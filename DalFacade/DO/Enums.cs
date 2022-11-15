@@ -1,5 +1,5 @@
 ﻿namespace DO;
 public enum Categories
 {
-    Chagim, HomeAccessories, HomeTextiles, Judaica, DesignedGifts
+    Chagim=1, HomeAccessories, HomeTextiles, Judaica, DesignedGifts
 };

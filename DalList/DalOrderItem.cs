@@ -1,9 +1,13 @@
 ﻿using DO;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Dal;
 
 public class DalOrderItem
 {
+    Product[] product = DataSource.productsArr;
+    Order[] order=DataSource.ordersArr;
     /// <summary>
     /// An add object method that accepts an entity object and returns the id of the added object
     /// </summary>
@@ -12,7 +16,7 @@ public class DalOrderItem
     /// <exception cref="Exception">Throws an error if there is no room for another orderItem</exception>
     public int AddOrderItem(OrderItem orderItem)
     {
-        orderItem.orderItemId = DataSource.Config.orderItemNextIndex;
+        orderItem.orderItemId = DataSource.Config.GetOrderItemNextId();
         //Checks if there is room to insert another order and throws an error if there is none
         if (DataSource.orderItemsArr.Length - 1 != DataSource.Config.orderItemNextIndex)
         {
@@ -35,12 +39,12 @@ public OrderItem GetOrderItem(int idOrderItem)
 {
     int i = 0;
         //A loop that runs until it reaches the desired index
-        while (i < DataSource.Config.orderItemNextIndex && DataSource.orderItemsArr[i].orderItemId != idOrderItem)
-    {
-        i++;
-    }
+        while (i <= DataSource.Config.orderItemNextIndex && DataSource.orderItemsArr[i].orderItemId != idOrderItem)
+        {
+            i++;
+        }
         //A condition that checks whether the id matches is displayed at the end of a message if it is not found
-        if (DataSource.orderItemsArr[i].orderItemId != idOrderItem)
+        if (DataSource.orderItemsArr[i].orderItemId == idOrderItem)
         return DataSource.orderItemsArr[i];
     throw new Exception("there is no orderItem with this id");
 }
@@ -50,11 +54,12 @@ public OrderItem GetOrderItem(int idOrderItem)
 /// <returns>Returns all objects of the entity</returns>
 public OrderItem[] GetAllOrderItems()
     {
+        OrderItem[] orderItem = DataSource.orderItemsArr;
         //Building a new layout where all the orderItems will be displayed
-        OrderItem[] newOrderItemsArr = new OrderItem[DataSource.orderItemsArr.Length];
+        OrderItem[] newOrderItemsArr = new OrderItem[DataSource.Config.orderItemNextIndex];
         //A loop that transfers all orderItem data to the new array
-        for (int i = 0; i < DataSource.orderItemsArr.Length; i++)
-            newOrderItemsArr[i] = DataSource.orderItemsArr[i];
+        for (int i = 0; i < DataSource.Config.orderItemNextIndex; i++)
+            newOrderItemsArr[i] = orderItem[i];
         return newOrderItemsArr;
     }
 /// <summary>
@@ -86,16 +91,20 @@ public void DeletOrderItem(int idOrderItem)
 /// <exception cref="Exception">Returns an error once no matching object is found</exception>
 public void UpdateOrderItem(OrderItem orderItem)
     {
-        int i;
-        //A loop that runs through the orderItems until you find the orderItem you want to update.
-        for (i = 0; i < DataSource.orderItemsArr.Length && DataSource.orderItemsArr[i].orderItemId != orderItem.orderId; i++)
+        if (orderItem.pricePerUnit != 0 && orderItem.amount != 0)
         {
+            int i = 0;
+            //A loop that runs through the orderItems until you find the orderItem you want to update.
+            while (i <= DataSource.Config.orderItemNextIndex && DataSource.orderItemsArr[i].orderItemId != orderItem.orderItemId)
+            {
+                i++;
+            }
             //A condition that checks whether the orderItem you want to update exists and throws an error accordingly.
             if (i >= DataSource.orderItemsArr.Length)
                 throw new Exception("The orderItem does not exist");
+            //Updating the orderItem in the orderItem system
+            DataSource.orderItemsArr[i] = orderItem;
         }
-        //Updating the orderItem in the orderItem system
-        DataSource.orderItemsArr[i] = orderItem;
     }
     //return object of orderItem by idProuct and idOrder
     public OrderItem GetItemById(int idProduct, int idOrder)

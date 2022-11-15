@@ -11,28 +11,20 @@ internal static class DataSource
     //A class containing fields for indexes of the first free element and additional fields for the last ID number
     internal static class Config
     {
-        private static int productNextId = 0;
         private static int orderNextId = 0;
         private static int orderItemNextId = 0;
         internal static int productNextIndex = 0;
         internal static int orderNextIndex = 0;
         internal static int orderItemNextIndex = 0;
-        //functions for each field of the last ID number that you advance the
-        //The field is automatic so that each time a number is received that is greater than the previous one by 1
-        public static int GetProductNextId() 
-        {
-            productNextId++;
-            return productNextId; 
-        }
+        /*functions for each field of the last ID number that you advance the
+        The field is automatic so that each time a number is received that is greater than the previous one by 1*/
         public static int GetOrderNextId() 
         {
-            orderNextId++;
-            return orderNextId; 
+            return orderNextId++; 
         }
         public static int GetOrderItemNextId()
         {
-            orderItemNextId++;
-            return orderItemNextId;
+            return orderItemNextId++;
         }
     }
     private static readonly Random s_rand = new();
@@ -47,17 +39,17 @@ internal static class DataSource
         //A loop that runs over the array of products and fills it with values.
         for (int i = 0; i < 20; i++)
         {
-            int instock;
+            int amountInstock;
             if (i % 4 == 0)
-                instock = 0;
+                amountInstock = 0;
             else
-                instock = s_rand.Next(10) + 200;
+                amountInstock = s_rand.Next(10) + 200;
             Product product = new Product();
-            product.productId = i;
+            product.productId = i + 100000;
             product.productName = productNameArr[i];
             product.category = (Categories)i;
-            product.price = s_rand.Next(10) + 450;
-            product.amountInStock = instock;
+            product.price = s_rand.Next(10) + 300;
+            product.amountInStock = amountInstock;
             productsArr[Config.productNextIndex++] = product;
         }
     }
@@ -82,7 +74,7 @@ internal static class DataSource
                 date = DateTime.MinValue + timeS;
             }
             Order order = new Order();
-            order.orderId = i;
+            order.orderId = Config.GetOrderNextId();
             order.customerName = customerNameArr[i];
             order.email = customerEmailArr[s_rand.Next(customerNameArr.Length)];
             order.shippingAddress = customerAddressArr[i];
@@ -95,19 +87,33 @@ internal static class DataSource
     //Initialization function for orderItem data
     public static void createInitializeOrderItem()
     {
-        int product = s_rand.Next(20);
         //A loop that runs over the array of orderItems and fills it with values.
-        for (int i = 0; i < 40; i++)
+        int countOrderItems = 0;
+        for (int i = 0; i < 20; i++)
         {
-            OrderItem orderItem = new OrderItem();
-            orderItem.orderItemId = Config.GetOrderItemNextId();
-            orderItem.orderId = s_rand.Next(10);
-            orderItem.productId = product;
-            orderItem.amount = s_rand.Next(10) + 1;
-            orderItem.pricePerUnit = productsArr[product].price;
-            orderItemsArr[i] = orderItem;
-            orderItemsArr[Config.orderItemNextIndex] = orderItem;
+            for (int j = 0; j < s_rand.Next(1, 5); j++)
+            {
+                OrderItem orderItem = new OrderItem();
+                orderItem.orderItemId = Config.GetOrderItemNextId();
+                orderItem.orderId = i;
+                orderItem.productId = productsArr[s_rand.Next(Config.productNextIndex)].productId;
+                orderItem.amount = s_rand.Next(10) + 1;
+                orderItem.pricePerUnit = findPrice(orderItem.productId);
+                orderItemsArr[countOrderItems++] = orderItem;
+                orderItemsArr[Config.orderItemNextIndex++] = orderItem;
+            }
+            if (i == 19 && countOrderItems < 40)
+                i = i - countOrderItems;
         }
+    }
+    private static double findPrice(int idProduct)
+    {
+        for(int i = 0; i < Config.productNextIndex; i++)
+        {
+            if (productsArr[i].productId == idProduct)
+                return productsArr[i].price;
+        }
+        return -1;
     }
     //A function that calls all the initialization operations
     private static void s_Initialize()

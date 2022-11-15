@@ -5,7 +5,7 @@ using Dal;
 public class Program
 {
     //function for orders
-    public static void OrderFunction()
+    public static void ActionsOnOrder()
     {
         int number;
         Console.WriteLine("Insert number");
@@ -20,19 +20,24 @@ public class Program
             case 1:
                 {
                     //Entering the new data
-                    Console.WriteLine("Insert name & address & email to customer");
+                    Console.WriteLine("Insert name & address & email to customer and orderDate,shipDate,deliveryDate");
 
                     string name = Console.ReadLine();
                     string address = Console.ReadLine();
                     string email = Console.ReadLine();
-
+                    string orderDate = Console.ReadLine();
+                    string shippingDate = Console.ReadLine();
+                    string deliveryDate = Console.ReadLine();
+                    DateTime.TryParse(orderDate, out DateTime dtOrder);
+                    DateTime.TryParse(shippingDate, out DateTime dtShip);
+                    DateTime.TryParse(deliveryDate, out DateTime dtDelivery);
                     Order order = new Order();
                     order.customerName = name;
                     order.email = email;
                     order.shippingAddress = address;
-                    order.orderCreationDate = DateTime.Today;
-                    order.deliveryDate = DateTime.MinValue;
-                    order.dateOfDelivery = DateTime.MinValue;
+                    order.orderCreationDate = dtOrder;
+                    order.deliveryDate = dtShip;
+                    order.dateOfDelivery = dtDelivery;
                     Console.WriteLine(dalOrder.AddOrder(order));
                 }
                 break;
@@ -42,8 +47,7 @@ public class Program
                     int id;
                     Console.WriteLine("Insert id");
                     id = int.Parse(Console.ReadLine());
-                    Order order = new Order();
-                    order = dalOrder.GetOrder(id);
+                    Order order = dalOrder.GetOrder(id);
                     Console.WriteLine(order);
                 }
                 break;
@@ -68,22 +72,24 @@ public class Program
                     Order order = new Order();
                     order = dalOrder.GetOrder(id);
                     Console.WriteLine(order);
-                    Console.WriteLine("Insert name,address,email to customer");
+                    Console.WriteLine("Insert name,address,email to customer and orderDate,shipDate,deliveryDate");
                     string name = Console.ReadLine();
                     string address = Console.ReadLine();
                     string email = Console.ReadLine();
-                    if (name != "" && address != "" && email != "")
-                    {
-                        Order newOrder = new Order();
-                        order.orderId = id;
-                        order.customerName = name;
-                        order.shippingAddress = address;
-                        order.email = email;
-                        order.orderCreationDate = DateTime.Today;
-                        order.deliveryDate = DateTime.MinValue;
-                        order.dateOfDelivery = DateTime.MinValue;
-                        dalOrder.UpdateOrder(newOrder);
-                    }
+                    string orderDate = Console.ReadLine();
+                    string shippingDate = Console.ReadLine();
+                    string deliveryDate = Console.ReadLine();
+                    DateTime.TryParse(orderDate, out DateTime dtOrder);
+                    DateTime.TryParse(shippingDate, out DateTime dtShip);
+                    DateTime.TryParse(deliveryDate, out DateTime dtDelivery);
+                    order.orderId = id;
+                    order.customerName = name;
+                    order.shippingAddress = address;
+                    order.email = email;
+                    order.orderCreationDate = dtOrder;
+                    order.deliveryDate = dtShip;
+                    order.dateOfDelivery = dtDelivery;
+                    dalOrder.UpdateOrder(order);
                 }
                 break;
             //To delete a specific order
@@ -98,14 +104,14 @@ public class Program
         }
     }
     //function for products
-    public static void ProductFunction()
+    public static void ActionsOnProduct()
     {
-        int num2;
+        int number2;
         Console.WriteLine("Insert number");
-        num2 = int.Parse(Console.ReadLine());
+        number2 = int.Parse(Console.ReadLine());
         DalProduct dalProduct = new DalProduct();
 
-        switch (num2)
+        switch (number2)
         {
             case 0:
                 break;
@@ -113,12 +119,14 @@ public class Program
             case 1:
                 {
                     //Entering the new data
-                    Console.WriteLine("Insert name,price,amount in stock and category 1- Chagim, 2-HomeAccessories, 3-HomeTextiles,4- Judaica, 5-DesignedGifts");
+                    Console.WriteLine("Insert id, name,price,amount in stock and category 1- Chagim, 2-HomeAccessories, 3-HomeTextiles,4- Judaica, 5-DesignedGifts");
+                    int id = int.Parse(Console.ReadLine());
                     string name = Console.ReadLine();
                     int price = int.Parse(Console.ReadLine());
                     int amountInStock = int.Parse(Console.ReadLine());
                     int category = int.Parse(Console.ReadLine());
                     Product product = new Product();
+                    product.productId = id;
                     product.productName = name;
                     product.category = (Categories)category; 
                     product.price = price;
@@ -132,8 +140,7 @@ public class Program
                     int id;
                     Console.WriteLine("Insert id");
                     id = int.Parse(Console.ReadLine());
-                    Product product = new Product();
-                    product = dalProduct.GetProduct(id);
+                    Product product = dalProduct.GetProduct(id);
                     Console.WriteLine(product);
                 }
                 break;
@@ -164,16 +171,12 @@ public class Program
                     int price = int.Parse(Console.ReadLine());
                     int amountInStock = int.Parse(Console.ReadLine());
                     int category = int.Parse(Console.ReadLine());
-                    if (name != "" && price != 0 && amountInStock != 0 && category != 0)
-                    {
-                        Product newProduct = new Product();
-                        product.productId = id;
-                        product.productName = name;
-                        product.category = (Categories)category;
-                        product.price = price;
-                        product.amountInStock = amountInStock;
-                        dalProduct.UpdateProduct(newProduct);
-                    }
+                    product.productId = id;
+                    product.productName = name;
+                    product.category = (Categories)category;
+                    product.price = price;
+                    product.amountInStock = amountInStock;
+                    dalProduct.UpdateProduct(product);
                 }
                 break;
             //To delete a specific product
@@ -188,14 +191,14 @@ public class Program
         }
     }
     //function for orderItems
-    public static void OrderItemFunction()
+    public static void ActionsOnOrderItems()
     {
-        int num2;
+        int number2;
         Console.WriteLine("Insert number");
-        num2 = int.Parse(Console.ReadLine());
+        number2 = int.Parse(Console.ReadLine());
         DalOrderItem dalOrderItem = new DalOrderItem();
         DalProduct dalProduct = new DalProduct();
-        switch (num2)
+        switch (number2)
         {
             case 0:
                 break;
@@ -223,8 +226,7 @@ public class Program
                     int id;
                     Console.WriteLine("Insert id");
                     id = int.Parse(Console.ReadLine());
-                    OrderItem orderItem = new OrderItem();
-                    orderItem = dalOrderItem.GetOrderItem(id);
+                    OrderItem orderItem = dalOrderItem.GetOrderItem(id);
                     Console.WriteLine(orderItem);
                 }
                 break;
@@ -247,21 +249,17 @@ public class Program
                     //Finding the orderItem you want to update by its ID
                     Console.WriteLine("Insert id");
                     id = int.Parse(Console.ReadLine());
-                    OrderItem orderItem = new OrderItem();
-                    orderItem = dalOrderItem.GetOrderItem(id);
+                    OrderItem orderItem = dalOrderItem.GetOrderItem(id);
                     Console.WriteLine(orderItem);
-                    Console.WriteLine("Insert name,price,in stock and category 1- Chagim, 2-HomeAccessories, 3-HomeTextiles,4- Judaica, 5-DesignedGifts");
-                    string name = Console.ReadLine();
+                    Console.WriteLine("Inser amount, productId,orderId");
                     int amount = int.Parse(Console.ReadLine());
-                    int price = int.Parse(Console.ReadLine());
-                    if (price != 0 && amount != 0)
-                    {
-
-                        OrderItem newOrderItem = new OrderItem();
-                        orderItem.amount = amount;
-                        orderItem.pricePerUnit = price;
-                        dalOrderItem.UpdateOrderItem(newOrderItem);
-                    }
+                    int product_id = int.Parse(Console.ReadLine());
+                    int order_id = int.Parse(Console.ReadLine());
+                    double price = dalProduct.GetProduct(product_id).price;
+                    orderItem.amount = amount;
+                    orderItem.productId = product_id;
+                    orderItem.orderId = order_id;
+                    dalOrderItem.UpdateOrderItem(orderItem);
                 }
                 break;
             //To delete a specific orderItem
@@ -313,7 +311,7 @@ public class Program
                 case 1:
                     try
                     {
-                        ProductFunction();
+                        ActionsOnProduct();
                     }
                     catch (Exception ex)
                     {
@@ -323,7 +321,7 @@ public class Program
                 case 2:
                     try
                     {
-                        OrderFunction();
+                        ActionsOnOrder();
                     }
                     catch (Exception ex)
                     {
@@ -333,7 +331,7 @@ public class Program
                 case 3:
                     try
                     {
-                        OrderItemFunction();
+                        ActionsOnOrderItems();
                     }
                     catch (Exception ex)
                     {
