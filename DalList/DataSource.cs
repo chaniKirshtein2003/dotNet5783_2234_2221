@@ -5,9 +5,10 @@ namespace Dal;
 internal static class DataSource
 {
     //Statement on new sets of products orders and order details
-    internal static Product[] productsArr = new Product[50];
-    internal static Order[] ordersArr = new Order[100];
-    internal static OrderItem[] orderItemsArr = new OrderItem[200];
+    //internal static Product[] productsArr = new Product[50];
+    internal static List<Product> productsList = new List<Product>();
+    internal static List<Order> ordersList = new List<Order>();
+    internal static List<OrderItem> orderItemsList = new List<OrderItem>();
     //A class containing fields for indexes of the first free element and additional fields for the last ID number
     internal static class Config
     {
@@ -50,7 +51,7 @@ internal static class DataSource
             product.category = (Categories)i;
             product.price = s_rand.Next(10) + 300;
             product.amountInStock = amountInstock;
-            productsArr[Config.productNextIndex++] = product;
+            productsList.Add(product);
         }
     }
     //Initialization function for order data
@@ -81,7 +82,7 @@ internal static class DataSource
             order.orderCreationDate = DateTime.MinValue;
             order.deliveryDate = date;
             order.dateOfDelivery = DateTime.MinValue + timeS + timeS1;
-            ordersArr[Config.orderNextIndex++] = order;
+            ordersList.Add(order);
         }
     }
     //Initialization function for orderItem data
@@ -96,11 +97,11 @@ internal static class DataSource
                 OrderItem orderItem = new OrderItem();
                 orderItem.orderItemId = Config.GetOrderItemNextId();
                 orderItem.orderId = i;
-                orderItem.productId = productsArr[s_rand.Next(Config.productNextIndex)].productId;
+                orderItem.productId = s_rand.Next(20) + 100000;
                 orderItem.amount = s_rand.Next(10) + 1;
                 orderItem.pricePerUnit = findPrice(orderItem.productId);
-                orderItemsArr[countOrderItems++] = orderItem;
-                orderItemsArr[Config.orderItemNextIndex++] = orderItem;
+                orderItemsList.Add(orderItem);
+                orderItemsList.Add(orderItem);
             }
             if (i == 19 && countOrderItems < 40)
                 i = i - countOrderItems;
@@ -108,10 +109,10 @@ internal static class DataSource
     }
     private static double findPrice(int idProduct)
     {
-        for(int i = 0; i < Config.productNextIndex; i++)
+        foreach(var item in productsList)
         {
-            if (productsArr[i].productId == idProduct)
-                return productsArr[i].price;
+            if (item.productId == idProduct)
+                return item.price;
         }
         return -1;
     }

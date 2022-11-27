@@ -1,35 +1,27 @@
 ﻿using DO;
-using System.Diagnostics;
-using System.Xml.Linq;
+using DalApi;
 
 namespace Dal;
-    public class DalProduct
+    public class DalProduct:IProduct
     {
-    Product [] product=DataSource.productsArr;
     /// <summary>
     /// An add object method that accepts an entity object and returns the id of the added object
     /// </summary>
     /// <param name="order">Product to add</param>
     /// <returns>Return the id number of the object that added</returns>
     /// <exception cref="Exception">Throws an error if there is no room for another product</exception>
-    public int AddProduct(Product product)
+    public int Add(Product product)
     {
-        for(int i=0;i<DataSource.Config.productNextIndex;i++)
+        //A loop that runs through the list and adds a new product
+        foreach (var item in DataSource.productsList)
         {
-            if (product.productId == DataSource.productsArr[i].productId)
+            if (product.productId == item.productId)
                 throw new Exception("this id is already exist");
             if (product.productId < 100000)
                 throw new Exception("the id is not valid");
         }
-        //A condition that checks whether there is room in the array to add a new product, and if not, throws a suitable acknowledgment at the end
-        if (DataSource.productsArr.Length - 1 != DataSource.Config.productNextIndex)
-        {
-            DataSource.productsArr[DataSource.Config.productNextIndex++] = product;
-        }
-        else
-        {
-            throw new Exception("there is no place");
-        }
+        //add product to the list
+        DataSource.productsList.Add(product);
         return product.productId;
     }
     /// <summary>
@@ -38,53 +30,48 @@ namespace Dal;
     /// <param name="idProduct"></param>
     /// <returns>Returns the corresponding object</returns>
     /// <exception cref="Exception">Returns an error as soon as no suitable product is found</exception>
-    public Product GetProduct(int idProduct)
+    public Product Get(int idProduct)
     {
-        int i = 0;
         //A loop that runs until it reaches the desired index
-        while (i < DataSource.Config.productNextIndex && DataSource.productsArr[i].productId != idProduct)
+        foreach(var item in DataSource.productsList)
         {
-            i++;
+            if (item.productId == idProduct)
+                return item;
         }
-        //A condition that checks whether the id matches is displayed at the end of a message if it is not found
-        if (DataSource.productsArr[i].productId == idProduct)
-            return DataSource.productsArr[i];
         throw new Exception("there is no product with this id");
     }
     /// <summary>
     /// Request/read method of the list of all objects of the entity
     /// </summary>
     /// <returns>Returns all objects of the entity</returns>
-    public Product[] GetAllProducts()
+    public IEnumerable<Product> GetAll()
     {
-        Product[] products = DataSource.productsArr;
         //Building a new layout where all the products will be displayed
-        Product[] newProductArr = new Product[DataSource.Config.productNextIndex];
-        //A loop that transfers all product data to the new array
-        for (int i = 0; i < DataSource.Config.productNextIndex; i++)
-            newProductArr[i] = DataSource.productsArr[i];
-        return newProductArr;
+        List<Product> newProductList = new List<Product>();
+        //A loop that transfers all product data to the new list
+        foreach(var item in DataSource.productsList)
+        {
+            newProductList.Add(item);
+        }
+        return newProductList;
     }
     /// <summary>
     /// A method to delete a product object that receives a product ID number
     /// </summary>
     /// <param name="idProduct"></param>
     /// <exception cref="Exception">Throws an error as soon as no suitable product is found</exception>
-    public void DeletProduct(int idProduct)
+    public void Delete(int idProduct)
     {
-        int i=0;
         //A loop that runs through the products until you find the product you want to delete.
-        while (i <= DataSource.Config.productNextIndex && DataSource.productsArr[i].productId != idProduct)
+        foreach(var item in DataSource.productsList)
         {
-            i++;
+            if (item.productId == idProduct)
+            {
+                DataSource.productsList.Remove(item);
+                return;
+            }
         }
-        //A condition that checks whether the product you want to delete exists and throws an error accordingly.
-        if (i >= DataSource.productsArr.Length)
-            throw new Exception("The product does not exist");
-        //A loop that ran to delete the product and updates the number of products
-        for (int j = i + 1; j < DataSource.productsArr.Length; j++)
-            DataSource.productsArr[j - 1] = DataSource.productsArr[j];
-        DataSource.Config.productNextIndex--;
+        throw new Exception("The product does not exist");
     }
     /// <summary>
     /// An object update method that will receive a new object
@@ -93,21 +80,27 @@ namespace Dal;
     /// </summary>
     /// <param name="orderItem"></param>
     /// <exception cref="Exception">Returns an error once no matching object is found</exception>
-    public void UpdateProduct(Product product)
+    public void Update(Product product)
     {
+        bool flag = false;
         if (product.productName != "" && product.price != 0 && product.amountInStock != 0 && product.category != 0)
         {
-            int i = 0;
             //A loop that runs through the products until you find the product you want to update.
-            while (i < DataSource.Config.productNextIndex && DataSource.productsArr[i].productId != product.productId)
+            foreach (var item in DataSource.productsList)
             {
-                i++;
+                if (item.productId == product.productId)
+                {
+                    DataSource.productsList.Remove(item);
+                    flag = true;
+                }
             }
-            //A condition that checks whether the product you want to update exists and throws an error accordingly.
-            if (i >= DataSource.productsArr.Length)
-                throw new Exception("The product does not exist");
             //Updating the product in the product system
-            DataSource.productsArr[i] = product;
+            if (flag == true)
+            {
+                DataSource.productsList.Add(product);
+            }
+            else
+                throw new Exception("The product does not exist");
         }
     }
 }

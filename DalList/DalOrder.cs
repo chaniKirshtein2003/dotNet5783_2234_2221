@@ -1,32 +1,30 @@
 ﻿using DO;
-using System.Net;
-using System.Xml.Linq;
+using DalApi;
 
 namespace Dal;
 
-public class DalOrder
+public class DalOrder:IOrder
 {
-    Order[] dalO = DataSource.ordersArr;
     /// <summary>
     /// An add object method that accepts an entity object and returns the id of the added object
     /// </summary>
     /// <param name="order">Order to add</param>
     /// <returns>Return the id number of the object that added</returns>
     /// <exception cref="Exception">Throws an error if there is no room for another order</exception>
-    public int AddOrder(Order order)
+    public int Add(Order order)
     {
         if (order.orderCreationDate > order.deliveryDate)
             throw new Exception("the date is not valid");
         if (order.deliveryDate > order.dateOfDelivery)
             throw new Exception("the date is not valid");
-        order.orderId = DataSource.Config.GetOrderNextId();
-        //A condition that checks whether there is room in the array to add a new order, and if not, throws a suitable acknowledgment at the end
-        if (DataSource.ordersArr.Length - 1 != DataSource.Config.orderNextIndex)
-            DataSource.ordersArr[DataSource.Config.orderNextIndex++] = order;
-        else
+        //A loop that runs through the list and adds a new order
+        foreach (var item in DataSource.ordersList)
         {
-            throw new Exception("there is no place");
+            if (order.orderId == item.orderId)
+                throw new Exception("this id is already exist");
         }
+        //add the order to the list
+        DataSource.ordersList.Add(order);
         return order.orderId;
     }
 /// <summary>
@@ -35,53 +33,48 @@ public class DalOrder
 /// <param name="idProduct"></param>
 /// <returns>Returns the corresponding object</returns>
 /// <exception cref="Exception">Returns an error as soon as no suitable order is found</exception>
-public Order GetOrder(int idOrder)
+public Order Get(int idOrder)
     {
-        int i = 0;
         //A loop that runs until it reaches the desired index
-        while (i <= DataSource.Config.orderNextIndex && DataSource.ordersArr[i].orderId != idOrder)
+        foreach(var item in DataSource.ordersList)
         {
-            i++;
+            if (item.orderId == idOrder)
+                return item;
         }
-        //A condition that checks whether the id matches is displayed at the end of a message if it is not found
-        if (DataSource.ordersArr[i].orderId == idOrder)
-            return DataSource.ordersArr[i];
-        throw new Exception("there are no order with this id");
+        throw new Exception("there is no order with this id");
     }
 /// <summary>
 /// Request/read method of the list of all objects of the entity
 /// </summary>
 /// <returns>Returns all objects of the entity</returns>
-public Order[] GetAllOrders()
+public IEnumerable<Order> GetAll()
     {
         //Building a new layout where all the orders will be displayed
-        Order[] order = DataSource.ordersArr; 
-        Order[] newOrderArr = new Order[DataSource.Config.orderNextIndex];
-        //A loop that transfers all order data to the new array
-        for (int i=0;i< DataSource.Config.orderNextIndex; i++)
-            newOrderArr[i] = order[i];
-        return newOrderArr;
+        List<Order> newOrderList = new List<Order>();
+        //A loop that transfers all order data to the new list
+        foreach(var item in DataSource.ordersList)
+        {
+            newOrderList.Add(item);
+        }
+        return newOrderList;
     }
 /// <summary>
 /// A method to delete a order object that receives a order ID number
 /// </summary>
 /// <param name="idProduct"></param>
 /// <exception cref="Exception">Throws an error as soon as no suitable order is found</exception>
-public void DeletOrder(int idOrder)
+public void Delete(int idOrder)
     {
-        int i=0;
         //A loop that runs through the orders until you find the order you want to delete.
-        while (i <= DataSource.Config.orderNextIndex && DataSource.ordersArr[i].orderId != idOrder)
+        foreach (var item in DataSource.ordersList)
         {
-            i++;
+            if (item.orderId == idOrder)
+            {
+                DataSource.ordersList.Remove(item);
+                return;
+            }
         }
-        //A condition that checks whether the order you want to delete exists and throws an error accordingly.
-        if (i > DataSource.ordersArr.Length)
-            throw new Exception("The order does not exist");
-        //A loop that ran to delete the order and updates the number of orders
-        for (int j = i + 1; j < DataSource.ordersArr.Length; j++)
-            DataSource.ordersArr[j - 1] = DataSource.ordersArr[j];
-        DataSource.Config.orderNextIndex--;
+        throw new Exception("The order does not exist");
     }
 /// <summary>
 /// An object update method that will receive a new object
@@ -90,21 +83,27 @@ public void DeletOrder(int idOrder)
 /// </summary>
 /// <param name="orderItem"></param>
 /// <exception cref="Exception">Returns an error once no matching object is found</exception>
-public void UpdateOrder(Order order)
+public void Update(Order order)
     {
         if (order.customerName != "" && order.shippingAddress != "" && order.email != "")
         {
-            int i = 0;
+            bool flag = false;
             //A loop that runs through the orders until you find the order you want to update.
-            while (i < DataSource.Config.orderNextIndex && DataSource.ordersArr[i].orderId != order.orderId)
+            foreach (var item in DataSource.ordersList)
             {
-                i++;
+                if (item.orderId == order.orderId)
+                {
+                    DataSource.ordersList.Remove(item);
+                    flag = true;
+                }
             }
-            //A condition that checks whether the order you want to update exists and throws an error accordingly.
-            if (i >= DataSource.ordersArr.Length)
-                throw new Exception("The order does not exist");
             //Updating the order in the order system
-            DataSource.ordersArr[i] = order;
+            if (flag == true)
+            {
+                DataSource.ordersList.Add(order);
+            }
+            else
+                throw new Exception("The order does not exist");
         }
     }
 }
