@@ -23,7 +23,11 @@ namespace BlImplementation
         }
         public IEnumerable<Order> GetOrder(int idOrder)
         {
-
+        }
+        public BO.Order UpdateSend(int id)
+        {
+            DO.Order order= idal.Order.Get(id);
+            BO.Order order = new BO.Order();
         }
     }
 }
