@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using DalApi;
 using Dal;
-using System.Reflection.Metadata.Ecma335;
-using DO;
-using BO;
-using BlApi;
+
 
 namespace BlImplementation
 {
@@ -24,7 +16,7 @@ namespace BlImplementation
                 BO.ProductForList product = new BO.ProductForList();
                 product.Name = item.productName;
                 product.price = item.price;
-                //product.category = item.CategoryP;  
+                product.category = (BO.Categories)item.category;  
                 product.ID = item.productId;
                 products.Add(product);
             }
@@ -37,7 +29,7 @@ namespace BlImplementation
             newProduct.productName= product.productName;
             newProduct.price= product.price;
             newProduct.productId= product.productId;
-            // newProduct.category = product.category;
+            newProduct.category = (BO.Categories)product.category;
             newProduct.amountInStock = product.amountInStock;
             return newProduct;
         }
@@ -56,7 +48,7 @@ namespace BlImplementation
             newProduct.price = product.price;   
             newProduct.productId= product.productId;
             newProduct.amountInStock= product.amountInStock;
-            //newProduct.category = product.category;
+            newProduct.category = (DO.Categories)product.category;
             int id=idal.Product.Add(newProduct);
             return id;
         }
@@ -88,24 +80,36 @@ namespace BlImplementation
             updateProduct.price = product.price;
             updateProduct.productId = product.productId;
             updateProduct.amountInStock = product.amountInStock;
-            //newProduct.category = product.category;
+            updateProduct.category = (DO.Categories)product.category;
             idal.Product.Update(updateProduct);
         }
-        public IEnumerable<OrderForList> ListOrderToManager()
+        public IEnumerable<BO.ProductItem> ListProductsToBuy()
         {
-            IEnumerable<DO.OrderItem> orderItemList;
-            IEnumerable<DO.Order> orderList = idal.Order.GetAll();
-            IEnumerable<BO.OrderForList> orderForList = new List<BO.OrderForList>();
-            BO.OrderForList order = new BO.OrderForList();
-            foreach (DO.Order item in orderList)
+            IEnumerable<DO.Product> Product = idal.Product.GetAll();
+            List<BO.ProductItem> ProductList = new List<BO.ProductItem>();
+            BO.ProductItem newProduct;
+            foreach(DO.Product item in Product)
             {
-                orderItemList = idal.OrderItem.GetAllProductsOfOrder(item.orderId);
-                order.ID = item.orderId;
-                order.customerName = item.customerName;
-               // order.status = 
-               order.amountOfItems=
+                newProduct = new BO.ProductItem();
+                newProduct.ID=item.productId;
+                newProduct.Name=item.productName;
+                newProduct.price=item.price;
+                newProduct.category = (BO.Categories)item.category;
+                newProduct.inStock = item.amountInStock > 0 ? true : false;
+                newProduct.amount = item.amountInStock;
+                ProductList.Add(newProduct);
             }
-            
+            return ProductList;
+        }
+        public void ProductForBuyer(int idProduct)
+        {
+            DO.Product Product = idal.Product.Get(idProduct);
+            BO.ProductItem newProduct = new BO.ProductItem();
+            newProduct.ID = Product.productId;
+            newProduct.Name = Product.productName;
+            newProduct.price = Product.price;
+            newProduct.category = (BO.Categories)Product.category;
+            newProduct.amount = Product.amountInStock;
         }
     }
 }
