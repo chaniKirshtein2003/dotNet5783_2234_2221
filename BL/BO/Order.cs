@@ -23,7 +23,7 @@ namespace BO
         /// <summary>
         /// shipping address
         /// </summary>
-        public string customerAdress { get; set; }
+        public string customerAddress { get; set; }
         /// <summary>
         /// Order creation date
         /// </summary>
@@ -38,7 +38,7 @@ namespace BO
         /// Date of delivery
         /// </summary>
         public DateTime deliveryDate { get; set; }
-        public OrderItem items { get; set; }
+        public List<OrderItem> items { get; set; }
         public double totalPrice { get; set; }
         /// <summary>
         /// Overriding method of the ToString 
