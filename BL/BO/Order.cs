@@ -24,11 +24,13 @@ namespace BO
         /// shipping address
         /// </summary>
         public string customerAddress { get; set; }
+        public OrderStatus status { get; set; }
+
         /// <summary>
         /// Order creation date
         /// </summary>
+        /// 
         public DateTime orderDate { get; set; }
-        public OrderStatus status { get; set; }
         public DateTime paymentDate { get; set; }
         /// <summary>
         /// shipping date

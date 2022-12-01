@@ -12,6 +12,6 @@ namespace BO
     };
     public enum OrderStatus
     {
-        approved, sent, delivered
+        approved=1, sent, delivered
     };
 }

@@ -58,7 +58,7 @@ namespace BlImplementation
             IEnumerable<DO.Order> orderList=new List<DO.Order>();
             foreach(DO.Order order in orderList)
             {
-                orderItemList = idal.OrderItem.GetAllProductsOfOrder(order.orderId);
+                orderItemList = idal.OrderItem.GetOrderItems(order.orderId);
                 foreach (DO.OrderItem item in orderItemList)
                     if (item.orderItemId == id)
                         throw new Exception("the product is exist");

@@ -1,8 +1,5 @@
 ﻿using BlApi;
 using BlImplementation;
-using BO;
-using Dal;
-using DalApi;
 
 
 public class Program
@@ -10,16 +7,51 @@ public class Program
     static IBl bl = new Bl();
 
     //Functions for orders
-    public static void Order() { }
-
-    //Functions for products
-    public static void Product()
+    public static void Order()
+    {
+        BO.Order order;
+        int number, id;
+        Console.WriteLine("Insert number from 1 to 5");
+        number = int.Parse(Console.ReadLine());
+        switch (number)
+        {
+            case 1:
+                IEnumerable<BO.OrderForList> orderForLists = bl.Order.GetOrders();
+                foreach (BO.OrderForList orderForList in orderForLists)
+                    Console.WriteLine(orderForList);
+                break;
+            case 2:
+                Console.WriteLine("insert order ID");
+                 id=int.Parse(Console.ReadLine());
+                 order = bl.Order.GetOrderDetails(id);
+                Console.WriteLine(order);
+                break;
+            case 3:
+                Console.WriteLine("insert ID");
+                id = int.Parse(Console.ReadLine());
+                 order = bl.Order.UpdateSending(id);
+                Console.WriteLine(order);
+                break;
+            case 4:
+                Console.WriteLine("insert ID");
+                id = int.Parse(Console.ReadLine());
+                order = bl.Order.supplyUpdate(id);
+                Console.WriteLine(order);
+                break;
+            case 5:
+                BO.OrderTracking orderTracking = new BO.OrderTracking();
+                Console.WriteLine("insert ID");
+                id = int.Parse(Console.ReadLine());
+                orderTracking = bl.Order.OrderTracking(id);
+                break;
+        }
+    }
+        //Functions for products
+        public static void Product()
     {
         int number;
         Console.WriteLine("Insert number from 1 to 5");
         number = int.Parse(Console.ReadLine());
-        DalProduct dalProduct = new DalProduct();
-        //Product Blproduct = new Product();
         switch (number)
         {
             case 0:
@@ -37,7 +69,7 @@ public class Program
                     BO.Product product = new BO.Product();
                     product.productId = id;
                     product.productName = name;
-                    product.category = (Categories)category;
+                    product.category = (BO.Categories)category;
                     product.price = price;
                     product.amountInStock = amountInStock;
                     Console.WriteLine(bl.Product.Add(product));
@@ -74,7 +106,7 @@ public class Program
                     BO.Product product = new BO.Product();
                     product.productId = id;
                     product.productName = name;
-                    product.category = (Categories)category;
+                    product.category = (BO.Categories)category;
                     product.price = price;
                     product.amountInStock = amountInStock;
                     bl.Product.Update(product);

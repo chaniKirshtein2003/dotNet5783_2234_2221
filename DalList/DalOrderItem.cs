@@ -120,7 +120,7 @@ public class DalOrderItem :IOrderItem
     }
 
     //return list of products by idOrder
-    public IEnumerable<OrderItem> GetAllProductsOfOrder(int idOrder)
+    public IEnumerable<OrderItem> GetOrderItems(int idOrder)
     {
         List<OrderItem> productsList = new List<OrderItem>();
         //A loop that runs through the order items until the appropriate ID is found
@@ -129,7 +129,6 @@ public class DalOrderItem :IOrderItem
             //The condition checks whether the IDs are the same
             if (idOrder == item.orderId)
                 productsList.Add(item);
-
         }
         return productsList;
     }

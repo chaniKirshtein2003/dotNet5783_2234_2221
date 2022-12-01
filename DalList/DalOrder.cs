@@ -13,9 +13,9 @@ public class DalOrder:IOrder
     /// <exception cref="Exception">Throws an error if there is no room for another order</exception>
     public int Add(Order order)
     {
-        if (order.orderCreationDate > order.deliveryDate)
+        if (order.orderDate > order.deliveryDate)
             throw new Exception("the date is not valid");
-        if (order.deliveryDate > order.dateOfDelivery)
+        if (order.deliveryDate > order.deliveryDate)
             throw new Exception("the date is not valid");
         //A loop that runs through the list and adds a new order
         foreach (var item in DataSource.ordersList)
@@ -85,7 +85,7 @@ public void Delete(int idOrder)
 /// <exception cref="Exception">Returns an error once no matching object is found</exception>
 public void Update(Order order)
     {
-        if (order.customerName != "" && order.shippingAddress != "" && order.email != "")
+        if (order.customerName != "" && order.customerAddress != "" && order.customerEmail != "")
         {
             bool flag = false;
             //A loop that runs through the orders until you find the order you want to update.

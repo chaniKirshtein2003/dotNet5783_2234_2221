@@ -9,6 +9,7 @@ namespace BO
     public class OrderTracking
     {
         public int ID { get; set; }
+        
         public OrderStatus status;
         public List<Tuple<DateTime, string>> Tracking { get; set; }
 
