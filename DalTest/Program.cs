@@ -33,9 +33,9 @@ public class Program
                     DateTime.TryParse(deliveryDate, out DateTime dtDelivery);
                     Order order = new Order();
                     order.customerName = name;
-                    order.email = email;
-                    order.shippingAddress = address;
-                    order.orderCreationDate = dtOrder;
+                    order.customerEmail = email;
+                    order.customerAddress = address;
+                    order.orderDate = dtOrder;
                     order.deliveryDate = dtShip;
                     order.dateOfDelivery = dtDelivery;
                     Console.WriteLine(dalOrder.Add(order));
@@ -84,9 +84,9 @@ public class Program
                     DateTime.TryParse(deliveryDate, out DateTime dtDelivery);
                     order.orderId = id;
                     order.customerName = name;
-                    order.shippingAddress = address;
-                    order.email = email;
-                    order.orderCreationDate = dtOrder;
+                    order.customerAddress = address;
+                    order.customerEmail = email;
+                    order.orderDate = dtOrder;
                     order.deliveryDate = dtShip;
                     order.dateOfDelivery = dtDelivery;
                     dalOrder.Update(order);
@@ -285,7 +285,7 @@ public class Program
                 {
                     Console.WriteLine("Enter order id");
                     int order = int.Parse(Console.ReadLine());
-                    IEnumerable<OrderItem> list = dalOrderItem.GetAllProductsOfOrder(order);
+                    IEnumerable<OrderItem> list = dalOrderItem.GetOrderItems(order);
                     foreach(var item in list)
                     {
                         Console.WriteLine(item);
