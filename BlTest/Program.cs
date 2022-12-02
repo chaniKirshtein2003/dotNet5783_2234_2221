@@ -159,6 +159,7 @@ public class Program
     public static void Main()
     {
         int number;
+        Console.WriteLine("chani timchaki et ze");
         do
         {
             Console.WriteLine("Enter 1 to product");
