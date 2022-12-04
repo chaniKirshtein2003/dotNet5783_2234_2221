@@ -125,38 +125,50 @@ public class Program
     //Functions for cart
     public static void Cart()
     {
+        int number;
         Console.WriteLine("enter 1 to Add item to the cart, 2 to update amount of item, 3 to confirm your order");
-        int x =int.Parse(Console.ReadLine());
-        int id;
-        switch (x)
+        number = int.Parse(Console.ReadLine());
+        //add product to cart
+        Console.WriteLine("insert customer name,email,adress");
+        string name = Console.ReadLine();
+        string email = Console.ReadLine();
+        string adress = Console.ReadLine();
+        BO.Cart cart = new BO.Cart();
+        cart.customerName = name;
+        cart.customerEmail = email;
+        cart.customerAddress = adress;
+        cart.items = new List<BO.OrderItem>();
+        cart.totalPrice = 0;
+        switch (number)
         {
             case 1:
                 {
-                    Console.WriteLine("enter id of product");
-                    id=int.Parse(Console.ReadLine());
 
+                    Console.WriteLine("insert product id");
+                    int id = int.Parse(Console.ReadLine());
+                    Console.WriteLine(bl.Cart.Add(cart, id));
+                    break;
                 }
-                break;
             case 2:
                 {
+                    //update amount of product in cart
 
+                    int id = int.Parse(Console.ReadLine());
+                    int amount = int.Parse(Console.ReadLine());
+                    bl.Cart.Update(cart, id, amount);
+                    break;
                 }
-                break;
             case 3:
                 {
+                    //to confirmation Order
+                    Console.WriteLine("insert customer name,email,adress");
 
+                    bl.Cart.MakeAnOrder(cart);
+                    break;
                 }
-                break;
-
-            default:
-                {
-                    Console.WriteLine("enter 1 to Add item to the cart, 2 to update amount of item, 3 to confirm your order");
-                    x = int.Parse(Console.ReadLine());
-                }
-                break;
         }
     }
-    public static void Main()
+        public static void Main()
     {
         int number;
         Console.WriteLine("chani timchaki et ze");

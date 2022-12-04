@@ -63,7 +63,14 @@ namespace BlImplementation
         {
             if (cart.customerAddress == "" || cart.customerName == "" || cart.customerEmail == "")
                 throw new Exception("missing details");
-            
+            foreach (var item in cart.items)
+            {
+                if (item.amount < 0)
+                    throw new Exception("cannot be negative amount");
+                DO.Product doProduct = idal.Product.Get(item.productId);
+                if (doProduct.amountInStock - item.amount < 0)
+                    throw new Exception("there is not enough products in stock ");
+            }
             DO.Order order=new DO.Order();
             int id;
             order.customerAddress = cart.customerAddress;
@@ -72,25 +79,19 @@ namespace BlImplementation
             order.deliveryDate = DateTime.MinValue;
             order.shipDate = DateTime.MinValue;
             order.orderDate = DateTime.Now;
-            try
-            {
-                id = idal.Order.Add(order);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            id = idal.Order.Add(order);
             DO.OrderItem orderItem = new DO.OrderItem();
-            foreach(BO.OrderItem item in cart.items)
+            foreach(var itemBO in cart.items)
             {
+                DO.Product doProduct = idal.Product.Get(itemBO.productId);
+                doProduct.amountInStock -= itemBO.amount;
+                idal.Product.Update(doProduct);
                 orderItem.orderId = id;
-                orderItem.productId = item.productId;
-                orderItem.pricePerUnit = item.price;
-                orderItem.amount = item.amount;
+                orderItem.productId = itemBO.productId;
+                orderItem.pricePerUnit = itemBO.totalPrice;
+                orderItem.amount = itemBO.amount;
                 idal.OrderItem.Add(orderItem);
             }
-            ///צריך לעדכן את המלאי של המוצרים שהוזמנו!!!
         }
     }
 }

@@ -77,9 +77,9 @@ internal static class DataSource
             Order order = new Order();
             order.orderId = Config.GetOrderNextId();
             order.customerName = customerNameArr[i];
-            order.email = customerEmailArr[s_rand.Next(customerNameArr.Length)];
-            order.shippingAddress = customerAddressArr[i];
-            order.orderCreationDate = DateTime.MinValue;
+            order.customerEmail = customerEmailArr[s_rand.Next(customerNameArr.Length)];
+            order.customerAddress = customerAddressArr[i];
+            order.orderDate = DateTime.MinValue;
             order.deliveryDate = date;
             order.dateOfDelivery = DateTime.MinValue + timeS + timeS1;
             ordersList.Add(order);
