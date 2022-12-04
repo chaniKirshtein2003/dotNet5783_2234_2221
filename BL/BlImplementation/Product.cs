@@ -8,6 +8,7 @@ namespace BlImplementation
     internal class Product : BlApi.IProduct
     {
         IDal idal = new Dallist();
+        //The purpose of the function is to show the manager a list of products.
         public IEnumerable<BO.ProductForList> GetProducts()
         {
             List<BO.ProductForList> products = new List<BO.ProductForList>();
@@ -16,23 +17,25 @@ namespace BlImplementation
                 BO.ProductForList product = new BO.ProductForList();
                 product.Name = item.productName;
                 product.price = item.price;
-                product.category = (BO.Categories)item.category;  
+                product.category = (BO.Categories)item.category;
                 product.ID = item.productId;
                 products.Add(product);
             }
             return products;
         }
+        //The purpose of the function is to show the manager by product code the details of that product.
         public BO.Product GetProduct(int id)
         {
             DO.Product product = idal.Product.Get(id);
             BO.Product newProduct = new BO.Product();
-            newProduct.productName= product.productName;
-            newProduct.price= product.price;
-            newProduct.productId= product.productId;
+            newProduct.productName = product.productName;
+            newProduct.price = product.price;
+            newProduct.productId = product.productId;
             newProduct.category = (BO.Categories)product.category;
             newProduct.amountInStock = product.amountInStock;
             return newProduct;
         }
+        //The purpose of the function is to get the product details from the user and add a new product with the product details.
         public int Add(BO.Product product)
         {
             if (product.productId < 0)
@@ -45,18 +48,19 @@ namespace BlImplementation
                 throw new ArgumentException("Price must be positive");
             DO.Product newProduct = new DO.Product();
             newProduct.productName = product.productName;
-            newProduct.price = product.price;   
-            newProduct.productId= product.productId;
-            newProduct.amountInStock= product.amountInStock;
+            newProduct.price = product.price;
+            newProduct.productId = product.productId;
+            newProduct.amountInStock = product.amountInStock;
             newProduct.category = (DO.Categories)product.category;
-            int id=idal.Product.Add(newProduct);
+            int id = idal.Product.Add(newProduct);
             return id;
         }
+        //The purpose of the function is to delete a product by product code.
         public void Delete(int id)
         {
             IEnumerable<DO.OrderItem> orderItemList;
-            IEnumerable<DO.Order> orderList=new List<DO.Order>();
-            foreach(DO.Order order in orderList)
+            IEnumerable<DO.Order> orderList = new List<DO.Order>();
+            foreach (DO.Order order in orderList)
             {
                 orderItemList = idal.OrderItem.GetOrderItems(order.orderId);
                 foreach (DO.OrderItem item in orderItemList)
@@ -65,6 +69,7 @@ namespace BlImplementation
             }
             idal.Product.Delete(id);
         }
+        //The purpose of the function is to update a product.
         public void Update(BO.Product product)
         {
             if (product.productId < 0)
@@ -83,17 +88,18 @@ namespace BlImplementation
             updateProduct.category = (DO.Categories)product.category;
             idal.Product.Update(updateProduct);
         }
+        //The purpose of the function is to show the buyer a list of products.
         public IEnumerable<BO.ProductItem> ListProductsToBuy()
         {
             IEnumerable<DO.Product> Product = idal.Product.GetAll();
             List<BO.ProductItem> ProductList = new List<BO.ProductItem>();
             BO.ProductItem newProduct;
-            foreach(DO.Product item in Product)
+            foreach (DO.Product item in Product)
             {
                 newProduct = new BO.ProductItem();
-                newProduct.ID=item.productId;
-                newProduct.Name=item.productName;
-                newProduct.price=item.price;
+                newProduct.ID = item.productId;
+                newProduct.Name = item.productName;
+                newProduct.price = item.price;
                 newProduct.category = (BO.Categories)item.category;
                 newProduct.inStock = item.amountInStock > 0 ? true : false;
                 newProduct.amount = item.amountInStock;
@@ -101,15 +107,19 @@ namespace BlImplementation
             }
             return ProductList;
         }
-        public void ProductForBuyer(int idProduct)
+        //The purpose of the function is to present the product details to the buyer according to the product code.
+        public BO.ProductItem ProductForBuyer(int idProduct)
         {
-            DO.Product Product = idal.Product.Get(idProduct);
+            DO.Product product;
+            product = idal.Product.Get(idProduct);
             BO.ProductItem newProduct = new BO.ProductItem();
-            newProduct.ID = Product.productId;
-            newProduct.Name = Product.productName;
-            newProduct.price = Product.price;
-            newProduct.category = (BO.Categories)Product.category;
-            newProduct.amount = Product.amountInStock;
+            newProduct.ID = idProduct;
+            newProduct.Name = product.productName;
+            newProduct.price = product.price;
+            newProduct.amount = product.amountInStock;
+            newProduct.category = (BO.Categories)product.category;
+            newProduct.inStock = product.amountInStock > 0 ? true : false;
+            return newProduct;
         }
     }
 }

@@ -55,14 +55,32 @@ public class Program
         public static void Product()
     {
         int number, id;
-        Console.WriteLine("Insert number from 1 to 5");
+        Console.WriteLine("enter 1 to get all product,2 to get profuct by id,3 to add product,4 to delete product,5 to update,6 to get catalog,7 to get product item by id");
         number = int.Parse(Console.ReadLine());
         switch (number)
         {
             case 0:
                 break;
-            //Add a new product
+            //Get all products
             case 1:
+                {
+                    IEnumerable<BO.ProductForList> products = bl.Product.GetProducts();
+                    foreach (BO.ProductForList product in products)
+                    {
+                        Console.WriteLine(product);
+                    }
+                }
+                break;
+            //Get product by ID
+            case 2:
+                {
+                    Console.WriteLine("Insert id of product");
+                    id = int.Parse(Console.ReadLine());
+                    Console.WriteLine(bl.Product.GetProduct(id)); 
+                }
+                break;
+            //Add a new product
+            case 3:
                 {
                     //Entering the new data
                     Console.WriteLine("Insert id, name, price, amount in stock, and category: 1 for Chagim, 2 for HomeAccessories, 3 for HomeTextiles,4 for Judaica, 5 for DesignedGifts");
@@ -80,26 +98,16 @@ public class Program
                     Console.WriteLine(bl.Product.Add(product));
                 }
                 break;
-            //Get product by ID
-            case 2:
+            //Delete a product
+            case 4:
                 {
-                    Console.WriteLine("Insert id of product");
+                    Console.WriteLine("Insert id");
                     id = int.Parse(Console.ReadLine());
-                    Console.WriteLine(bl.Product.GetProduct(id)); 
-                }
-                break;
-            //Get all products
-            case 3:
-                {
-                    IEnumerable<BO.ProductForList> products=bl.Product.GetProducts();
-                    foreach (BO.ProductForList product in products)
-                    {
-                        Console.WriteLine(product);
-                    }
+                    bl.Product.Delete(id);
                 }
                 break;
             //Update the time details
-            case 4:
+            case 5:
                 {
                     //Finding the product you want to update by its ID
                     Console.WriteLine("Insert id, name, price, amount in stock, and category: 1 for Chagim, 2 for HomeAccessories, 3 for HomeTextiles,4 for Judaica, 5 for DesignedGifts");
@@ -118,23 +126,20 @@ public class Program
                     Console.WriteLine("done");
                 }
                 break;
-            //Delete a product
-            case 5:
+            //get catalog of product
+            case 6:
+                foreach (var item in bl.Product.ListProductsToBuy())
                 {
-                    Console.WriteLine("Insert id");
-                     id = int.Parse(Console.ReadLine());
-                    bl.Product.Delete(id);
+                    Console.WriteLine(item);
                 }
                 break;
-            case 6:
-                IEnumerable<BO.ProductItem> ProductList=bl.Product.ListProductsToBuy();
-                Console.WriteLine(ProductList);
-
-                break;
+            //get product item by id
             case 7:
-                Console.WriteLine("insert id");
-                 id=int.Parse(Console.ReadLine());
-                bl.Product.ProductForBuyer(id);
+                {
+                    Console.WriteLine("insert id");
+                    id=int.Parse(Console.ReadLine());
+                    Console.WriteLine(bl.Product.ProductForBuyer(id));
+                }
                 break;
         }
     }

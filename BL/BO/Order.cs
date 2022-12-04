@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace BO
 {
@@ -24,6 +20,9 @@ namespace BO
         /// shipping address
         /// </summary>
         public string customerAddress { get; set; }
+        /// <summary>
+        /// The status of the order
+        /// </summary>
         public OrderStatus status { get; set; }
 
         /// <summary>
@@ -31,6 +30,9 @@ namespace BO
         /// </summary>
         /// 
         public DateTime orderDate { get; set; }
+        /// <summary>
+        /// Order payment date
+        /// </summary>
         public DateTime paymentDate { get; set; }
         /// <summary>
         /// shipping date
@@ -40,7 +42,13 @@ namespace BO
         /// Date of delivery
         /// </summary>
         public DateTime deliveryDate { get; set; }
+        /// <summary>
+        /// The list of the items in the order
+        /// </summary>
         public List<OrderItem> items { get; set; }
+        /// <summary>
+        /// The total price of the order
+        /// </summary>
         public double totalPrice { get; set; }
         /// <summary>
         /// Overriding method of the ToString 

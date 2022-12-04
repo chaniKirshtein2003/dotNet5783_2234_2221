@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace BlApi
 {
@@ -10,11 +6,10 @@ namespace BlApi
     {
         public IEnumerable<BO.ProductForList> GetProducts();
         public BO.Product GetProduct(int id);
+        public int Add(BO.Product product);
         public void Delete(int id);
         public void Update(BO.Product product);
-        public int Add(BO.Product product);
         public IEnumerable<BO.ProductItem> ListProductsToBuy();
-        public void ProductForBuyer(int idProduct);
-
+        public BO.ProductItem ProductForBuyer(int idProduct);
     }
 }

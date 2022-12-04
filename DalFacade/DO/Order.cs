@@ -29,13 +29,13 @@ public struct Order
     /// delivery date
     /// </summary>
     public DateTime deliveryDate { get; set; }
-
-    public DateTime dateOfDelivery { get; set; }
-
-
     /// <summary>
     /// date of shipping
     /// </summary>
+    //public DateTime dateOfDelivery { get; set; }
+
+
+    
     public DateTime shipDate { get; set; }
 
 

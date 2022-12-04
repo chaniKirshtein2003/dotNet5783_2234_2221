@@ -81,7 +81,7 @@ internal static class DataSource
             order.customerAddress = customerAddressArr[i];
             order.orderDate = DateTime.MinValue;
             order.deliveryDate = date;
-            order.dateOfDelivery = DateTime.MinValue + timeS + timeS1;
+            order.shipDate = DateTime.MinValue + timeS + timeS1;
             ordersList.Add(order);
         }
     }

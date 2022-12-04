@@ -95,6 +95,7 @@ public void Update(Order order)
                 {
                     DataSource.ordersList.Remove(item);
                     flag = true;
+                    break;
                 }
             }
             //Updating the order in the order system

@@ -7,6 +7,7 @@ namespace BlImplementation
     internal class Cart:BlApi.ICart
     {
         IDal idal = new Dallist();
+        //The purpose of the function is to allow the customer to add a product to the current shopping cart.
         public BO.Cart Add(BO.Cart cart, int id)
         {
             bool isExist = false, isInStock = false;
@@ -39,6 +40,7 @@ namespace BlImplementation
                 cart.totalPrice += product.price;
             return cart;
         }
+        //The purpose of the function is to update the quantity of a product in the current shopping basket and returns the updated shopping basket.
         public BO.Cart Update(BO.Cart cart, int id, int amount)
         {
             DO.Product product = idal.Product.Get(id);
@@ -59,6 +61,7 @@ namespace BlImplementation
             }
             return cart;
         }
+        //The purpose of the function is to make the order that is in the customer's shopping cart.
         public void MakeAnOrder(BO.Cart cart)
         {
             if (cart.customerAddress == "" || cart.customerName == "" || cart.customerEmail == "")
