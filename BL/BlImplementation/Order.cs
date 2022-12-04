@@ -46,6 +46,7 @@ namespace BlImplementation
                 order.orderDate = DOorder.orderDate;
                 order.shipDate = DOorder.shipDate;
                 order.deliveryDate = DOorder.deliveryDate;
+                order.items = new List<OrderItem>();
                 BO.OrderItem orderItem = new BO.OrderItem();
                 foreach (DO.OrderItem DOorderItem in idal.OrderItem.GetOrderItems(idOrder))
                 {
@@ -87,7 +88,7 @@ namespace BlImplementation
             }
         }
 
-        public BO.Order supplyUpdate (int id)
+        public BO.Order supplyUpdate(int id)
         {
             try
             {
@@ -104,10 +105,8 @@ namespace BlImplementation
             }
             catch (Exception)
             {
-
                 throw new Exception("order not exist");
             }
-
         }
         public OrderTracking OrderTracking(int id)
         {

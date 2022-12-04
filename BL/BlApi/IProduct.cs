@@ -13,6 +13,8 @@ namespace BlApi
         public void Delete(int id);
         public void Update(BO.Product product);
         public int Add(BO.Product product);
+        public IEnumerable<BO.ProductItem> ListProductsToBuy();
+        public void ProductForBuyer(int idProduct);
 
     }
 }

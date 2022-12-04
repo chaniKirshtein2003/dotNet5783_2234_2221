@@ -12,6 +12,10 @@ namespace BO
         
         public OrderStatus status;
         public List<Tuple<DateTime, string>> Tracking { get; set; }
+        public override string ToString()
+        {
+            return ClassToString.ToStringProperty(this);
+        }
 
     }
 }

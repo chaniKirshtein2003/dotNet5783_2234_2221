@@ -46,14 +46,9 @@ namespace BO
         /// Overriding method of the ToString 
         /// </summary>
         /// <returns>Returns a string describing a order</returns>
-       /* public override string ToString() => $@"
-        Order ID={orderId},
-        Customer Name - {customerName}
-    	Email: {customerEmail}
-    	Customer Address: {customerAdress}
-        Order Creation Date: {orderCreationDate}
-        Delivery Date: {deliveryDate}
-        Date Of Delivery: {dateOfDelivery}
-    ";*/
+        public override string ToString()
+        {
+            return ClassToString.ToStringProperty(this);
+        }
     }
 }

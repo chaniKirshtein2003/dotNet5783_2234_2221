@@ -11,7 +11,7 @@ namespace BlImplementation
         public IEnumerable<BO.ProductForList> GetProducts()
         {
             List<BO.ProductForList> products = new List<BO.ProductForList>();
-            foreach (var item in idal.Product.GetAll())
+            foreach (DO.Product item in idal.Product.GetAll())
             {
                 BO.ProductForList product = new BO.ProductForList();
                 product.Name = item.productName;
@@ -68,13 +68,13 @@ namespace BlImplementation
         public void Update(BO.Product product)
         {
             if (product.productId < 0)
-                throw new ArgumentException("Id must be positive");
+                throw new Exception("Id must be positive");
             if (product.price < 0)
-                throw new ArgumentException("Price must be positive");
+                throw new Exception("Price must be positive");
             if (product.amountInStock < 0)
-                throw new ArgumentException("AmountInStock must be positive");
+                throw new Exception("AmountInStock must be positive");
             if (product.productName == "")
-                throw new ArgumentException("Price must be positive");
+                throw new Exception("Price must be positive");
             DO.Product updateProduct = new DO.Product();
             updateProduct.productName = product.productName;
             updateProduct.price = product.price;

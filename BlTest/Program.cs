@@ -1,7 +1,5 @@
 ﻿using BlApi;
 using BlImplementation;
-
-
 public class Program
 {
     static IBl bl = new Bl();
@@ -11,7 +9,11 @@ public class Program
     {
         BO.Order order;
         int number, id;
-        Console.WriteLine("Insert number from 1 to 5");
+        Console.WriteLine("Insert 1 to get all orders");
+        Console.WriteLine("2 to get order by ID");
+        Console.WriteLine("3 to update sending of order");
+        Console.WriteLine("4 to supply update");
+        Console.WriteLine("5 to orderTracking");
         number = int.Parse(Console.ReadLine());
         switch (number)
         {
@@ -30,6 +32,8 @@ public class Program
                 Console.WriteLine("insert ID");
                 id = int.Parse(Console.ReadLine());
                  order = bl.Order.UpdateSending(id);
+                Console.WriteLine("update done succesfully");
+                Console.WriteLine();
                 Console.WriteLine(order);
                 break;
             case 4:
@@ -43,13 +47,14 @@ public class Program
                 Console.WriteLine("insert ID");
                 id = int.Parse(Console.ReadLine());
                 orderTracking = bl.Order.OrderTracking(id);
+                Console.WriteLine(orderTracking);
                 break;
         }
     }
         //Functions for products
         public static void Product()
     {
-        int number;
+        int number, id;
         Console.WriteLine("Insert number from 1 to 5");
         number = int.Parse(Console.ReadLine());
         switch (number)
@@ -61,7 +66,7 @@ public class Program
                 {
                     //Entering the new data
                     Console.WriteLine("Insert id, name, price, amount in stock, and category: 1 for Chagim, 2 for HomeAccessories, 3 for HomeTextiles,4 for Judaica, 5 for DesignedGifts");
-                    int id = int.Parse(Console.ReadLine());
+                    id = int.Parse(Console.ReadLine());
                     string name = Console.ReadLine();
                     int price = int.Parse(Console.ReadLine());
                     int amountInStock = int.Parse(Console.ReadLine());
@@ -79,7 +84,7 @@ public class Program
             case 2:
                 {
                     Console.WriteLine("Insert id of product");
-                    int id = int.Parse(Console.ReadLine());
+                    id = int.Parse(Console.ReadLine());
                     Console.WriteLine(bl.Product.GetProduct(id)); 
                 }
                 break;
@@ -98,7 +103,7 @@ public class Program
                 {
                     //Finding the product you want to update by its ID
                     Console.WriteLine("Insert id, name, price, amount in stock, and category: 1 for Chagim, 2 for HomeAccessories, 3 for HomeTextiles,4 for Judaica, 5 for DesignedGifts");
-                    int id = int.Parse(Console.ReadLine());
+                    id = int.Parse(Console.ReadLine());
                     string name = Console.ReadLine();
                     int price = int.Parse(Console.ReadLine());
                     int amountInStock = int.Parse(Console.ReadLine());
@@ -110,15 +115,26 @@ public class Program
                     product.price = price;
                     product.amountInStock = amountInStock;
                     bl.Product.Update(product);
+                    Console.WriteLine("done");
                 }
                 break;
             //Delete a product
             case 5:
                 {
                     Console.WriteLine("Insert id");
-                    int id = int.Parse(Console.ReadLine());
+                     id = int.Parse(Console.ReadLine());
                     bl.Product.Delete(id);
                 }
+                break;
+            case 6:
+                IEnumerable<BO.ProductItem> ProductList=bl.Product.ListProductsToBuy();
+                Console.WriteLine(ProductList);
+
+                break;
+            case 7:
+                Console.WriteLine("insert id");
+                 id=int.Parse(Console.ReadLine());
+                bl.Product.ProductForBuyer(id);
                 break;
         }
     }
@@ -129,7 +145,7 @@ public class Program
         Console.WriteLine("enter 1 to Add item to the cart, 2 to update amount of item, 3 to confirm your order");
         number = int.Parse(Console.ReadLine());
         //add product to cart
-        Console.WriteLine("insert customer name,email,adress");
+        Console.WriteLine("insert customer name, email, address");
         string name = Console.ReadLine();
         string email = Console.ReadLine();
         string adress = Console.ReadLine();
@@ -143,7 +159,6 @@ public class Program
         {
             case 1:
                 {
-
                     Console.WriteLine("insert product id");
                     int id = int.Parse(Console.ReadLine());
                     Console.WriteLine(bl.Cart.Add(cart, id));
@@ -152,8 +167,9 @@ public class Program
             case 2:
                 {
                     //update amount of product in cart
-
+                    Console.Write("insert id of product you want to update: ");
                     int id = int.Parse(Console.ReadLine());
+                    Console.Write("insert new amount: ");
                     int amount = int.Parse(Console.ReadLine());
                     bl.Cart.Update(cart, id, amount);
                     break;
@@ -161,8 +177,6 @@ public class Program
             case 3:
                 {
                     //to confirmation Order
-                    Console.WriteLine("insert customer name,email,adress");
-
                     bl.Cart.MakeAnOrder(cart);
                     break;
                 }
@@ -171,7 +185,6 @@ public class Program
         public static void Main()
     {
         int number;
-        Console.WriteLine("chani timchaki et ze");
         do
         {
             Console.WriteLine("Enter 1 to product");

@@ -13,5 +13,10 @@ namespace BO
         public OrderStatus status { get; set; }
         public int amountOfItems { get; set; }
         public double totalPrice { get; set; }
+        public override string ToString()
+        {
+            return ClassToString.ToStringProperty(this);
+        }
+
     }
 }

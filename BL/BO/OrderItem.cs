@@ -33,12 +33,9 @@ namespace BO
         /// Overriding method of the ToString 
         /// </summary>
         /// <returns>Returns a string describing a orderItem</returns>
-      /*  public override string ToString() => $@"
-        OrderItem ID={orderItemId},
-         
-    	Product Id: {productId}
-    	Price Per Unit: {pricePerUnit}
-        Amount: {amount}
-    ";*/
+        public override string ToString()
+        {
+            return ClassToString.ToStringProperty(this);
+        }
     }
 }

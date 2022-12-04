@@ -86,12 +86,13 @@ namespace Dal;
         if (product.productName != "" && product.price != 0 && product.amountInStock != 0 && product.category != 0)
         {
             //A loop that runs through the products until you find the product you want to update.
-            foreach (var item in DataSource.productsList)
+            foreach (Product item in DataSource.productsList)
             {
                 if (item.productId == product.productId)
                 {
                     DataSource.productsList.Remove(item);
                     flag = true;
+                    break;
                 }
             }
             //Updating the product in the product system

@@ -1,5 +1,4 @@
 ﻿using DO;
-
 using Dal;
 
 public class Program
@@ -21,7 +20,6 @@ public class Program
                 {
                     //Entering the new data
                     Console.WriteLine("Insert name & address & email to customer and orderDate,shipDate,deliveryDate");
-
                     string name = Console.ReadLine();
                     string address = Console.ReadLine();
                     string email = Console.ReadLine();

@@ -12,5 +12,10 @@ namespace BO
         public string Name { get; set; }
         public double price { get; set; }
         public Categories category { get; set; }
+        public override string ToString()
+        {
+            return ClassToString.ToStringProperty(this);
+        }
+
     }
 }
