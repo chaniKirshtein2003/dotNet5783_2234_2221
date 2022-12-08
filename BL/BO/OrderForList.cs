@@ -15,11 +15,11 @@ namespace BO
         /// <summary>
         /// The customer's name of this order
         /// </summary>
-        public string customerName { get; set; }
+        public string? customerName { get; set; }
         /// <summary>
         /// The status of this order
         /// </summary>
-        public OrderStatus status { get; set; }
+        public OrderStatus? status { get; set; }
         /// <summary>
         /// The amount of the items in this order
         /// </summary>

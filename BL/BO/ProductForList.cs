@@ -15,7 +15,7 @@ namespace BO
         /// <summary>
         /// ProductForList name
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
         /// <summary>
         /// The price of the productForList
         /// </summary>
@@ -23,7 +23,7 @@ namespace BO
         /// <summary>
         /// The category of the product
         /// </summary>
-        public Categories category { get; set; }
+        public Categories? category { get; set; }
         /// <summary>
         /// Overriding method of the ToString 
         /// </summary>

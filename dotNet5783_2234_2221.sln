@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalList", "DalList\DalList.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalTest", "DalTest\DalTest.csproj", "{CE43577D-CC4C-4F59-9166-D192AFF741D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{25BADAAE-3AEF-4963-8C7C-A647E04DE164}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{25BADAAE-3AEF-4963-8C7C-A647E04DE164}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlTest", "BlTest\BlTest.csproj", "{FCE09F1E-3BEE-4FDF-9200-5FD4572CE431}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlTest", "BlTest\BlTest.csproj", "{FCE09F1E-3BEE-4FDF-9200-5FD4572CE431}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

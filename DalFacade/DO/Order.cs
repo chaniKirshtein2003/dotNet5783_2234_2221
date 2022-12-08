@@ -1,4 +1,5 @@
 ﻿namespace DO;
+
 /// <summary>
 /// Structure for Order
 /// </summary>
@@ -11,24 +12,24 @@ public struct Order
     /// <summary>
     /// The name of the ordering customer
     /// </summary>
-    public string customerName { get; set; }
+    public string? customerName { get; set; }
     /// <summary>
     ///  The address of the customer
     /// </summary>
-    public string customerAddress { get; set; }
+    public string? customerAddress { get; set; }
     /// <summary>
     /// mail address
     /// </summary>
-    public string customerEmail { get; set; }
+    public string? customerEmail { get; set; }
     /// <summary>
     /// shipping address
     /// </summary>
 
-    public DateTime orderDate { get; set; }
+    public DateTime? orderDate { get; set; }
     /// <summary>
     /// delivery date
     /// </summary>
-    public DateTime deliveryDate { get; set; }
+    public DateTime? deliveryDate { get; set; }
     /// <summary>
     /// date of shipping
     /// </summary>
@@ -36,7 +37,7 @@ public struct Order
 
 
     
-    public DateTime shipDate { get; set; }
+    public DateTime? shipDate { get; set; }
 
 
     /// <summary>
