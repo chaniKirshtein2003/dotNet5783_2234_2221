@@ -13,23 +13,23 @@ namespace BO
         /// <summary>
         /// The customer's name of this buying
         /// </summary>
-        public string? customerName { get; set; }
+        public string CustomerName { get; set; }
         /// <summary>
         /// The customer's email of this buying
         /// </summary>
-        public string? customerEmail { get; set; }
+        public string CustomerEmail { get; set; }
         /// <summary>
         /// The customer's address of this buying
         /// </summary>
-        public string? customerAddress { get; set; }
+        public string CustomerAddress { get; set; }
         /// <summary>
         /// The list of the items in this buying
         /// </summary>
-        public List<OrderItem?>? items { get; set; }
+        public List<OrderItem> Items { get; set; }
         /// <summary>
         /// The total price of this buying
         /// </summary>
-        public double totalPrice { get; set; }
+        public double TotalPrice { get; set; }
         /// <summary>
         /// Overriding method of the ToString 
         /// </summary>

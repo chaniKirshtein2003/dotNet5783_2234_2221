@@ -6,9 +6,9 @@ internal static class DataSource
 {
     //Statement on new sets of products orders and order details
     //internal static Product[] productsArr = new Product[50];
-    internal static List<Product?> productsList = new List<Product?>();
-    internal static List<Order?> ordersList = new List<Order?>();
-    internal static List<OrderItem?> orderItemsList = new List<OrderItem?>();
+    internal static List<Product> productsList = new List<Product>();
+    internal static List<Order> ordersList = new List<Order>();
+    internal static List<OrderItem> orderItemsList = new List<OrderItem>();
     //A class containing fields for indexes of the first free element and additional fields for the last ID number
     internal static class Config
     {
@@ -34,7 +34,7 @@ internal static class DataSource
         s_Initialize();
     }
     //Initialization function for product data
-    public static void createInitializeProduct()
+    private static void createInitializeProduct()
     {
         string[] productNameArr = { "flowers", "ships beds", "watches", "Halat trays", "Napkins to get sick", "Burdens", "Covers for braces", "Furniture details", "Mirror", "Palm tree", "Picture frame", "vases", "Crystal candlestick", "A tissue box", "Crystal chess","a","b","c","d","e","f" };
         //A loop that runs over the array of products and fills it with values.
@@ -46,16 +46,16 @@ internal static class DataSource
             else
                 amountInstock = s_rand.Next(10) + 200;
             Product product = new Product();
-            product.productId = i + 100000;
-            product.productName = productNameArr[i];
-            product.category = (Categories)i;
-            product.price = s_rand.Next(10) + 300;
-            product.amountInStock = amountInstock;
+            product.ProductId = i + 100000;
+            product.ProductName = productNameArr[i];
+            product.Category = (Categories)i;
+            product.Price = s_rand.Next(10) + 300;
+            product.AmountInStock = amountInstock;
             productsList.Add(product);
         }
     }
     //Initialization function for order data
-    public static void createInitializeOrder()
+    private static void createInitializeOrder()
     {
         string[] customerNameArr = { "Chani kirshtein", "Shuli Levi", "David Cohen", "Chaim weiss", "Lali pal", "Israel Lubin", "Moshe duek", "Ruth Gross", "Chaya Grin", "Yehuda Cazt" };
         string[] customerAddressArr = { "Gotlib 2", "ovadia 1", "hanasi 3", "rabbi akiva 23", "ahronovith 8", "Gordon 4", "Pinkas 77", "Dakar 2", "Tarfon 3", "Golomb 4" };
@@ -75,18 +75,18 @@ internal static class DataSource
                 date = DateTime.MinValue + timeS;
             }
             Order order = new Order();
-            order.orderId = Config.GetOrderNextId();
-            order.customerName = customerNameArr[i];
-            order.customerEmail = customerEmailArr[s_rand.Next(customerNameArr.Length)];
-            order.customerAddress = customerAddressArr[i];
-            order.orderDate = DateTime.MinValue;
-            order.deliveryDate = date;
-            order.shipDate = DateTime.MinValue + timeS + timeS1;
+            order.OrderId = Config.GetOrderNextId();
+            order.CustomerName = customerNameArr[i];
+            order.CustomerEmail = customerEmailArr[s_rand.Next(customerNameArr.Length)];
+            order.CustomerAddress = customerAddressArr[i];
+            order.OrderDate = DateTime.MinValue;
+            order.DeliveryDate = date;
+            order.ShipDate = DateTime.MinValue + timeS + timeS1;
             ordersList.Add(order);
         }
     }
     //Initialization function for orderItem data
-    public static void createInitializeOrderItem()
+    private static void createInitializeOrderItem()
     {
         //A loop that runs over the array of orderItems and fills it with values.
         int countOrderItems = 0;
@@ -95,11 +95,11 @@ internal static class DataSource
             for (int j = 0; j < s_rand.Next(1, 5); j++)
             {
                 OrderItem orderItem = new OrderItem();
-                orderItem.orderItemId = Config.GetOrderItemNextId();
-                orderItem.orderId = i;
-                orderItem.productId = s_rand.Next(20) + 100000;
-                orderItem.amount = s_rand.Next(10) + 1;
-                orderItem.pricePerUnit = findPrice(orderItem.productId);
+                orderItem.OrderItemId = Config.GetOrderItemNextId();
+                orderItem.OrderId = i;
+                orderItem.ProductId = s_rand.Next(20) + 100000;
+                orderItem.Amount = s_rand.Next(10) + 1;
+                orderItem.PricePerUnit = findPrice(orderItem.ProductId);
                 orderItemsList.Add(orderItem);
                 orderItemsList.Add(orderItem);
             }
@@ -111,8 +111,8 @@ internal static class DataSource
     {
         foreach(var item in productsList)
         {
-            if (item.productId == idProduct)
-                return item.price;
+            if (item.ProductId == idProduct)
+                return item.Price;
         }
         return -1;
     }

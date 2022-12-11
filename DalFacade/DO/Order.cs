@@ -8,28 +8,28 @@ public struct Order
     /// <summary>
     /// Unique ID of Order
     /// </summary>
-    public int orderId { get; set; }
+    public int OrderId { get; set; }
     /// <summary>
     /// The name of the ordering customer
     /// </summary>
-    public string? customerName { get; set; }
+    public string CustomerName { get; set; }
     /// <summary>
     ///  The address of the customer
     /// </summary>
-    public string? customerAddress { get; set; }
+    public string CustomerAddress { get; set; }
     /// <summary>
     /// mail address
     /// </summary>
-    public string? customerEmail { get; set; }
+    public string CustomerEmail { get; set; }
     /// <summary>
     /// shipping address
     /// </summary>
 
-    public DateTime? orderDate { get; set; }
+    public DateTime OrderDate { get; set; }
     /// <summary>
     /// delivery date
     /// </summary>
-    public DateTime? deliveryDate { get; set; }
+    public DateTime DeliveryDate { get; set; }
     /// <summary>
     /// date of shipping
     /// </summary>
@@ -37,7 +37,7 @@ public struct Order
 
 
     
-    public DateTime? shipDate { get; set; }
+    public DateTime ShipDate { get; set; }
 
 
     /// <summary>
@@ -45,12 +45,12 @@ public struct Order
     /// </summary>
     /// <returns>Returns a string describing a order</returns>
     public override string ToString() => $@"
-        Order ID={orderId},
-        Customer Name - {customerName}
-    	Email: {customerEmail}
-    	Shipping Address: {customerAddress}
-        Order Date: {orderDate}
-        Delivery Date: {deliveryDate}
+        Order ID={OrderId},
+        Customer Name - {CustomerName}
+    	Email: {CustomerEmail}
+    	Shipping Address: {CustomerAddress}
+        Order Date: {OrderDate}
+        Delivery Date: {DeliveryDate}
     ";
 }
 

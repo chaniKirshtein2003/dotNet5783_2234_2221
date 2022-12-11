@@ -15,17 +15,17 @@ namespace BlImplementation
             int totalAmount = 0;
             foreach (DO.Order item in idal.Order.GetAll())
             {
-                foreach (DO.OrderItem orderItem in idal.OrderItem.GetOrderItems(item.orderId))
+                foreach (DO.OrderItem orderItem in idal.OrderItem.GetOrderItems(item.OrderId))
                 {
-                    totalAmount += orderItem.amount;
-                    totalPrice += orderItem.pricePerUnit;
+                    totalAmount += orderItem.Amount;
+                    totalPrice += orderItem.PricePerUnit;
                 }
                 order = new BO.OrderForList();
-                order.ID = item.orderId;
-                order.customerName = item.customerName;
-                order.totalPrice = totalPrice;
-                order.amountOfItems = totalAmount;
-                order.status = item.deliveryDate != DateTime.MinValue ? OrderStatus.delivered : item.shipDate != DateTime.MinValue ? OrderStatus.sent : OrderStatus.approved;
+                order.ID = item.OrderId;
+                order.CustomerName = item.CustomerName;
+                order.TotalPrice = totalPrice;
+                order.AmountOfItems = totalAmount;
+                order.Status = item.DeliveryDate != DateTime.MinValue ? OrderStatus.delivered : item.ShipDate != DateTime.MinValue ? OrderStatus.sent : OrderStatus.approved;
                 orderForList.Add(order);
             }
             return orderForList;
@@ -40,24 +40,24 @@ namespace BlImplementation
             try
             {
                 DOorder = idal.Order.Get(idOrder);
-                order.orderId = DOorder.orderId;
-                order.customerName = DOorder.customerName;
-                order.customerAddress = DOorder.customerAddress;
-                order.customerEmail = DOorder.customerEmail;
-                order.orderDate = DOorder.orderDate;
-                order.shipDate = DOorder.shipDate;
-                order.deliveryDate = DOorder.deliveryDate;
-                order.items = new List<OrderItem>();
+                order.OrderId = DOorder.OrderId;
+                order.CustomerName = DOorder.CustomerName;
+                order.CustomerAddress = DOorder.CustomerAddress;
+                order.CustomerEmail = DOorder.CustomerEmail;
+                order.OrderDate = DOorder.OrderDate;
+                order.ShipDate = DOorder.ShipDate;
+                order.DeliveryDate = DOorder.DeliveryDate;
+                order.Items = new List<OrderItem>();
                 BO.OrderItem orderItem = new BO.OrderItem();
                 foreach (DO.OrderItem DOorderItem in idal.OrderItem.GetOrderItems(idOrder))
                 {
-                    orderItem.orderItemId = DOorderItem.orderItemId;
-                    orderItem.productId = DOorderItem.productId;
-                    orderItem.orderItemName = idal.Product.Get(DOorderItem.productId).productName;
-                    orderItem.amount = DOorderItem.amount;
-                    orderItem.price = DOorderItem.pricePerUnit;
-                    orderItem.totalPrice = DOorderItem.pricePerUnit * DOorderItem.amount;
-                    order.items.Add(orderItem);
+                    orderItem.OrderItemId = DOorderItem.OrderItemId;
+                    orderItem.ProductId = DOorderItem.ProductId;
+                    orderItem.OrderItemName = idal.Product.Get(DOorderItem.ProductId).ProductName;
+                    orderItem.Amount = DOorderItem.Amount;
+                    orderItem.Price = DOorderItem.PricePerUnit;
+                    orderItem.TotalPrice = DOorderItem.PricePerUnit * DOorderItem.Amount;
+                    order.Items.Add(orderItem);
                 }
                 return order;
             }
@@ -70,26 +70,26 @@ namespace BlImplementation
         public BO.Order UpdateSending(int id)
         {
             DO.Order order = idal.Order.Get(id);
-            if (order.shipDate.Date < DateTime.Now.Date)
+            if (order.ShipDate.Date < DateTime.Now.Date)
             {
-                order.shipDate = DateTime.Now;
+                order.ShipDate = DateTime.Now;
                 idal.Order.Update(order);
             }
             BO.Order newOrder = GetOrderDetails(id);
-            newOrder.status = OrderStatus.sent;
+            newOrder.Status = OrderStatus.sent;
             return newOrder;
         }
         //The purpose of the function is to allow the manager to update that the order has been delivered to the customer.
         public BO.Order supplyUpdate(int id)
         {
             DO.Order order = idal.Order.Get(id);
-            if (order.deliveryDate.Date < DateTime.Now.Date)
+            if (order.DeliveryDate.Date < DateTime.Now.Date)
             {
-                order.deliveryDate = DateTime.Now;
+                order.DeliveryDate = DateTime.Now;
                 idal.Order.Update(order);
             }
             BO.Order newOrder = GetOrderDetails(id);
-            newOrder.status = OrderStatus.delivered;
+            newOrder.Status = OrderStatus.delivered;
             return newOrder;
         }
         //The purpose of the function is to allow the manager to track the status of the order.
@@ -99,24 +99,24 @@ namespace BlImplementation
             {
                 DO.Order DOorder = idal.Order.Get(id);
                 OrderTracking OrderTrack = new OrderTracking();
-                OrderTrack.ID = DOorder.orderId;
-                if (DOorder.deliveryDate != DateTime.MinValue)
-                    OrderTrack.status = OrderStatus.delivered;
-                else if (DOorder.shipDate != DateTime.MinValue)
-                    OrderTrack.status = OrderStatus.sent;
+                OrderTrack.ID = DOorder.OrderId;
+                if (DOorder.DeliveryDate != DateTime.MinValue)
+                    OrderTrack.Status = OrderStatus.delivered;
+                else if (DOorder.ShipDate != DateTime.MinValue)
+                    OrderTrack.Status = OrderStatus.sent;
                 else
-                    OrderTrack.status = OrderStatus.approved;
+                    OrderTrack.Status = OrderStatus.approved;
                 OrderTrack.Tracking = new List<Tuple<DateTime, string>>();
-                Tuple<DateTime, string> tuple = new Tuple<DateTime, string>(DOorder.orderDate, "approved");
+                Tuple<DateTime, string> tuple = new Tuple<DateTime, string>(DOorder.OrderDate, "approved");
                 OrderTrack.Tracking.Add(tuple);
-                if (DOorder.deliveryDate != DateTime.MinValue)
+                if (DOorder.DeliveryDate != DateTime.MinValue)
                 {
-                    tuple = new Tuple<DateTime, string>(DOorder.deliveryDate, "delivered");
+                    tuple = new Tuple<DateTime, string>(DOorder.DeliveryDate, "delivered");
                     OrderTrack.Tracking.Add(tuple);
                 }
-                else if (DOorder.shipDate != DateTime.MinValue)
+                else if (DOorder.ShipDate != DateTime.MinValue)
                 {
-                    tuple = new Tuple<DateTime, string>(DOorder.shipDate, "sent");
+                    tuple = new Tuple<DateTime, string>(DOorder.ShipDate, "sent");
                     OrderTrack.Tracking.Add(tuple);
                 }
                 return OrderTrack;

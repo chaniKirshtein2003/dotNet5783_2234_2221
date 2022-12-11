@@ -15,10 +15,10 @@ namespace BlImplementation
             foreach (DO.Product item in idal.Product.GetAll())
             {
                 BO.ProductForList product = new BO.ProductForList();
-                product.Name = item.productName;
-                product.price = item.price;
-                product.category = (BO.Categories)item.category;
-                product.ID = item.productId;
+                product.Name = item.ProductName;
+                product.Price = item.Price;
+                product.Category = (BO.Categories)item.Category;
+                product.ID = item.ProductId;
                 products.Add(product);
             }
             return products;
@@ -28,30 +28,30 @@ namespace BlImplementation
         {
             DO.Product product = idal.Product.Get(id);
             BO.Product newProduct = new BO.Product();
-            newProduct.productName = product.productName;
-            newProduct.price = product.price;
-            newProduct.productId = product.productId;
-            newProduct.category = (BO.Categories)product.category;
-            newProduct.amountInStock = product.amountInStock;
+            newProduct.ProductName = product.ProductName;
+            newProduct.Price = product.Price;
+            newProduct.ProductId = product.ProductId;
+            newProduct.Category = (BO.Categories)product.Category;
+            newProduct.AmountInStock = product.AmountInStock;
             return newProduct;
         }
         //The purpose of the function is to get the product details from the user and add a new product with the product details.
         public int Add(BO.Product product)
         {
-            if (product.productId < 0)
+            if (product.ProductId < 0)
                 throw new ArgumentException("Id must be positive");
-            if (product.price < 0)
+            if (product.Price < 0)
                 throw new ArgumentException("Price must be positive");
-            if (product.amountInStock < 0)
+            if (product.AmountInStock < 0)
                 throw new ArgumentException("AmountInStock must be positive");
-            if (product.productName == "")
+            if (product.ProductName == "")
                 throw new ArgumentException("Price must be positive");
             DO.Product newProduct = new DO.Product();
-            newProduct.productName = product.productName;
-            newProduct.price = product.price;
-            newProduct.productId = product.productId;
-            newProduct.amountInStock = product.amountInStock;
-            newProduct.category = (DO.Categories)product.category;
+            newProduct.ProductName = product.ProductName;
+            newProduct.Price = product.Price;
+            newProduct.ProductId = product.ProductId;
+            newProduct.AmountInStock = product.AmountInStock;
+            newProduct.Category = (DO.Categories)product.Category;
             int id = idal.Product.Add(newProduct);
             return id;
         }
@@ -62,9 +62,9 @@ namespace BlImplementation
             IEnumerable<DO.Order> orderList = new List<DO.Order>();
             foreach (DO.Order order in orderList)
             {
-                orderItemList = idal.OrderItem.GetOrderItems(order.orderId);
+                orderItemList = idal.OrderItem.GetOrderItems(order.OrderId);
                 foreach (DO.OrderItem item in orderItemList)
-                    if (item.orderItemId == id)
+                    if (item.OrderItemId == id)
                         throw new Exception("the product is exist");
             }
             idal.Product.Delete(id);
@@ -72,20 +72,20 @@ namespace BlImplementation
         //The purpose of the function is to update a product.
         public void Update(BO.Product product)
         {
-            if (product.productId < 0)
+            if (product.ProductId < 0)
                 throw new Exception("Id must be positive");
-            if (product.price < 0)
+            if (product.Price < 0)
                 throw new Exception("Price must be positive");
-            if (product.amountInStock < 0)
+            if (product.AmountInStock < 0)
                 throw new Exception("AmountInStock must be positive");
-            if (product.productName == "")
+            if (product.ProductName == "")
                 throw new Exception("Price must be positive");
             DO.Product updateProduct = new DO.Product();
-            updateProduct.productName = product.productName;
-            updateProduct.price = product.price;
-            updateProduct.productId = product.productId;
-            updateProduct.amountInStock = product.amountInStock;
-            updateProduct.category = (DO.Categories)product.category;
+            updateProduct.ProductName = product.ProductName;
+            updateProduct.Price = product.Price;
+            updateProduct.ProductId = product.ProductId;
+            updateProduct.AmountInStock = product.AmountInStock;
+            updateProduct.Category = (DO.Categories)product.Category;
             idal.Product.Update(updateProduct);
         }
         //The purpose of the function is to show the buyer a list of products.
@@ -97,12 +97,12 @@ namespace BlImplementation
             foreach (DO.Product item in Product)
             {
                 newProduct = new BO.ProductItem();
-                newProduct.ID = item.productId;
-                newProduct.Name = item.productName;
-                newProduct.price = item.price;
-                newProduct.category = (BO.Categories)item.category;
-                newProduct.inStock = item.amountInStock > 0 ? true : false;
-                newProduct.amount = item.amountInStock;
+                newProduct.ID = item.ProductId;
+                newProduct.Name = item.ProductName;
+                newProduct.Price = item.Price;
+                newProduct.Category = (BO.Categories)item.Category;
+                newProduct.InStock = item.AmountInStock > 0 ? true : false;
+                newProduct.Amount = item.AmountInStock;
                 ProductList.Add(newProduct);
             }
             return ProductList;
@@ -114,11 +114,11 @@ namespace BlImplementation
             product = idal.Product.Get(idProduct);
             BO.ProductItem newProduct = new BO.ProductItem();
             newProduct.ID = idProduct;
-            newProduct.Name = product.productName;
-            newProduct.price = product.price;
-            newProduct.amount = product.amountInStock;
-            newProduct.category = (BO.Categories)product.category;
-            newProduct.inStock = product.amountInStock > 0 ? true : false;
+            newProduct.Name = product.ProductName;
+            newProduct.Price = product.Price;
+            newProduct.Amount = product.AmountInStock;
+            newProduct.Category = (BO.Categories)product.Category;
+            newProduct.InStock = product.AmountInStock > 0 ? true : false;
             return newProduct;
         }
     }

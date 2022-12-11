@@ -17,12 +17,12 @@ public class DalOrderItem :IOrderItem
         //A loop that runs through the list and adds a new orderItem
         foreach (var item in DataSource.orderItemsList)
         {
-            if (orderItem.orderItemId == item.orderItemId)
+            if (orderItem.OrderItemId == item.OrderItemId)
                 throw new Exception("this id is already exist");
         }
         //add orderItem to the list
         DataSource.orderItemsList.Add(orderItem);
-        return orderItem.orderItemId;
+        return orderItem.OrderItemId;
     }
 
     /// <summary>
@@ -36,7 +36,7 @@ public class DalOrderItem :IOrderItem
         //A loop that runs until it reaches the desired index
         foreach (var item in DataSource.orderItemsList)
         {
-            if (item.orderItemId == idOrderItem)
+            if (item.OrderItemId == idOrderItem)
                 return item;
         }
         throw new Exception("there is no orderItem with this id");
@@ -66,7 +66,7 @@ public class DalOrderItem :IOrderItem
         //A loop that runs through the orderItems until you find the orderItem you want to delete.
         foreach (var item in DataSource.orderItemsList)
         {
-            if (item.orderItemId == idOrderItem)
+            if (item.OrderItemId == idOrderItem)
             {
                 DataSource.orderItemsList.Remove(item);
                 return;
@@ -83,26 +83,23 @@ public class DalOrderItem :IOrderItem
     /// <exception cref="Exception">Returns an error once no matching object is found</exception>
     public void Update(OrderItem orderItem)
     {
-        if (orderItem.pricePerUnit != 0 && orderItem.amount != 0)
+        bool flag = false;
+        //A loop that runs through the orderItems until you find the orderItem you want to update.
+        foreach (var item in DataSource.orderItemsList)
         {
-            bool flag = false;
-            //A loop that runs through the orderItems until you find the orderItem you want to update.
-            foreach (var item in DataSource.orderItemsList)
+            if (item.OrderItemId == orderItem.OrderItemId)
             {
-                if (item.orderItemId == orderItem.orderItemId)
-                {
-                    DataSource.orderItemsList.Remove(item);
-                    flag = true;
-                }
+                DataSource.orderItemsList.Remove(item);
+                flag = true;
             }
-            //Updating the orderItem in the orderItem system
-            if (flag == true)
-            {
-                DataSource.orderItemsList.Add(orderItem);
-            }
-            else
-                throw new Exception("The orderItem does not exist");
         }
+        //Updating the orderItem in the orderItem system
+        if (flag == true)
+        {
+            DataSource.orderItemsList.Add(orderItem);
+        }
+        else
+            throw new Exception("The orderItem does not exist");
     }
 
     //return object of orderItem by idProuct and idOrder
@@ -112,7 +109,7 @@ public class DalOrderItem :IOrderItem
         foreach (var item in DataSource.orderItemsList)
         {
             //The checker conditions whether the product code and the order code match
-            if (idProduct == item.productId && idOrder == item.orderId)
+            if (idProduct == item.ProductId && idOrder == item.OrderId)
                 return item;
         }
         //if this id does not exist in array
@@ -127,7 +124,7 @@ public class DalOrderItem :IOrderItem
         foreach (var item in DataSource.orderItemsList)
         {
             //The condition checks whether the IDs are the same
-            if (idOrder == item.orderId)
+            if (idOrder == item.OrderId)
                 productsList.Add(item);
         }
         return productsList;

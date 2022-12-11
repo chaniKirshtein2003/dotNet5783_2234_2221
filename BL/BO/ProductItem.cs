@@ -15,23 +15,23 @@ namespace BO
         /// <summary>
         /// ProductItem name
         /// </summary>
-        public string? Name { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// The price of the productItem
         /// </summary>
-        public double price { get; set; }
+        public double Price { get; set; }
         /// <summary>
         /// The category of the productItem
         /// </summary>
-        public Categories? category { get; set; }
+        public Categories Category { get; set; }
         /// <summary>
         /// Amount in stock of the productItem
         /// </summary>
-        public int amount { get; set; }
+        public int Amount { get; set; }
         /// <summary>
         /// Check if there is this productItem in the stock
         /// </summary>
-        public bool inStock { get; set; }
+        public bool InStock { get; set; }
         /// <summary>
         /// Overriding method of the ToString 
         /// </summary>

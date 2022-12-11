@@ -2,8 +2,8 @@
 using DalApi;
 
 namespace Dal;
-    public class DalProduct:IProduct
-    {
+public class DalProduct : IProduct
+{
     /// <summary>
     /// An add object method that accepts an entity object and returns the id of the added object
     /// </summary>
@@ -15,14 +15,12 @@ namespace Dal;
         //A loop that runs through the list and adds a new product
         foreach (var item in DataSource.productsList)
         {
-            if (product.productId == item.productId)
+            if (product.ProductId == item.ProductId)
                 throw new Exception("this id is already exist");
-            if (product.productId < 100000)
-                throw new Exception("the id is not valid");
         }
         //add product to the list
         DataSource.productsList.Add(product);
-        return product.productId;
+        return product.ProductId;
     }
     /// <summary>
     /// A request/call method of a single object receives an ID number of the entity and returns the corresponding object
@@ -33,9 +31,9 @@ namespace Dal;
     public Product Get(int idProduct)
     {
         //A loop that runs until it reaches the desired index
-        foreach(var item in DataSource.productsList)
+        foreach (var item in DataSource.productsList)
         {
-            if (item.productId == idProduct)
+            if (item.ProductId == idProduct)
                 return item;
         }
         throw new Exception("there is no product with this id");
@@ -49,7 +47,7 @@ namespace Dal;
         //Building a new layout where all the products will be displayed
         List<Product> newProductList = new List<Product>();
         //A loop that transfers all product data to the new list
-        foreach(var item in DataSource.productsList)
+        foreach (var item in DataSource.productsList)
         {
             newProductList.Add(item);
         }
@@ -63,9 +61,9 @@ namespace Dal;
     public void Delete(int idProduct)
     {
         //A loop that runs through the products until you find the product you want to delete.
-        foreach(var item in DataSource.productsList)
+        foreach (var item in DataSource.productsList)
         {
-            if (item.productId == idProduct)
+            if (item.ProductId == idProduct)
             {
                 DataSource.productsList.Remove(item);
                 return;
@@ -83,26 +81,23 @@ namespace Dal;
     public void Update(Product product)
     {
         bool flag = false;
-        if (product.productName != "" && product.price != 0 && product.amountInStock != 0 && product.category != 0)
+        //A loop that runs through the products until you find the product you want to update.
+        foreach (Product item in DataSource.productsList)
         {
-            //A loop that runs through the products until you find the product you want to update.
-            foreach (Product item in DataSource.productsList)
+            if (item.ProductId == product.ProductId)
             {
-                if (item.productId == product.productId)
-                {
-                    DataSource.productsList.Remove(item);
-                    flag = true;
-                    break;
-                }
+                DataSource.productsList.Remove(item);
+                flag = true;
+                break;
             }
-            //Updating the product in the product system
-            if (flag == true)
-            {
-                DataSource.productsList.Add(product);
-            }
-            else
-                throw new Exception("The product does not exist");
         }
+        //Updating the product in the product system
+        if (flag == true)
+        {
+            DataSource.productsList.Add(product);
+        }
+        else
+            throw new Exception("The product does not exist");
     }
 }
 

@@ -7,49 +7,49 @@ namespace BO
         /// <summary>
         /// Unique ID of Order
         /// </summary>
-        public int orderId { get; set; }
+        public int OrderId { get; set; }
         /// <summary>
         /// The name of the ordering customer
         /// </summary>
-        public string? customerName { get; set; }
+        public string CustomerName { get; set; }
         /// <summary>
         /// mail adress
         /// </summary>
-        public string? customerEmail { get; set; }
+        public string CustomerEmail { get; set; }
         /// <summary>
         /// shipping address
         /// </summary>
-        public string? customerAddress { get; set; }
+        public string CustomerAddress { get; set; }
         /// <summary>
         /// The status of the order
         /// </summary>
-        public OrderStatus? status { get; set; }
+        public OrderStatus Status { get; set; }
 
         /// <summary>
         /// Order creation date
         /// </summary>
         /// 
-        public DateTime? orderDate { get; set; }
+        public DateTime OrderDate { get; set; }
         /// <summary>
         /// Order payment date
         /// </summary>
-        public DateTime? paymentDate { get; set; }
+        public DateTime PaymentDate { get; set; }
         /// <summary>
         /// shipping date
         /// </summary>
-        public DateTime? shipDate { get; set; }
+        public DateTime ShipDate { get; set; }
         /// <summary>
         /// Date of delivery
         /// </summary>
-        public DateTime? deliveryDate { get; set; }
+        public DateTime DeliveryDate { get; set; }
         /// <summary>
         /// The list of the items in the order
         /// </summary>
-        public List<OrderItem?>? items { get; set; }
+        public List<OrderItem> Items { get; set; }
         /// <summary>
         /// The total price of the order
         /// </summary>
-        public double totalPrice { get; set; }
+        public double TotalPrice { get; set; }
         /// <summary>
         /// Overriding method of the ToString 
         /// </summary>

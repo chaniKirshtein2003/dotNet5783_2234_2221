@@ -15,19 +15,19 @@ namespace BO
         /// <summary>
         /// The customer's name of this order
         /// </summary>
-        public string? customerName { get; set; }
+        public string CustomerName { get; set; }
         /// <summary>
         /// The status of this order
         /// </summary>
-        public OrderStatus? status { get; set; }
+        public OrderStatus Status { get; set; }
         /// <summary>
         /// The amount of the items in this order
         /// </summary>
-        public int amountOfItems { get; set; }
+        public int AmountOfItems { get; set; }
         /// <summary>
         /// The total price of this order
         /// </summary>
-        public double totalPrice { get; set; }
+        public double TotalPrice { get; set; }
         /// <summary>
         /// Overriding method of the ToString 
         /// </summary>

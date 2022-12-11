@@ -90,11 +90,11 @@ public class Program
                     int amountInStock = int.Parse(Console.ReadLine());
                     int category = int.Parse(Console.ReadLine());
                     BO.Product product = new BO.Product();
-                    product.productId = id;
-                    product.productName = name;
-                    product.category = (BO.Categories)category;
-                    product.price = price;
-                    product.amountInStock = amountInStock;
+                    product.ProductId = id;
+                    product.ProductName = name;
+                    product.Category = (BO.Categories)category;
+                    product.Price = price;
+                    product.AmountInStock = amountInStock;
                     Console.WriteLine(bl.Product.Add(product));
                 }
                 break;
@@ -117,11 +117,11 @@ public class Program
                     int amountInStock = int.Parse(Console.ReadLine());
                     int category = int.Parse(Console.ReadLine());
                     BO.Product product = new BO.Product();
-                    product.productId = id;
-                    product.productName = name;
-                    product.category = (BO.Categories)category;
-                    product.price = price;
-                    product.amountInStock = amountInStock;
+                    product.ProductId = id;
+                    product.ProductName = name;
+                    product.Category = (BO.Categories)category;
+                    product.Price = price;
+                    product.AmountInStock = amountInStock;
                     bl.Product.Update(product);
                     Console.WriteLine("done");
                 }
@@ -155,11 +155,11 @@ public class Program
         string email = Console.ReadLine();
         string adress = Console.ReadLine();
         BO.Cart cart = new BO.Cart();
-        cart.customerName = name;
-        cart.customerEmail = email;
-        cart.customerAddress = adress;
-        cart.items = new List<BO.OrderItem>();
-        cart.totalPrice = 0;
+        cart.CustomerName = name;
+        cart.CustomerEmail = email;
+        cart.CustomerAddress = adress;
+        cart.Items = new List<BO.OrderItem>();
+        cart.TotalPrice = 0;
         switch (number)
         {
             case 1:
@@ -207,7 +207,7 @@ public class Program
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex);
+                        Console.WriteLine(ex.Message);
                     }
                     break;
                 case 2:
@@ -217,7 +217,7 @@ public class Program
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex);
+                        Console.WriteLine(ex.Message);
                     }
                     break;
                 case 3:
@@ -227,7 +227,7 @@ public class Program
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex);
+                        Console.WriteLine(ex.Message);
                     }
                     break;
 
