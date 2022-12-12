@@ -11,41 +11,41 @@ namespace BO
         /// <summary>
         /// The name of the ordering customer
         /// </summary>
-        public string CustomerName { get; set; }
+        public string? CustomerName { get; set; }
         /// <summary>
         /// mail adress
         /// </summary>
-        public string CustomerEmail { get; set; }
+        public string? CustomerEmail { get; set; }
         /// <summary>
         /// shipping address
         /// </summary>
-        public string CustomerAddress { get; set; }
+        public string? CustomerAddress { get; set; }
         /// <summary>
         /// The status of the order
         /// </summary>
-        public OrderStatus Status { get; set; }
+        public OrderStatus? Status { get; set; }
 
         /// <summary>
         /// Order creation date
         /// </summary>
         /// 
-        public DateTime OrderDate { get; set; }
+        public DateTime? OrderDate { get; set; }
         /// <summary>
         /// Order payment date
         /// </summary>
-        public DateTime PaymentDate { get; set; }
+        public DateTime? PaymentDate { get; set; }
         /// <summary>
         /// shipping date
         /// </summary>
-        public DateTime ShipDate { get; set; }
+        public DateTime? ShipDate { get; set; }
         /// <summary>
         /// Date of delivery
         /// </summary>
-        public DateTime DeliveryDate { get; set; }
+        public DateTime? DeliveryDate { get; set; }
         /// <summary>
         /// The list of the items in the order
         /// </summary>
-        public List<OrderItem> Items { get; set; }
+        public List<OrderItem?>? Items { get; set; }
         /// <summary>
         /// The total price of the order
         /// </summary>

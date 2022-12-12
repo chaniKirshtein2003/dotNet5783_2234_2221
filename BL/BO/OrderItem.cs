@@ -15,7 +15,7 @@ namespace BO
         /// <summary>
         /// The name of the item in the order
         /// </summary>
-        public string OrderItemName { get; set; }
+        public string? OrderItemName { get; set; }
         /// <summary>
         /// Product ID number
         /// </summary>

@@ -6,9 +6,9 @@ internal static class DataSource
 {
     //Statement on new sets of products orders and order details
     //internal static Product[] productsArr = new Product[50];
-    internal static List<Product> productsList = new List<Product>();
-    internal static List<Order> ordersList = new List<Order>();
-    internal static List<OrderItem> orderItemsList = new List<OrderItem>();
+    internal static List<Product?> productsList = new List<Product?>();
+    internal static List<Order?> ordersList = new List<Order?>();
+    internal static List<OrderItem?> orderItemsList = new List<OrderItem?>();
     //A class containing fields for indexes of the first free element and additional fields for the last ID number
     internal static class Config
     {

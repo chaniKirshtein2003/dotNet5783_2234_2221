@@ -45,14 +45,15 @@ public class DalOrderItem :IOrderItem
     /// Request/read method of the list of all objects of the entity
     /// </summary>
     /// <returns>Returns all objects of the entity</returns>
-    public IEnumerable<OrderItem> GetAll()
+    public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? pred = null)
     {
         //Building a new layout where all the orderItems will be displayed
-        List<OrderItem> newOrderItemList = new List<OrderItem>();
+        List<OrderItem?> newOrderItemList = new List<OrderItem?>();
         //A loop that transfers all orderItem data to the new list
-        foreach (var item in DataSource.orderItemsList)
+        foreach (OrderItem? item in DataSource.orderItemsList)
         {
-            newOrderItemList.Add(item);
+            if (pred == null || pred(item))
+                newOrderItemList.Add(item);
         }
         return newOrderItemList;
     }
@@ -128,5 +129,14 @@ public class DalOrderItem :IOrderItem
                 productsList.Add(item);
         }
         return productsList;
+    }
+    public OrderItem GetByCondition(Func<OrderItem, bool>? check)
+    {
+        foreach (OrderItem item in DataSource.orderItemsList)
+        {
+            if (check(item))
+                return item;
+        }
+        throw new DO.NotExistException(1, "OrderItem");
     }
 }

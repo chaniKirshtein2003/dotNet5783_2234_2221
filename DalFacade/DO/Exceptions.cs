@@ -3,15 +3,58 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+/// <summary>
+/// all the do exception
+/// </summary>
 namespace DO
 {
-    public class NotExist:Exception
+    /// <summary>
+    /// Exception to product/order/orderItem does not exist in database
+    /// </summary>
+    [Serializable]
+    public class NotExistException : Exception
     {
-        public NotExist(string message) : base(message) { }
+        string name;
+        int id;
+        public NotExistException(int _id, string _name) : base()
+        {
+            id = _id;
+            name = _name;
+        }
+        public NotExistException(int _id, string _name, string massage) : base(massage)
+        {
+            id = _id;
+            name = _name;
+        }
+        public override string ToString()
+        {
+            return $"{name} number {id} does not exist";
+        }
     }
-    public class Exist:Exception
+    [Serializable]
+    /// <summary>
+    /// Exception to product/order/orderItem already exist in database
+    /// </summary>
+    public class ExistException : Exception
     {
-        public Exist(string message) : base(message) { }
+        string name;
+        int id;
+        public ExistException(int _id, string _name) : base()
+        {
+            id = _id;
+            name = _name;
+        }
+        public ExistException(int _id, string _name, string massage) : base(massage)
+        {
+            id = _id;
+            name = _name;
+        }
+        public ExistException(int _id, string _name, string massage, Exception innerExcption) : base(massage, innerExcption)
+        {
+            id = _id;
+            name = _name;
+        }
+        public override string ToString() =>
+            $"{name} number {id} Already exist";
     }
 }

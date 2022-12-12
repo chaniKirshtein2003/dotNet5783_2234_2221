@@ -17,7 +17,7 @@ namespace BO
         /// </summary>
         
         public OrderStatus Status;
-        public List<Tuple<DateTime,string>> Tracking { get; set; }
+        public List<Tuple<DateTime?,string?>>? Tracking { get; set; }
         /// <summary>
         /// Overriding method of the ToString 
         /// </summary>

@@ -43,18 +43,19 @@ public Order Get(int idOrder)
         }
         throw new Exception("there is no order with this id");
     }
-/// <summary>
-/// Request/read method of the list of all objects of the entity
-/// </summary>
-/// <returns>Returns all objects of the entity</returns>
-public IEnumerable<Order> GetAll()
+    /// <summary>
+    /// Request/read method of the list of all objects of the entity
+    /// </summary>
+    /// <returns>Returns all objects of the entity</returns>
+    public IEnumerable<Order?> GetAll(Func<Order?, bool>? pred = null)
     {
         //Building a new layout where all the orders will be displayed
-        List<Order> newOrderList = new List<Order>();
+        List<Order?> newOrderList = new List<Order?>();
         //A loop that transfers all order data to the new list
-        foreach(var item in DataSource.ordersList)
+        foreach(Order? item in DataSource.ordersList)
         {
-            newOrderList.Add(item);
+            if (pred == null || pred(item))
+                newOrderList.Add(item);
         }
         return newOrderList;
     }
@@ -103,6 +104,15 @@ public void Delete(int idOrder)
         }
         else
             throw new Exception("The order does not exist");
+    }
+    public Order GetByCondition(Func<Order, bool>? check)
+    {
+        foreach (Order item in DataSource.ordersList)
+        {
+            if (check(item))
+                return item;
+        }
+        throw new DO.NotExistException(1, "Order");
     }
 }
 

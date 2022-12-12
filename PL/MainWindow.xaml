@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="107*"/>
+            <ColumnDefinition Width="293*"/>
+        </Grid.ColumnDefinitions>
+        <Button Height="100" x:Name="productDisplayBtn" Click="productDisplayBtn_Click" Content="" Grid.ColumnSpan="2" Margin="0,167,0,167" />
     </Grid>
 </Window>

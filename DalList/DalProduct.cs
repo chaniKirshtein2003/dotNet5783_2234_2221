@@ -10,17 +10,21 @@ public class DalProduct : IProduct
     /// <param name="order">Product to add</param>
     /// <returns>Return the id number of the object that added</returns>
     /// <exception cref="Exception">Throws an error if there is no room for another product</exception>
-    public int Add(Product product)
+    public void Add(DO.Product product)
     {
         //A loop that runs through the list and adds a new product
-        foreach (var item in DataSource.productsList)
-        {
-            if (product.ProductId == item.ProductId)
-                throw new Exception("this id is already exist");
-        }
+        //foreach (var item in DataSource.productsList)
+        //{
+        //    if (product.ProductId == item.ProductId)
+        //        throw new Exception("this id is already exist");
+        //}
         //add product to the list
+        //DataSource.productsList.Add(product);
+        //return product.ProductId;
+
+        if (CheckProduct(product.ProductId))
+            throw new DO.ExistException(product.ProductId, "Product");
         DataSource.productsList.Add(product);
-        return product.ProductId;
     }
     /// <summary>
     /// A request/call method of a single object receives an ID number of the entity and returns the corresponding object
@@ -42,14 +46,15 @@ public class DalProduct : IProduct
     /// Request/read method of the list of all objects of the entity
     /// </summary>
     /// <returns>Returns all objects of the entity</returns>
-    public IEnumerable<Product> GetAll()
+    public IEnumerable<Product?> GetAll(Func<Product?,bool>? pred=null)
     {
         //Building a new layout where all the products will be displayed
-        List<Product> newProductList = new List<Product>();
+        List<Product?> newProductList = new List<Product?>();
         //A loop that transfers all product data to the new list
-        foreach (var item in DataSource.productsList)
+        foreach (Product? item in DataSource.productsList)
         {
-            newProductList.Add(item);
+            if (pred == null || pred(item))
+                newProductList.Add(item);
         }
         return newProductList;
     }
@@ -99,5 +104,19 @@ public class DalProduct : IProduct
         else
             throw new Exception("The product does not exist");
     }
+    public Product GetByCondition(Func<Product, bool>? check)
+    {
+        foreach (Product item in DataSource.productsList)
+        {
+            if (check(item))
+                return item;
+        }
+        throw new DO.NotExistException(1, "Product");
+    }
+    public bool CheckProduct(int id)
+    {
+        return DataSource.productsList.Any(product => product?.ProductId == id);
+    }
+
 }
 
