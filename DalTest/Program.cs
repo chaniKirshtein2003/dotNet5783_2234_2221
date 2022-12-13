@@ -52,7 +52,7 @@ public class Program
             //To receive all the orders that exist in the order array
             case 3:
                 {
-                    IEnumerable<Order> orders = dalOrder.GetAll();
+                    IEnumerable<Order?> orders = dalOrder.GetAll();
                     foreach (var item in orders)
                     {
                         Console.WriteLine(item);
@@ -145,7 +145,7 @@ public class Program
             //To receive all the products that exist in the product array  
             case 3:
                 {
-                    IEnumerable<Product> products = dalProduct.GetAll();
+                    IEnumerable<Product?> products = dalProduct.GetAll();
                     foreach(var item in products)
                     {
                         Console.WriteLine(item);
@@ -231,7 +231,7 @@ public class Program
             //To receive all the orderItems that exist in the orderItem array           
             case 3:
                 {
-                    IEnumerable<OrderItem> ordersItem = dalOrderItem.GetAll();
+                    IEnumerable<OrderItem?> ordersItem = dalOrderItem.GetAll();
                     foreach(var item in ordersItem)
                     {
                         Console.WriteLine(item);
@@ -283,7 +283,7 @@ public class Program
                 {
                     Console.WriteLine("Enter order id");
                     int order = int.Parse(Console.ReadLine());
-                    IEnumerable<OrderItem> list = dalOrderItem.GetOrderItems(order);
+                    IEnumerable<OrderItem?> list = dalOrderItem.GetOrderItems(order);
                     foreach(var item in list)
                     {
                         Console.WriteLine(item);

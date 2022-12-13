@@ -14,12 +14,8 @@ public class DalOrderItem :IOrderItem
     /// <exception cref="Exception">Throws an error if there is no room for another orderItem</exception>
     public int Add(OrderItem orderItem)
     {
-        //A loop that runs through the list and adds a new orderItem
-        foreach (var item in DataSource.orderItemsList)
-        {
-            if (orderItem.OrderItemId == item?.OrderItemId)
-                throw new Exception("this id is already exist");
-        }
+        if (CheckOrderItem(orderItem.OrderItemId))
+            throw new DO.ExistException(orderItem.OrderItemId, "OrderItem");
         //add orderItem to the list
         DataSource.orderItemsList.Add(orderItem);
         return orderItem.OrderItemId;
@@ -33,13 +29,8 @@ public class DalOrderItem :IOrderItem
     /// <exception cref="Exception">Returns an error as soon as no suitable orderItem is found</exception>
     public OrderItem Get(int idOrderItem)
     {
-        //A loop that runs until it reaches the desired index
-        foreach (var item in DataSource.orderItemsList)
-        {
-            if (item?.OrderItemId == idOrderItem)
-                return item??throw new NotExistException(idOrderItem,"There is no orderItem with thid id");
-        }
-        throw new NotExistException(idOrderItem,"there is no orderItem with this id");
+        //look for the orderItem with the same id
+        return DataSource.orderItemsList.FirstOrDefault(orItem => orItem?.OrderItemId == idOrderItem) ?? throw new NotExistException(idOrderItem, "OrderItem");
     }
     /// <summary>
     /// Request/read method of the list of all objects of the entity
@@ -47,15 +38,23 @@ public class DalOrderItem :IOrderItem
     /// <returns>Returns all objects of the entity</returns>
     public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? pred = null)
     {
-        //Building a new layout where all the orderItems will be displayed
-        List<OrderItem?> newOrderItemList = new List<OrderItem?>();
-        //A loop that transfers all orderItem data to the new list
-        foreach (OrderItem? item in DataSource.orderItemsList)
-        {
-            if (pred == null || pred(item))
-                newOrderItemList.Add(item);
-        }
-        return newOrderItemList;
+        ////Building a new layout where all the orderItems will be displayed
+        //List<OrderItem?> newOrderItemList = new List<OrderItem?>();
+        ////A loop that transfers all orderItem data to the new list
+        //foreach (OrderItem? item in DataSource.orderItemsList)
+        //{
+        //    if (pred == null || pred(item))
+        //        newOrderItemList.Add(item);
+        //}
+        //return newOrderItemList;
+        //copy to new arr all the products that exist the arr
+        if (pred != null)
+            //    return from ordItem in DataSource.orderItemsList
+            //           where pred(ordItem) select ordItem;
+            return DataSource.orderItemsList.FindAll(x => pred(x));
+        else
+            return from ordItem in DataSource.orderItemsList
+                   select ordItem;
     }
     /// <summary>
     /// A method to delete a orderItem object that receives a orderItem ID number
@@ -64,16 +63,9 @@ public class DalOrderItem :IOrderItem
     /// <exception cref="Exception">Throws an error as soon as no suitable orderItem is found</exception>
     public void Delete(int idOrderItem)
     {
-        //A loop that runs through the orderItems until you find the orderItem you want to delete.
-        foreach (var item in DataSource.orderItemsList)
-        {
-            if (item?.OrderItemId == idOrderItem)
-            {
-                DataSource.orderItemsList.Remove(item);
-                return;
-            }
-        }
-        throw new Exception("The orderItem does not exist");
+        int count = DataSource.orderItemsList.RemoveAll(orItem => orItem?.OrderItemId == idOrderItem);
+        if (count == 0)
+            throw new DO.NotExistException(idOrderItem, "OrderItem");
     }
     /// <summary>
     /// An object update method that will receive a new object
@@ -84,23 +76,10 @@ public class DalOrderItem :IOrderItem
     /// <exception cref="Exception">Returns an error once no matching object is found</exception>
     public void Update(OrderItem orderItem)
     {
-        bool flag = false;
-        //A loop that runs through the orderItems until you find the orderItem you want to update.
-        foreach (var item in DataSource.orderItemsList)
-        {
-            if (item?.OrderItemId == orderItem.OrderItemId)
-            {
-                DataSource.orderItemsList.Remove(item);
-                flag = true;
-            }
-        }
-        //Updating the orderItem in the orderItem system
-        if (flag == true)
-        {
-            DataSource.orderItemsList.Add(orderItem);
-        }
-        else
-            throw new Exception("The orderItem does not exist");
+        int count = DataSource.orderItemsList.RemoveAll(ordItem => orderItem.OrderItemId == ordItem?.OrderItemId);
+        if (count == 0)
+            throw new DO.NotExistException(orderItem.OrderItemId, "OrderItem");
+        DataSource.orderItemsList.Add(orderItem);
     }
 
     //return object of orderItem by idProuct and idOrder
@@ -132,11 +111,16 @@ public class DalOrderItem :IOrderItem
     }
     public OrderItem GetByCondition(Func<OrderItem?, bool>? check)
     {
+        //return DataSource.orderItemsList.FirstOrDefault(x=>check(x))??throw new
         foreach (OrderItem item in DataSource.orderItemsList)
         {
             if (check(item))
                 return item;
         }
         throw new DO.NotExistException(1, "OrderItem");
+    }
+    public bool CheckOrderItem(int id)
+    {
+        return DataSource.orderItemsList.Any(ordItem => ordItem?.OrderItemId == id);
     }
 }

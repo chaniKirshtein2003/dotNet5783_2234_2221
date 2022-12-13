@@ -49,7 +49,7 @@ namespace BlImplementation
                 order.OrderDate = DOorder.OrderDate;
                 order.ShipDate = DOorder.ShipDate;
                 order.DeliveryDate = DOorder.DeliveryDate;
-                order.Items = new List<OrderItem>();
+                order.Items = new List<BO.OrderItem>();
                 BO.OrderItem orderItem = new BO.OrderItem();
                 foreach (DO.OrderItem DOorderItem in idal.OrderItem.GetOrderItems(idOrder))
                 {
