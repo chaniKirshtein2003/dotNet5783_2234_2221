@@ -10,21 +10,17 @@ public class DalProduct : IProduct
     /// <param name="order">Product to add</param>
     /// <returns>Return the id number of the object that added</returns>
     /// <exception cref="Exception">Throws an error if there is no room for another product</exception>
-    public void Add(DO.Product product)
+    public int Add(DO.Product product)
     {
         //A loop that runs through the list and adds a new product
-        //foreach (var item in DataSource.productsList)
-        //{
-        //    if (product.ProductId == item.ProductId)
-        //        throw new Exception("this id is already exist");
-        //}
+        foreach (var item in DataSource.productsList)
+        {
+            if (product.ProductId == item?.ProductId)
+                throw new Exception("this id is already exist");
+        }
         //add product to the list
-        //DataSource.productsList.Add(product);
-        //return product.ProductId;
-
-        if (CheckProduct(product.ProductId))
-            throw new DO.ExistException(product.ProductId, "Product");
         DataSource.productsList.Add(product);
+        return product.ProductId;
     }
     /// <summary>
     /// A request/call method of a single object receives an ID number of the entity and returns the corresponding object
@@ -32,13 +28,13 @@ public class DalProduct : IProduct
     /// <param name="idProduct"></param>
     /// <returns>Returns the corresponding object</returns>
     /// <exception cref="Exception">Returns an error as soon as no suitable product is found</exception>
-    public Product Get(int idProduct)
+    public DO.Product Get(int idProduct)
     {
         //A loop that runs until it reaches the desired index
         foreach (var item in DataSource.productsList)
         {
-            if (item.ProductId == idProduct)
-                return item;
+            if (item?.ProductId == idProduct)
+                return item??throw new NotExistException(idProduct,"This id is not valid");
         }
         throw new Exception("there is no product with this id");
     }
@@ -46,7 +42,7 @@ public class DalProduct : IProduct
     /// Request/read method of the list of all objects of the entity
     /// </summary>
     /// <returns>Returns all objects of the entity</returns>
-    public IEnumerable<Product?> GetAll(Func<Product?,bool>? pred=null)
+    public IEnumerable<Product?> GetAll(Func<Product?, bool>? pred = null)
     {
         //Building a new layout where all the products will be displayed
         List<Product?> newProductList = new List<Product?>();
@@ -68,7 +64,7 @@ public class DalProduct : IProduct
         //A loop that runs through the products until you find the product you want to delete.
         foreach (var item in DataSource.productsList)
         {
-            if (item.ProductId == idProduct)
+            if (item?.ProductId == idProduct)
             {
                 DataSource.productsList.Remove(item);
                 return;
@@ -83,7 +79,7 @@ public class DalProduct : IProduct
     /// </summary>
     /// <param name="orderItem"></param>
     /// <exception cref="Exception">Returns an error once no matching object is found</exception>
-    public void Update(Product product)
+    public void Update(DO.Product product)
     {
         bool flag = false;
         //A loop that runs through the products until you find the product you want to update.
@@ -104,7 +100,7 @@ public class DalProduct : IProduct
         else
             throw new Exception("The product does not exist");
     }
-    public Product GetByCondition(Func<Product, bool>? check)
+    public Product GetByCondition(Func<Product?, bool>? check)
     {
         foreach (Product item in DataSource.productsList)
         {
@@ -113,10 +109,5 @@ public class DalProduct : IProduct
         }
         throw new DO.NotExistException(1, "Product");
     }
-    public bool CheckProduct(int id)
-    {
-        return DataSource.productsList.Any(product => product?.ProductId == id);
-    }
-
 }
 

@@ -1,13 +1,15 @@
 ﻿using BO;
 using Dal;
 using DalApi;
+using DO;
+
 namespace BlImplementation
 {
     internal class Order : BlApi.IOrder
     {
         IDal idal = new Dallist();
         //The purpose of the function is to show the manager all orders.
-        public IEnumerable<BO.OrderForList> GetOrders()
+        public IEnumerable<BO.OrderForList?> GetOrders()
         {
             List<BO.OrderForList> orderForList = new List<BO.OrderForList>();
             BO.OrderForList order;
@@ -70,7 +72,7 @@ namespace BlImplementation
         public BO.Order UpdateSending(int id)
         {
             DO.Order order = idal.Order.Get(id);
-            if (order.ShipDate.Date < DateTime.Now.Date)
+            if (order.ShipDate?.Date < DateTime.Now.Date)
             {
                 order.ShipDate = DateTime.Now;
                 idal.Order.Update(order);
@@ -83,7 +85,7 @@ namespace BlImplementation
         public BO.Order supplyUpdate(int id)
         {
             DO.Order order = idal.Order.Get(id);
-            if (order.DeliveryDate.Date < DateTime.Now.Date)
+            if (order.DeliveryDate?.Date < DateTime.Now.Date)
             {
                 order.DeliveryDate = DateTime.Now;
                 idal.Order.Update(order);
@@ -106,24 +108,24 @@ namespace BlImplementation
                     OrderTrack.Status = OrderStatus.sent;
                 else
                     OrderTrack.Status = OrderStatus.approved;
-                OrderTrack.Tracking = new List<Tuple<DateTime, string>>();
-                Tuple<DateTime, string> tuple = new Tuple<DateTime, string>(DOorder.OrderDate, "approved");
+                OrderTrack.Tracking = new List<Tuple<DateTime?, string?>>();
+                Tuple<DateTime?, string?> tuple = new Tuple<DateTime?, string?>(DOorder.OrderDate, "approved");
                 OrderTrack.Tracking.Add(tuple);
-                if (DOorder.DeliveryDate != DateTime.MinValue)
+                if (DOorder.DeliveryDate != null)
                 {
-                    tuple = new Tuple<DateTime, string>(DOorder.DeliveryDate, "delivered");
+                    tuple = new Tuple<DateTime?, string?>(DOorder.DeliveryDate, "delivered");
                     OrderTrack.Tracking.Add(tuple);
                 }
                 else if (DOorder.ShipDate != DateTime.MinValue)
                 {
-                    tuple = new Tuple<DateTime, string>(DOorder.ShipDate, "sent");
+                    tuple = new Tuple<DateTime?, string?>(DOorder.ShipDate, "sent");
                     OrderTrack.Tracking.Add(tuple);
                 }
                 return OrderTrack;
             }
             catch (Exception)
             {
-                throw new Exception("order not exist");
+                throw new NotExistException(id,"order not exist");
             }
         }
     }

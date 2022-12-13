@@ -1,7 +1,7 @@
 ﻿
 using DalApi;
 using Dal;
-
+using DO;
 
 namespace BlImplementation
 {
@@ -9,7 +9,7 @@ namespace BlImplementation
     {
         IDal idal = new Dallist();
         //The purpose of the function is to show the manager a list of products.
-        public IEnumerable<BO.ProductForList> GetProducts()
+        public IEnumerable<BO.ProductForList?> GetProducts()
         {
             List<BO.ProductForList> products = new List<BO.ProductForList>();
             foreach (DO.Product item in idal.Product.GetAll())
@@ -58,14 +58,14 @@ namespace BlImplementation
         //The purpose of the function is to delete a product by product code.
         public void Delete(int id)
         {
-            IEnumerable<DO.OrderItem> orderItemList;
-            IEnumerable<DO.Order> orderList = new List<DO.Order>();
-            foreach (DO.Order order in orderList)
+            IEnumerable<DO.OrderItem?> orderItemList;
+            IEnumerable<DO.Order?> orderList = idal.Order.GetAll();
+            foreach (var order in orderList)
             {
-                orderItemList = idal.OrderItem.GetOrderItems(order.OrderId);
+                orderItemList = idal.OrderItem.GetOrderItems(order?.OrderId??throw new Exception());
                 foreach (DO.OrderItem item in orderItemList)
                     if (item.OrderItemId == id)
-                        throw new Exception("the product is exist");
+                        throw new ExistException(id,"the product is exist");
             }
             idal.Product.Delete(id);
         }
@@ -89,9 +89,9 @@ namespace BlImplementation
             idal.Product.Update(updateProduct);
         }
         //The purpose of the function is to show the buyer a list of products.
-        public IEnumerable<BO.ProductItem> ListProductsToBuy()
+        public IEnumerable<BO.ProductItem?> ListProductsToBuy()
         {
-            IEnumerable<DO.Product> Product = idal.Product.GetAll();
+            IEnumerable<DO.Product?> Product = idal.Product.GetAll();
             List<BO.ProductItem> ProductList = new List<BO.ProductItem>();
             BO.ProductItem newProduct;
             foreach (DO.Product item in Product)

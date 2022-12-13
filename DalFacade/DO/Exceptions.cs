@@ -21,11 +21,7 @@ namespace DO
             id = _id;
             name = _name;
         }
-        public NotExistException(int _id, string _name, string massage) : base(massage)
-        {
-            id = _id;
-            name = _name;
-        }
+
         public override string ToString()
         {
             return $"{name} number {id} does not exist";

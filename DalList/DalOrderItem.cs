@@ -17,7 +17,7 @@ public class DalOrderItem :IOrderItem
         //A loop that runs through the list and adds a new orderItem
         foreach (var item in DataSource.orderItemsList)
         {
-            if (orderItem.OrderItemId == item.OrderItemId)
+            if (orderItem.OrderItemId == item?.OrderItemId)
                 throw new Exception("this id is already exist");
         }
         //add orderItem to the list
@@ -36,10 +36,10 @@ public class DalOrderItem :IOrderItem
         //A loop that runs until it reaches the desired index
         foreach (var item in DataSource.orderItemsList)
         {
-            if (item.OrderItemId == idOrderItem)
-                return item;
+            if (item?.OrderItemId == idOrderItem)
+                return item??throw new NotExistException(idOrderItem,"There is no orderItem with thid id");
         }
-        throw new Exception("there is no orderItem with this id");
+        throw new NotExistException(idOrderItem,"there is no orderItem with this id");
     }
     /// <summary>
     /// Request/read method of the list of all objects of the entity
@@ -67,7 +67,7 @@ public class DalOrderItem :IOrderItem
         //A loop that runs through the orderItems until you find the orderItem you want to delete.
         foreach (var item in DataSource.orderItemsList)
         {
-            if (item.OrderItemId == idOrderItem)
+            if (item?.OrderItemId == idOrderItem)
             {
                 DataSource.orderItemsList.Remove(item);
                 return;
@@ -88,7 +88,7 @@ public class DalOrderItem :IOrderItem
         //A loop that runs through the orderItems until you find the orderItem you want to update.
         foreach (var item in DataSource.orderItemsList)
         {
-            if (item.OrderItemId == orderItem.OrderItemId)
+            if (item?.OrderItemId == orderItem.OrderItemId)
             {
                 DataSource.orderItemsList.Remove(item);
                 flag = true;
@@ -110,27 +110,27 @@ public class DalOrderItem :IOrderItem
         foreach (var item in DataSource.orderItemsList)
         {
             //The checker conditions whether the product code and the order code match
-            if (idProduct == item.ProductId && idOrder == item.OrderId)
-                return item;
+            if (idProduct == item?.ProductId && idOrder == item?.OrderId)
+                return item?? throw new Exception("threr is no product and order with tis id");
         }
         //if this id does not exist in array
-        throw new Exception("This id of orderItem does not exist");
+        throw new NotExistException(idProduct,"This id of orderItem does not exist in the order");
     }
 
     //return list of products by idOrder
-    public IEnumerable<OrderItem> GetOrderItems(int idOrder)
+    public IEnumerable<OrderItem?> GetOrderItems(int idOrder)
     {
         List<OrderItem> productsList = new List<OrderItem>();
         //A loop that runs through the order items until the appropriate ID is found
         foreach (var item in DataSource.orderItemsList)
         {
             //The condition checks whether the IDs are the same
-            if (idOrder == item.OrderId)
-                productsList.Add(item);
+            if (idOrder == item?.OrderId)
+                productsList.Add(item??throw new NotExistException(idOrder,"There is no order with this id"));
         }
         return productsList;
     }
-    public OrderItem GetByCondition(Func<OrderItem, bool>? check)
+    public OrderItem GetByCondition(Func<OrderItem?, bool>? check)
     {
         foreach (OrderItem item in DataSource.orderItemsList)
         {

@@ -111,8 +111,8 @@ internal static class DataSource
     {
         foreach(var item in productsList)
         {
-            if (item.ProductId == idProduct)
-                return item.Price;
+            if (item?.ProductId == idProduct)
+                return item?.Price??throw new NotExistException(idProduct,"There is no product with this id");
         }
         return -1;
     }

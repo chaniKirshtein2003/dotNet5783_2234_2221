@@ -15,31 +15,31 @@ public class DalOrder:IOrder
     {
         if (order.OrderDate > order.DeliveryDate)
             throw new Exception("the date is not valid");
-        if (order.DeliveryDate > order.DeliveryDate)
+        if (order.DeliveryDate > order.ShipDate)
             throw new Exception("the date is not valid");
         //A loop that runs through the list and adds a new order
         foreach (var item in DataSource.ordersList)
         {
-            if (order.OrderId == item.OrderId)
+            if (order.OrderId == item?.OrderId)
                 throw new Exception("this id is already exist");
         }
         //add the order to the list
         DataSource.ordersList.Add(order);
         return order.OrderId;
     }
-/// <summary>
-/// A request/call method of a single object receives an ID number of the entity and returns the corresponding object
-/// </summary>
-/// <param name="idProduct"></param>
-/// <returns>Returns the corresponding object</returns>
-/// <exception cref="Exception">Returns an error as soon as no suitable order is found</exception>
-public Order Get(int idOrder)
+        /// <summary>
+        /// A request/call method of a single object receives an ID number of the entity and returns the corresponding object
+        /// </summary>
+        /// <param name="idProduct"></param>
+        /// <returns>Returns the corresponding object</returns>
+        /// <exception cref="Exception">Returns an error as soon as no suitable order is found</exception>
+        public Order Get(int idOrder)
     {
         //A loop that runs until it reaches the desired index
-        foreach(var item in DataSource.ordersList)
+        foreach (var item in DataSource.ordersList)
         {
-            if (item.OrderId == idOrder)
-                return item;
+            if (item?.OrderId == idOrder)
+                return item?? throw new NotExistException(idOrder,"There is no order with this id");
         }
         throw new Exception("there is no order with this id");
     }
@@ -69,7 +69,7 @@ public void Delete(int idOrder)
         //A loop that runs through the orders until you find the order you want to delete.
         foreach (var item in DataSource.ordersList)
         {
-            if (item.OrderId == idOrder)
+            if (item?.OrderId == idOrder)
             {
                 DataSource.ordersList.Remove(item);
                 return;
@@ -90,7 +90,7 @@ public void Delete(int idOrder)
         //A loop that runs through the orders until you find the order you want to update.
         foreach (var item in DataSource.ordersList)
         {
-            if (item.OrderId == order.OrderId)
+            if (item?.OrderId == order.OrderId)
             {
                 DataSource.ordersList.Remove(item);
                 flag = true;
@@ -105,7 +105,7 @@ public void Delete(int idOrder)
         else
             throw new Exception("The order does not exist");
     }
-    public Order GetByCondition(Func<Order, bool>? check)
+    public Order GetByCondition(Func<Order?, bool>? check)
     {
         foreach (Order item in DataSource.ordersList)
         {
