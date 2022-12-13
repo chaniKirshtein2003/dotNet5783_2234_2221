@@ -120,7 +120,7 @@ public class DalOrderItem :IOrderItem
     //return list of products by idOrder
     public IEnumerable<OrderItem?> GetOrderItems(int idOrder)
     {
-        List<OrderItem> productsList = new List<OrderItem>();
+        List<OrderItem?> productsList = new List<OrderItem?>();
         //A loop that runs through the order items until the appropriate ID is found
         foreach (var item in DataSource.orderItemsList)
         {
