@@ -19,7 +19,7 @@ Grid.Column="1" SelectionChanged="CategoriesSelector_SelectionChanged"/>
         </Grid>
         <ListView Grid.Row="1" x:Name="ProductListview"/>
         <Button x:Name="AddUpdateBtn" Content="Add" Margin="46,184,608,200" Background="#FFF37E7E" FontSize="14" Height="50"/>
-        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5"/>
+        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="Button_Click"/>
       <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="500*"/>

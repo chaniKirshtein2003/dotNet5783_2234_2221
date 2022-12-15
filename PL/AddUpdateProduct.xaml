@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="AddUpdateProduct" Height="450" Width="800">
     <Grid>
-        
+        <Label Content="ID product:"/>
+        <TextBox x:Name="ID"></TextBox>
+        <Label Content="Name of product:"/>
+        <TextBox x:Name="NameP"></TextBox>
+        <Label Content="Price:"/>
+        <TextBox x:Name="PriceP"></TextBox>
+        <Label Content=" Category:"/>
+        <ComboBox x:Name="CategoryP"></ComboBox>
+        <Label Content="Amount in stock:"/>
+        <TextBox x:Name="AmountP"></TextBox>
+        <Button></Button>
     </Grid>
 </Window>

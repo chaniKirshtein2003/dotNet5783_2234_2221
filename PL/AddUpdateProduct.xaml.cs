@@ -19,9 +19,11 @@ namespace PL
     /// </summary>
     public partial class AddUpdateProduct : Window
     {
-        public AddUpdateProduct()
+        private BlApi.IBl bl = new BlImplementation.Bl();
+        public AddUpdateProduct(BlApi.IBl _bl)
         {
             InitializeComponent();
+            bl = _bl;
         }
     }
 }

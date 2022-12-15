@@ -35,5 +35,10 @@ namespace PL
             BO.Categories categories = (BO.Categories)CategoriesSelector.SelectedItem;
             //products = bl.Product.GetProduct();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new AddUpdateProduct(bl).ShowDialog();
+        }
     }
 }

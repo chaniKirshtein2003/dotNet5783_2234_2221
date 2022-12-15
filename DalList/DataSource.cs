@@ -14,9 +14,6 @@ internal static class DataSource
     {
         private static int orderNextId = 0;
         private static int orderItemNextId = 0;
-        internal static int productNextIndex = 0;
-        internal static int orderNextIndex = 0;
-        internal static int orderItemNextIndex = 0;
         /*functions for each field of the last ID number that you advance the
         The field is automatic so that each time a number is received that is greater than the previous one by 1*/
         public static int GetOrderNextId() 
@@ -100,7 +97,6 @@ internal static class DataSource
                 orderItem.ProductId = s_rand.Next(20) + 100000;
                 orderItem.Amount = s_rand.Next(10) + 1;
                 orderItem.PricePerUnit = findPrice(orderItem.ProductId);
-                orderItemsList.Add(orderItem);
                 orderItemsList.Add(orderItem);
             }
             if (i == 19 && countOrderItems < 40)
