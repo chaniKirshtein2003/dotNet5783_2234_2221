@@ -7,16 +7,16 @@
         mc:Ignorable="d"
         Title="AddUpdateProduct" Height="450" Width="800">
     <Grid>
-        <Label Content="ID product:" />
-        <TextBox x:Name="ID"></TextBox>
-        <Label Content="Name of product:"/>
-        <TextBox x:Name="NameP"></TextBox>
-        <Label Content="Price:"/>
-        <TextBox x:Name="PriceP"></TextBox>
-        <Label Content=" Category:"/>
-        <ComboBox x:Name="CategoryP"></ComboBox>
-        <Label Content="Amount in stock:"/>
-        <TextBox x:Name="AmountP"></TextBox>
-        <Button/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Margin="413,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="White"/>
+        <Label x:Name="lblPrID" Content="שם" HorizontalAlignment="Left" Margin="609,96,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPrId" Content="מזהה מוצר" HorizontalAlignment="Left" Margin="570,54,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPrPrice" Content="מחיר" HorizontalAlignment="Left" Margin="601,141,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPrCategory" Content="קטגוריה" HorizontalAlignment="Left" Margin="585,180,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPrAmount" Content="כמות במלאי" HorizontalAlignment="Left" Margin="565,224,0,0" VerticalAlignment="Top" RenderTransformOrigin="10.729,-2.258"/>
+        <TextBox x:Name="txtPrId" HorizontalAlignment="Left" Margin="413,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtPrPrice" HorizontalAlignment="Left" Margin="413,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtPrAmount" HorizontalAlignment="Left" Margin="413,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <ComboBox HorizontalAlignment="Left" Margin="413,182,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnOK" Content="לאישור" HorizontalAlignment="Left" Margin="443,290,0,0" VerticalAlignment="Top" Height="40" Width="90"/>
     </Grid>
 </Window>
