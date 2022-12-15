@@ -20,10 +20,13 @@ namespace PL
     public partial class AddUpdateProduct : Window
     {
         private BlApi.IBl bl = new BlImplementation.Bl();
+        string state;
         public AddUpdateProduct(BlApi.IBl _bl)
         {
             InitializeComponent();
             bl = _bl;
+            state = "add";
+            btnOK.Content = state;
         }
     }
 }
