@@ -49,8 +49,8 @@ public class DalOrderItem :IOrderItem
         //return newOrderItemList;
         //copy to new arr all the products that exist the arr
         if (pred != null)
-            //    return from ordItem in DataSource.orderItemsList
-            //           where pred(ordItem) select ordItem;
+            //    return from orderItem in DataSource.orderItemsList
+            //           where pred(ordItem) select orderItem;
             return DataSource.orderItemsList.FindAll(x => pred(x));
         else
             return from ordItem in DataSource.orderItemsList
@@ -82,43 +82,26 @@ public class DalOrderItem :IOrderItem
         DataSource.orderItemsList.Add(orderItem);
     }
 
-    //return object of orderItem by idProuct and idOrder
+    //The function returns an object of orderItem by idProuct and idOrder
     public OrderItem GetItemById(int idProduct, int idOrder)
     {
-        //A loop that ran over the order items until the product code and the corresponding order code were found
-        foreach (var item in DataSource.orderItemsList)
-        {
-            //The checker conditions whether the product code and the order code match
-            if (idProduct == item?.ProductId && idOrder == item?.OrderId)
-                return item?? throw new Exception("threr is no product and order with tis id");
-        }
-        //if this id does not exist in array
-        throw new NotExistException(idProduct,"This id of orderItem does not exist in the order");
+        return DataSource.orderItemsList.FirstOrDefault(item => idProduct == item?.ProductId && idOrder == item?.OrderId) ?? throw new NotExistException(idProduct, "OrderItem");
     }
 
-    //return list of products by idOrder
-    public IEnumerable<OrderItem?> GetOrderItems(int idOrder)
-    {
-        List<OrderItem?> productsList = new List<OrderItem?>();
-        //A loop that runs through the order items until the appropriate ID is found
-        foreach (var item in DataSource.orderItemsList)
-        {
-            //The condition checks whether the IDs are the same
-            if (idOrder == item?.OrderId)
-                productsList.Add(item??throw new NotExistException(idOrder,"There is no order with this id"));
-        }
-        return productsList;
-    }
+    //The function returns a list of items in order by order id
+    //public IEnumerable<OrderItem?> GetOrderItems(int idOrder)
+    //{
+    //    //A loop that runs through the order items until the appropriate ID is found
+    //    return DataSource.orderItemsList.FindAll(x => x?.OrderId==idOrder) ?? throw new NotExistException(idOrder,"Order");
+    //}
+
+    //The function returns an object of orderItem by a condition
+
     public OrderItem GetByCondition(Func<OrderItem?, bool>? check)
     {
-        //return DataSource.orderItemsList.FirstOrDefault(x=>check(x))??throw new
-        foreach (OrderItem item in DataSource.orderItemsList)
-        {
-            if (check(item))
-                return item;
-        }
-        throw new DO.NotExistException(1, "OrderItem");
+        return DataSource.orderItemsList.FirstOrDefault(x => check(x)) ?? throw new NotExistException(1, "OrderItem");
     }
+    //The function returns if exists in the list an order items with the  
     public bool CheckOrderItem(int id)
     {
         return DataSource.orderItemsList.Any(ordItem => ordItem?.OrderItemId == id);

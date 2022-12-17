@@ -35,6 +35,11 @@ namespace BlImplementation
             newProduct.AmountInStock = product.AmountInStock;
             return newProduct;
         }
+        public IEnumerable<BO.ProductForList> GetProductsListByCategory(BO.Categories _category)
+        {
+            IEnumerable<BO.ProductForList> products = GetProducts().Where(x => x.Category == _category);
+            return products;
+        }
         //The purpose of the function is to get the product details from the user and add a new product with the product details.
         public int Add(BO.Product product)
         {

@@ -11,5 +11,6 @@ namespace BlApi
         public void Update(BO.Product product);
         public IEnumerable<BO.ProductItem> ListProductsToBuy();
         public BO.ProductItem ProductForBuyer(int idProduct);
+        public IEnumerable<BO.ProductForList> GetProductsListByCategory(BO.Categories _category);
     }
 }

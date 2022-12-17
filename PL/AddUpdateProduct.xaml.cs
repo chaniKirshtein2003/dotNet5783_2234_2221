@@ -21,12 +21,64 @@ namespace PL
     {
         private BlApi.IBl bl = new BlImplementation.Bl();
         string state;
-        public AddUpdateProduct(BlApi.IBl _bl)
+
+        //Opening the form in addition mode
+        public AddUpdateProduct()
         {
             InitializeComponent();
-            bl = _bl;
+            cmbCategory.ItemsSource = Enum.GetValues(typeof(BO.Categories));
             state = "add";
-            btnOK.Content = state;
+            btnOK.Content = "להוספה";
+        }
+        //Opening the form in update mode
+        public AddUpdateProduct(int id)
+        {
+            InitializeComponent();
+            cmbCategory.ItemsSource= Enum.GetValues(typeof(BO.Categories));
+            BO.Product product = bl.Product.GetProduct(id);
+            state = "update";
+            btnOK.Content = "לעדכון";
+            txtPrId.IsEnabled = false;
+            //fill all the textboxes with the attributes of current product
+            txtPrId.Text = product.ProductId.ToString();
+            txtName.Text = product.ProductName;
+            txtPrPrice.Text = product.Price.ToString();
+            txtPrAmount.Text = product.AmountInStock.ToString();
+            cmbCategory.SelectedItem =product.Category;
+        }
+        
+        private void btnOK_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtName.Text == "" || txtPrAmount.Text == "" || txtPrId.Text == "" || txtPrPrice.Text == "")
+                MessageBox.Show("missing details");
+            BO.Product product = new BO.Product();
+            product.ProductName = txtName.Text;
+            product.ProductId = int.Parse(txtPrId.Text);
+            product.Price = int.Parse(txtPrPrice.Text);
+            product.AmountInStock = int.Parse(txtPrAmount.Text);
+            product.Category = (BO.Categories)cmbCategory.SelectedItem;
+            if (state == "add")
+                try
+                {
+                    bl.Product.Add(product);
+                    MessageBox.Show("successfull product addition");
+                    this.Close();
+                }
+                catch
+                {
+                    throw new Exception("addition failed");
+                }
+            else if (state == "update")
+                try
+                {
+                    bl.Product.Update(product);
+                    MessageBox.Show("successfull product update");
+                    this.Close ();
+                }
+                catch
+                {
+                    throw new Exception("update failed");
+                }
         }
     }
 }

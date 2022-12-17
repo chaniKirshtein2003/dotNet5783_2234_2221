@@ -7,16 +7,16 @@
         mc:Ignorable="d"
         Title="AddUpdateProduct" Height="450" Width="800">
     <Grid>
-        <TextBox x:Name="txtName" HorizontalAlignment="Left" Margin="413,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="White"/>
         <Label x:Name="lblPrID" Content="שם" HorizontalAlignment="Left" Margin="609,96,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblPrId" Content="מזהה מוצר" HorizontalAlignment="Left" Margin="570,54,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblPrPrice" Content="מחיר" HorizontalAlignment="Left" Margin="601,141,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblPrCategory" Content="קטגוריה" HorizontalAlignment="Left" Margin="585,180,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblPrAmount" Content="כמות במלאי" HorizontalAlignment="Left" Margin="565,224,0,0" VerticalAlignment="Top" RenderTransformOrigin="10.729,-2.258"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Margin="413,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="White"/>
         <TextBox x:Name="txtPrId" HorizontalAlignment="Left" Margin="413,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtPrPrice" HorizontalAlignment="Left" Margin="413,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtPrAmount" HorizontalAlignment="Left" Margin="413,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ComboBox HorizontalAlignment="Left" Margin="413,182,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnOK" Content="לאישור" HorizontalAlignment="Left" Margin="443,290,0,0" VerticalAlignment="Top" Height="40" Width="90"/>
+        <ComboBox x:Name="cmbCategory" HorizontalAlignment="Left" Margin="413,182,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnOK" Content="לאישור" HorizontalAlignment="Left" Margin="443,290,0,0" VerticalAlignment="Top" Height="40" Width="90" Click="btnOK_Click"/>
     </Grid>
 </Window>

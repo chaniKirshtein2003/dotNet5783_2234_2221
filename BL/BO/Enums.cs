@@ -8,10 +8,10 @@ namespace BO
 {
     public enum Categories
     {
-        Chagim = 1, HomeAccessories, HomeTextiles, Judaica, DesignedGifts
+        Chagim = 1, HomeAccessories, HomeTextiles, Judaica, DesignedGifts, None
     };
     public enum OrderStatus
     {
-        approved=1, sent, delivered
+        approved=1, sent, delivered, None
     };
 }

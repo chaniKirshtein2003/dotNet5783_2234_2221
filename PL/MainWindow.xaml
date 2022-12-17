@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="#FFFDF2F2">
-        <Button x:Name="productDisplayBtn" Click="productDisplayBtn_Click" Content="View product list" Margin="46,100,608,284" Background="#FFF37E7E" FontSize="14" Height="50"/>
+        <Button x:Name="productDisplayBtn" Click="productDisplayBtn_Click" Content="View product list" Margin="46,100,579,266" Background="#FFF37E7E" FontSize="14"/>
     </Grid>
 </Window>

@@ -16,6 +16,10 @@ namespace DO
     {
         string name;
         int id;
+        public NotExistException() : base()
+        {
+
+        }
         public NotExistException(int _id, string _name) : base()
         {
             id = _id;

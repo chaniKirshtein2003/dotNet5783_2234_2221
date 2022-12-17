@@ -9,18 +9,21 @@
     <Grid Name="MainGrid">
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
 VerticalAlignment="Stretch" Width="auto" RenderTransformOrigin="0.506,0.769">
-            <ComboBox Name="CategoriesSelector"
-Grid.Column="1" SelectionChanged="CategoriesSelector_SelectionChanged"/>
-            <Label Grid.Column="0" />
+            <ComboBox Name="CategoriesSelector" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch"
+Grid.Column="2" SelectionChanged="CategoriesSelector_SelectionChanged"/>
+            <Label Grid.Column="0" Grid.ColumnSpan="2" FontSize="16" >
+                <Label Content="Category" Height="33" Width="190"/>
+            </Label>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="369*"/>
+                <ColumnDefinition Width="31*"/>
+                <ColumnDefinition Width="400*" />
             </Grid.ColumnDefinitions >
         </Grid>
-        <ListView Grid.Row="1" x:Name="ProductListview"/>
+        <ListView Grid.Row="1" x:Name="ProductListview" MouseDoubleClick="ProductListview_MouseDoubleClick" />
         <Button x:Name="AddUpdateBtn" Content="Add" Margin="46,184,608,200" Background="#FFF37E7E" FontSize="14" Height="50"/>
         <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="Button_Click"/>
-      <Grid.RowDefinitions>
+        <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>

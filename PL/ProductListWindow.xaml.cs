@@ -21,24 +21,36 @@ namespace PL
     {
         private BlApi.IBl bl = new BlImplementation.Bl();
         IEnumerable<BO.ProductForList> products;
-        public ProductListWindow(BlApi.IBl _bl)
+        public ProductListWindow()
         {
             InitializeComponent();
-            bl = _bl;
-            products = bl.Product.GetProducts();
-            ProductListview.ItemsSource = products;
+            ProductListview.ItemsSource = bl.Product.GetProducts(); ;
             CategoriesSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
+            CategoriesSelector.SelectedItem = BO.Categories.None;
         }
 
         private void CategoriesSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            BO.Categories categories = (BO.Categories)CategoriesSelector.SelectedItem;
-            //products = bl.Product.GetProduct();
+            BO.Categories category = (BO.Categories)CategoriesSelector.SelectedItem;
+            if (category.ToString() == "None")
+                ProductListview.ItemsSource = bl.Product.GetProducts();
+            else
+                ProductListview.ItemsSource = bl.Product.GetProductsListByCategory(category);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new AddUpdateProduct(bl).ShowDialog();
+            new AddUpdateProduct().ShowDialog();
+            ProductListview.ItemsSource = bl.Product.GetProducts();
+            CategoriesSelector.SelectedItem = BO.Categories.None;
+        } 
+
+        private void ProductListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int id = ((BO.ProductForList)((ListView)sender).SelectedItem).ID;
+            new AddUpdateProduct(id).ShowDialog();
+            ProductListview.ItemsSource = bl.Product.GetProducts();
+            CategoriesSelector.SelectedItem = BO.Categories.None;
         }
     }
 }

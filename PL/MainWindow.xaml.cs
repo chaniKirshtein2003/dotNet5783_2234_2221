@@ -27,9 +27,6 @@ namespace PL
             InitializeComponent();
         }
 
-        private void productDisplayBtn_Click(object sender, RoutedEventArgs e)
-        {
-            new ProductListWindow(bl).Show();
-        }
+        private void productDisplayBtn_Click(object sender, RoutedEventArgs e)=>new ProductListWindow().Show();
     }
 }
