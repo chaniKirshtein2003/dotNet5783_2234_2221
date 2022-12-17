@@ -88,12 +88,12 @@ public class DalOrderItem :IOrderItem
         return DataSource.orderItemsList.FirstOrDefault(item => idProduct == item?.ProductId && idOrder == item?.OrderId) ?? throw new NotExistException(idProduct, "OrderItem");
     }
 
-    //The function returns a list of items in order by order id
-    //public IEnumerable<OrderItem?> GetOrderItems(int idOrder)
-    //{
-    //    //A loop that runs through the order items until the appropriate ID is found
-    //    return DataSource.orderItemsList.FindAll(x => x?.OrderId==idOrder) ?? throw new NotExistException(idOrder,"Order");
-    //}
+   // The function returns a list of items in order by order id
+    public IEnumerable<OrderItem?> GetOrderItems(int idOrder)
+    {
+        //A loop that runs through the order items until the appropriate ID is found
+        return DataSource.orderItemsList.FindAll(x => x?.OrderId == idOrder) ?? throw new NotExistException(idOrder, "Order");
+    }
 
     //The function returns an object of orderItem by a condition
 
