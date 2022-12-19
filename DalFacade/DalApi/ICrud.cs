@@ -13,6 +13,6 @@ namespace DalApi
         public void Delete(int id);
         public T Get(int id);
         public IEnumerable<T?> GetAll(Func<T?, bool>? pred = null);
-        public T GetByCondition(Func<T?, bool>? pred);
+        public T? GetByCondition(Func<T?, bool>? pred);
     }
 }

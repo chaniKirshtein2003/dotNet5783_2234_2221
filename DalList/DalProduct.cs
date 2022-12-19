@@ -17,7 +17,6 @@ public class DalProduct : IProduct
         //add product to the list
         DataSource.productsList.Add(product);
         return product.ProductId;
-
     }
     /// <summary>
     /// A request/call method of a single object receives an ID number of the entity and returns the corresponding object
@@ -37,8 +36,6 @@ public class DalProduct : IProduct
     public IEnumerable<Product?> GetAll(Func<Product?, bool>? pred = null)
     {
         if (pred != null)
-            //    return from prod in DataSource.productsList
-            //           where pred(prod) select prod;
             return DataSource.productsList.FindAll(x => pred(x));
         else
             return from prod in DataSource.productsList
@@ -70,15 +67,11 @@ public class DalProduct : IProduct
         DataSource.productsList.Add(product);
 
     }
-    public Product GetByCondition(Func<Product?, bool>? check)
+    public Product? GetByCondition(Func<Product?, bool>? check)
     {
         //return DataSource.productsList.FirstOrDefault(x=>check(x))?? throw new NotExistException
-        foreach (Product item in DataSource.productsList)
-        {
-            if (check(item))
-                return item;
-        }
-        throw new DO.NotExistException(1, "Product");
+        return DataSource.productsList.FirstOrDefault(x => check!(x)) ?? throw new NotExistException(1, "product");
+
     }
     public bool CheckProduct(int id)
     {

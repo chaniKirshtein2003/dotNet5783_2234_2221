@@ -69,15 +69,11 @@ public void Delete(int idOrder)
             throw new DO.NotExistException(order.OrderId, "Order");
         DataSource.ordersList.Add(order);
     }
-    public Order GetByCondition(Func<Order?, bool>? check)
+    public Order? GetByCondition(Func<Order?, bool>? check)
     {
         //return DataSource.ordersList.FirstOrDefault(x=>check(x))?? throw new NotExistException
-        foreach (Order item in DataSource.ordersList)
-        {
-            if (check(item))
-                return item;
-        }
-        throw new DO.NotExistException(1, "Order");
+        return DataSource.ordersList.FirstOrDefault(x => check!(x)) ?? throw new NotExistException(1, "order");
+
     }
     public bool CheckOrder(int id)
     {

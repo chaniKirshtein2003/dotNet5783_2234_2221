@@ -20,7 +20,6 @@ namespace PL
     public partial class ProductListWindow : Window
     {
         private BlApi.IBl bl = new BlImplementation.Bl();
-        IEnumerable<BO.ProductForList> products;
         public ProductListWindow()
         {
             InitializeComponent();

@@ -97,9 +97,9 @@ public class DalOrderItem :IOrderItem
 
     //The function returns an object of orderItem by a condition
 
-    public OrderItem GetByCondition(Func<OrderItem?, bool>? check)
+    public OrderItem? GetByCondition(Func<OrderItem?, bool>? check)
     {
-        return DataSource.orderItemsList.FirstOrDefault(x => check(x)) ?? throw new NotExistException(1, "OrderItem");
+        return DataSource.orderItemsList.FirstOrDefault(x => check!(x)) ?? throw new NotExistException(1, "OrderItem");
     }
     //The function returns if exists in the list an order items with the  
     public bool CheckOrderItem(int id)
