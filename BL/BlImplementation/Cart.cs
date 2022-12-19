@@ -45,7 +45,6 @@ namespace BlImplementation
             }
             catch (Exception ex)
             {
-
                 throw new BO.NotExistBlException("not exist", ex);
             }
 

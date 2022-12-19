@@ -52,6 +52,7 @@ namespace BlImplementation
                 newPro.Price = item?.Price ?? 0;
                 newPro.ID = item?.ProductId ?? 0;
                 newPro.Category = (BO.Categories?)item?.Category;
+                pro.Add(newPro);
             }
             return pro;
         }
