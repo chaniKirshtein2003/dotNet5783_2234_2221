@@ -1,8 +1,6 @@
-﻿using BlApi;
-using BlImplementation;
-public class Program
+﻿public class Program
 {
-    static IBl bl = new Bl();
+   static BlApi.IBl? bl = BlApi.Factory.Get();
 
     //Functions for orders
     public static void Order()
@@ -18,20 +16,20 @@ public class Program
         switch (number)
         {
             case 1:
-                IEnumerable<BO.OrderForList> orderForLists = bl.Order.GetOrders();
+                IEnumerable<BO.OrderForList> orderForLists = bl!.Order.GetOrders();
                 foreach (BO.OrderForList orderForList in orderForLists)
                     Console.WriteLine(orderForList);
                 break;
             case 2:
                 Console.WriteLine("insert order ID");
                  id=int.Parse(Console.ReadLine());
-                 order = bl.Order.GetOrderDetails(id);
+                 order = bl!.Order.GetOrderDetails(id);
                 Console.WriteLine(order);
                 break;
             case 3:
                 Console.WriteLine("insert ID");
                 id = int.Parse(Console.ReadLine());
-                 order = bl.Order.UpdateSending(id);
+                 order = bl!.Order.UpdateSending(id);
                 Console.WriteLine("update done succesfully");
                 Console.WriteLine();
                 Console.WriteLine(order);
@@ -39,14 +37,14 @@ public class Program
             case 4:
                 Console.WriteLine("insert ID");
                 id = int.Parse(Console.ReadLine());
-                order = bl.Order.supplyUpdate(id);
+                order = bl!.Order.supplyUpdate(id);
                 Console.WriteLine(order);
                 break;
             case 5:
                 BO.OrderTracking orderTracking = new BO.OrderTracking();
                 Console.WriteLine("insert ID");
                 id = int.Parse(Console.ReadLine());
-                orderTracking = bl.Order.OrderTracking(id);
+                orderTracking = bl!.Order.OrderTracking(id);
                 Console.WriteLine(orderTracking);
                 break;
         }
@@ -64,7 +62,7 @@ public class Program
             //Get all products
             case 1:
                 {
-                    IEnumerable<BO.ProductForList> products = bl.Product.GetProducts();
+                    IEnumerable<BO.ProductForList> products = bl!.Product.GetProducts();
                     foreach (BO.ProductForList product in products)
                     {
                         Console.WriteLine(product);
@@ -76,7 +74,7 @@ public class Program
                 {
                     Console.WriteLine("Insert id of product");
                     id = int.Parse(Console.ReadLine());
-                    Console.WriteLine(bl.Product.GetProduct(id)); 
+                    Console.WriteLine(bl!.Product.GetProduct(id)); 
                 }
                 break;
             //Add a new product
@@ -95,7 +93,7 @@ public class Program
                     product.Category = (BO.Categories)category;
                     product.Price = price;
                     product.AmountInStock = amountInStock;
-                    Console.WriteLine(bl.Product.Add(product));
+                    Console.WriteLine(bl!.Product.Add(product));
                 }
                 break;
             //Delete a product
@@ -103,7 +101,7 @@ public class Program
                 {
                     Console.WriteLine("Insert id");
                     id = int.Parse(Console.ReadLine());
-                    bl.Product.Delete(id);
+                    bl!.Product.Delete(id);
                 }
                 break;
             //Update the time details
@@ -122,13 +120,13 @@ public class Program
                     product.Category = (BO.Categories)category;
                     product.Price = price;
                     product.AmountInStock = amountInStock;
-                    bl.Product.Update(product);
+                    bl!.Product.Update(product);
                     Console.WriteLine("done");
                 }
                 break;
             //get catalog of product
             case 6:
-                foreach (var item in bl.Product.ListProductsToBuy())
+                foreach (var item in bl!.Product.ListProductsToBuy())
                 {
                     Console.WriteLine(item);
                 }
@@ -138,7 +136,7 @@ public class Program
                 {
                     Console.WriteLine("insert id");
                     id=int.Parse(Console.ReadLine());
-                    Console.WriteLine(bl.Product.ProductForBuyer(id));
+                    Console.WriteLine(bl!.Product.ProductForBuyer(id));
                 }
                 break;
         }
@@ -166,7 +164,7 @@ public class Program
                 {
                     Console.WriteLine("insert product id");
                     int id = int.Parse(Console.ReadLine());
-                    Console.WriteLine(bl.Cart.Add(cart, id));
+                    Console.WriteLine(bl!.Cart.Add(cart, id));
                     break;
                 }
             case 2:
@@ -176,13 +174,13 @@ public class Program
                     int id = int.Parse(Console.ReadLine());
                     Console.Write("insert new amount: ");
                     int amount = int.Parse(Console.ReadLine());
-                    bl.Cart.Update(cart, id, amount);
+                    bl!.Cart.Update(cart, id, amount);
                     break;
                 }
             case 3:
                 {
                     //to confirmation Order
-                    bl.Cart.MakeAnOrder(cart);
+                    bl!.Cart.MakeAnOrder(cart);
                     break;
                 }
         }

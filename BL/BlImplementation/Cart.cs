@@ -1,20 +1,18 @@
 ﻿using BO;
-using Dal;
-using DalApi;
 
 
 namespace BlImplementation
 {
     internal class Cart : BlApi.ICart
     {
-        IDal idal = new Dallist();
+        DalApi.IDal? idal = DalApi.Factory.Get();
         //The purpose of the function is to allow the customer to add a product to the current shopping cart.
         public BO.Cart Add(BO.Cart cart, int id)
         {
             bool isExist = false, isInStock = false;
             try
             {
-                DO.Product product = idal.Product.Get(id);
+                DO.Product product = idal!.Product.Get(id);
                 foreach (BO.OrderItem? item in cart.Items!)
                 {
                     if (item?.ProductId == id)
@@ -54,7 +52,7 @@ namespace BlImplementation
         {
             try
             {
-                DO.Product product = idal.Product.Get(id);
+                DO.Product product = idal!.Product.Get(id);
                 foreach (BO.OrderItem? item in cart.Items!)
                 {
                     if (id == item?.ProductId)
@@ -87,7 +85,7 @@ namespace BlImplementation
             {
                 if (item?.Amount < 0)
                     throw new BO.NotValidException("cannot be negative amount");
-                DO.Product doProduct = idal.Product.Get(item?.ProductId??0);
+                DO.Product doProduct = idal!.Product.Get(item?.ProductId??0);
                 if (doProduct.AmountInStock - item?.Amount < 0)
                     throw new BO.NotValidException("there is not enough products in stock");
             }
@@ -101,7 +99,7 @@ namespace BlImplementation
             order.OrderDate = DateTime.Now;
             try
             {
-                id = idal.Order.Add(order);
+                id = idal!.Order.Add(order);
                 DO.OrderItem orderItem = new DO.OrderItem();
                 foreach (BO.OrderItem? itemBO in cart.Items)
                 {

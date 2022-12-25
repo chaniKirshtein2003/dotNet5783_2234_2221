@@ -19,7 +19,7 @@ namespace PL
     /// </summary>
     public partial class AddUpdateProduct : Window
     {
-        private BlApi.IBl bl = new BlImplementation.Bl();
+        BlApi.IBl? bl = BlApi.Factory.Get();
         string state;
 
         //Opening the form in addition mode
@@ -35,7 +35,7 @@ namespace PL
         {
             InitializeComponent();
             cmbCategory.ItemsSource= Enum.GetValues(typeof(BO.Categories));
-            BO.Product product = bl.Product.GetProduct(id);
+            BO.Product product = bl!.Product.GetProduct(id);
             state = "update";
             btnOK.Content = "לעדכון";
             txtPrId.IsEnabled = false;
@@ -64,7 +64,7 @@ namespace PL
                 if (state == "add")
                     try
                     {
-                        bl.Product.Add(product);
+                        bl!.Product.Add(product);
                         MessageBox.Show("successfull product addition");
                         this.Close();
                     }
@@ -75,7 +75,7 @@ namespace PL
                 else if (state == "update")
                     try
                     {
-                        bl.Product.Update(product);
+                        bl!.Product.Update(product);
                         MessageBox.Show("successfull product update");
                         this.Close();
                     }

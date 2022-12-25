@@ -1,17 +1,13 @@
-﻿using DalApi;
-using Dal;
-
-
-namespace BlImplementation
+﻿namespace BlImplementation
 {
     internal class Product : BlApi.IProduct
     {
-        IDal idal = new Dallist();
+        DalApi.IDal? idal = DalApi.Factory.Get();
         //The purpose of the function is to show the manager a list of products.
         public IEnumerable<BO.ProductForList?> GetProducts()
         {
             List<BO.ProductForList> products = new List<BO.ProductForList>();
-            foreach (DO.Product? item in idal.Product.GetAll())
+            foreach (DO.Product? item in idal!.Product.GetAll())
             {
                 BO.ProductForList product = new BO.ProductForList();
                 product.Name = item?.ProductName;
@@ -27,7 +23,7 @@ namespace BlImplementation
         {
             try
             {
-                DO.Product product = idal.Product.Get(id);
+                DO.Product product = idal!.Product.Get(id);
                 BO.Product newProduct = new BO.Product();
                 newProduct.ProductName = product.ProductName;
                 newProduct.Price = product.Price;
@@ -43,7 +39,7 @@ namespace BlImplementation
         }
         public IEnumerable<BO.ProductForList?> GetProductsListByCategory(BO.Categories _category)
         {
-            IEnumerable<DO.Product?> products = idal.Product.GetAll(x => x?.Category == (DO.Categories)_category);
+            IEnumerable<DO.Product?> products = idal!.Product.GetAll(x => x?.Category == (DO.Categories)_category);
             List<BO.ProductForList?> pro = new List<BO.ProductForList?>();
             foreach (DO.Product? item in products)
             {
@@ -75,7 +71,7 @@ namespace BlImplementation
             newProduct.Category = (DO.Categories?)product.Category;
             try
             {
-                int id = idal.Product.Add(newProduct);
+                int id = idal!.Product.Add(newProduct);
                 return id;
             }
             catch (Exception x)
@@ -87,7 +83,7 @@ namespace BlImplementation
         public void Delete(int id)
         {
             IEnumerable<DO.OrderItem?> orderItemList;
-            IEnumerable<DO.Order?> orderList = idal.Order.GetAll();
+            IEnumerable<DO.Order?> orderList = idal!.Order.GetAll();
             foreach (var order in orderList)
             {
                 orderItemList = idal.OrderItem.GetOrderItems(order?.OrderId ?? throw new BO.NotExistBlException());
@@ -97,7 +93,7 @@ namespace BlImplementation
             }
             try
             {
-                idal.Product.Delete(id);
+                idal!.Product.Delete(id);
             }
             catch (Exception x)
             {
@@ -123,7 +119,7 @@ namespace BlImplementation
                 updateProduct.ProductId = product.ProductId;
                 updateProduct.AmountInStock = product.AmountInStock;
                 updateProduct.Category = (DO.Categories?)product.Category;
-                idal.Product.Update(updateProduct);
+                idal!.Product.Update(updateProduct);
             }
             catch (Exception x)
             {
@@ -134,7 +130,7 @@ namespace BlImplementation
         //The purpose of the function is to show the buyer a list of products.
         public IEnumerable<BO.ProductItem?> ListProductsToBuy()
         {
-            IEnumerable<DO.Product?> products = idal.Product.GetAll();
+            IEnumerable<DO.Product?> products = idal!.Product.GetAll();
             List<BO.ProductItem?> productList = new List<BO.ProductItem?>();
             BO.ProductItem? newProduct;
             foreach (DO.Product? item in products)
@@ -156,7 +152,7 @@ namespace BlImplementation
             DO.Product product;
             try
             {
-                product = idal.Product.Get(idProduct);
+                product = idal!.Product.Get(idProduct);
                 BO.ProductItem newProduct = new BO.ProductItem();
                 newProduct.ID = idProduct;
                 newProduct.Name = product.ProductName;

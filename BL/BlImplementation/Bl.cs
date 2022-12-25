@@ -9,7 +9,7 @@ using DalApi;
 
 namespace BlImplementation
 {
-    sealed public class Bl : IBl
+    sealed internal class Bl : IBl
     {
         public BlApi.IOrder Order => new Order();
         public ICart Cart => new Cart();

@@ -12,6 +12,13 @@ namespace DO
     /// Exception to product/order/orderItem does not exist in database
     /// </summary>
     [Serializable]
+    public class DalConfigException : Exception
+    {
+        public DalConfigException(string msg) : base(msg) { }
+        public DalConfigException(string msg, Exception ex) : base(msg, ex) { }
+    }
+
+
     public class NotExistException : Exception
     {
         string name;

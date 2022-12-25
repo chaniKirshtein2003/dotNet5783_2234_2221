@@ -1,12 +1,10 @@
-﻿using Dal;
-using DalApi;
-
+﻿
 
 namespace BlImplementation
 {
     internal class Order : BlApi.IOrder
     {
-        IDal idal = new Dallist();
+        DalApi.IDal? idal = DalApi.Factory.Get();
         //The purpose of the function is to show the manager all orders.
         public IEnumerable<BO.OrderForList?> GetOrders()
         {
@@ -14,11 +12,11 @@ namespace BlImplementation
             BO.OrderForList order;
             double totalPrice = 0;
             int totalAmount = 0;
-            foreach (DO.Order? item in idal.Order.GetAll())
+            foreach (DO.Order? item in idal!.Order.GetAll())
             {
                 try
                 {
-                    foreach (DO.OrderItem? orderItem in idal.OrderItem.GetOrderItems(item?.OrderId??0))
+                    foreach (DO.OrderItem? orderItem in idal!.OrderItem.GetOrderItems(item?.OrderId??0))
                     {
                         totalAmount += orderItem?.Amount??0;
                         totalPrice += orderItem?.PricePerUnit??0;
@@ -47,7 +45,7 @@ namespace BlImplementation
             DO.Order DOorder;
             try
             {
-                DOorder = idal.Order.Get(idOrder);
+                DOorder = idal!.Order.Get(idOrder);
                 order.OrderId = DOorder.OrderId;
                 order.CustomerName = DOorder.CustomerName;
                 order.CustomerAddress = DOorder.CustomerAddress;
@@ -57,7 +55,7 @@ namespace BlImplementation
                 order.DeliveryDate = DOorder.DeliveryDate;
                 order.Items = new List<BO.OrderItem?>();
                 BO.OrderItem orderItem = new BO.OrderItem();
-                foreach (DO.OrderItem? DOorderItem in idal.OrderItem.GetOrderItems(idOrder))
+                foreach (DO.OrderItem? DOorderItem in idal!.OrderItem.GetOrderItems(idOrder))
                 {
                     orderItem.OrderItemId = DOorderItem?.OrderItemId??0;
                     orderItem.ProductId = DOorderItem?.ProductId??0;
@@ -79,11 +77,11 @@ namespace BlImplementation
         {
             try
             {
-                DO.Order order = idal.Order.Get(id);
+                DO.Order order = idal!.Order.Get(id);
                 if (order.ShipDate?.Date < DateTime.Now.Date)
                 {
                     order.ShipDate = DateTime.Now;
-                    idal.Order.Update(order);
+                    idal!.Order.Update(order);
                 }
                 BO.Order newOrder = GetOrderDetails(id);
                 newOrder.Status = BO.OrderStatus.sent;
@@ -99,11 +97,11 @@ namespace BlImplementation
         {
             try
             {
-                DO.Order order = idal.Order.Get(id);
+                DO.Order order = idal!.Order.Get(id);
                 if (order.DeliveryDate?.Date < DateTime.Now.Date)
                 {
                     order.DeliveryDate = DateTime.Now;
-                    idal.Order.Update(order);
+                    idal!.Order.Update(order);
                 }
                 BO.Order newOrder = GetOrderDetails(id);
                 newOrder.Status = BO.OrderStatus.delivered;
@@ -119,7 +117,7 @@ namespace BlImplementation
         {
             try
             {
-                DO.Order DOorder = idal.Order.Get(id);
+                DO.Order DOorder = idal!.Order.Get(id);
                 BO.OrderTracking OrderTrack = new BO.OrderTracking();
                 OrderTrack.ID = DOorder.OrderId;
                 if (DOorder.DeliveryDate != DateTime.MinValue)
