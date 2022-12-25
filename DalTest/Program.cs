@@ -3,14 +3,14 @@ using Dal;
 
 public class Program
 {
+    static DalApi.IDal? idal = DalApi.Factory.Get();
+
     //function for orders
     public static void ActionsOnOrder()
     {
         int number;
         Console.WriteLine("insert number 0 to exit,1 to add order,2 to get order by id,3 to get all orders,4 to update order and 5 to delete order");
-        number = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-        DalOrder dalOrder = new DalOrder();
-
+        number = int.Parse(Console.ReadLine() ?? throw new Exception("missing details"));
         switch (number)
         {
             case 0:
@@ -20,12 +20,12 @@ public class Program
                 {
                     //Entering the new data
                     Console.WriteLine("Insert name & address & email to customer and orderDate,shipDate,deliveryDate");
-                    string name = Console.ReadLine()??throw new Exception("missing details");
-                    string address = Console.ReadLine()??throw new Exception("missing details");
-                    string email = Console.ReadLine()??throw new Exception("missing details");
-                    string orderDate = Console.ReadLine()??throw new Exception("missing details");
-                    string shippingDate = Console.ReadLine()??throw new Exception("missing details");
-                    string deliveryDate = Console.ReadLine()??throw new Exception("missing details");
+                    string name = Console.ReadLine() ?? throw new Exception("missing details");
+                    string address = Console.ReadLine() ?? throw new Exception("missing details");
+                    string email = Console.ReadLine() ?? throw new Exception("missing details");
+                    string orderDate = Console.ReadLine() ?? throw new Exception("missing details");
+                    string shippingDate = Console.ReadLine() ?? throw new Exception("missing details");
+                    string deliveryDate = Console.ReadLine() ?? throw new Exception("missing details");
                     DateTime.TryParse(orderDate, out DateTime dtOrder);
                     DateTime.TryParse(shippingDate, out DateTime dtShip);
                     DateTime.TryParse(deliveryDate, out DateTime dtDelivery);
@@ -36,7 +36,7 @@ public class Program
                     order.OrderDate = dtOrder;
                     order.DeliveryDate = dtDelivery;
                     order.ShipDate = dtShip;
-                    Console.WriteLine(dalOrder.Add(order));
+                    Console.WriteLine(idal?.Order.Add(order));
                 }
                 break;
             //To receive a particular order by its ID
@@ -44,16 +44,16 @@ public class Program
                 {
                     int id;
                     Console.WriteLine("Insert id");
-                    id = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-                    Order order = dalOrder.Get(id);
+                    id = int.Parse(Console.ReadLine() ?? throw new Exception("missing details"));
+                    Order order = idal!.Order.Get(id);
                     Console.WriteLine(order);
                 }
                 break;
             //To receive all the orders that exist in the order array
             case 3:
                 {
-                    IEnumerable<Order?> orders = dalOrder.GetAll();
-                    foreach (var item in orders)
+                    IEnumerable<Order?> orders = idal?.Order.GetAll();
+                    foreach (Order? item in orders)
                     {
                         Console.WriteLine(item);
                         Console.WriteLine();
@@ -66,17 +66,17 @@ public class Program
                     int id;
                     //Finding the order you want to update by its ID
                     Console.WriteLine("Insert id");
-                    id = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
+                    id = int.Parse(Console.ReadLine() ?? throw new Exception("missing details"));
                     Order order = new Order();
-                    order = dalOrder.Get(id);
+                    order = idal!.Order.Get(id);
                     Console.WriteLine(order);
                     Console.WriteLine("Insert name,address,email to customer and orderDate,shipDate,deliveryDate");
-                    string name = Console.ReadLine()??throw new Exception("missing details");
-                    string address = Console.ReadLine()??throw new Exception("missing details");
-                    string email = Console.ReadLine()??throw new Exception("missing details");
-                    string orderDate = Console.ReadLine()??throw new Exception("missing details");
-                    string shippingDate = Console.ReadLine()??throw new Exception("missing details");
-                    string deliveryDate = Console.ReadLine()??throw new Exception("missing details");
+                    string name = Console.ReadLine() ?? throw new Exception("missing details");
+                    string address = Console.ReadLine() ?? throw new Exception("missing details");
+                    string email = Console.ReadLine() ?? throw new Exception("missing details");
+                    string orderDate = Console.ReadLine() ?? throw new Exception("missing details");
+                    string shippingDate = Console.ReadLine() ?? throw new Exception("missing details");
+                    string deliveryDate = Console.ReadLine() ?? throw new Exception("missing details");
                     DateTime.TryParse(orderDate, out DateTime dtOrder);
                     DateTime.TryParse(shippingDate, out DateTime dtShip);
                     DateTime.TryParse(deliveryDate, out DateTime dtDelivery);
@@ -87,7 +87,7 @@ public class Program
                     order.OrderDate = dtOrder;
                     order.DeliveryDate = dtDelivery;
                     order.ShipDate = dtShip;
-                    dalOrder.Update(order);
+                    idal?.Order.Update(order);
                 }
                 break;
             //To delete a specific order
@@ -95,19 +95,20 @@ public class Program
                 {
                     int id;
                     Console.WriteLine("insert id");
-                    id = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-                    dalOrder.Delete(id);
+                    id = int.Parse(Console.ReadLine() ?? throw new Exception("missing details"));
+                    idal?.Order.Delete(id);
                 }
                 break;
         }
     }
+
     //function for products
     public static void ActionsOnProduct()
     {
         int number2;
         Console.WriteLine("insert number 0 to exit,1 to add product,2 to get product by id,3 to get all products,4 to update product and 5 to delete product");
-        number2 = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-        DalProduct dalProduct = new DalProduct();
+        number2 = int.Parse(Console.ReadLine() ?? throw new Exception("missing details"));
+        //DalProduct dalProduct = new DalProduct();
 
         switch (number2)
         {
@@ -118,18 +119,18 @@ public class Program
                 {
                     //Entering the new data
                     Console.WriteLine("Insert id, name,price,amount in stock and category 1- Chagim, 2-HomeAccessories, 3-HomeTextiles,4- Judaica, 5-DesignedGifts");
-                    int id = int.Parse(Console.ReadLine()??throw new Exception("missing details"));
-                    string name = Console.ReadLine()??throw new Exception("missing details");
-                    int price = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-                    int amountInStock = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-                    int category = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
+                    int id = int.Parse(Console.ReadLine() ?? throw new Exception("missing details"));
+                    string name = Console.ReadLine() ?? throw new Exception("missing details");
+                    int price = int.Parse(Console.ReadLine() ?? throw new Exception("missing details"));
+                    int amountInStock = int.Parse(Console.ReadLine() ?? throw new Exception("missing details"));
+                    int category = int.Parse(Console.ReadLine() ?? throw new Exception("missing details"));
                     Product product = new Product();
                     product.ProductId = id;
                     product.ProductName = name;
-                    product.Category = (Categories)category; 
+                    product.Category = (Categories)category;
                     product.Price = price;
                     product.AmountInStock = amountInStock;
-                    Console.WriteLine(dalProduct.Add(product));
+                    Console.WriteLine(idal?.Product.Add(product));
                 }
                 break;
             //To receive a particular product by its ID
@@ -137,16 +138,16 @@ public class Program
                 {
                     int id;
                     Console.WriteLine("Insert id");
-                    id = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-                    Product product = dalProduct.Get(id);
+                    id = int.Parse(Console.ReadLine() ?? throw new Exception("missing details"));
+                    Product product = idal!.Product.Get(id);
                     Console.WriteLine(product);
                 }
                 break;
             //To receive all the products that exist in the product array  
             case 3:
                 {
-                    IEnumerable<Product?> products = dalProduct.GetAll();
-                    foreach(var item in products)
+                    IEnumerable<Product?> products = idal!.Product.GetAll();
+                    foreach (Product? item in products)
                     {
                         Console.WriteLine(item);
                         Console.WriteLine();
@@ -160,21 +161,21 @@ public class Program
 
                     //Finding the product you want to update by its ID
                     Console.WriteLine("Insert id");
-                    id = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
+                    id = int.Parse(Console.ReadLine() ?? throw new Exception("missing details"));
                     Product product = new Product();
-                    product = dalProduct.Get(id);
+                    product = idal!.Product.Get(id);
                     Console.WriteLine(product);
                     Console.WriteLine("Insert name,price,amount in stock and category 1- Chagim, 2-HomeAccessories, 3-HomeTextiles,4- Judaica, 5-DesignedGifts to product");
-                    string name = Console.ReadLine()??throw new Exception("missing details");
-                    int price = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-                    int amountInStock = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-                    int category = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
+                    string name = Console.ReadLine() ?? throw new Exception("missing details");
+                    int price = int.Parse(Console.ReadLine() ?? throw new Exception("missing details"));
+                    int amountInStock = int.Parse(Console.ReadLine() ?? throw new Exception("missing details"));
+                    int category = int.Parse(Console.ReadLine() ?? throw new Exception("missing details"));
                     product.ProductId = id;
                     product.ProductName = name;
                     product.Category = (Categories)category;
                     product.Price = price;
                     product.AmountInStock = amountInStock;
-                    dalProduct.Update(product);
+                    idal?.Product.Update(product);
                 }
                 break;
             //To delete a specific product
@@ -182,20 +183,21 @@ public class Program
                 {
                     int id;
                     Console.WriteLine("Insert id");
-                    id = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-                    dalProduct.Delete(id);
+                    id = int.Parse(Console.ReadLine() ?? throw new Exception("missing details"));
+                    idal?.Product.Delete(id);
                 }
                 break;
         }
     }
+
     //function for orderItems
     public static void ActionsOnOrderItems()
     {
         int number2;
         Console.WriteLine("insert number 0 to exit,1 to add orderItem,2 to get orderItem by id,3 to get all orderItems,4 to update orderItem and 5 to delete orderItem");
         number2 = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-        DalOrderItem dalOrderItem = new DalOrderItem();
-        DalProduct dalProduct = new DalProduct();
+        //DalOrderItem dalOrderItem = new DalOrderItem();
+        //DalProduct dalProduct = new DalProduct();
         switch (number2)
         {
             case 0:
@@ -208,13 +210,13 @@ public class Program
                     int amount = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
                     int product_id = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
                     int order_id = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-                    double price = dalProduct.Get(product_id).Price;
+                    double price = idal!.Product.Get(product_id).Price;
                     OrderItem orderItem = new OrderItem();
                     orderItem.ProductId = product_id;
                     orderItem.Amount = amount;
                     orderItem.OrderId = order_id;
                     orderItem.PricePerUnit = price;
-                    Console.WriteLine(dalOrderItem.Add(orderItem));
+                    Console.WriteLine(idal?.OrderItem.Add(orderItem));
 
                 }
                 break;
@@ -224,15 +226,15 @@ public class Program
                     int id;
                     Console.WriteLine("Insert id");
                     id = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-                    OrderItem orderItem = dalOrderItem.Get(id);
+                    OrderItem orderItem = idal!.OrderItem.Get(id);
                     Console.WriteLine(orderItem);
                 }
                 break;
             //To receive all the orderItems that exist in the orderItem array           
             case 3:
                 {
-                    IEnumerable<OrderItem?> ordersItem = dalOrderItem.GetAll();
-                    foreach(var item in ordersItem)
+                    IEnumerable<OrderItem?> ordersItem = idal?.OrderItem.GetAll();
+                    foreach(OrderItem? item in ordersItem)
                     {
                         Console.WriteLine(item);
                         Console.WriteLine();
@@ -247,17 +249,17 @@ public class Program
                     //Finding the orderItem you want to update by its ID
                     Console.WriteLine("Insert id");
                     id = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-                    OrderItem orderItem = dalOrderItem.Get(id);
+                    OrderItem orderItem = idal!.OrderItem.Get(id);
                     Console.WriteLine(orderItem);
                     Console.WriteLine("Inser amount, productId,orderId");
                     int amount = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
                     int product_id = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
                     int order_id = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-                    double price = dalProduct.Get(product_id).Price;
+                    double price = idal!.OrderItem.Get(product_id).PricePerUnit;
                     orderItem.Amount = amount;
                     orderItem.ProductId = product_id;
                     orderItem.OrderId = order_id;
-                    dalOrderItem.Update(orderItem);
+                    idal?.OrderItem.Update(orderItem);
                 }
                 break;
             //To delete a specific orderItem
@@ -266,7 +268,7 @@ public class Program
                     int id;
                     Console.WriteLine("Insert id");
                     id = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-                    dalOrderItem.Delete(id);
+                    idal?.OrderItem.Delete(id);
                 }
                 break;
             //Returning an order item object that matches a product code and an order code
@@ -275,7 +277,7 @@ public class Program
                     Console.WriteLine("Enter product id,order id");
                     int prod = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
                     int ord = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-                    Console.WriteLine(dalOrderItem.GetItemById(prod, ord));
+                    Console.WriteLine(idal?.OrderItem.GetItemById(prod, ord));
                 }
                 break;
             //Array of order details by order ID number
@@ -283,8 +285,8 @@ public class Program
                 {
                     Console.WriteLine("Enter order id");
                     int order = int.Parse(Console.ReadLine()?? throw new Exception("missing details"));
-                    IEnumerable<OrderItem?> list = dalOrderItem.GetOrderItems(order);
-                    foreach(var item in list)
+                    IEnumerable<OrderItem?> list = idal?.OrderItem.GetOrderItems(order);
+                    foreach(OrderItem? item in list)
                     {
                         Console.WriteLine(item);
                         Console.WriteLine();
