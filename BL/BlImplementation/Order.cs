@@ -9,7 +9,7 @@ namespace BlImplementation
         public IEnumerable<BO.OrderForList?> GetOrders()
         {
             List<BO.OrderForList?> orderForList = new List<BO.OrderForList?>();
-            BO.OrderForList order;
+            BO.OrderForList? order;
             double totalPrice = 0;
             int totalAmount = 0;
             foreach (DO.Order? item in idal!.Order.GetAll())

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 /// <summary>
 /// all the do exception
 /// </summary>
@@ -59,5 +61,23 @@ namespace DO
         }
         public override string ToString() =>
             $"{name} number {id} Already exist";
+    }
+    public class EmptyInput : Exception
+    {
+        string field;
+        public EmptyInput(string _field) : base()
+        {
+            field = _field;
+        }
+        public EmptyInput(string _field, string massage) : base(massage)
+        {
+            field = _field;
+        }
+        public EmptyInput(string _field, string massage, Exception innerExcption) : base(massage, innerExcption)
+        {
+            field = _field;
+        }
+        public override string ToString() => $"{field} can not be empty";
+
     }
 }
