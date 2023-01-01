@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,10 +21,23 @@ namespace PL
     public partial class ProductListWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
+
+
+        public ObservableCollection<BO.ProductForList> prods
+        {
+            get { return (ObservableCollection<BO.ProductForList>)GetValue(prodsProperty); }
+            set { SetValue(prodsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for prods.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty prodsProperty =
+            DependencyProperty.Register("prods", typeof(ObservableCollection<BO.ProductForList>), typeof(Window), new PropertyMetadata(null));
+
         public ProductListWindow()
         {
             InitializeComponent();
-            ProductListview.ItemsSource = bl!.Product.GetProducts(); ;
+            var help= bl!.Product.GetProducts();
+            prods = help == null ? new() : new(help);
             CategoriesSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
             CategoriesSelector.SelectedItem = BO.Categories.None;
         }
@@ -32,9 +46,15 @@ namespace PL
         {
             BO.Categories category = (BO.Categories)CategoriesSelector.SelectedItem;
             if (category.ToString() == "None")
-                ProductListview.ItemsSource = bl!.Product.GetProducts();
+            {
+                var help = bl!.Product.GetProducts();
+                prods = help == null ? new() : new(help);
+            }
             else
-                ProductListview.ItemsSource = bl!.Product.GetProductsListByCategory(category);
+            {
+                var help = bl!.Product.GetProductsListByCategory(category);
+                prods = help == null ? new() : new(help);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -48,7 +68,8 @@ namespace PL
         {
             int id = ((BO.ProductForList)((ListView)sender).SelectedItem).ID;
             new AddUpdateProduct(id).ShowDialog();
-            ProductListview.ItemsSource = bl!.Product.GetProducts();
+            var help = bl!.Product.GetProducts();
+            prods = help == null ? new() : new(help);
             CategoriesSelector.SelectedItem = BO.Categories.None;
         }
     }

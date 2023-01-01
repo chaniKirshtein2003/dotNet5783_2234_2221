@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
+        DataContext="{Binding Path=prods, RelativeSource={RelativeSource self}}"
         mc:Ignorable="d"
         Title="ShowProduct" Height="640" Width="800">
     <Grid Name="MainGrid">
@@ -20,7 +21,7 @@ Grid.Column="2" SelectionChanged="CategoriesSelector_SelectionChanged"/>
                 <ColumnDefinition Width="400*" />
             </Grid.ColumnDefinitions >
         </Grid>
-        <ListView Grid.Row="1" x:Name="ProductListview" MouseDoubleClick="ProductListview_MouseDoubleClick" />
+        <ListView ItemsSource="{Binding}" Grid.Row="1" x:Name="ProductListview" MouseDoubleClick="ProductListview_MouseDoubleClick" />
         <Button x:Name="AddUpdateBtn" Content="Add" Margin="46,184,608,200" Background="#FFF37E7E" FontSize="14" Height="50"/>
         <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="Button_Click"/>
         <Grid.RowDefinitions>

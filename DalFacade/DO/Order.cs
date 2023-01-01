@@ -33,8 +33,6 @@ public struct Order
     /// <summary>
     /// date of shipping
     /// </summary>
-    //public DateTime dateOfDelivery { get; set; }
-
 
     
     public DateTime? ShipDate { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,19 @@ namespace PL
         BlApi.IBl? bl = BlApi.Factory.Get();
         string state;
 
+
+        public BO.Product product
+        {
+            get { return (BO.Product)GetValue(productProperty); }
+            set { SetValue(productProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for product.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty productProperty =
+            DependencyProperty.Register("product", typeof(BO.Product), typeof(Window), new PropertyMetadata(null));
+
+
+
         //Opening the form in addition mode
         public AddUpdateProduct()
         {
@@ -35,16 +49,10 @@ namespace PL
         {
             InitializeComponent();
             cmbCategory.ItemsSource= Enum.GetValues(typeof(BO.Categories));
-            BO.Product product = bl!.Product.GetProduct(id);
+            product = bl!.Product.GetProduct(id);
             state = "update";
             btnOK.Content = "לעדכון";
             txtPrId.IsEnabled = false;
-            //fill all the textboxes with the attributes of current product
-            txtPrId.Text = product.ProductId.ToString();
-            txtName.Text = product.ProductName;
-            txtPrPrice.Text = product.Price.ToString();
-            txtPrAmount.Text = product.AmountInStock.ToString();
-            cmbCategory.SelectedItem =product.Category;
         }
         
         private void btnOK_Click(object sender, RoutedEventArgs e)

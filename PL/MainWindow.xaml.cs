@@ -27,5 +27,7 @@ namespace PL
         }
 
         private void productDisplayBtn_Click(object sender, RoutedEventArgs e)=>new ProductListWindow().Show();
+
+        private void btnShowOrder_Click(object sender, RoutedEventArgs e)=>new OrderListWindow().Show();    
     }
 }
