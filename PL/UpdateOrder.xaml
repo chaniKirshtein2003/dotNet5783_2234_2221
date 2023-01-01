@@ -1,0 +1,40 @@
+﻿<Window x:Class="PL.UpdateOrder"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        DataContext="{Binding Path=order, RelativeSource={RelativeSource self}}"
+        mc:Ignorable="d"
+        Title="UpdateOrder" Height="450" Width="800">
+    <Grid>
+        <TextBox Text="{Binding OrderId}" x:Name="txtOrId" HorizontalAlignment="Left" Margin="459,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblOrId" Content="מזהה הזמנה" HorizontalAlignment="Left" Margin="645,27,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblCusName" Content="שם לקוח" HorizontalAlignment="Left" Margin="663,72,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblCusAddres" Content="כתובת" HorizontalAlignment="Left" Margin="676,116,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblCusEmail" Content="מייל" HorizontalAlignment="Left" Margin="689,147,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblStatus" Content="סטטוס" HorizontalAlignment="Left" Margin="674,178,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblTotalPrice" Content="מחיר סופי" HorizontalAlignment="Left" Margin="658,217,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblOrderDate" Content="תאריך הזמנה" HorizontalAlignment="Left" Margin="638,248,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblShipDate" Content="תאריך משלוח" HorizontalAlignment="Left" Margin="639,279,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDeliveryDate" Content="תאריך אספקה" HorizontalAlignment="Left" Margin="634,310,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding CustomerName}" x:Name="txtCusName" HorizontalAlignment="Left" Margin="459,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding CustomerAddress}" HorizontalAlignment="Left" Margin="459,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding CustomerEmail}" x:Name="txtCusEmail" HorizontalAlignment="Left" Margin="459,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding Status}" x:Name="txtStatus" HorizontalAlignment="Left" Margin="459,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding TotalPrice}" x:Name="txtTotalPrice" HorizontalAlignment="Left" Margin="459,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding OrderDate}" x:Name="txtOrderDate" HorizontalAlignment="Left" Margin="459,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding ShipDate}" x:Name="txtShipDate" HorizontalAlignment="Left" Margin="459,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding DeliveryDate}" x:Name="txtDeliveryDate" HorizontalAlignment="Left" Margin="459,314,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnUpdateOrder" Content="לעדכון" HorizontalAlignment="Left" Margin="604,380,0,0" VerticalAlignment="Top" Height="27" Width="69"/>
+        <Button x:Name="btnUpdateDeliveryDate" Content="לעדכון תאריך משלוח" HorizontalAlignment="Left" Margin="417,378,0,0" VerticalAlignment="Top" Height="29" Width="134"/>
+        <ListView ItemsSource="{Binding}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="122,72,515,189">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>

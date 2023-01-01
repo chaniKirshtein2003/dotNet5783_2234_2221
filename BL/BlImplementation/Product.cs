@@ -4,7 +4,7 @@
     {
         DalApi.IDal? idal = DalApi.Factory.Get();
         //The purpose of the function is to show the manager a list of products.
-        public IEnumerable<BO.ProductForList?> GetProducts()
+        public IEnumerable<BO.ProductForList> GetProducts()
         {
             List<BO.ProductForList> products = new List<BO.ProductForList>();
             foreach (DO.Product? item in idal!.Product.GetAll())
@@ -37,7 +37,7 @@
                 throw new BO.NotExistBlException("product not exist", x);
             }
         }
-        public IEnumerable<BO.ProductForList?> GetProductsListByCategory(BO.Categories _category)
+        public IEnumerable<BO.ProductForList> GetProductsListByCategory(BO.Categories _category)
         {
             IEnumerable<DO.Product?> products = idal!.Product.GetAll(x => x?.Category == (DO.Categories)_category);
             List<BO.ProductForList?> pro = new List<BO.ProductForList?>();
@@ -128,7 +128,7 @@
             }
         }
         //The purpose of the function is to show the buyer a list of products.
-        public IEnumerable<BO.ProductItem?> ListProductsToBuy()
+        public IEnumerable<BO.ProductItem> ListProductsToBuy()
         {
             IEnumerable<DO.Product?> products = idal!.Product.GetAll();
             List<BO.ProductItem?> productList = new List<BO.ProductItem?>();
