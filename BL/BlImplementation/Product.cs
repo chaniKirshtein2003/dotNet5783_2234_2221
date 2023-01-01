@@ -7,6 +7,7 @@
         public IEnumerable<BO.ProductForList?> GetProducts()
         {
             List<BO.ProductForList> products = new List<BO.ProductForList>();
+
             foreach (DO.Product? item in idal!.Product.GetAll())
             {
                 BO.ProductForList product = new BO.ProductForList();
@@ -83,7 +84,7 @@
         public void Delete(int id)
         {
             IEnumerable<DO.OrderItem?> orderItemList;
-            IEnumerable<DO.Order?> orderList = idal!.Order.GetAll();
+            IEnumerable<DO.Order?> orderList = idal!.Order.GetAll();            
             foreach (var order in orderList)
             {
                 orderItemList = idal.OrderItem.GetOrderItems(order?.OrderId ?? throw new BO.NotExistBlException());
