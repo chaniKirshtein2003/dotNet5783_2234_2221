@@ -9,5 +9,6 @@
     <Grid Background="#FFFDF2F2">
         <Button x:Name="productDisplayBtn" Click="productDisplayBtn_Click" Content="View product list" Margin="46,100,579,266" Background="#FFF37E7E" FontSize="14"/>
         <Button x:Name="btnShowOrder" Content="View order list" HorizontalAlignment="Left" Margin="385,108,0,0" VerticalAlignment="Top" Height="54" Width="171" Click="btnShowOrder_Click"/>
+        <Button x:Name="btnNewOrder" Content="New order" HorizontalAlignment="Left" Margin="156,247,0,0" VerticalAlignment="Top" Height="59" Width="115" Click="btnNewOrder_Click"/>
     </Grid>
 </Window>

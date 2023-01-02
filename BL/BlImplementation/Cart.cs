@@ -1,4 +1,5 @@
 ﻿using BO;
+using DalApi;
 
 
 namespace BlImplementation
@@ -6,39 +7,66 @@ namespace BlImplementation
     internal class Cart : BlApi.ICart
     {
         DalApi.IDal? idal = DalApi.Factory.Get();
-        //The purpose of the function is to allow the customer to add a product to the current shopping cart.
+        /// <summary>
+        ///function that adds a product to the cart
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="id"></param>
+        /// <returns>update cart</returns>
+        /// <exception cref="BO.AlreadyExistBlException"></exception>
+        /// <exception cref="BO.NotExistBlException"></exception>
         public BO.Cart Add(BO.Cart cart, int id)
         {
-            bool isExist = false, isInStock = false;
             try
             {
-                DO.Product product = idal!.Product.Get(id);
-                foreach (BO.OrderItem? item in cart.Items!)
+                //DO.Product product = idal!.Product.Get(id);
+                //foreach (BO.OrderItem? item in cart.Items!)
+                //{
+                //    if (item?.ProductId == id)
+                //    {
+                //        isExist = true;
+                //        if (product.AmountInStock > 0)
+                //        {
+                //            isInStock = true;
+                //            item.TotalPrice += item.Price;
+                //            item.Amount++;
+                //        }
+                //    }
+                //}
+                //if (!isExist && product.AmountInStock > 0)
+                //{
+                //    isInStock = true;
+                //    BO.OrderItem item = new BO.OrderItem();
+                //    item.OrderItemName = product.ProductName;
+                //    item.Price = product.Price;
+                //    item.ProductId = id;
+                //    item.Amount = 1;
+                //    item.TotalPrice = product.Price;
+                //    cart.Items.Add(item);
+                //}
+                //if (isInStock)
+                //    cart.TotalPrice += product.Price;
+                //return cart;
+
+                DO.Product product = new DO.Product();
+                BO.OrderItem orderItem1 = new BO.OrderItem();
+
+                if (cart.Items?.FirstOrDefault(item => item?.ProductId == id) != null)
                 {
-                    if (item?.ProductId == id)
-                    {
-                        isExist = true;
-                        if (product.AmountInStock > 0)
-                        {
-                            isInStock = true;
-                            item.TotalPrice += item.Price;
-                            item.Amount++;
-                        }
-                    }
+                    throw new BO.AlreadyExistBlException("product exist in cart");
                 }
-                if (!isExist && product.AmountInStock > 0)
-                {
-                    isInStock = true;
-                    BO.OrderItem item = new BO.OrderItem();
-                    item.OrderItemName = product.ProductName;
-                    item.Price = product.Price;
-                    item.ProductId = id;
-                    item.Amount = 1;
-                    item.TotalPrice = product.Price;
-                    cart.Items.Add(item);
-                }
-                if (isInStock)
-                    cart.TotalPrice += product.Price;
+                product = (DO.Product)idal!.Product.GetByCondition(product2 => product2?.ProductId == id)!;
+
+                if (product.AmountInStock <= 0)
+                    throw new BO.NotExistBlException("product not exist in stock");
+
+                orderItem1.OrderItemName = product.ProductName;
+                orderItem1.ProductId = id;
+                orderItem1.Amount = 1;
+                orderItem1.Price = product.Price;
+                orderItem1.TotalPrice = orderItem1.Price * orderItem1.Amount;
+                cart.Items?.Add(orderItem1);
+                cart.TotalPrice += orderItem1.TotalPrice;
                 return cart;
             }
             catch (Exception ex)

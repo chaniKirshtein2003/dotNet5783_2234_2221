@@ -28,6 +28,8 @@ namespace PL
 
         private void productDisplayBtn_Click(object sender, RoutedEventArgs e)=>new ProductListWindow().Show();
 
-        private void btnShowOrder_Click(object sender, RoutedEventArgs e)=>new OrderListWindow().Show();    
+        private void btnShowOrder_Click(object sender, RoutedEventArgs e)=>new OrderListWindow().Show();
+
+        private void btnNewOrder_Click(object sender, RoutedEventArgs e)=>new NewOrderWindow().Show();
     }
 }

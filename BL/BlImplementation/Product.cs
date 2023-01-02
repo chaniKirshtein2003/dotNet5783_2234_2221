@@ -168,5 +168,9 @@
                 throw new BO.NotExistBlException("not exist", x);
             }
         }
+        public IEnumerable<BO.ProductItem> GetProductsItemByCategory(BO.Categories _category)
+        {
+            return ListProductsToBuy().ToList().FindAll(x => x?.Category == _category);
+        }
     }
 }
