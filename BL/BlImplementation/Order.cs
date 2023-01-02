@@ -16,7 +16,7 @@ namespace BlImplementation
             {
                 try
                 {
-                    foreach (DO.OrderItem? orderItem in idal!.OrderItem.GetOrderItems(item?.OrderId??0))
+                    foreach (DO.OrderItem? orderItem in idal!.OrderItem.GetAll(x => x?.OrderId == (item?.OrderId ?? 0)))
                     {
                         totalAmount += orderItem?.Amount??0;
                         totalPrice += orderItem?.PricePerUnit??0;
@@ -26,7 +26,7 @@ namespace BlImplementation
                     order.CustomerName = item?.CustomerName;
                     order.TotalPrice = totalPrice;
                     order.AmountOfItems = totalAmount;
-                    order.Status = item?.DeliveryDate != DateTime.MinValue ? BO.OrderStatus.delivered : item?.ShipDate != DateTime.MinValue ? BO.OrderStatus.sent : BO.OrderStatus.approved;
+                    order.Status = item?.DeliveryDate != null ? BO.OrderStatus.delivered : item?.ShipDate != null ? BO.OrderStatus.sent : BO.OrderStatus.approved;
                     orderForList.Add(order);
                 }
                 catch (Exception ex)
@@ -55,14 +55,16 @@ namespace BlImplementation
                 order.DeliveryDate = DOorder.DeliveryDate;
                 order.Items = new List<BO.OrderItem?>();
                 BO.OrderItem orderItem = new BO.OrderItem();
-                foreach (DO.OrderItem? DOorderItem in idal!.OrderItem.GetOrderItems(idOrder))
+                foreach (DO.OrderItem? DOorderItem in idal!.OrderItem.GetAll(x=>x?.OrderId==idOrder))
                 {
+                    orderItem = new BO.OrderItem();
                     orderItem.OrderItemId = DOorderItem?.OrderItemId??0;
                     orderItem.ProductId = DOorderItem?.ProductId??0;
                     orderItem.OrderItemName = idal.Product.Get(DOorderItem?.ProductId??0).ProductName;
                     orderItem.Amount = DOorderItem?.Amount??0;
                     orderItem.Price = DOorderItem?.PricePerUnit??0;
                     orderItem.TotalPrice = DOorderItem?.PricePerUnit * DOorderItem?.Amount??0;
+                    
                     order.Items.Add(orderItem);
                 }
                 return order;

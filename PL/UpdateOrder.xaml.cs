@@ -22,17 +22,14 @@ namespace PL
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
 
-
         public BO.Order order
         {
             get { return (BO.Order)GetValue(orderProperty); }
             set { SetValue(orderProperty, value); }
         }
-
         // Using a DependencyProperty as the backing store for order.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty orderProperty =
             DependencyProperty.Register("order", typeof(BO.Order), typeof(Window), new PropertyMetadata(null));
-
 
         public UpdateOrder(int id)
         {

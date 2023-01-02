@@ -38,16 +38,6 @@ public class DalOrderItem :IOrderItem
     /// <returns>Returns all objects of the entity</returns>
     public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? pred = null)
     {
-        ////Building a new layout where all the orderItems will be displayed
-        //List<OrderItem?> newOrderItemList = new List<OrderItem?>();
-        ////A loop that transfers all orderItem data to the new list
-        //foreach (OrderItem? item in DataSource.orderItemsList)
-        //{
-        //    if (pred == null || pred(item))
-        //        newOrderItemList.Add(item);
-        //}
-        //return newOrderItemList;
-        //copy to new arr all the products that exist the arr
         if (pred != null)
             //    return from orderItem in DataSource.orderItemsList
             //           where pred(ordItem) select orderItem;
@@ -86,13 +76,6 @@ public class DalOrderItem :IOrderItem
     public OrderItem GetItemById(int idProduct, int idOrder)
     {
         return DataSource.orderItemsList.FirstOrDefault(item => idProduct == item?.ProductId && idOrder == item?.OrderId) ?? throw new NotExistException(idProduct, "OrderItem");
-    }
-
-   // The function returns a list of items in order by order id
-    public IEnumerable<OrderItem?> GetOrderItems(int idOrder)
-    {
-        //A loop that runs through the order items until the appropriate ID is found
-        return DataSource.orderItemsList.FindAll(x => x?.OrderId == idOrder) ?? throw new NotExistException(idOrder, "Order");
     }
 
     //The function returns an object of orderItem by a condition

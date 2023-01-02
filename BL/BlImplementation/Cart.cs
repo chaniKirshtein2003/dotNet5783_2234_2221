@@ -94,9 +94,9 @@ namespace BlImplementation
             order.CustomerAddress = cart.CustomerAddress;
             order.CustomerName = cart.CustomerName;
             order.CustomerEmail = cart.CustomerEmail;
-            order.DeliveryDate = DateTime.MinValue;
-            order.ShipDate = DateTime.MinValue;
-            order.OrderDate = DateTime.Now;
+            order.DeliveryDate = null;
+            order.ShipDate = null;
+            order.OrderDate = null;
             try
             {
                 id = idal!.Order.Add(order);

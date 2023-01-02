@@ -87,7 +87,7 @@
             IEnumerable<DO.Order?> orderList = idal!.Order.GetAll();            
             foreach (var order in orderList)
             {
-                orderItemList = idal.OrderItem.GetOrderItems(order?.OrderId ?? throw new BO.NotExistBlException());
+                orderItemList = idal.OrderItem.GetAll(x => x?.OrderId == (order?.OrderId ?? throw new BO.NotExistBlException()));
                 foreach (DO.OrderItem? item in orderItemList)
                     if (item?.OrderItemId == id)
                         throw new BO.AlreadyExistBlException("The product is exist");
