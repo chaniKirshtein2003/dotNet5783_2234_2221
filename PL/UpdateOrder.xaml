@@ -26,8 +26,8 @@
         <TextBox Text="{Binding OrderDate}" x:Name="txtOrderDate" HorizontalAlignment="Left" Margin="459,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox Text="{Binding ShipDate}" x:Name="txtShipDate" HorizontalAlignment="Left" Margin="459,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox Text="{Binding DeliveryDate}" x:Name="txtDeliveryDate" HorizontalAlignment="Left" Margin="459,314,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnUpdateOrder" Content="לעדכון" HorizontalAlignment="Left" Margin="604,380,0,0" VerticalAlignment="Top" Height="27" Width="69"/>
-        <Button x:Name="btnUpdateDeliveryDate" Content="לעדכון תאריך משלוח" HorizontalAlignment="Left" Margin="417,378,0,0" VerticalAlignment="Top" Height="29" Width="134"/>
+        <Button x:Name="btnUpdateOrder" Content="לעדכון" HorizontalAlignment="Left" Margin="604,380,0,0" VerticalAlignment="Top" Height="27" Width="69" Click="btnUpdateOrder_Click"/>
+        <Button x:Name="btnUpdateDeliveryDate" Content="לעדכון תאריך משלוח" HorizontalAlignment="Left" Margin="417,378,0,0" VerticalAlignment="Top" Height="29" Width="134" Click="btnUpdateDeliveryDate_Click"/>
         <ListView ItemsSource="{Binding Path=Items}" Margin="96,40,478,27">
             <ListView.View>
                 <GridView>

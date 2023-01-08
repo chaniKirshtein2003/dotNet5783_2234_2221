@@ -7,7 +7,36 @@
         DataContext="{Binding Path=prods, RelativeSource={RelativeSource self}}"
         mc:Ignorable="d"
         Title="ShowProduct" Height="640" Width="800">
-    <Grid Name="MainGrid">
+    <Window.Resources>
+        <DataTemplate x:Key="MyDataTemplate" DataType="local:ProductForList">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="1" Text="{Binding Path=ID}" />
+                <TextBlock Grid.Column="3" Text="{Binding Path=Name}" />
+                <TextBlock Grid.Column="5" Text="{Binding Path=Price}" />
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <StackPanel>
+        <ComboBox Name="CategoriesSelector" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" SelectionChanged="CategoriesSelector_SelectionChanged"/>
+        <ListView ItemsSource="{Binding}" x:Name="ProductListview"
+ItemTemplate="{StaticResource MyDataTemplate}"
+HorizontalContentAlignment="Stretch" />
+        <Button Content="Add new Product"
+Click="Button_Click" />
+    </StackPanel>
+</Window>
+<!--<Grid Name="MainGrid">
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
 VerticalAlignment="Stretch" Width="auto" RenderTransformOrigin="0.506,0.769">
             <ComboBox Name="CategoriesSelector" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch"
@@ -31,4 +60,4 @@ Grid.Column="2" SelectionChanged="CategoriesSelector_SelectionChanged"/>
         </Grid.RowDefinitions>
 
     </Grid>
-</Window>
+</Window>-->

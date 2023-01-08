@@ -36,5 +36,15 @@ namespace PL
             InitializeComponent();
             order = bl!.Order.GetOrderDetails(id);
         }
+
+        private void btnUpdateOrder_Click(object sender, RoutedEventArgs e)
+        {
+            order = bl!.Order.supplyUpdate(order.OrderId);
+        }
+
+        private void btnUpdateDeliveryDate_Click(object sender, RoutedEventArgs e)
+        {
+            order = bl!.Order.UpdateSending(order.OrderId);
+        }
     }
 }

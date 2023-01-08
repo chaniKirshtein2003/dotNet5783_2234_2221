@@ -7,9 +7,44 @@
         DataContext="{Binding Path=newOrder,RelativeSource={RelativeSource self}}"
         mc:Ignorable="d"
         Title="NewOrderWindow" Height="450" Width="800">
+    <!--<Window.Resources>
+        <DataTemplate x:Key="MyDataTemplate" DataType="local:ProductItem">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Column="0" Text="{Binding Path=ID}" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=Name}" />
+                <TextBlock Grid.Column="2" Text="{Binding Path=Price}" />
+                <TextBlock Grid.Column="3" Text="{Binding Path=Category}" />
+                <CheckBox Grid.Column="4" IsChecked="{Binding Path=InStock}" />
+                <TextBlock Grid.Column="5" Text="{Binding Path=Amount}" />
+                <Button Grid.Column="6" Content="Add" Click="Button_Click" />
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <StackPanel>
+        <ComboBox x:Name="cmxFilterCategories" Width="120" SelectionChanged="cmxFilterCategories_SelectionChanged" Margin="645,10,35,379"/>
+        <ListView ItemsSource="{Binding}" x:Name="lstNewOrder"
+ItemTemplate="{StaticResource MyDataTemplate}"
+HorizontalContentAlignment="Stretch" />
+        <Button Content="Add"
+Click="Button_Click" />
+    </StackPanel>-->
     <Grid>
         <ListView ItemsSource="{Binding}" x:Name="lstNewOrder">
         </ListView>
         <ComboBox  x:Name="cmxFilterCategories" Width="120" SelectionChanged="cmxFilterCategories_SelectionChanged" Margin="645,10,35,379"/>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="705,124,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.069,-0.13"/>
     </Grid>
 </Window>

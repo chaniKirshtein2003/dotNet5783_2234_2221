@@ -25,7 +25,7 @@ namespace PL
         }
 
 
-        private void btnOrderTracking_Click(object sender, RoutedEventArgs e) { }
+        private void btnOrderTracking_Click(object sender, RoutedEventArgs e) => new OrderTracking().Show();
 
         private void btnManager_Click(object sender, RoutedEventArgs e) => new ManagerDisplay().Show();
        

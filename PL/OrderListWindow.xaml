@@ -7,9 +7,36 @@
         DataContext="{Binding Path=ords,RelativeSource={RelativeSource self}}"
         mc:Ignorable="d"
         Title="OrderListWindow" Height="450" Width="800">
-    <Grid>
+    <Window.Resources>
+        <DataTemplate x:Key="MyDataTemplate" DataType="local:OrderForList">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding Path=OrderId}" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=CustomerName}" />
+                <TextBlock Grid.Column="2" Text="{Binding Path=Status}" />
+                <TextBlock Grid.Column="3" Text="{Binding Path=AmountOfItems}" />
+                <TextBlock Grid.Column="4" Text="{Binding Path=TotalPrice}" />
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <StackPanel>
+        <ListView ItemsSource="{Binding}" x:Name="OrderListView"
+ItemTemplate="{StaticResource MyDataTemplate}"
+HorizontalContentAlignment="Stretch" MouseDoubleClick="OrderListView_MouseDoubleClick"/>
+    </StackPanel>
+</Window>
+<!--<Grid>
         <ListView ItemsSource="{Binding}" x:Name="OrderListView" Grid.Row="1" MouseDoubleClick="OrderListView_MouseDoubleClick">
         </ListView>
 
     </Grid>
-</Window>
+</Window>-->
