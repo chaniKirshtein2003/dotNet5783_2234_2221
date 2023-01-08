@@ -38,8 +38,8 @@ public class DalProduct : IProduct
         if (pred != null)
             return DataSource.productsList.FindAll(x => pred(x));
         else
-            return from prod in DataSource.productsList
-                   select prod;
+            return from product in DataSource.productsList
+                   select product;
     }
     /// <summary>
     /// A method to delete a product object that receives a product ID number

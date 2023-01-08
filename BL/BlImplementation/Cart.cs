@@ -1,5 +1,4 @@
-﻿using BO;
-using DalApi;
+﻿using DalApi;
 
 
 namespace BlImplementation
@@ -19,38 +18,8 @@ namespace BlImplementation
         {
             try
             {
-                //DO.Product product = idal!.Product.Get(id);
-                //foreach (BO.OrderItem? item in cart.Items!)
-                //{
-                //    if (item?.ProductId == id)
-                //    {
-                //        isExist = true;
-                //        if (product.AmountInStock > 0)
-                //        {
-                //            isInStock = true;
-                //            item.TotalPrice += item.Price;
-                //            item.Amount++;
-                //        }
-                //    }
-                //}
-                //if (!isExist && product.AmountInStock > 0)
-                //{
-                //    isInStock = true;
-                //    BO.OrderItem item = new BO.OrderItem();
-                //    item.OrderItemName = product.ProductName;
-                //    item.Price = product.Price;
-                //    item.ProductId = id;
-                //    item.Amount = 1;
-                //    item.TotalPrice = product.Price;
-                //    cart.Items.Add(item);
-                //}
-                //if (isInStock)
-                //    cart.TotalPrice += product.Price;
-                //return cart;
-
                 DO.Product product = new DO.Product();
-                BO.OrderItem orderItem1 = new BO.OrderItem();
-
+                BO.OrderItem orderItem = new BO.OrderItem();
                 if (cart.Items?.FirstOrDefault(item => item?.ProductId == id) != null)
                 {
                     throw new BO.AlreadyExistBlException("product exist in cart");
@@ -59,47 +28,40 @@ namespace BlImplementation
 
                 if (product.AmountInStock <= 0)
                     throw new BO.NotExistBlException("product not exist in stock");
-
-                orderItem1.OrderItemName = product.ProductName;
-                orderItem1.ProductId = id;
-                orderItem1.Amount = 1;
-                orderItem1.Price = product.Price;
-                orderItem1.TotalPrice = orderItem1.Price * orderItem1.Amount;
-                cart.Items?.Add(orderItem1);
-                cart.TotalPrice += orderItem1.TotalPrice;
+                orderItem.OrderItemName = product.ProductName;
+                orderItem.ProductId = id;
+                orderItem.Amount = 1;
+                orderItem.Price = product.Price;
+                orderItem.TotalPrice = orderItem.Price * orderItem.Amount;
+                cart.Items?.Add(orderItem);
+                cart.TotalPrice += orderItem.TotalPrice;
                 return cart;
             }
-            catch (Exception ex)
+            catch (DO.NotExistException ex)
             {
                 throw new BO.NotExistBlException("not exist", ex);
             }
-
         }
         //The purpose of the function is to update the quantity of a product in the current shopping basket and returns the updated shopping basket.
-        public BO.Cart Update(BO.Cart cart, int id, int amount)
+        public BO.Cart Update(BO.Cart cart, int idProduct, int amount)
         {
             try
             {
-                DO.Product product = idal!.Product.Get(id);
-                foreach (BO.OrderItem? item in cart.Items!)
+                DO.Product product = idal!.Product.Get(idProduct);
+                var item = cart.Items!.FirstOrDefault(x => x?.ProductId == idProduct);
+                if (amount == 0)
+                    cart.Items!.Remove(item);
+                else
+                    if (product.AmountInStock >= amount)
                 {
-                    if (id == item?.ProductId)
-                    {
-                        if (amount == 0)
-                            cart.Items.Remove(item);
-                        else if (product.AmountInStock >= amount)
-                        {
-                            item.Amount = amount;
-                            item.Price = product.Price;
-                            item.TotalPrice = product.Price * amount;
-                            cart.TotalPrice += product.Price;
-                        }
-                    }
+                    item!.Amount = amount;
+                    item.Price = product.Price;
+                    item.TotalPrice = product.Price * amount;
+                    cart.TotalPrice += product.Price * amount;
                 }
                 return cart;
-
             }
-            catch (Exception ex)
+            catch (DO.NotExistException ex)
             {
                 throw new BO.NotExistBlException("not exist", ex);
             }
@@ -109,11 +71,14 @@ namespace BlImplementation
         {
             if (cart.CustomerAddress == "" || cart.CustomerName == "" || cart.CustomerEmail == "")
                 throw new BO.NotValidException("missing details");
+
+            //var updatedCart = cart.Items!.FindAll(item => item?.Amount > 0);
+
             foreach (BO.OrderItem? item in cart.Items!)
             {
                 if (item?.Amount < 0)
                     throw new BO.NotValidException("cannot be negative amount");
-                DO.Product doProduct = idal!.Product.Get(item?.ProductId??0);
+                DO.Product doProduct = idal!.Product.Get(item?.ProductId ?? 0);
                 if (doProduct.AmountInStock - item?.Amount < 0)
                     throw new BO.NotValidException("there is not enough products in stock");
             }
@@ -143,13 +108,13 @@ namespace BlImplementation
                         idal.OrderItem.Add(orderItem);
 
                     }
-                    catch (Exception x)
+                    catch (DO.ExistException x)
                     {
                         throw new BO.AlreadyExistBlException("alerady exist", x);
                     }
                 }
             }
-            catch (Exception ex)
+            catch (DO.ExistException ex)
             {
                 throw new BO.AlreadyExistBlException("alerady exist", ex);
             }
