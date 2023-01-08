@@ -1,11 +1,37 @@
-﻿
-
-namespace BlImplementation
+﻿namespace BlImplementation
 {
     internal class Order : BlApi.IOrder
     {
         DalApi.IDal? idal = DalApi.Factory.Get();
         //The purpose of the function is to show the manager all orders.
+
+        //הפונקציה של שולה וזיסי!!!
+        //public IEnumerable<BO.OrderForList> GetOrders()
+        //{
+        //    try
+        //    {
+        //        IEnumerable<DO.Order?> orders = idal!.Order.GetAll();
+        //        var ordersForList = from order in orders
+        //                            let orderItems = idal.OrderItem.GetAll(orditem => orditem?.OrderId == order?.ID)
+        //                            let amount = orderItems.Sum(o => ((DO.OrderItem)o!).Amount)
+        //                            let totalPrice = orderItems.Sum(o => ((DO.OrderItem)o!).Amount * ((DO.OrderItem)o!).Price)
+        //                            select new BO.OrderForList
+        //                            {
+        //                                ID = ((DO.Order)order!).ID,
+        //                                CustomerName = ((DO.Order)order!).CustomerName,
+        //                                AmountOfItems = amount,
+        //                                TotalPrice = totalPrice,
+        //                                Status = (((DO.Order)order!).DeliveryDate != null && ((DO.Order)order!).DeliveryDate < DateTime.Now) ?
+        //                             BO.OrderStatus.provided : ((DO.Order)order!).ShipDate != null && ((DO.Order)order!).ShipDate < DateTime.Now ?
+        //                             BO.OrderStatus.sent : BO.OrderStatus.approved
+        //                            };
+        //        return ordersForList;
+        //    }
+        //    catch (DO.NotExistException ex)
+        //    {
+        //        throw new BO.NotExistBlException("order doesnot exist", ex);
+        //    }
+        //}
         public IEnumerable<BO.OrderForList?> GetOrders()
         {
             List<BO.OrderForList?> orderForList = new List<BO.OrderForList?>();
@@ -43,6 +69,7 @@ namespace BlImplementation
                 throw new BO.NotValidException("id");
             BO.Order order = new BO.Order();
             DO.Order DOorder;
+            double totalPrice = 0;
             try
             {
                 DOorder = idal!.Order.Get(idOrder);
@@ -55,18 +82,21 @@ namespace BlImplementation
                 order.DeliveryDate = DOorder.DeliveryDate;
                 order.Items = new List<BO.OrderItem?>();
                 BO.OrderItem orderItem = new BO.OrderItem();
-                foreach (DO.OrderItem? DOorderItem in idal!.OrderItem.GetAll(x=>x?.OrderId==idOrder))
+
+                foreach (DO.OrderItem? DOorderItem in idal!.OrderItem.GetAll(x => x?.OrderId == idOrder))
                 {
                     orderItem = new BO.OrderItem();
-                    orderItem.OrderItemId = DOorderItem?.OrderItemId??0;
-                    orderItem.ProductId = DOorderItem?.ProductId??0;
-                    orderItem.OrderItemName = idal.Product.Get(DOorderItem?.ProductId??0).ProductName;
-                    orderItem.Amount = DOorderItem?.Amount??0;
-                    orderItem.Price = DOorderItem?.PricePerUnit??0;
-                    orderItem.TotalPrice = DOorderItem?.PricePerUnit * DOorderItem?.Amount??0;
-                    
+                    orderItem.OrderItemId = DOorderItem?.OrderItemId ?? 0;
+                    orderItem.ProductId = DOorderItem?.ProductId ?? 0;
+                    orderItem.OrderItemName = idal.Product.Get(DOorderItem?.ProductId ?? 0).ProductName;
+                    orderItem.Amount = DOorderItem?.Amount ?? 0;
+                    orderItem.Price = DOorderItem?.PricePerUnit ?? 0;
+                    orderItem.TotalPrice = DOorderItem?.PricePerUnit * DOorderItem?.Amount ?? 0;
+                    totalPrice += orderItem.TotalPrice;
                     order.Items.Add(orderItem);
                 }
+                order.TotalPrice = totalPrice;
+                order.Status = order.DeliveryDate != null ? BO.OrderStatus.delivered : order.ShipDate != null ? BO.OrderStatus.sent : BO.OrderStatus.approved;
                 return order;
             }
             catch (Exception X)
@@ -80,7 +110,7 @@ namespace BlImplementation
             try
             {
                 DO.Order order = idal!.Order.Get(id);
-                if (order.ShipDate?.Date < DateTime.Now.Date)
+                if (order.ShipDate?.Date ==null)
                 {
                     order.ShipDate = DateTime.Now;
                     idal!.Order.Update(order);
@@ -100,7 +130,7 @@ namespace BlImplementation
             try
             {
                 DO.Order order = idal!.Order.Get(id);
-                if (order.DeliveryDate?.Date < DateTime.Now.Date)
+                if (order.DeliveryDate?.Date ==null)
                 {
                     order.DeliveryDate = DateTime.Now;
                     idal!.Order.Update(order);
@@ -122,9 +152,9 @@ namespace BlImplementation
                 DO.Order DOorder = idal!.Order.Get(id);
                 BO.OrderTracking OrderTrack = new BO.OrderTracking();
                 OrderTrack.ID = DOorder.OrderId;
-                if (DOorder.DeliveryDate != DateTime.MinValue)
+                if (DOorder.DeliveryDate != null)
                     OrderTrack.Status = BO.OrderStatus.delivered;
-                else if (DOorder.ShipDate != DateTime.MinValue)
+                else if (DOorder.ShipDate != null)
                     OrderTrack.Status = BO.OrderStatus.sent;
                 else
                     OrderTrack.Status = BO.OrderStatus.approved;
@@ -136,7 +166,7 @@ namespace BlImplementation
                     tuple = new Tuple<DateTime?, string?>(DOorder.DeliveryDate, "delivered");
                     OrderTrack.Tracking.Add(tuple);
                 }
-                else if (DOorder.ShipDate != DateTime.MinValue)
+                else if (DOorder.ShipDate != null)
                 {
                     tuple = new Tuple<DateTime?, string?>(DOorder.ShipDate, "sent");
                     OrderTrack.Tracking.Add(tuple);
@@ -147,6 +177,7 @@ namespace BlImplementation
             {
                 throw new BO.NotExistBlException("not exist", x);
             }
+            
         }
     }
 }

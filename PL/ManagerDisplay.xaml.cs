@@ -18,10 +18,10 @@ namespace PL
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ManagerDisplay : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        public MainWindow()
+        public ManagerDisplay()
         {
             InitializeComponent();
         }
@@ -30,6 +30,5 @@ namespace PL
 
         private void btnShowOrder_Click(object sender, RoutedEventArgs e)=>new OrderListWindow().Show();
 
-        private void btnNewOrder_Click(object sender, RoutedEventArgs e)=>new NewOrderWindow().Show();
     }
 }

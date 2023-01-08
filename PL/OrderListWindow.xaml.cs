@@ -29,7 +29,7 @@ namespace PL
             set { SetValue(ordsProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for ords.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for ords. This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ordsProperty =
             DependencyProperty.Register("ords", typeof(ObservableCollection<BO.OrderForList?>), typeof(Window), new PropertyMetadata(null));
         public OrderListWindow()

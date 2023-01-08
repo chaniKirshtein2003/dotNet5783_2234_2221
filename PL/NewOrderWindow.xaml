@@ -10,6 +10,6 @@
     <Grid>
         <ListView ItemsSource="{Binding}" x:Name="lstNewOrder">
         </ListView>
-        <ComboBox  x:Name="cmxFilterCategories" Width="120" SelectionChanged="cmxFilterCategories_SelectionChanged"/>
+        <ComboBox  x:Name="cmxFilterCategories" Width="120" SelectionChanged="cmxFilterCategories_SelectionChanged" Margin="645,10,35,379"/>
     </Grid>
 </Window>

@@ -124,7 +124,7 @@ namespace BlImplementation
             order.CustomerEmail = cart.CustomerEmail;
             order.DeliveryDate = null;
             order.ShipDate = null;
-            order.OrderDate = null;
+            order.OrderDate = DateTime.Now;
             try
             {
                 id = idal!.Order.Add(order);

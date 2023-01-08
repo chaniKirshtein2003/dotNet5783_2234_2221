@@ -76,9 +76,9 @@ internal static class DataSource
             order.CustomerName = customerNameArr[i];
             order.CustomerEmail = customerEmailArr[s_rand.Next(customerNameArr.Length)];
             order.CustomerAddress = customerAddressArr[i];
-            order.OrderDate = DateTime.MinValue;
-            order.DeliveryDate = date;
-            order.ShipDate = DateTime.MinValue + timeS + timeS1;
+            order.OrderDate = DateTime.Today;
+            order.DeliveryDate = i%3==0? date:null;
+            order.ShipDate = i%2==0? date: null;
             ordersList.Add(order);
         }
     }

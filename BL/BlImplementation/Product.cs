@@ -1,4 +1,6 @@
-﻿namespace BlImplementation
+﻿using DalApi;
+
+namespace BlImplementation
 {
     internal class Product : BlApi.IProduct
     {
@@ -128,6 +130,7 @@
                 throw new BO.NotExistBlException("not exist", x);
             }
         }
+
         //The purpose of the function is to show the buyer a list of products.
         public IEnumerable<BO.ProductItem> ListProductsToBuy()
         {

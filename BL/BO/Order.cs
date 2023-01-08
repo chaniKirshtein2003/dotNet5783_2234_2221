@@ -1,6 +1,4 @@
-﻿
-
-namespace BO
+﻿namespace BO
 {
     public class Order
     {
@@ -28,28 +26,28 @@ namespace BO
         /// <summary>
         /// Order creation date
         /// </summary>
-        /// 
         public DateTime? OrderDate { get; set; }
-        /// <summary>
-        /// Order payment date
-        /// </summary>
-        public DateTime? PaymentDate { get; set; }
+
         /// <summary>
         /// shipping date
         /// </summary>
         public DateTime? ShipDate { get; set; }
+
         /// <summary>
         /// Date of delivery
         /// </summary>
         public DateTime? DeliveryDate { get; set; }
+
         /// <summary>
         /// The list of the items in the order
         /// </summary>
         public List<OrderItem?>? Items { get; set; }
+
         /// <summary>
         /// The total price of the order
         /// </summary>
         public double TotalPrice { get; set; }
+
         /// <summary>
         /// Overriding method of the ToString 
         /// </summary>
