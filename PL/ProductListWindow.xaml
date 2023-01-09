@@ -17,21 +17,18 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="1" Text="{Binding Path=ID}" />
-                <TextBlock Grid.Column="3" Text="{Binding Path=Name}" />
-                <TextBlock Grid.Column="5" Text="{Binding Path=Price}" />
+                <TextBlock Grid.Column="0" Text="{Binding Path=ID}" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=Name}" />
+                <TextBlock Grid.Column="2" Text="{Binding Path=Price}" />
             </Grid>
         </DataTemplate>
     </Window.Resources>
     <StackPanel>
         <ComboBox Name="CategoriesSelector" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" SelectionChanged="CategoriesSelector_SelectionChanged"/>
-        <ListView ItemsSource="{Binding}" x:Name="ProductListview"
+        <ListView ItemsSource="{Binding}" x:Name="ProductListview" 
 ItemTemplate="{StaticResource MyDataTemplate}"
-HorizontalContentAlignment="Stretch" />
+HorizontalContentAlignment="Stretch"  MouseDoubleClick="ProductListview_MouseDoubleClick"/>
         <Button Content="Add new Product"
 Click="Button_Click" />
     </StackPanel>
