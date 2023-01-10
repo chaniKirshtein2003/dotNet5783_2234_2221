@@ -62,8 +62,7 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new AddUpdateProduct().ShowDialog();
-            ProductListview.ItemsSource = bl!.Product.GetProducts();
-            //CategoriesSelector.SelectedItem = BO.Categories.None;
+            CategoriesSelector.SelectedItem = BO.Categories.None;
             var help = bl!.Product.GetProducts();
             prods = help == null ? new() : new(help);
         }

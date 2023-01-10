@@ -134,6 +134,8 @@ namespace BlImplementation
         {
             IEnumerable<DO.Product?> products = idal!.Product.GetAll();
             var productList = from product in products
+                              orderby product?.ProductName
+
                               select new BO.ProductItem
                               {
                                   ID = product?.ProductId ?? 0,

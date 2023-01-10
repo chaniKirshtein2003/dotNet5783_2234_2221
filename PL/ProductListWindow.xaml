@@ -28,8 +28,7 @@
     </Window.Resources>
     <StackPanel>
         <ComboBox Name="CategoriesSelector" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" SelectionChanged="CategoriesSelector_SelectionChanged"/>
-        <ListView ItemsSource="{Binding}" x:Name="ProductListview" 
-ItemTemplate="{StaticResource MyDataTemplate}"
+        <ListView ItemsSource="{Binding}" x:Name="ProductListview"  ItemTemplate="{StaticResource MyDataTemplate}"
 HorizontalContentAlignment="Stretch"  MouseDoubleClick="ProductListview_MouseDoubleClick"/>
         <Button Content="Add new Product"
 Click="Button_Click" />

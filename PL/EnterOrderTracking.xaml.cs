@@ -19,6 +19,7 @@ namespace PL
     /// </summary>
     public partial class EnterOrderTracking : Window
     {
+        BlApi.IBl? bl = BlApi.Factory.Get();
         public EnterOrderTracking()
         {
             InitializeComponent();
@@ -26,7 +27,8 @@ namespace PL
 
         private void btnTracking_Click(object sender, RoutedEventArgs e)
         {
-
+            int id = int.Parse(txtInsertId.Text);
+            new OrderTracking(id).ShowDialog();
         }
     }
 }

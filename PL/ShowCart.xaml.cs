@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,21 +24,43 @@ namespace PL
         BO.Cart _myCart = new BO.Cart();
 
 
-        public IObservable<BO.OrderItem> item
+        public ObservableCollection<BO.OrderItem> item
         {
-            get { return (IObservable<BO.OrderItem>)GetValue(itemProperty); }
+            get { return (ObservableCollection<BO.OrderItem>)GetValue(itemProperty); }
             set { SetValue(itemProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for item.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty itemProperty =
-            DependencyProperty.Register("item", typeof(IObservable<BO.OrderItem>), typeof(Window), new PropertyMetadata(null));
+            DependencyProperty.Register("item", typeof(ObservableCollection<BO.OrderItem>), typeof(Window), new PropertyMetadata(null));
 
 
         public ShowCart(BO.Cart cart)
         {
             InitializeComponent();
             _myCart = cart;
+            var help = _myCart.Items;
+            item = help == null ? new() : new (help!);
+        }
+
+        private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).OrderItemId;
+            BO.OrderItem orderItem = _myCart.Items!.FirstOrDefault(x => x!.OrderItemId == id)!;
+            bl!.Cart.Update(_myCart, orderItem.ProductId, orderItem.Amount + 1);
+        }
+
+        private void Button_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+            int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).OrderItemId;
+            BO.OrderItem orderItem = _myCart.Items!.FirstOrDefault(x => x!.OrderItemId == id)!;
+            bl!.Cart.Update(_myCart, orderItem.ProductId, orderItem.Amount - 1);
+        }
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).OrderItemId;
+            BO.OrderItem orderItem = _myCart.Items!.FirstOrDefault(x => x!.OrderItemId == id)!;
+            bl!.Cart.Update(_myCart, orderItem.ProductId, 0);
         }
     }
 }
