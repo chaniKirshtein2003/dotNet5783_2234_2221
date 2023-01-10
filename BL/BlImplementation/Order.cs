@@ -10,7 +10,7 @@
             try
             {
                 IEnumerable<DO.Order?> orders = idal!.Order.GetAll();
-                var ordersForList = from order in orders
+                IEnumerable<BO.OrderForList?> ordersForList = from order in orders
                                     let orderItems = idal!.OrderItem.GetAll(orderItem => orderItem?.OrderId == (order?.OrderId ?? 0))
                                     let totalAmount = orderItems.Sum(x => ((DO.OrderItem)x!).Amount)
                                     let totalPrice = orderItems.Sum(x => ((DO.OrderItem)x!).Amount * ((DO.OrderItem)x!).PricePerUnit)
@@ -59,7 +59,7 @@
                                 Price = orderItem?.PricePerUnit ?? 0,
                                 TotalPrice = orderItem?.PricePerUnit * orderItem?.Amount ?? 0
                             };
-                order.Items = items.ToList();
+                order.Items = items.ToList()!;
                 order.TotalPrice = items.Sum(x => x.TotalPrice);
                 order.Status = order.DeliveryDate != null ?
                                 BO.OrderStatus.delivered : order.ShipDate != null ?

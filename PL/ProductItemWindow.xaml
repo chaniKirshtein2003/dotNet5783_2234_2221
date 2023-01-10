@@ -1,0 +1,27 @@
+﻿<Window x:Class="PL.ProductItemWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        DataContext="{Binding Path=productItem, RelativeSource={RelativeSource self}}"
+        mc:Ignorable="d"
+        Title="ProductItemWindow" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="lblPrID" Content="שם" HorizontalAlignment="Left" Margin="609,96,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPrId" Content="מזהה מוצר" HorizontalAlignment="Left" Margin="570,54,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPrPrice" Content="מחיר" HorizontalAlignment="Left" Margin="601,141,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPrCategory" Content="קטגוריה" HorizontalAlignment="Left" Margin="585,180,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPrAmount" Content="כמות במלאי" HorizontalAlignment="Left" Margin="565,224,0,0" VerticalAlignment="Top" RenderTransformOrigin="10.729,-2.258"/>
+        <TextBox Text="{Binding Path=Name}" x:Name="txtName" HorizontalAlignment="Left" Margin="413,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="White"/>
+        <TextBox Text="{Binding Path=ID}" x:Name="txtPrId" HorizontalAlignment="Left" Margin="413,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding Path=Price}" x:Name="txtPrPrice" HorizontalAlignment="Left" Margin="413,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding Path=Amount}" x:Name="txtPrAmount" HorizontalAlignment="Left" Margin="413,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding Path=Category}" x:Name="cmbCategory" HorizontalAlignment="Left" Margin="413,182,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnCancel" Content="ביטול" HorizontalAlignment="Left" Margin="518,346,0,0" VerticalAlignment="Top" Height="32" Width="66" Click="btnCancel_Click"/>
+        <Label x:Name="lblInStock" Content="במלאי" HorizontalAlignment="Left" Margin="594,255,0,0" VerticalAlignment="Top"/>
+        <CheckBox IsChecked="{Binding Path=InStock}" x:Name="cbInStock" Content="" HorizontalAlignment="Left" Margin="518,265,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtCartAmount" HorizontalAlignment="Left" Margin="413,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblCartAmount" Content="כמות בסל" HorizontalAlignment="Left" Margin="576,284,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.257,1.551"/>
+    </Grid>
+</Window>

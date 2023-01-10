@@ -37,7 +37,6 @@ namespace PL
         {
             InitializeComponent();
             {
-                //orderTracking = bl!.Order.OrderTracking(4);
                 order = bl.Order.GetOrderDetails(idOrder);
                 orderTracking = bl.Order.OrderTracking(order.OrderId);
                 lstTracking.ItemsSource = orderTracking.Tracking;
@@ -46,7 +45,8 @@ namespace PL
 
         private void btnShowOrderDetails_Click(object sender, RoutedEventArgs e)
         {
-            new OrderTracking(order!.OrderId).Show();
+            int id = Convert.ToInt32(txtOrderId.Text);
+            new UpdateOrder(id).ShowDialog();
         }
     }
 }

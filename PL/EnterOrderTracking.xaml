@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="EnterOrderTracking" Height="450" Width="800">
     <Grid>
-        <Button x:Name="btnTracking" Content="למעקב" HorizontalAlignment="Left" Margin="529,247,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnTracking" Content="למעקב" HorizontalAlignment="Left" Margin="529,247,0,0" VerticalAlignment="Top" Click="btnTracking_Click"/>
         <Label x:Name="lblInsertId" Content="הכנס קוד הזמנה" HorizontalAlignment="Left" Margin="563,150,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtInsertId" HorizontalAlignment="Left" Margin="400,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
