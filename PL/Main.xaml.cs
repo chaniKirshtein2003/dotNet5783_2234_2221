@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace PL
         }
 
 
-        private void btnOrderTracking_Click(object sender, RoutedEventArgs e) => new OrderTracking().Show();
+        private void btnOrderTracking_Click(object sender, RoutedEventArgs e) => new EnterOrderTracking().Show();
 
         private void btnManager_Click(object sender, RoutedEventArgs e) => new ManagerDisplay().Show();
        
