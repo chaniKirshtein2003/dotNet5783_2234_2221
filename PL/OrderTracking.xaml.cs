@@ -36,10 +36,15 @@ namespace PL
         public OrderTracking(int idOrder)
         {
             InitializeComponent();
+            try
             {
-                order = bl.Order.GetOrderDetails(idOrder);
-                orderTracking = bl.Order.OrderTracking(order.OrderId);
+                //order = bl.Order.GetOrderDetails(idOrder);
+                orderTracking = bl.Order.OrderTracking(idOrder);
                 lstTracking.ItemsSource = orderTracking.Tracking;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Sorry, There is no an order with id " + idOrder);
             }
         }
 

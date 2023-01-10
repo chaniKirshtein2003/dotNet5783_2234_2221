@@ -150,26 +150,29 @@ namespace BlImplementation
             //int negativeAmount = boCart.Items!.Count(x => x!.Amount < 0);
             //if (negativeAmount > 0)
             //    throw new BO.NotValidException("amount");
-            try
-            {
-                boCart.Items!.FindAll(x => idal!.Product.Get(x!.ProductId).AmountInStock - x.Amount > 0 ? true : throw new BO.NotInStockException(x.ProductId, x.ProductName!));
-                DO.Order doOrder = new DO.Order() { CustomerAddress = boCart.CustomerAddress, CustomerName = boCart.CustomerName, CustomerEmail = boCart.CustomerEmail, ShipDate = null, DeliveryDate = null, OrderDate = DateTime.Now };
-                int id = idal!.Order.Add(doOrder);
-                var allItems = from item in boCart.Items
-                               let product = idal!.Product.Get(item.ProductId)
-                               let newProd = new DO.Product { ID = product.ID, Name = product.Name, Price = product.Price, InStock = product.InStock - item.Amount, CategoryP = product.CategoryP }
-                               let updateAmount = UpdateAmountDal(newProd)
-                               select new DO.OrderItem() { Amount = item!.Amount, ProductId = item.ProductId, OrderId = id, Price = newProd.Price };
-                allItems.All(x => idal.OrderItem.Add(x) > 0 ? true : false);
-            }
-            catch (DO.ExistException ex)
-            {
-                throw new BO.AlreadyExistBlException("order alredy exist cannot add- ", ex);
-            }
-            catch (DO.NotExistException ex)
-            {
-                throw new BO.NotExistBlException("product does not exist-", ex);
-            }
+
+
+            //    try
+            //    {
+            //        boCart.Items!.FindAll(x => idal!.Product.Get(x!.ProductId).AmountInStock - x.Amount > 0 ? true : throw new BO.NotInStockException(x.ProductId, x.ProductName!));
+            //        DO.Order doOrder = new DO.Order() { CustomerAddress = boCart.CustomerAddress, CustomerName = boCart.CustomerName, CustomerEmail = boCart.CustomerEmail, ShipDate = null, DeliveryDate = null, OrderDate = DateTime.Now };
+            //        int id = idal!.Order.Add(doOrder);
+            //        var allItems = from item in boCart.Items
+            //                       let product = idal!.Product.Get(item.ProductId)
+            //                       let newProd = new DO.Product { ID = product.ID, Name = product.Name, Price = product.Price, InStock = product.InStock - item.Amount, CategoryP = product.CategoryP }
+            //                       let updateAmount = UpdateAmountDal(newProd)
+            //                       select new DO.OrderItem() { Amount = item!.Amount, ProductId = item.ProductId, OrderId = id, Price = newProd.Price };
+            //        allItems.All(x => idal.OrderItem.Add(x) > 0 ? true : false);
+            //    }
+            //    catch (DO.ExistException ex)
+            //    {
+            //        throw new BO.AlreadyExistBlException("order alredy exist cannot add- ", ex);
+            //    }
+            //    catch (DO.NotExistException ex)
+            //    {
+            //        throw new BO.NotExistBlException("product does not exist-", ex);
+            //    }
+            //}
         }
     }
 }

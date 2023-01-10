@@ -23,7 +23,6 @@ namespace PL
         BlApi.IBl? bl = BlApi.Factory.Get();
         string state;
 
-
         public BO.Product product
         {
             get { return (BO.Product)GetValue(productProperty); }
