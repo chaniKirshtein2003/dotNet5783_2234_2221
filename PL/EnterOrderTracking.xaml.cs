@@ -23,5 +23,10 @@ namespace PL
         {
             InitializeComponent();
         }
+
+        private void btnTracking_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
