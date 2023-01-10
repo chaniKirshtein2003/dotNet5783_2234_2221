@@ -21,26 +21,34 @@ namespace PL
     public partial class NewOrderWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
+        BO.Cart myCart=new BO.Cart();
 
 
-        public ObservableCollection<BO.ProductItem> newOrder
+
+        public ObservableCollection<BO.ProductItem> NewOrder
         {
-            get { return (ObservableCollection<BO.ProductItem>)GetValue(newOrderProperty); }
-            set { SetValue(newOrderProperty, value); }
+            get { return (ObservableCollection<BO.ProductItem>)GetValue(NewOrderProperty); }
+            set { SetValue(NewOrderProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for newOrder.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty newOrderProperty =
-            DependencyProperty.Register("newOrder", typeof(ObservableCollection<BO.ProductItem>), typeof(Window), new PropertyMetadata(null));
+        // Using a DependencyProperty as the backing store for NewOrder.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NewOrderProperty =
+            DependencyProperty.Register("NewOrder", typeof(ObservableCollection<BO.ProductItem>), typeof(Window), new PropertyMetadata(null));
+
 
 
         public NewOrderWindow()
         {
             InitializeComponent();
             var help = bl!.Product.ListProductsToBuy();
-            newOrder = help == null ? new() : new(help);
+            NewOrder = help == null ? new() : new(help);
             cmxFilterCategories.ItemsSource = Enum.GetValues(typeof(BO.Categories));
             cmxFilterCategories.SelectedItem = BO.Categories.None;
+            myCart.Items = null;
+            myCart.CustomerAddress = "aaa";
+            myCart.CustomerEmail = "aaa";
+            myCart.CustomerName = "aaa";
+            myCart.TotalPrice = 0;
         }
 
         private void cmxFilterCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -49,18 +57,25 @@ namespace PL
             if (category.ToString() == "None")
             {
                 var help = bl!.Product.ListProductsToBuy();
-                newOrder = help == null ? new() : new(help);
+                NewOrder = help == null ? new() : new(help);
             }
             else
             {
                 var help = bl!.Product.GetProductsItemByCategory(category);
-                newOrder = help == null ? new() : new(help);
+                NewOrder = help == null ? new() : new(help);
             }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            int id = ((BO.ProductItem)((System.Windows.FrameworkElement)sender).DataContext).ID;
+            if (((BO.ProductItem)((System.Windows.FrameworkElement)sender).DataContext).InStock == false)
+                MessageBox.Show("אזל מהמלאי");
+            else
 
+                myCart = bl!.Cart.Add( myCart, id);
         }
+
+        private void btnShowCart_Click(object sender, RoutedEventArgs e) => new ShowCart(myCart).Show();
     }
 }

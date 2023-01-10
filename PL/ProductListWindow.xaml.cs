@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -44,6 +45,7 @@ namespace PL
 
         private void CategoriesSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            CategoriesSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
             BO.Categories category = (BO.Categories)CategoriesSelector.SelectedItem;
             if (category.ToString() == "None")
             {
@@ -61,8 +63,10 @@ namespace PL
         {
             new AddUpdateProduct().ShowDialog();
             ProductListview.ItemsSource = bl!.Product.GetProducts();
-            CategoriesSelector.SelectedItem = BO.Categories.None;
-        } 
+            //CategoriesSelector.SelectedItem = BO.Categories.None;
+            var help = bl!.Product.GetProducts();
+            prods = help == null ? new() : new(help);
+        }
 
         private void ProductListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

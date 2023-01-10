@@ -12,14 +12,14 @@
         <Label Content="סטטוס הזמנה" HorizontalAlignment="Left" Margin="626,129,0,0" VerticalAlignment="Top"/>
         <TextBox Text="{Binding ID}" x:Name="txtOrderId" HorizontalAlignment="Left" Margin="463,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox Text="{Binding Status}" x:Name="txtOrderStatus" HorizontalAlignment="Left" Margin="463,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ListView ItemsSource="{Binding Tracking}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="103,56,495,185">
+        <ListView x:Name="lstTracking" ItemsSource="{Binding Tracking}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="103,56,495,185">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="btnShowOrderDetails" Content="לצפיה בפרטי ההזמנה" HorizontalAlignment="Left" Margin="519,239,0,0" VerticalAlignment="Top" Height="46" Width="158"/>
+        <Button x:Name="btnShowOrderDetails" Content="לצפיה בפרטי ההזמנה" HorizontalAlignment="Left" Margin="519,239,0,0" VerticalAlignment="Top" Height="46" Width="158" Click="btnShowOrderDetails_Click"/>
 
     </Grid>
 </Window>

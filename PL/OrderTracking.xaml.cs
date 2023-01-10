@@ -20,6 +20,7 @@ namespace PL
     public partial class OrderTracking : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
+        BO.Order? order;
 
         public BO.OrderTracking orderTracking
         {
@@ -32,12 +33,20 @@ namespace PL
             DependencyProperty.Register("orderTracking", typeof(BO.OrderTracking), typeof(Window), new PropertyMetadata(null));
 
 
-        public OrderTracking()
+        public OrderTracking(int idOrder)
         {
             InitializeComponent();
             {
-                orderTracking = bl!.Order.OrderTracking(4);
+                //orderTracking = bl!.Order.OrderTracking(4);
+                order = bl.Order.GetOrderDetails(idOrder);
+                orderTracking = bl.Order.OrderTracking(order.OrderId);
+                lstTracking.ItemsSource = orderTracking.Tracking;
             }
+        }
+
+        private void btnShowOrderDetails_Click(object sender, RoutedEventArgs e)
+        {
+            new OrderTracking(order!.OrderId).Show();
         }
     }
 }

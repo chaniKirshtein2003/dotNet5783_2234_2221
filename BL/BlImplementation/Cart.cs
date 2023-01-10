@@ -20,22 +20,38 @@ namespace BlImplementation
             {
                 DO.Product product = new DO.Product();
                 BO.OrderItem orderItem = new BO.OrderItem();
-                if (cart.Items?.FirstOrDefault(item => item?.ProductId == id) != null)
-                {
-                    throw new BO.AlreadyExistBlException("product exist in cart");
-                }
                 product = (DO.Product)idal!.Product.GetByCondition(product2 => product2?.ProductId == id)!;
+                if (cart.Items == null) cart.Items = new List<BO.OrderItem?>();
 
-                if (product.AmountInStock <= 0)
-                    throw new BO.NotExistBlException("product not exist in stock");
-                orderItem.OrderItemName = product.ProductName;
-                orderItem.ProductId = id;
-                orderItem.Amount = 1;
-                orderItem.Price = product.Price;
-                orderItem.TotalPrice = orderItem.Price * orderItem.Amount;
-                cart.Items?.Add(orderItem);
-                cart.TotalPrice += orderItem.TotalPrice;
-                return cart;
+                bool exist = false;
+                if (cart.Items?.Any(item => item?.ProductId == id) == true)
+                {
+                    exist = true;
+                }
+                if (exist)
+                {
+                    BO.OrderItem? ord = cart.Items?.FirstOrDefault(orderItem => orderItem?.ProductId == id);//find this item in cart
+                    cart.Items?.Remove(ord);//delete it
+                    ord!.Amount += 1;
+                    ord.TotalPrice += ord.Price;//for only one item
+                    cart.TotalPrice += product.Price;//update the total price of all the cart
+                    cart.Items?.Add(ord);//and add the updated
+                    return cart;
+                }
+                else
+                {
+                    BO.OrderItem newOrderItem = new BO.OrderItem()//creat a new OrderItem
+                    {
+                        OrderItemName = product.ProductName,
+                        Price = product.Price,
+                        ProductId = product.ProductId,
+                        Amount = 1,
+                        TotalPrice = product.Price
+                    };
+                    cart.Items?.Add(newOrderItem);//add to list of cart
+                    cart.TotalPrice += product.Price;//update the total price of all the cart
+                    return cart;// return the cart
+                }
             }
             catch (DO.NotExistException ex)
             {

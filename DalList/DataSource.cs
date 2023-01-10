@@ -45,7 +45,7 @@ internal static class DataSource
             Product product = new Product();
             product.ProductId = i + 100000;
             product.ProductName = productNameArr[i];
-            product.Category = (Categories)i;
+            product.Category = (Categories)s_rand.Next(1,5);
             product.Price = s_rand.Next(10) + 300;
             product.AmountInStock = amountInstock;
             productsList.Add(product);

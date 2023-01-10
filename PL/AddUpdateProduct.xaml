@@ -19,5 +19,6 @@
         <TextBox Text="{Binding AmountInStock}" x:Name="txtPrAmount" HorizontalAlignment="Left" Margin="413,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <ComboBox SelectedItem="{Binding Category}" x:Name="cmbCategory" HorizontalAlignment="Left" Margin="413,182,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnOK" Content="לאישור" HorizontalAlignment="Left" Margin="443,290,0,0" VerticalAlignment="Top" Height="40" Width="90" Click="btnOK_Click"/>
+        <Button x:Name="btnCancel" Content="ביטול" HorizontalAlignment="Left" Margin="293,290,0,0" VerticalAlignment="Top" Height="40" Width="90" Click="btnCancel_Click"/>
     </Grid>
 </Window>
