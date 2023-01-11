@@ -24,16 +24,16 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{Binding Path=OrderItemId}" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=OrderItemName}" />
-                <TextBlock Grid.Column="2" Text="{Binding Path=ProductId}" />
-                <TextBlock Grid.Column="3" Text="{Binding Path=Price}" />
+                <TextBlock Grid.Column="0" Text="{Binding Path=OrderItemId}" Margin="10 5 10 5"/>
+                <TextBlock Grid.Column="1" Text="{Binding Path=OrderItemName}" Margin="10 5 10 5"/>
+                <TextBlock Grid.Column="2" Text="{Binding Path=ProductId}" Margin="10 5 10 5" />
+                <TextBlock Grid.Column="3" Text="{Binding Path=Price}" Margin="10 5 10 5" />
                 <!--<TextBlock Grid.Column="4" Text="{Binding Path=Amount}" />-->
-                <TextBlock Grid.Column="4" Text="{Binding Path=TotalPrice}" />
-                <Button Grid.Column="5" Content="+" MouseDoubleClick="Button_MouseDoubleClick"/>
-                <TextBlock Grid.Column="6" Text="{Binding Path=Amount}" />
-                <Button Grid.Column="7" Content="-" MouseDoubleClick="Button_MouseDoubleClick_1"/>
-                <Button x:Name="btnDelete" Grid.Column="8" Content="למחיקה" Click="btnDelete_Click"/>
+                <TextBlock Grid.Column="4" Text="{Binding Path=TotalPrice}" Margin="10 5 10 5" />
+                <Button Grid.Column="5" Content="+" MouseDoubleClick="Button_MouseDoubleClick" Margin="10 5 10 5"/>
+                <TextBlock Grid.Column="6" Text="{Binding Path=Amount}" Margin="10 5 10 5"/>
+                <Button Grid.Column="7" Content="-" MouseDoubleClick="Button_MouseDoubleClick_1" Margin="10 5 10 5"/>
+                <Button x:Name="btnDelete" Grid.Column="8" Content="למחיקה" Click="btnDelete_Click" Margin="10 5 10 5"/>
             </Grid>
         </DataTemplate>
     </Window.Resources>

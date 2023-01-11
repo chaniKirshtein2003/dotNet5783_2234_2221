@@ -20,7 +20,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="/שוהם.JPG" Stretch="UniformToFill"/>
         </Grid.Background>
-        <Button x:Name="btnManager" Content="Admin" HorizontalAlignment="Left" Height="56" Margin="88,91,0,0" VerticalAlignment="Top" Width="138" Click="btnManager_Click" BorderBrush="#FF222631" FontFamily="Dubai Medium" FontSize="16" Background="#FFF7E4C6" Foreground="#FF222631" BorderThickness="3,1,1,3" />
+        <Button x:Name="btnManager" Content="Admin" HorizontalAlignment="Left" Height="56" Margin="88,91,0,0" VerticalAlignment="Top" Width="138" Click="btnManager_Click" BorderBrush="#FF222631" FontFamily="Dubai Medium" FontSize="16" Background="#FFF7E4C6" Foreground="#FF222631" BorderThickness="3,1,1,3"/>
         <Button x:Name="btnOrderTracking" Content="מעקב הזמנה" HorizontalAlignment="Left" Height="56" Margin="88,276,0,0" VerticalAlignment="Top" Width="138" Click="btnOrderTracking_Click" RenderTransformOrigin="-2.806,0.935"/>
         <Button x:Name="btnNewOrder" Content="הזמנה חדשה" HorizontalAlignment="Left" Height="57" Margin="88,186,0,0" VerticalAlignment="Top" Width="138" Click="btnNewOrder_Click"/>
 
