@@ -23,7 +23,6 @@ namespace PL
         BlApi.IBl? bl = BlApi.Factory.Get();
         BO.Cart _myCart = new BO.Cart();
 
-
         public ObservableCollection<BO.OrderItem> item
         {
             get { return (ObservableCollection<BO.OrderItem>)GetValue(itemProperty); }
@@ -43,24 +42,32 @@ namespace PL
             item = help == null ? new() : new (help!);
         }
 
-        private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        //private void Button_Click(object sender, MouseButtonEventArgs e)
+        //{
+        //}
+
+        //private void Button_Click_1(object sender, MouseButtonEventArgs e)
+        //{
+        //}
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).OrderItemId;
+            BO.OrderItem orderItem = _myCart.Items!.FirstOrDefault(x => x!.OrderItemId == id)!;
+            bl!.Cart.Update(_myCart, orderItem.ProductId, 0);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).OrderItemId;
             BO.OrderItem orderItem = _myCart.Items!.FirstOrDefault(x => x!.OrderItemId == id)!;
             bl!.Cart.Update(_myCart, orderItem.ProductId, orderItem.Amount + 1);
         }
 
-        private void Button_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).OrderItemId;
             BO.OrderItem orderItem = _myCart.Items!.FirstOrDefault(x => x!.OrderItemId == id)!;
             bl!.Cart.Update(_myCart, orderItem.ProductId, orderItem.Amount - 1);
-        }
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).OrderItemId;
-            BO.OrderItem orderItem = _myCart.Items!.FirstOrDefault(x => x!.OrderItemId == id)!;
-            bl!.Cart.Update(_myCart, orderItem.ProductId, 0);
         }
     }
 }

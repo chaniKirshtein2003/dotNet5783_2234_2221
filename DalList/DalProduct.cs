@@ -65,7 +65,6 @@ public class DalProduct : IProduct
         if (count == 0)
             throw new DO.NotExistException(product.ProductId, "Product");
         DataSource.productsList.Add(product);
-
     }
     public Product? GetByCondition(Func<Product?, bool>? check)
     {

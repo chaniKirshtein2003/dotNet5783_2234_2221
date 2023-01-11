@@ -21,13 +21,11 @@ namespace BlImplementation
                 DO.Product product = new DO.Product();
                 BO.OrderItem orderItem = new BO.OrderItem();
                 product = (DO.Product)idal!.Product.GetByCondition(product2 => product2?.ProductId == id)!;
-                if (cart.Items == null) cart.Items = new List<BO.OrderItem?>();
-
+                if (cart.Items == null) 
+                    cart.Items = new List<BO.OrderItem?>();
                 bool exist = false;
                 if (cart.Items?.Any(item => item?.ProductId == id) == true)
-                {
                     exist = true;
-                }
                 if (exist)
                 {
                     BO.OrderItem? ord = cart.Items?.FirstOrDefault(orderItem => orderItem?.ProductId == id);//find this item in cart
@@ -42,6 +40,7 @@ namespace BlImplementation
                 {
                     BO.OrderItem newOrderItem = new BO.OrderItem()//creat a new OrderItem
                     {
+                        OrderItemId = id,
                         OrderItemName = product.ProductName,
                         Price = product.Price,
                         ProductId = product.ProductId,
@@ -69,12 +68,16 @@ namespace BlImplementation
                     cart.Items!.Remove(item);
                 else
                     if (product.AmountInStock >= amount)
-                {
-                    item!.Amount = amount;
-                    item.Price = product.Price;
-                    item.TotalPrice = product.Price * amount;
-                    cart.TotalPrice += product.Price * amount;
-                }
+                    {
+                        item!.Amount = amount;
+                        item.Price = product.Price;
+                        item.TotalPrice = product.Price * amount;
+                        cart.TotalPrice += product.Price * amount;
+
+                    }
+                    else
+                { }
+
                 return cart;
             }
             catch (DO.NotExistException ex)

@@ -14,8 +14,8 @@ public class DalOrderItem :IOrderItem
     /// <exception cref="Exception">Throws an error if there is no room for another orderItem</exception>
     public int Add(OrderItem orderItem)
     {
-        if (CheckOrderItem(orderItem.OrderItemId))
-            throw new DO.ExistException(orderItem.OrderItemId, "OrderItem");
+
+        orderItem.OrderId = DataSource.Config.GetOrderItemNextId();
         //add orderItem to the list
         DataSource.orderItemsList.Add(orderItem);
         return orderItem.OrderItemId;
