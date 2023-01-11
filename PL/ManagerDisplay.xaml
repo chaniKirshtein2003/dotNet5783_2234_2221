@@ -6,8 +6,23 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ManagerDisplay" Height="450" Width="800">
-    <Grid Background="#FFFDF2F2">
-        <Button x:Name="productDisplayBtn" Click="productDisplayBtn_Click" Content="View product list" Margin="46,100,579,266" Background="#FFF37E7E" FontSize="14"/>
-        <Button x:Name="btnShowOrder" Content="View order list" HorizontalAlignment="Left" Margin="385,108,0,0" VerticalAlignment="Top" Height="54" Width="171" Click="btnShowOrder_Click"/>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{x:Null}"  />
+            <Setter Property="Foreground" Value="#FFF4F8FA"/>
+            <Setter Property="FontFamily" Value="Dubai Medium" />
+            <Setter Property="FontSize" Value="30 px" />
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <!--<Setter Property="BorderThickness" Value="3 1 1 3"/>-->
+            <Setter Property="Width" Value="138"/>
+            <Setter Property="Height" Value="56"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/shoham1.png" Stretch="UniformToFill" TileMode="None"/>
+        </Grid.Background>
+        <Button x:Name="productDisplayBtn" Click="productDisplayBtn_Click" Content="Products" Margin="121,110,541,264" Height="60"/>
+        <Button x:Name="btnShowOrder" Content="Orders" Click="btnShowOrder_Click" Margin="106,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
     </Grid>
 </Window>
