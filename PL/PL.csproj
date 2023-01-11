@@ -13,6 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="shoham.JPG" />
+    <None Remove="shoham1.png" />
     <None Remove="שוהם.JPG" />
   </ItemGroup>
 
@@ -21,6 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="shoham.JPG" />
+    <Resource Include="shoham1.png" />
     <Resource Include="שוהם.JPG" />
   </ItemGroup>
 
