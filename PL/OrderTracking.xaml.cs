@@ -51,7 +51,12 @@ namespace PL
         private void btnShowOrderDetails_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(txtOrderId.Text);
-            new UpdateOrder(id).ShowDialog();
+            new UpdateOrder(id, true).ShowDialog();
+        }
+
+        private void txtOrderStatus_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -31,11 +31,17 @@ namespace PL
         public static readonly DependencyProperty orderProperty =
             DependencyProperty.Register("order", typeof(BO.Order), typeof(Window), new PropertyMetadata(null));
 
-        public UpdateOrder(int id)
+        public UpdateOrder(int id, bool isTrack =false)
         {
             InitializeComponent();
             order = bl!.Order.GetOrderDetails(id);
+            if (isTrack)
+            {
+                btnUpdateOrder.Visibility = Visibility.Hidden;
+                btnUpdateDeliveryDate.Visibility = Visibility.Hidden;
+            }
         }
+
 
         private void btnUpdateOrder_Click(object sender, RoutedEventArgs e)
         {

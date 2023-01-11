@@ -72,8 +72,7 @@ namespace PL
             if (((BO.ProductItem)((System.Windows.FrameworkElement)sender).DataContext).InStock == false)
                 MessageBox.Show("אזל מהמלאי");
             else
-
-                myCart = bl!.Cart.Add( myCart, id);
+                myCart = bl!.Cart.Add(myCart, id);
         }
 
         private void btnShowCart_Click(object sender, RoutedEventArgs e) => new ShowCart(myCart).Show();
