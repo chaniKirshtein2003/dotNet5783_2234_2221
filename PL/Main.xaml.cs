@@ -32,5 +32,9 @@ namespace PL
        
         private void btnNewOrder_Click(object sender, RoutedEventArgs e) => new NewOrderWindow().Show();
 
+    //    private void btnManager_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    //    {
+
+    //    }
     }
 }

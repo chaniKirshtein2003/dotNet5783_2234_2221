@@ -5,11 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        
         Title="Main" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#FFF7E4C6" />
+            <Setter Property="FontFamily" Value="Dubai Medium" />
+            <Setter Property="BorderBrush" Value="#FF222631" />
+            <Setter Property="BorderThickness" Value="3 1 1 3"/>
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        <Button x:Name="btnManager" Content="מנהל" HorizontalAlignment="Left" Height="79" Margin="342,72,0,0" VerticalAlignment="Top" Width="182" Click="btnManager_Click" />
-        <Button x:Name="btnOrderTracking" Content="מעקב הזמנה" HorizontalAlignment="Left" Height="79" Margin="342,285,0,0" VerticalAlignment="Top" Width="182" Click="btnOrderTracking_Click"/>
-        <Button x:Name="btnNewOrder" Content="הזמנה חדשה" HorizontalAlignment="Left" Height="79" Margin="342,0,0,0" VerticalAlignment="Center" Width="182" Click="btnNewOrder_Click"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="/שוהם.JPG" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Button x:Name="btnManager" Content="Admin" HorizontalAlignment="Left" Height="56" Margin="88,91,0,0" VerticalAlignment="Top" Width="138" Click="btnManager_Click" BorderBrush="#FF222631" FontFamily="Dubai Medium" FontSize="16" Background="#FFF7E4C6" Foreground="#FF222631" BorderThickness="3,1,1,3" />
+        <Button x:Name="btnOrderTracking" Content="מעקב הזמנה" HorizontalAlignment="Left" Height="56" Margin="88,276,0,0" VerticalAlignment="Top" Width="138" Click="btnOrderTracking_Click" RenderTransformOrigin="-2.806,0.935"/>
+        <Button x:Name="btnNewOrder" Content="הזמנה חדשה" HorizontalAlignment="Left" Height="57" Margin="88,186,0,0" VerticalAlignment="Top" Width="138" Click="btnNewOrder_Click"/>
 
     </Grid>
 </Window>
