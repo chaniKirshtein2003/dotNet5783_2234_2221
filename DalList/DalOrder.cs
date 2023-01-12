@@ -13,8 +13,7 @@ public class DalOrder:IOrder
     /// <exception cref="Exception">Throws an error if there is no room for another order</exception>
     public int Add(Order order)
     {
-        if (CheckOrder(order.OrderId))
-            throw new DO.ExistException(order.OrderId, "Order");
+        order.OrderId = DataSource.Config.GetOrderNextId();
         //add the order to the list
         DataSource.ordersList.Add(order);
         return order.OrderId;

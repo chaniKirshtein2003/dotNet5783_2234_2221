@@ -21,9 +21,7 @@ namespace PL
     public partial class NewOrderWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        BO.Cart myCart=new BO.Cart();
-
-
+        BO.Cart myCart = new BO.Cart();
 
         public ObservableCollection<BO.ProductItem> NewOrder
         {
@@ -35,8 +33,6 @@ namespace PL
         public static readonly DependencyProperty NewOrderProperty =
             DependencyProperty.Register("NewOrder", typeof(ObservableCollection<BO.ProductItem>), typeof(Window), new PropertyMetadata(null));
 
-
-
         public NewOrderWindow()
         {
             InitializeComponent();
@@ -45,9 +41,9 @@ namespace PL
             cmxFilterCategories.ItemsSource = Enum.GetValues(typeof(BO.Categories));
             cmxFilterCategories.SelectedItem = BO.Categories.None;
             myCart.Items = null;
-            myCart.CustomerAddress = "aaa";
-            myCart.CustomerEmail = "aaa";
-            myCart.CustomerName = "aaa";
+            //myCart.CustomerAddress = "aaa";
+            //myCart.CustomerEmail = "aaa";
+            //myCart.CustomerName = "aaa";
             myCart.TotalPrice = 0;
         }
 
@@ -71,14 +67,13 @@ namespace PL
             int id = ((BO.ProductItem)((System.Windows.FrameworkElement)sender).DataContext).ID;
             if (((BO.ProductItem)((System.Windows.FrameworkElement)sender).DataContext).InStock == false)
                 MessageBox.Show("אזל מהמלאי");
-            else
+            else 
                 myCart = bl!.Cart.Add(myCart, id);
         }
 
         private void btnShowCart_Click(object sender, RoutedEventArgs e) => new ShowCart(myCart).Show();
 
-
-        private void ProductItemsListview_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        private void ProductItemsListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             int id = ((BO.ProductItem)((System.Windows.Controls.ListBox)sender).SelectedItem).ID;
             new ProductItemWindow(id).ShowDialog();
