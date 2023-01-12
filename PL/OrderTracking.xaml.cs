@@ -40,7 +40,6 @@ namespace PL
             {
                 //order = bl.Order.GetOrderDetails(idOrder);
                 orderTracking = bl.Order.OrderTracking(idOrder);
-                //lstTracking.ItemsSource = orderTracking.Tracking;
             }
             catch (Exception)
             {
