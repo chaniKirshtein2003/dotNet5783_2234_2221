@@ -13,43 +13,44 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="{Binding Path=OrderItemId}" Margin="10 5 10 5"/>
-                <TextBlock Grid.Column="1" Text="{Binding Path=OrderItemName}" Margin="10 5 10 5"/>
+                <TextBlock Grid.Column="1" Text="{Binding Path=OrderItemName}" Margin="10 5 10 5" Width="70"/>
                 <TextBlock Grid.Column="2" Text="{Binding Path=ProductId}" Margin="10 5 10 5" />
                 <TextBlock Grid.Column="3" Text="{Binding Path=Price}" Margin="10 5 10 5" />
-                <!--<TextBlock Grid.Column="4" Text="{Binding Path=Amount}" />-->
                 <TextBlock Grid.Column="4" Text="{Binding Path=TotalPrice}" Margin="10 5 10 5" />
-                <Button Grid.Column="5" Content="+" Margin="10 5 10 5" Click="Button_Click"/>
+                <Button Grid.Column="5" Content="+" Margin="10 5 10 5" Click="Button_Click" Width="15"/>
                 <TextBlock Grid.Column="6" Text="{Binding Path=Amount}" Margin="10 5 10 5"/>
-                <Button Grid.Column="7" Content="-" Margin="10 5 10 5" Click="Button_Click_1"/>
-                <Button x:Name="btnDelete" Grid.Column="8" Content="מחק" Click="btnDelete_Click" Margin="10 5 10 5"/>
+                <Button Grid.Column="7" Content="-" Margin="10 5 10 5" Click="Button_Click_1" Width="15"/>
+                <Button x:Name="btnDelete" Grid.Column="8" Content="מחק" Click="btnDelete_Click" Margin="10 5 10 5" Width="30"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
             </Grid>
         </DataTemplate>
     </Window.Resources>
-    <StackPanel>
-        <ListBox ItemsSource="{Binding}" x:Name="lstItems"
+    <Grid>
+        <StackPanel Margin="305,0,10,143">
+            <ListBox ItemsSource="{Binding}" x:Name="lstItems"
 ItemTemplate="{StaticResource MyDataTemplate}"
 HorizontalContentAlignment="Stretch" />
-    </StackPanel>
-    <!--<Grid>
-        <ListView x:Name="lstItems" d:ItemsSource="{d:SampleData ItemCount=5}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+            <Label Content="Label"/>
+        </StackPanel>
+        <Label x:Name="lblName"  Content="שם מלא" HorizontalAlignment="Left" Height="28" Margin="112,38,0,0" VerticalAlignment="Top" Width="53"/>
+        <Label x:Name="lblEmail" Content="מייל" HorizontalAlignment="Right" Height="28" Margin="0,86,626,0" VerticalAlignment="Top" Width="53"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Right" Height="25" Margin="0,41,693,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtAddress" HorizontalAlignment="Right" Height="28" Margin="0,139,693,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65"/>
+        <Label x:Name="lblAddress" Content="כתובת" HorizontalAlignment="Right" Height="28" Margin="0,139,635,0" VerticalAlignment="Top" Width="53"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Right" Height="24" Margin="0,88,693,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65"/>
+        <Button x:Name="btnOK" Content="סיים הזמנה" HorizontalAlignment="Left" Height="43" Margin="53,206,0,0" VerticalAlignment="Top" Width="95" Click="btnOK_Click"/>
+        <Label x:Name="lblEmpty" Content="סל הקניות שלך ריק" Height="63" Margin="306,325,0,0" Width="466" FontSize="24" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Hidden"/>
+    </Grid>
 
-    </Grid>-->
 </Window>

@@ -27,11 +27,11 @@
         </DataTemplate>
     </Window.Resources>
     <StackPanel>
-        <ComboBox Name="CategoriesSelector" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" SelectionChanged="CategoriesSelector_SelectionChanged"/>
+        <ComboBox x:Name="CategoriesSelector" SelectionChanged="CategoriesSelector_SelectionChanged" Width="132" Height="38"/>
         <ListView ItemsSource="{Binding}" x:Name="ProductListview"  ItemTemplate="{StaticResource MyDataTemplate}"
 HorizontalContentAlignment="Stretch"  MouseDoubleClick="ProductListview_MouseDoubleClick"/>
         <Button Content="Add new Product"
-Click="Button_Click" />
+Click="Button_Click" Width="128" Height="46" />
     </StackPanel>
 </Window>
 <!--<Grid Name="MainGrid">

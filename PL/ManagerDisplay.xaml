@@ -22,7 +22,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="/shoham1.png" Stretch="UniformToFill" TileMode="None"/>
         </Grid.Background>
-        <Button x:Name="productDisplayBtn" Click="productDisplayBtn_Click" Content="Products" Margin="121,110,541,264" Height="60"/>
-        <Button x:Name="btnShowOrder" Content="Orders" Click="btnShowOrder_Click" Margin="106,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button x:Name="productDisplayBtn" Click="productDisplayBtn_Click" Content="Products" Margin="106,110,541,264" Height="NaN" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button x:Name="btnShowOrder" Content="Orders" Click="btnShowOrder_Click" Margin="106,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="NaN"/>
     </Grid>
 </Window>

@@ -39,35 +39,61 @@ namespace PL
             InitializeComponent();
             _myCart = cart;
             var help = _myCart.Items;
-            item = help == null ? new() : new (help!);
+            item = help == null ? new() : new(help!);
+            if (item == null)
+            {
+                lblEmpty.Visibility = Visibility.Visible;
+                btnOK.Visibility = Visibility.Hidden;
+            }
         }
 
-        //private void Button_Click(object sender, MouseButtonEventArgs e)
-        //{
-        //}
-
-        //private void Button_Click_1(object sender, MouseButtonEventArgs e)
-        //{
-        //}
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).OrderItemId;
             BO.OrderItem orderItem = _myCart.Items!.FirstOrDefault(x => x!.OrderItemId == id)!;
-            bl!.Cart.Update(_myCart, orderItem.ProductId, 0);
+            var x = (bl!.Cart.Update(_myCart, orderItem.ProductId, 0)).Items;
+            item = x == null ? new() : new(x!);
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).OrderItemId;
             BO.OrderItem orderItem = _myCart.Items!.FirstOrDefault(x => x!.OrderItemId == id)!;
-            bl!.Cart.Update(_myCart, orderItem.ProductId, orderItem.Amount + 1);
+            var x = (bl!.Cart.Update(_myCart, orderItem.ProductId, orderItem.Amount + 1)).Items;
+            item = x == null ? new() : new(x!);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).OrderItemId;
             BO.OrderItem orderItem = _myCart.Items!.FirstOrDefault(x => x!.OrderItemId == id)!;
-            bl!.Cart.Update(_myCart, orderItem.ProductId, orderItem.Amount - 1);
+            var x = (bl!.Cart.Update(_myCart, orderItem.ProductId, orderItem.Amount - 1)).Items;
+            item = x == null ? new() : new(x!);
+        }
+
+        private void btnOK_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (item == null)
+                    MessageBox.Show("The cart is empty");
+                else
+                {
+                    BO.Cart cart = new BO.Cart();
+                    cart.CustomerName = txtName.Text;
+                    cart.CustomerAddress = txtAddress.Text;
+                    cart.CustomerEmail = txtEmail.Text;
+                    cart.Items = item == null ? new() : new(item);
+                    cart.TotalPrice = item!.Sum(x => x.TotalPrice);
+                    bl!.Cart.MakeAnOrder(cart);
+                    MessageBox.Show("הזמנתך התקבלה במערכת. תודה שקנית אצלנו");
+                }
+            }
+            catch (BO.NotValidException ex)
+            {
+                MessageBox.Show(""+ex);
+            }
+            //if (txtAddress.Text == "" || txtName.Text == "" || txtEmail.Text == "")
+
         }
     }
 }

@@ -60,6 +60,7 @@ namespace BlImplementation
         //The purpose of the function is to update the quantity of a product in the current shopping basket and returns the updated shopping basket.
         public BO.Cart Update(BO.Cart cart, int idProduct, int amount)
         {
+            BO.Cart cart1 = new BO.Cart();
             try
             {
                 DO.Product product = idal!.Product.Get(idProduct);
@@ -77,8 +78,12 @@ namespace BlImplementation
                     }
                     else
                 { }
-
-                return cart;
+                cart1.CustomerAddress = cart.CustomerAddress;
+                cart1.CustomerEmail=cart.CustomerEmail;
+                cart1.CustomerName=cart.CustomerName;
+                cart1.Items = new(cart.Items!);
+                cart1.TotalPrice = cart.TotalPrice;
+                return cart1;
             }
             catch (DO.NotExistException ex)
             {
@@ -90,7 +95,8 @@ namespace BlImplementation
         {
             if (cart.CustomerAddress == "" || cart.CustomerName == "" || cart.CustomerEmail == "")
                 throw new BO.NotValidException("missing details");
-
+            if (cart.Items == null)
+                throw new Exception("The cart is empty");
             //var updatedCart = cart.Items!.FindAll(item => item?.Amount > 0);
 
             foreach (BO.OrderItem? item in cart.Items!)

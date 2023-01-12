@@ -28,7 +28,16 @@ namespace PL
         private void btnTracking_Click(object sender, RoutedEventArgs e)
         {
             int id = int.Parse(txtInsertId.Text);
-            new OrderTracking(id).ShowDialog();
+            try
+            {
+                var x= bl!.Order.GetOrderDetails(id);
+                new OrderTracking(id).ShowDialog();
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Sorry, There is no an order with id " + id);
+            }
         }
     }
 }

@@ -40,11 +40,10 @@ namespace PL
             {
                 //order = bl.Order.GetOrderDetails(idOrder);
                 orderTracking = bl.Order.OrderTracking(idOrder);
-                lstTracking.ItemsSource = orderTracking.Tracking;
+                //lstTracking.ItemsSource = orderTracking.Tracking;
             }
             catch (Exception)
             {
-                MessageBox.Show("Sorry, There is no an order with id " + idOrder);
             }
         }
 

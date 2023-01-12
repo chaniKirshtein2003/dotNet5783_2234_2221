@@ -33,7 +33,7 @@ internal static class DataSource
     //Initialization function for product data
     private static void createInitializeProduct()
     {
-        string[] productNameArr = { "flowers", "ships beds", "watches", "Halat trays", "Napkins to get sick", "Burdens", "Covers for braces", "Furniture details", "Mirror", "Palm tree", "Picture frame", "vases", "Crystal candlestick", "A tissue box", "Crystal chess","a","b","c","d","e","f" };
+        string[] productNameArr = { "flowers", "ships beds", "watches", "Halat trays", "Napkins to get sick", "Burdens", "Covers for braces", "Furniture details", "Mirror", "Palm tree", "Picture frame", "vases", "Crystal candlestick", "A tissue box", "Crystal chess","chocolate","gift","gift","gift", "gift", "gift" };
         //A loop that runs over the array of products and fills it with values.
         for (int i = 0; i < 20; i++)
         {
@@ -45,7 +45,7 @@ internal static class DataSource
             Product product = new Product();
             product.ProductId = i + 100000;
             product.ProductName = productNameArr[i];
-            product.Category = (Categories)s_rand.Next(1,5);
+            product.Category = (Categories)(i%5+1);
             product.Price = s_rand.Next(10) + 300;
             product.AmountInStock = amountInstock;
             productsList.Add(product);
