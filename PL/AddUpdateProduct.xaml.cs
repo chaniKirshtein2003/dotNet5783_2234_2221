@@ -41,7 +41,6 @@ namespace PL
             InitializeComponent();
             cmbCategory.ItemsSource = Enum.GetValues(typeof(BO.Categories));
             state = "add";
-            btnOK.Content = "להוספה";
         }
         //Opening the form in update mode
         public AddUpdateProduct(int id)
@@ -50,18 +49,16 @@ namespace PL
             cmbCategory.ItemsSource= Enum.GetValues(typeof(BO.Categories));
             product = bl!.Product.GetProduct(id);
             state = "update";
-            btnOK.Content = "לעדכון";
-            txtPrId.IsEnabled = false;
         }
         
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            if (txtName.Text == "" || txtPrAmount.Text == "" || txtPrId.Text == "" || txtPrPrice.Text == "")
-            {
-                MessageBox.Show("missing details");
-            }
-            else
-            {
+            //if (txtName.Text == "" || txtPrAmount.Text == "" || txtPrId.Text == "" || txtPrPrice.Text == "")
+            //{
+            //    MessageBox.Show("missing details");
+            //}
+            //else
+            //{
                 BO.Product product = new BO.Product();
                 product.ProductName = txtName.Text;
                 product.ProductId = int.Parse(txtPrId.Text);
@@ -90,7 +87,7 @@ namespace PL
                     {
                         throw new Exception("update failed");
                     }
-            }
+            //}
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

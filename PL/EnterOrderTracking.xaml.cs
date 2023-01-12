@@ -27,6 +27,7 @@ namespace PL
 
         private void btnTracking_Click(object sender, RoutedEventArgs e)
         {
+            //int id = ((BO.OrderTracking)((ListView)sender).SelectedItem).ID;
             int id = int.Parse(txtInsertId.Text);
             try
             {

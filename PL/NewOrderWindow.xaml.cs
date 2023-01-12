@@ -77,10 +77,11 @@ namespace PL
 
         private void btnShowCart_Click(object sender, RoutedEventArgs e) => new ShowCart(myCart).Show();
 
-        //private void ProductItemsListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
-        //    int id = ((BO.ProductItem)((System.Windows.Controls.ListBox)sender).SelectedItem).ID;
-        //    new ProductItemWindow(id).ShowDialog();
-        //}
+
+        private void ProductItemsListview_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+            int id = ((BO.ProductItem)((System.Windows.Controls.ListBox)sender).SelectedItem).ID;
+            new ProductItemWindow(id).ShowDialog();
+        }
     }
 }

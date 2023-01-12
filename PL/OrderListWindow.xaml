@@ -29,7 +29,7 @@
         </DataTemplate>
     </Window.Resources>
     <StackPanel>
-        <ListView ItemsSource="{Binding}" x:Name="OrderListView"
+        <ListView ItemsSource="{Binding}"
 ItemTemplate="{StaticResource MyDataTemplate}"
 HorizontalContentAlignment="Stretch" MouseDoubleClick="OrderListView_MouseDoubleClick"/>
     </StackPanel>

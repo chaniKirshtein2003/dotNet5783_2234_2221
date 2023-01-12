@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         DataContext="{Binding Path=NewOrder,RelativeSource={RelativeSource self}}"
         mc:Ignorable="d"
-        Title="NewOrderWindow" Height="550" Width="800">
+        Title="NewOrderWindow" Height="600" Width="800">
     <Window.Resources>
         <DataTemplate x:Key="MyTemplate" DataType="local:ProductItem">
             <Grid>
@@ -35,7 +35,7 @@
     </Window.Resources>
 
     <StackPanel>
-        <ListBox x:Name="ProductItemsListview" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyTemplate}" HorizontalContentAlignment="Stretch"/>
+        <ListBox x:Name="ProductItemsListview" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyTemplate}" HorizontalContentAlignment="Stretch" MouseDoubleClick="ProductItemsListview_MouseDoubleClick_1"/>
         <ComboBox x:Name="cmxFilterCategories" Width="120" SelectionChanged="cmxFilterCategories_SelectionChanged" Margin="10"/>
         <Button x:Name="btnShowCart" Content="לצפיה בסל הקניות" Width="120" Click="btnShowCart_Click" Margin="5"/>
     </StackPanel>
