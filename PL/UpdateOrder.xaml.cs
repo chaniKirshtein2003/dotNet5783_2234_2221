@@ -42,7 +42,6 @@ namespace PL
             }
         }
 
-
         private void btnUpdateOrder_Click(object sender, RoutedEventArgs e)
         {
             order = bl!.Order.supplyUpdate(order.OrderId);
