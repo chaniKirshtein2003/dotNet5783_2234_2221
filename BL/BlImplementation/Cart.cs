@@ -120,7 +120,7 @@ namespace BlImplementation
             try
             {
                 id = idal!.Order.Add(order);
-                DO.OrderItem orderItem = new DO.OrderItem();
+                DO.OrderItem orderItem;
                 foreach (BO.OrderItem? itemBO in cart.Items)
                 {
                     try
@@ -128,6 +128,7 @@ namespace BlImplementation
                         DO.Product doProduct = idal.Product.Get(itemBO?.ProductId ?? 0);
                         doProduct.AmountInStock -= itemBO?.Amount ?? 0;
                         idal.Product.Update(doProduct);
+                        orderItem = new DO.OrderItem();
                         orderItem.OrderId = id;
                         orderItem.ProductId = itemBO?.ProductId ?? 0;
                         orderItem.PricePerUnit = itemBO?.TotalPrice ?? 0;
