@@ -94,22 +94,26 @@
         //The purpose of the function is to allow the manager to update that the order has been delivered to the customer.
         public BO.Order supplyUpdate(int id)
         {
+            DO.Order order;
             try
             {
-                DO.Order order = idal!.Order.Get(id);
-                if (order.DeliveryDate?.Date == null)
-                {
-                    order.DeliveryDate = DateTime.Now;
-                    idal!.Order.Update(order);
-                }
-                BO.Order newOrder = GetOrderDetails(id);
-                newOrder.Status = BO.OrderStatus.delivered;
-                return newOrder;
+                order = idal!.Order.Get(id);
             }
             catch (Exception ex)
             {
                 throw new BO.NotExistBlException("not exist", ex);
             }
+            if (order.DeliveryDate == null)
+                throw new Exception("Shipping date can not be updated before delivery date");
+
+            if (order.DeliveryDate?.Date == null)
+            {
+                order.DeliveryDate = DateTime.Now;
+                idal!.Order.Update(order);
+            }
+            BO.Order newOrder = GetOrderDetails(id);
+            newOrder.Status = BO.OrderStatus.delivered;
+            return newOrder;
         }
         //The purpose of the function is to allow the manager to track the status of the order.
         public BO.OrderTracking OrderTracking(int id)

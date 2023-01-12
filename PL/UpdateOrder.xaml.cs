@@ -49,7 +49,14 @@ namespace PL
 
         private void btnUpdateDeliveryDate_Click(object sender, RoutedEventArgs e)
         {
-            order = bl!.Order.UpdateSending(order.OrderId);
+            try
+            {
+                order = bl!.Order.UpdateSending(order.OrderId);
+            }
+            catch (Exception x)
+            {
+                MessageBox.Show(x.Message);
+            }
         }
     }
 }
