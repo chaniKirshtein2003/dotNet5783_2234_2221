@@ -7,6 +7,9 @@
         DataContext="{Binding Path=order, RelativeSource={RelativeSource self}}"
         mc:Ignorable="d"
         Title="UpdateOrder" Height="450" Width="800">
+    <Window.Resources>
+        <local:NotEmptyTextToEnabledConverter x:Key="notEmptyTextToEnabledConverter" />
+    </Window.Resources>
     <Grid>
         <Label x:Name="lblOrId" Content="מזהה הזמנה" HorizontalAlignment="Left" Margin="645,27,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblCusName" Content="שם לקוח" HorizontalAlignment="Left" Margin="663,72,0,0" VerticalAlignment="Top"/>
@@ -26,8 +29,8 @@
         <TextBox Text="{Binding OrderDate}" x:Name="txtOrderDate" HorizontalAlignment="Left" Margin="459,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox Text="{Binding ShipDate}" x:Name="txtShipDate" HorizontalAlignment="Left" Margin="459,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox Text="{Binding DeliveryDate}" x:Name="txtDeliveryDate" HorizontalAlignment="Left" Margin="459,314,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnUpdateOrder" Content="לעדכון" HorizontalAlignment="Left" Margin="646,380,0,0" VerticalAlignment="Top" Height="27" Width="69" Click="btnUpdateOrder_Click"/>
-        <Button x:Name="btnUpdateDeliveryDate" Content="לעדכון תאריך משלוח" HorizontalAlignment="Left" Margin="459,378,0,0" VerticalAlignment="Top" Height="29" Width="134" Click="btnUpdateDeliveryDate_Click"/>
+        <Button x:Name="btnUpdateDeliveryDate" IsEnabled="{Binding ElementName=txtShipDate,Path=Text,Converter={StaticResource notEmptyTextToEnabledConverter}}" Content="לעדכון" HorizontalAlignment="Center" Margin="0,279,0,0" VerticalAlignment="Top" Height="22" Width="56" Click="btnUpdateDeliveryDate_Click"/>
+        <Button x:Name="btnUpdateOrder" Content=" לעדכון" IsEnabled="{Binding ElementName=txtDeliveryDate,Path=Text,Converter={StaticResource notEmptyTextToEnabledConverter}}" HorizontalAlignment="Center" Margin="0,309,0,0" VerticalAlignment="Top" Height="27" Width="55" Click="btnUpdateOrder_Click"/>
         <ListView ItemsSource="{Binding Path=Items}" Margin="96,40,478,27">
             <ListView.View>
                 <GridView>
