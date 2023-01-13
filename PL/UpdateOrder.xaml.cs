@@ -44,19 +44,19 @@ namespace PL
 
         private void btnUpdateOrder_Click(object sender, RoutedEventArgs e)
         {
-            order = bl!.Order.supplyUpdate(order.OrderId);
-        }
-
-        private void btnUpdateDeliveryDate_Click(object sender, RoutedEventArgs e)
-        {
             try
             {
-                order = bl!.Order.UpdateSending(order.OrderId);
+                order = bl!.Order.supplyUpdate(order.OrderId);
             }
             catch (Exception x)
             {
                 MessageBox.Show(x.Message);
             }
+        }
+
+        private void btnUpdateDeliveryDate_Click(object sender, RoutedEventArgs e)
+        {
+            order = bl!.Order.UpdateSending(order.OrderId);
         }
     }
 }

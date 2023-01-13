@@ -11,26 +11,26 @@
         <local:NotEmptyTextToEnabledConverter x:Key="notEmptyTextToEnabledConverter" />
     </Window.Resources>
     <Grid>
-        <Label x:Name="lblOrId" Content="מזהה הזמנה" HorizontalAlignment="Left" Margin="645,27,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblCusName" Content="שם לקוח" HorizontalAlignment="Left" Margin="663,72,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblCusAddres" Content="כתובת" HorizontalAlignment="Left" Margin="676,116,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblCusEmail" Content="מייל" HorizontalAlignment="Left" Margin="689,147,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblStatus" Content="סטטוס" HorizontalAlignment="Left" Margin="674,178,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblTotalPrice" Content="מחיר סופי" HorizontalAlignment="Left" Margin="658,217,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblOrderDate" Content="תאריך הזמנה" HorizontalAlignment="Left" Margin="638,248,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblShipDate" Content="תאריך משלוח" HorizontalAlignment="Left" Margin="639,279,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblDeliveryDate" Content="תאריך אספקה" HorizontalAlignment="Left" Margin="634,310,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding OrderId}" x:Name="txtOrId" HorizontalAlignment="Left" Margin="459,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox Text="{Binding CustomerName}" x:Name="txtCusName" HorizontalAlignment="Left" Margin="459,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox Text="{Binding CustomerAddress}" HorizontalAlignment="Left" Margin="459,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox Text="{Binding CustomerEmail}" x:Name="txtCusEmail" HorizontalAlignment="Left" Margin="459,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox Text="{Binding Status}" x:Name="txtStatus" HorizontalAlignment="Left" Margin="459,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox Text="{Binding TotalPrice}" x:Name="txtTotalPrice" HorizontalAlignment="Left" Margin="459,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox Text="{Binding OrderDate}" x:Name="txtOrderDate" HorizontalAlignment="Left" Margin="459,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox Text="{Binding ShipDate}" x:Name="txtShipDate" HorizontalAlignment="Left" Margin="459,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox Text="{Binding DeliveryDate}" x:Name="txtDeliveryDate" HorizontalAlignment="Left" Margin="459,314,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnUpdateDeliveryDate" IsEnabled="{Binding ElementName=txtShipDate,Path=Text,Converter={StaticResource notEmptyTextToEnabledConverter}}" Content="לעדכון" HorizontalAlignment="Center" Margin="0,279,0,0" VerticalAlignment="Top" Height="22" Width="56" Click="btnUpdateDeliveryDate_Click"/>
-        <Button x:Name="btnUpdateOrder" Content=" לעדכון" IsEnabled="{Binding ElementName=txtDeliveryDate,Path=Text,Converter={StaticResource notEmptyTextToEnabledConverter}}" HorizontalAlignment="Center" Margin="0,309,0,0" VerticalAlignment="Top" Height="27" Width="55" Click="btnUpdateOrder_Click"/>
+        <Label x:Name="lblOrId" Content="מזהה הזמנה" HorizontalAlignment="Right" Margin="0,30,76,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblCusName" Content="שם לקוח" HorizontalAlignment="Right" Margin="0,70,76,0" VerticalAlignment="Top"/>
+        <Label Content="כתובת" HorizontalAlignment="Right" Margin="0,110,76,0" VerticalAlignment="Top"/>
+        <Label Content="מייל" HorizontalAlignment="Right" Margin="0,150,76,0" VerticalAlignment="Top"/>
+        <Label Content="סטטוס" HorizontalAlignment="Right" Margin="0,190,76,0" VerticalAlignment="Top"/>
+        <Label Content="מחיר סופי" HorizontalAlignment="Right" Margin="0,230,76,0" VerticalAlignment="Top"/>
+        <Label Content="תאריך הזמנה" HorizontalAlignment="Right" Margin="0,270,76,0" VerticalAlignment="Top"/>
+        <Label Content="תאריך משלוח" HorizontalAlignment="Right" Margin="0,310,76,0" VerticalAlignment="Top"/>
+        <Label Content="תאריך אספקה" HorizontalAlignment="Right" Margin="0,350,76,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding OrderId}" IsEnabled="False" HorizontalAlignment="Right" Margin="0,37,203,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <TextBox Text="{Binding CustomerName}" IsEnabled="False" HorizontalAlignment="Right" Margin="0,77,203,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <TextBox Text="{Binding CustomerAddress}" IsEnabled="False" HorizontalAlignment="Right" Margin="0,117,203,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <TextBox Text="{Binding CustomerEmail}" IsEnabled="False" HorizontalAlignment="Right" Margin="0,157,203,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <TextBox Text="{Binding Status}" IsEnabled="False" HorizontalAlignment="Right" Margin="0,197,203,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <TextBox Text="{Binding TotalPrice}" IsEnabled="False" HorizontalAlignment="Right" Margin="0,237,203,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <TextBox Text="{Binding OrderDate}" IsEnabled="False" HorizontalAlignment="Right" Margin="0,277,203,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <TextBox Text="{Binding ShipDate}" IsEnabled="False" HorizontalAlignment="Right" Margin="0,317,203,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <TextBox Text="{Binding DeliveryDate}" IsEnabled="False" HorizontalAlignment="Right" Margin="0,357,203,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <Button x:Name="btnUpdateDeliveryDate" IsEnabled="{Binding ElementName=txtShipDate,Path=Text,Converter={StaticResource notEmptyTextToEnabledConverter}}" Content="לעדכון" Margin="0,318,0,0" VerticalAlignment="Top" Height="23" Width="56" Click="btnUpdateDeliveryDate_Click" HorizontalAlignment="Center" FontSize="12.5"/>
+        <Button x:Name="btnUpdateOrder" Content=" לעדכון" IsEnabled="{Binding ElementName=txtDeliveryDate,Path=Text,Converter={StaticResource notEmptyTextToEnabledConverter}}" Margin="0,355,0,0" VerticalAlignment="Top" Height="23" Width="56" Click="btnUpdateOrder_Click" HorizontalAlignment="Center" FontSize="12.5"/>
         <ListView ItemsSource="{Binding Path=Items}" Margin="96,40,478,27">
             <ListView.View>
                 <GridView>

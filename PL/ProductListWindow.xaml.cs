@@ -40,14 +40,13 @@ namespace PL
             var help= bl!.Product.GetProducts();
             prods = help == null ? new() : new(help);
             CategoriesSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
-            CategoriesSelector.SelectedItem = BO.Categories.None;
         }
 
         private void CategoriesSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CategoriesSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
             BO.Categories category = (BO.Categories)CategoriesSelector.SelectedItem;
-            if (category.ToString() == "None")
+            if (category.ToString() == "Choose_Category")
             {
                 var help = bl!.Product.GetProducts();
                 prods = help == null ? new() : new(help);
@@ -62,7 +61,6 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new AddUpdateProduct().ShowDialog();
-            CategoriesSelector.SelectedItem = BO.Categories.None;
             var help = bl!.Product.GetProducts();
             prods = help == null ? new() : new(help);
         }
@@ -73,7 +71,6 @@ namespace PL
             new AddUpdateProduct(id).ShowDialog();
             var help = bl!.Product.GetProducts();
             prods = help == null ? new() : new(help);
-            CategoriesSelector.SelectedItem = BO.Categories.None;
         }
     }
 }

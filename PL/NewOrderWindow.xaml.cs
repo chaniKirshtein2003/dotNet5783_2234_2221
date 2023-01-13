@@ -39,18 +39,14 @@ namespace PL
             var help = bl!.Product.ListProductsToBuy();
             NewOrder = help == null ? new() : new(help);
             cmxFilterCategories.ItemsSource = Enum.GetValues(typeof(BO.Categories));
-            cmxFilterCategories.SelectedItem = BO.Categories.None;
             myCart.Items = null;
-            //myCart.CustomerAddress = "aaa";
-            //myCart.CustomerEmail = "aaa";
-            //myCart.CustomerName = "aaa";
             myCart.TotalPrice = 0;
         }
 
         private void cmxFilterCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BO.Categories category = (BO.Categories)cmxFilterCategories.SelectedItem;
-            if (category.ToString() == "None")
+            if (category.ToString() == "Choose_Category")
             {
                 var help = bl!.Product.ListProductsToBuy();
                 NewOrder = help == null ? new() : new(help);

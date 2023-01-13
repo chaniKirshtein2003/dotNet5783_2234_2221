@@ -5,24 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ManagerDisplay" Height="450" Width="800">
-    <Window.Resources>
-        <Style TargetType="Button">
+        Title="ManagerDisplay" Height="500" Width="500">
+    <!--<Style TargetType="Button">
             <Setter Property="Background" Value="{x:Null}"  />
             <Setter Property="Foreground" Value="#FFF4F8FA"/>
             <Setter Property="FontFamily" Value="Dubai Medium" />
             <Setter Property="FontSize" Value="30 px" />
             <Setter Property="BorderBrush" Value="{x:Null}" />
-            <!--<Setter Property="BorderThickness" Value="3 1 1 3"/>-->
             <Setter Property="Width" Value="138"/>
             <Setter Property="Height" Value="56"/>
-        </Style>
-    </Window.Resources>
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/shoham1.png" Stretch="UniformToFill" TileMode="None"/>
-        </Grid.Background>
-        <Button Click="productDisplayBtn_Click" Content="Products" Margin="106,110,541,264" Height="NaN" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Button Content="Orders" Click="btnShowOrder_Click" Margin="106,200,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="NaN"/>
+        </Style>-->
+    <Grid Background="#FFF7E4C6">
+        <Button Click="productDisplayBtn_Click" Content="Products" Margin="0,249,0,129" HorizontalAlignment="Center"/>
+        <Button Content="Orders" Click="btnShowOrder_Click" Margin="0,339,0,39" HorizontalAlignment="Center"/>
+        <Image HorizontalAlignment="Left" Height="152" Margin="163,36,0,0" VerticalAlignment="Top" Width="215" Source="/לוגו.png"/>
     </Grid>
 </Window>

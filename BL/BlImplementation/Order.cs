@@ -103,8 +103,8 @@
             {
                 throw new BO.NotExistBlException("not exist", ex);
             }
-            if (order.DeliveryDate == null)
-                throw new Exception("Shipping date can not be updated before delivery date");
+            if (order.ShipDate == null)
+                throw new Exception("Delivery date can not be updated before shipping date");
 
             if (order.DeliveryDate?.Date == null)
             {
