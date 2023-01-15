@@ -40,10 +40,10 @@ namespace BlImplementation
                 {
                     BO.OrderItem newOrderItem = new BO.OrderItem()//creat a new OrderItem
                     {
-                        OrderItemId = id,
+                        //OrderItemId = id,
                         OrderItemName = product.ProductName,
                         Price = product.Price,
-                        ProductId = product.ProductId,
+                        ProductId = id,
                         Amount = 1,
                         TotalPrice = product.Price
                     };

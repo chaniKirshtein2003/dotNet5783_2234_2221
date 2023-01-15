@@ -59,6 +59,8 @@ namespace PL
             //}
             //else
             //{
+            try
+            {
                 BO.Product product = new BO.Product();
                 product.ProductName = txtName.Text;
                 product.ProductId = int.Parse(txtPrId.Text);
@@ -66,7 +68,7 @@ namespace PL
                 product.AmountInStock = int.Parse(txtPrAmount.Text);
                 product.Category = (BO.Categories)cmbCategory.SelectedItem;
                 if (state == "add")
-                    try
+                    try 
                     {
                         bl!.Product.Add(product);
                         MessageBox.Show("successfull product addition");
@@ -87,7 +89,11 @@ namespace PL
                     {
                         throw new Exception("update failed");
                     }
-            //}
+            }
+            catch(Exception x)
+            {
+                MessageBox.Show("Missing details");
+            }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
