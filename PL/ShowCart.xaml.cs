@@ -49,24 +49,23 @@ namespace PL
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).OrderItemId;
-            BO.OrderItem orderItem = _myCart.Items!.FirstOrDefault(x => x!.OrderItemId == id)!;
-            var x = (bl!.Cart.Update(_myCart, orderItem.ProductId, 0)).Items;
+            int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).ProductId;
+            var x = (bl!.Cart.Update(_myCart, id, 0)).Items;
             item = x == null ? new() : new(x!);
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).OrderItemId;
-            BO.OrderItem orderItem = _myCart.Items!.FirstOrDefault(x => x!.OrderItemId == id)!;
-            var x = (bl!.Cart.Update(_myCart, orderItem.ProductId, orderItem.Amount + 1)).Items;
+            int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).ProductId;
+            int amount = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).Amount;
+            var x = (bl!.Cart.Update(_myCart, id, amount + 1)).Items;
             item = x == null ? new() : new(x!);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).OrderItemId;
-            BO.OrderItem orderItem = _myCart.Items!.FirstOrDefault(x => x!.OrderItemId == id)!;
-            var x = (bl!.Cart.Update(_myCart, orderItem.ProductId, orderItem.Amount - 1)).Items;
+            int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).ProductId;
+            int amount = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).Amount;
+            var x = (bl!.Cart.Update(_myCart, id, amount - 1)).Items;
             item = x == null ? new() : new(x!);
         }
 

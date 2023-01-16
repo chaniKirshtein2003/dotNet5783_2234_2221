@@ -39,6 +39,7 @@ namespace PL
             var help = bl!.Product.ListProductsToBuy();
             NewOrder = help == null ? new() : new(help);
             cmxFilterCategories.ItemsSource = Enum.GetValues(typeof(BO.Categories));
+            cmxFilterCategories.SelectedItem = BO.Categories.None;
             myCart.Items = null;
             myCart.TotalPrice = 0;
         }
@@ -46,7 +47,7 @@ namespace PL
         private void cmxFilterCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BO.Categories category = (BO.Categories)cmxFilterCategories.SelectedItem;
-            if (category.ToString() == "Choose_Category")
+            if (category.ToString() == "None")
             {
                 var help = bl!.Product.ListProductsToBuy();
                 NewOrder = help == null ? new() : new(help);
@@ -63,8 +64,11 @@ namespace PL
             int id = ((BO.ProductItem)((System.Windows.FrameworkElement)sender).DataContext).ID;
             if (((BO.ProductItem)((System.Windows.FrameworkElement)sender).DataContext).InStock == false)
                 MessageBox.Show("אזל מהמלאי");
-            else 
+            else
+            {
                 myCart = bl!.Cart.Add(myCart, id);
+                MessageBox.Show("!המוצר נוסף בהצלחה");
+            }
         }
 
         private void btnShowCart_Click(object sender, RoutedEventArgs e) => new ShowCart(myCart).Show();

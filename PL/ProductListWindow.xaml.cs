@@ -40,13 +40,14 @@ namespace PL
             var help= bl!.Product.GetProducts();
             prods = help == null ? new() : new(help);
             CategoriesSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
+            CategoriesSelector.SelectedItem = BO.Categories.None;
         }
 
         private void CategoriesSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CategoriesSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
             BO.Categories category = (BO.Categories)CategoriesSelector.SelectedItem;
-            if (category.ToString() == "Choose_Category")
+            if (category.ToString() == "None")
             {
                 var help = bl!.Product.GetProducts();
                 prods = help == null ? new() : new(help);

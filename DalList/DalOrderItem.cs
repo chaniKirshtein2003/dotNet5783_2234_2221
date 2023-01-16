@@ -15,7 +15,7 @@ public class DalOrderItem :IOrderItem
     public int Add(OrderItem orderItem)
     {
 
-        orderItem.OrderId = DataSource.Config.GetOrderItemNextId();
+        orderItem.OrderItemId = DataSource.Config.GetOrderItemNextId();
         //add orderItem to the list
         DataSource.orderItemsList.Add(orderItem);
         return orderItem.OrderItemId;

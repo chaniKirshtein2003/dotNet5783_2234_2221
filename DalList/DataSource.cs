@@ -93,7 +93,7 @@ internal static class DataSource
             {
                 OrderItem orderItem = new OrderItem();
                 orderItem.OrderItemId = Config.GetOrderItemNextId();
-                orderItem.OrderId = i;
+                orderItem.OrderId = i/2-1;
                 orderItem.ProductId = s_rand.Next(20) + 100000;
                 orderItem.Amount = s_rand.Next(10) + 1;
                 orderItem.PricePerUnit = findPrice(orderItem.ProductId);
