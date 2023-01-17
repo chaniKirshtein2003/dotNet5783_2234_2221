@@ -38,8 +38,6 @@ namespace PL
             InitializeComponent();
             var help = bl!.Product.ListProductsToBuy();
             NewOrder = help == null ? new() : new(help);
-            //cmxFilterCategories.ItemsSource = Enum.GetValues(typeof(BO.Categories));
-            //cmxFilterCategories.SelectedItem = BO.Categories.Choose_Category;
             myCart.Items = null;
             myCart.TotalPrice = 0;
         }
@@ -63,11 +61,11 @@ namespace PL
         {
             int id = ((BO.ProductItem)((System.Windows.FrameworkElement)sender).DataContext).ID;
             if (((BO.ProductItem)((System.Windows.FrameworkElement)sender).DataContext).InStock == false)
-                MessageBox.Show("אזל מהמלאי");
+                MessageBox.Show("Out of stock");
             else
             {
                 myCart = bl!.Cart.Add(myCart, id);
-                MessageBox.Show("!המוצר נוסף בהצלחה");
+                MessageBox.Show("The product has been successfully added!");
             }
         }
 

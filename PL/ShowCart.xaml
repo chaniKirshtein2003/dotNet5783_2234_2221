@@ -43,13 +43,13 @@
 ItemTemplate="{StaticResource MyDataTemplate}"
 HorizontalContentAlignment="Stretch" />
         </StackPanel>
-        <Label x:Name="lblName"  Content="שם מלא" HorizontalAlignment="Left" Height="28" Margin="112,38,0,0" VerticalAlignment="Top" Width="73"/>
-        <Label x:Name="lblEmail" Content="מייל" HorizontalAlignment="Right" Height="28" Margin="0,86,626,0" VerticalAlignment="Top" Width="53"/>
-        <TextBox x:Name="txtName" HorizontalAlignment="Right" Height="25" Margin="0,41,693,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65"/>
-        <TextBox x:Name="txtAddress" HorizontalAlignment="Right" Height="28" Margin="0,139,693,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65"/>
-        <Label x:Name="lblAddress" Content="כתובת" HorizontalAlignment="Right" Height="28" Margin="0,139,635,0" VerticalAlignment="Top" Width="53"/>
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Right" Height="24" Margin="0,88,693,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65"/>
-        <Button x:Name="btnOK" IsEnabled="{Binding Count,Converter={StaticResource noProd}}" Content="סיים הזמנה" HorizontalAlignment="Left" Height="43" Margin="53,206,0,0" VerticalAlignment="Top" Width="95" Click="btnOK_Click"/>
+        <Label x:Name="lblName"  Content="Full Name" HorizontalAlignment="Left" Height="28" Margin="5,40,0,0" VerticalAlignment="Top" Width="73"/>
+        <Label x:Name="lblEmail" Content="Email" HorizontalAlignment="Left" Height="28" Margin="5,85,626,0" VerticalAlignment="Top" Width="53"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="25" Margin="80,45,648,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.548,0.777"/>
+        <TextBox x:Name="txtAddress" HorizontalAlignment="Left" Height="25" Margin="80,135,648,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75"/>
+        <Label x:Name="lblAddress" Content="Address" HorizontalAlignment="Left" Height="28" Margin="5,130,635,0" VerticalAlignment="Top" Width="60"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="24" Margin="80,90,648,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnOK" IsEnabled="{Binding Count,Converter={StaticResource noProd}}" Content="Complete order" HorizontalAlignment="Left" Height="43" Margin="32,0,0,0" VerticalAlignment="Center" Width="112" Click="btnOK_Click" RenderTransformOrigin="0.259,0.575"/>
         <Label x:Name="lblEmpty" Content="סל הקניות שלך ריק" Height="63" Margin="306,325,0,0" Width="466" FontSize="24" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Hidden"/>
     </Grid>
 
