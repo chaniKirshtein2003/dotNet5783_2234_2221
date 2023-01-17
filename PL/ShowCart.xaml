@@ -41,8 +41,6 @@
 ItemTemplate="{StaticResource MyDataTemplate}"
 HorizontalContentAlignment="Stretch" />
         </StackPanel>
-        <Label Content="סל הקניות שלך ריק" Visibility="Hidden"/>
-
         <Label x:Name="lblName"  Content="שם מלא" HorizontalAlignment="Right" Height="28" Margin="0,40,617,0" VerticalAlignment="Top" Width="76" HorizontalContentAlignment="Right"/>
         <Label x:Name="lblEmail" Content="מייל" HorizontalAlignment="Right" Height="28" Margin="0,86,617,0" VerticalAlignment="Top" Width="53" HorizontalContentAlignment="Right"/>
         <TextBox x:Name="txtName" HorizontalAlignment="Right" Height="25" Margin="0,41,693,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65"/>
@@ -51,6 +49,8 @@ HorizontalContentAlignment="Stretch" />
         <TextBox x:Name="txtEmail" HorizontalAlignment="Right" Height="25" Margin="0,88,693,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65"/>
         <Button x:Name="btnOK" Content="סיים הזמנה" HorizontalAlignment="Left" Height="43" Margin="53,206,0,0" VerticalAlignment="Top" Width="95" Click="btnOK_Click"/>
         <Label x:Name="lblEmpty" Content="סל הקניות שלך ריק" Height="63" Margin="306,325,0,0" Width="466" FontSize="24" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Hidden"/>
+        <Label Content="סל הקניות שלך ריק" Visibility="Hidden"/>
+
     </Grid>
 
 </Window>
