@@ -37,6 +37,13 @@
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="Height" Value="30"/>
         </Style>
+        <Style  TargetType="Button">
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Background" Value="#FFF7E4C6" />
+            <Setter Property="FontFamily" Value="Dubai Medium" />
+            <Setter Property="FontSize" Value="12 px" />
+            <Setter Property="BorderBrush" Value="#FF222631" />
+        </Style>
     </Window.Resources>
     <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
@@ -56,7 +63,6 @@
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition  Width="80"/>
-
         </Grid.ColumnDefinitions>
         <Label Content="Id Product" Grid.Row="1" Grid.Column="0"/>
         <Label Content="Product Name" Grid.Row="1" Grid.Column="1"/>
@@ -64,9 +70,9 @@
         <Label Content="Category" Grid.Row="1" Grid.Column="3"/>
         <Label Content="Is In Stock?" Grid.Row="1" Grid.Column="4"/>
         <Label Content="Amount In Stock" Grid.Row="1" Grid.Column="5"/>
-
+        
         <ListBox x:Name="ProductItemsListview" Background="#FFF7E4C6"  Grid.Row="2" Grid.ColumnSpan="10" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyTemplate}" HorizontalContentAlignment="Stretch" MouseDoubleClick="ProductItemsListview_MouseDoubleClick"/>
         <ComboBox x:Name="cmxFilterCategories"  Grid.Row="0" Grid.ColumnSpan="5" Width="150" SelectionChanged="cmxFilterCategories_SelectionChanged" Margin="90,10,10,45" Height="36" SelectedItem="Choose_Category" Grid.Column="5" Grid.RowSpan="2"/>
-        <Button x:Name="btnShowCart"  Grid.ColumnSpan="10" Grid.Row="3" Content="View Cart" Width="150" Click="btnShowCart_Click" Margin="5" Height="40"/>
+        <Button x:Name="btnShowCart" BorderThickness="3 1 1 3" Grid.ColumnSpan="10" Grid.Row="3" Content="View Cart" Width="150" Click="btnShowCart_Click" Margin="5" Height="40"/>
     </Grid>
 </Window>
