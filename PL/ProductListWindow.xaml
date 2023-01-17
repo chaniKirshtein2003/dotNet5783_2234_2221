@@ -12,7 +12,7 @@
     <Window.Resources>
         <ObjectDataProvider MethodName="GetValues"
                     ObjectType="{x:Type sys:Enum}"
-                    x:Key="allCategories">
+                    x:Key="Categories">
             <ObjectDataProvider.MethodParameters>
                 <x:Type TypeName="Enum:Categories" />
             </ObjectDataProvider.MethodParameters>
@@ -53,11 +53,6 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition  Width="*"/>
-            <ColumnDefinition  Width="*"/>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="20"/>
             <ColumnDefinition  Width="80"/>
 
         </Grid.ColumnDefinitions>
@@ -65,9 +60,7 @@
         <Label Content="Product Name" Grid.Row="1" Grid.Column="1"/>
         <Label Content="Price" Grid.Row="1" Grid.Column="2"/>
         <Label Content="Category" Grid.Row="1" Grid.Column="3"/>
-        <Label Content="Is In Stock" Grid.Row="1" Grid.Column="4"/>
-        <Label Content="Amont In Stock" Grid.Row="1" Grid.Column="5"/>
-        <ComboBox x:Name="CategoriesSelector" Grid.Row="0" Grid.ColumnSpan="5"  SelectionChanged="CategoriesSelector_SelectionChanged" Width="132" Height="38" SelectedItem="Choose_Category"/>
+        <ComboBox SelectedItem="{x:Static Enum:Categories.Choose_Category }"  ItemsSource="{Binding Source={StaticResource Categories}}" x:Name="CategoriesSelector" Grid.Row="0" Grid.ColumnSpan="5"  SelectionChanged="CategoriesSelector_SelectionChanged" Width="132" Height="38"/>
         <ListView ItemsSource="{Binding}" Background="#FFF7E4C6" Grid.Row="2" Grid.ColumnSpan="10"  x:Name="ProductListview"  ItemTemplate="{StaticResource MyDataTemplate}"
 HorizontalContentAlignment="Stretch"  MouseDoubleClick="ProductListview_MouseDoubleClick"/>
         <Button Content="Add new Product" Grid.Row="3" Grid.ColumnSpan="10" 

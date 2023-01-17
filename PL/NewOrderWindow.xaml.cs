@@ -38,8 +38,8 @@ namespace PL
             InitializeComponent();
             var help = bl!.Product.ListProductsToBuy();
             NewOrder = help == null ? new() : new(help);
-            cmxFilterCategories.ItemsSource = Enum.GetValues(typeof(BO.Categories));
-            cmxFilterCategories.SelectedItem = BO.Categories.Choose_Category;
+            //cmxFilterCategories.ItemsSource = Enum.GetValues(typeof(BO.Categories));
+            //cmxFilterCategories.SelectedItem = BO.Categories.Choose_Category;
             myCart.Items = null;
             myCart.TotalPrice = 0;
         }

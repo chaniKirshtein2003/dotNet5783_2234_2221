@@ -39,8 +39,6 @@ namespace PL
             InitializeComponent();
             var help= bl!.Product.GetProducts();
             Prods = help == null ? new() : new(help);
-            CategoriesSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
-            CategoriesSelector.SelectedItem = BO.Categories.Choose_Category;
         }
 
         private void CategoriesSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
