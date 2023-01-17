@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         DataContext="{Binding Path=Ords,RelativeSource={RelativeSource self}}"
         mc:Ignorable="d"
-        Title="OrderListWindow" Height="450" Width="800">
+        Title="OrderListWindow" Height="340" Width="600">
     <Window.Resources>
         <DataTemplate x:Key="MyDataTemplate" DataType="local:OrderForList">
             <Grid>
@@ -27,10 +27,32 @@
                 <TextBlock Grid.Column="4" Text="{Binding Path=TotalPrice}" />
             </Grid>
         </DataTemplate>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Dubai Medium" />
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
     </Window.Resources>
-    <StackPanel>
-        <ListView ItemsSource="{Binding}"
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="11*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Customer Name" Grid.Row="1" Grid.Column="0"/>
+        <Label Content="Status" Grid.Row="1" Grid.Column="1"/>
+        <Label Content="Amount Of Items" Grid.Row="1" Grid.Column="2"/>
+        <Label Content="Total Price" Grid.Row="1" Grid.Column="3"/>
+        <ListView ItemsSource="{Binding}" Background="#FFF7E4C6" Grid.Row="2" Grid.ColumnSpan="10"
 ItemTemplate="{StaticResource MyDataTemplate}"
 HorizontalContentAlignment="Stretch" MouseDoubleClick="OrderListView_MouseDoubleClick"/>
-    </StackPanel>
+    </Grid>
 </Window>

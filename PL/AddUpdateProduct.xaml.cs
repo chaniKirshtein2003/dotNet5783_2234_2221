@@ -50,49 +50,50 @@ namespace PL
             Product = bl!.Product.GetProduct(id);
             state = "update";
         }
-        
+
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            //if (txtName.Text == "" || txtPrAmount.Text == "" || txtPrId.Text == "" || txtPrPrice.Text == "")
-            //{
-            //    MessageBox.Show("missing details");
-            //}
-            //else
-            //{
-            try
+            if (txtName.Text == "" || txtPrAmount.Text == "" || txtPrId.Text == "" || txtPrPrice.Text == "")
             {
-                BO.Product product = new BO.Product();
-                product.ProductName = txtName.Text;
-                product.ProductId = int.Parse(txtPrId.Text);
-                product.Price = int.Parse(txtPrPrice.Text);
-                product.AmountInStock = int.Parse(txtPrAmount.Text);
-                product.Category = (BO.Categories)cmbCategory.SelectedItem;
-                if (state == "add")
-                    try 
-                    {
-                        bl!.Product.Add(product);
-                        MessageBox.Show("successfull product addition");
-                        this.Close();
-                    }
-                    catch
-                    {
-                        throw new Exception("addition failed");
-                    }
-                else if (state == "update")
-                    try
-                    {
-                        bl!.Product.Update(product);
-                        MessageBox.Show("successfull product update");
-                        this.Close();
-                    }
-                    catch
-                    {
-                        throw new Exception("update failed");
-                    }
+                MessageBox.Show("missing details");
             }
-            catch(Exception x)
+            else
             {
-                MessageBox.Show("Missing details");
+                try
+                {
+                    BO.Product product = new BO.Product();
+                    product.ProductName = txtName.Text;
+                    product.ProductId = int.Parse(txtPrId.Text);
+                    product.Price = int.Parse(txtPrPrice.Text);
+                    product.AmountInStock = int.Parse(txtPrAmount.Text);
+                    product.Category = (BO.Categories)cmbCategory.SelectedItem;
+                    if (state == "add")
+                        try
+                        {
+                            bl!.Product.Add(product);
+                            MessageBox.Show("successfull product addition");
+                            this.Close();
+                        }
+                        catch
+                        {
+                            throw new Exception("addition failed");
+                        }
+                    else if (state == "update")
+                        try
+                        {
+                            bl!.Product.Update(product);
+                            MessageBox.Show("successfull product update");
+                            this.Close();
+                        }
+                        catch
+                        {
+                            throw new Exception("update failed");
+                        }
+                }
+                catch (Exception x)
+                {
+                    MessageBox.Show("Missing details");
+                }
             }
         }
 
