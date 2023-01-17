@@ -27,17 +27,22 @@ namespace PL
 
         private void btnTracking_Click(object sender, RoutedEventArgs e)
         {
-            //int id = ((BO.OrderTracking)((ListView)sender).SelectedItem).ID;
-            int id = int.Parse(txtInsertId.Text);
-            try
+            if (txtInsertId.Text == "")
+                MessageBox.Show("Please enter an order number");
+            else
             {
-                var x= bl!.Order.GetOrderDetails(id);
-                new OrderTracking(id).ShowDialog();
+                int id = int.Parse(txtInsertId.Text);
+                try
+                {
+                    var x = bl!.Order.GetOrderDetails(id);
+                    new OrderTracking(id).ShowDialog();
 
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Sorry, There is no an order with id " + id);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Sorry, There is no an order with id " + id);
+                    txtInsertId.Text = "";
+                }
             }
         }
     }

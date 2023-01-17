@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="EnterOrderTracking" Height="250" Width="300">
     <Grid Margin="10,0,0,0">
-        <Button Content="למעקב" HorizontalAlignment="Left" Margin="86,136,0,0" VerticalAlignment="Top" Click="btnTracking_Click" FontSize="18" Height="41" Width="124">
+        <Button Content="Tracking" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="86,136,0,0" VerticalAlignment="Top" Click="btnTracking_Click" FontSize="18" Height="41" Width="124">
             <!--<Button.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -15,17 +15,7 @@
                 </LinearGradientBrush>
             </Button.BorderBrush>-->
         </Button>
-        <Label Content="הכנס קוד הזמנה" HorizontalAlignment="Left" Margin="135,66,0,0" VerticalAlignment="Top" Width="124" Height="33" />
-        <TextBox x:Name="txtInsertId" HorizontalAlignment="Left" Margin="20,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="101" RenderTransformOrigin="0.5,0.5" Height="27">
-            <TextBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="0.012"/>
-                    <RotateTransform Angle="-0.605"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBox.RenderTransform>
-        </TextBox>
-
+        <Label Content="Order Number" HorizontalAlignment="Left" Margin="33,68,0,0" VerticalAlignment="Top" Width="101" Height="33" />
+        <TextBox x:Name="txtInsertId" HorizontalAlignment="Left" Margin="144,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="101" RenderTransformOrigin="0.5,0.5" Height="27"/>
     </Grid>
 </Window>
