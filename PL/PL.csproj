@@ -13,7 +13,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="shoham1.png" />
     <None Remove="לוגו.png" />
     <None Remove="שוהם.JPG" />
   </ItemGroup>
@@ -23,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="shoham1.png" />
     <Resource Include="לוגו.png" />
     <Resource Include="שוהם.JPG" />
   </ItemGroup>
