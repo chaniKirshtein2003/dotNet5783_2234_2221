@@ -23,20 +23,20 @@ namespace PL
         BlApi.IBl? bl = BlApi.Factory.Get();
 
 
-        public ObservableCollection<BO.OrderForList?> ords
+        public ObservableCollection<BO.OrderForList?> Ords
         {
-            get { return (ObservableCollection<BO.OrderForList?>)GetValue(ordsProperty); }
-            set { SetValue(ordsProperty, value); }
+            get { return (ObservableCollection<BO.OrderForList?>)GetValue(OrdsProperty); }
+            set { SetValue(OrdsProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for ords. This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ordsProperty =
-            DependencyProperty.Register("ords", typeof(ObservableCollection<BO.OrderForList?>), typeof(Window), new PropertyMetadata(null));
+        public static readonly DependencyProperty OrdsProperty =
+            DependencyProperty.Register("Ords", typeof(ObservableCollection<BO.OrderForList?>), typeof(Window), new PropertyMetadata(null));
         public OrderListWindow()
         {
             InitializeComponent();
             var help = bl!.Order.GetOrders();
-            ords = help == null ? new() : new(help);
+            Ords = help == null ? new() : new(help);
         }
 
         private void OrderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -44,7 +44,7 @@ namespace PL
             int id = ((BO.OrderForList)((ListView)sender).SelectedItem).ID;
             new UpdateOrder(id).ShowDialog();
             var help = bl!.Order.GetOrders();
-            ords = help == null ? new() : new(help);   
+            Ords = help == null ? new() : new(help);   
         }
     }
 }

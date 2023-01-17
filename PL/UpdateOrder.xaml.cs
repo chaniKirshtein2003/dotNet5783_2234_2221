@@ -22,19 +22,19 @@ namespace PL
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
 
-        public BO.Order order
+        public BO.Order Order
         {
-            get { return (BO.Order)GetValue(orderProperty); }
-            set { SetValue(orderProperty, value); }
+            get { return (BO.Order)GetValue(OrderProperty); }
+            set { SetValue(OrderProperty, value); }
         }
         // Using a DependencyProperty as the backing store for order.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty orderProperty =
-            DependencyProperty.Register("order", typeof(BO.Order), typeof(Window), new PropertyMetadata(null));
+        public static readonly DependencyProperty OrderProperty =
+            DependencyProperty.Register("Order", typeof(BO.Order), typeof(Window), new PropertyMetadata(null));
 
         public UpdateOrder(int id, bool isTrack =false)
         {
             InitializeComponent();
-            order = bl!.Order.GetOrderDetails(id);
+            Order = bl!.Order.GetOrderDetails(id);
             if (isTrack)
             {
                 btnUpdateOrder.Visibility = Visibility.Hidden;
@@ -46,7 +46,7 @@ namespace PL
         {
             try
             {
-                order = bl!.Order.supplyUpdate(order.OrderId);
+                Order = bl!.Order.supplyUpdate(Order.OrderId);
             }
             catch (Exception x)
             {
@@ -56,7 +56,7 @@ namespace PL
 
         private void btnUpdateDeliveryDate_Click(object sender, RoutedEventArgs e)
         {
-            order = bl!.Order.UpdateSending(order.OrderId);
+            Order = bl!.Order.UpdateSending(Order.OrderId);
         }
     }
 }

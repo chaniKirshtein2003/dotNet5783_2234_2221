@@ -6,17 +6,17 @@
         xmlns:Enum="clr-namespace:BO;assembly=BL"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:PL"
-        DataContext="{Binding Path=prods, RelativeSource={RelativeSource self}}"
+        DataContext="{Binding Path=Prods, RelativeSource={RelativeSource self}}"
         mc:Ignorable="d"
         Title="ShowProduct" Height="500" Width="800">
     <Window.Resources>
-            <!--<ObjectDataProvider MethodName="GetValues"
+            <ObjectDataProvider MethodName="GetValues"
                     ObjectType="{x:Type sys:Enum}"
                     x:Key="allCategories">
                 <ObjectDataProvider.MethodParameters>
                     <x:Type TypeName="Enum:Categories" />
                 </ObjectDataProvider.MethodParameters>
-            </ObjectDataProvider>-->
+            </ObjectDataProvider>
             <DataTemplate x:Key="MyDataTemplate" DataType="local:ProductForList">
             <Grid>
                 <Grid.RowDefinitions>
@@ -35,13 +35,38 @@
             </Grid>
         </DataTemplate>
     </Window.Resources>
-    <StackPanel>
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="11*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition  Width="*"/>
+            <ColumnDefinition  Width="*"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition  Width="80"/>
+
+        </Grid.ColumnDefinitions>
+        <Label Content="מזהה מוצר" Grid.Row="1" Grid.Column="0"/>
+        <Label Content="שם מוצר" Grid.Row="1" Grid.Column="1"/>
+        <Label Content="מחיר" Grid.Row="1" Grid.Column="2"/>
+        <Label Content="קטגוריה" Grid.Row="1" Grid.Column="3"/>
+        <Label Content="?במלאי" Grid.Row="1" Grid.Column="4"/>
+        <Label Content="כמות במלאי" Grid.Row="1" Grid.Column="5"/>
         <ComboBox x:Name="CategoriesSelector" SelectionChanged="CategoriesSelector_SelectionChanged" Width="132" Height="38" SelectedItem="Choose_Category"/>
         <ListView ItemsSource="{Binding}" x:Name="ProductListview"  ItemTemplate="{StaticResource MyDataTemplate}"
 HorizontalContentAlignment="Stretch"  MouseDoubleClick="ProductListview_MouseDoubleClick"/>
         <Button Content="Add new Product"
 Click="Button_Click" Width="135" Height="46" Margin="0,10,0,0" FontSize="15" />
-    </StackPanel>
+    </Grid>
 </Window>
 <!--<Grid Name="MainGrid">
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"

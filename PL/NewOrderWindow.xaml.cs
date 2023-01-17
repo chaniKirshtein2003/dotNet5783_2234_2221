@@ -39,7 +39,7 @@ namespace PL
             var help = bl!.Product.ListProductsToBuy();
             NewOrder = help == null ? new() : new(help);
             cmxFilterCategories.ItemsSource = Enum.GetValues(typeof(BO.Categories));
-            cmxFilterCategories.SelectedItem = BO.Categories.None;
+            cmxFilterCategories.SelectedItem = BO.Categories.Choose_Category;
             myCart.Items = null;
             myCart.TotalPrice = 0;
         }
@@ -47,7 +47,7 @@ namespace PL
         private void cmxFilterCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BO.Categories category = (BO.Categories)cmxFilterCategories.SelectedItem;
-            if (category.ToString() == "None")
+            if (category.ToString() == "Choose_Category")
             {
                 var help = bl!.Product.ListProductsToBuy();
                 NewOrder = help == null ? new() : new(help);

@@ -14,7 +14,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -22,7 +22,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{Binding Path=ID}" />
+                <TextBlock Grid.Column="0" Text="{Binding Path=ID}"/>
                 <TextBlock Grid.Column="1" Text="{Binding Path=Name}" />
                 <TextBlock Grid.Column="2" Text="{Binding Path=Price}" />
                 <TextBlock Grid.Column="3" Text="{Binding Path=Category}" />
@@ -31,17 +31,42 @@
                 <Button Grid.Column="6" Content="Add" Click="Button_Click" FontSize="13" Height="25" Width="52" Margin="1"/>
             </Grid>
         </DataTemplate>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Dubai Medium" />
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
     </Window.Resources>
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="11*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition  Width="*"/>
+            <ColumnDefinition  Width="*"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition  Width="80"/>
 
-    <StackPanel>
-        <ListBox x:Name="ProductItemsListview" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyTemplate}" HorizontalContentAlignment="Stretch" MouseDoubleClick="ProductItemsListview_MouseDoubleClick"/>
-        <ComboBox x:Name="cmxFilterCategories" Width="150" SelectionChanged="cmxFilterCategories_SelectionChanged" Margin="10" Height="36" SelectedItem="Choose_Category"/>
-        <Button x:Name="btnShowCart" Content="לצפיה בסל הקניות" Width="150" Click="btnShowCart_Click" Margin="5" Height="40"/>
-    </StackPanel>
-    <!--<Grid>
-        <ListView ItemsSource="{Binding}" x:Name="lstNewOrder">
-        </ListView>
-        <ComboBox  x:Name="cmxFilterCategories" Width="120" SelectionChanged="cmxFilterCategories_SelectionChanged" Margin="645,10,35,379"/>
-        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="705,124,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.069,-0.13"/>
-    </Grid>-->
+        </Grid.ColumnDefinitions>
+        <Label Content="Id Product" Grid.Row="1" Grid.Column="0"/>
+        <Label Content="Product Name" Grid.Row="1" Grid.Column="1"/>
+        <Label Content="Price" Grid.Row="1" Grid.Column="2"/>
+        <Label Content="Category" Grid.Row="1" Grid.Column="3"/>
+        <Label Content="Is In Stock?" Grid.Row="1" Grid.Column="4"/>
+        <Label Content="Amount In Stock" Grid.Row="1" Grid.Column="5"/>
+
+        <ListBox x:Name="ProductItemsListview" Background="#FFF7E4C6"  Grid.Row="2" Grid.ColumnSpan="10" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyTemplate}" HorizontalContentAlignment="Stretch" MouseDoubleClick="ProductItemsListview_MouseDoubleClick"/>
+        <ComboBox x:Name="cmxFilterCategories"  Grid.Row="0" Grid.ColumnSpan="5" Width="150" SelectionChanged="cmxFilterCategories_SelectionChanged" Margin="90,10,10,45" Height="36" SelectedItem="Choose_Category" Grid.Column="5" Grid.RowSpan="2"/>
+        <Button x:Name="btnShowCart"  Grid.ColumnSpan="10" Grid.Row="3" Content="View Cart" Width="150" Click="btnShowCart_Click" Margin="5" Height="40"/>
+    </Grid>
 </Window>
