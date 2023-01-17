@@ -18,21 +18,27 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <!--<ColumnDefinition Width="*" />-->
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{Binding Path=OrderId}" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=CustomerName}" />
-                <TextBlock Grid.Column="2" Text="{Binding Path=Status}" />
-                <TextBlock Grid.Column="3" Text="{Binding Path=AmountOfItems}" />
-                <TextBlock Grid.Column="4" Text="{Binding Path=TotalPrice}" />
+                <!--<TextBlock Grid.Column="0" Text="{Binding Path=OrderId}" />-->
+                <TextBlock Grid.Column="0" Text="{Binding Path=CustomerName}" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=Status}" />
+                <TextBlock Grid.Column="2" Text="{Binding Path=AmountOfItems}" />
+                <TextBlock Grid.Column="3" Text="{Binding Path=TotalPrice}" />
             </Grid>
         </DataTemplate>
+        <!--<Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>-->
         <Style TargetType="Label">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="FontFamily" Value="Dubai Medium" />
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="Height" Value="30"/>
-        </Style>
+            <Setter Property="Margin" Value="-4"/>
+</Style>
     </Window.Resources>
     <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
