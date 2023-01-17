@@ -23,15 +23,15 @@ namespace PL
         BlApi.IBl? bl = BlApi.Factory.Get();
         BO.Cart _myCart = new BO.Cart();
 
-        public ObservableCollection<BO.OrderItem> item
+        public ObservableCollection<BO.OrderItem> Item
         {
-            get { return (ObservableCollection<BO.OrderItem>)GetValue(itemProperty); }
-            set { SetValue(itemProperty, value); }
+            get { return (ObservableCollection<BO.OrderItem>)GetValue(ItemProperty); }
+            set { SetValue(ItemProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for item.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty itemProperty =
-            DependencyProperty.Register("item", typeof(ObservableCollection<BO.OrderItem>), typeof(Window), new PropertyMetadata(null));
+        public static readonly DependencyProperty ItemProperty =
+            DependencyProperty.Register("Item", typeof(ObservableCollection<BO.OrderItem>), typeof(Window), new PropertyMetadata(null));
 
 
         public ShowCart(BO.Cart cart)
@@ -39,8 +39,8 @@ namespace PL
             InitializeComponent();
             _myCart = cart;
             var help = _myCart.Items;
-            item = help == null ? new() : new(help!);
-            if (item == null)
+            Item = help == null ? new() : new(help!);
+            if (Item == null)
             {
                 lblEmpty.Visibility = Visibility.Visible;
                 btnOK.Visibility = Visibility.Hidden;
@@ -50,31 +50,30 @@ namespace PL
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).ProductId;
-            BO.OrderItem orderItem = _myCart.Items!.FirstOrDefault(x => x!.ProductId == id)!;
-            var x = (bl!.Cart.Update(_myCart, orderItem.ProductId, 0)).Items;
-            item = x == null ? new() : new(x!);
+            var x = (bl!.Cart.Update(_myCart, id, 0)).Items;
+            Item = x == null ? new() : new(x!);
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).ProductId;
-            BO.OrderItem orderItem = _myCart.Items!.FirstOrDefault(x => x!.ProductId == id)!;
-            var x = (bl!.Cart.Update(_myCart, orderItem.ProductId, orderItem.Amount + 1)).Items;
-            item = x == null ? new() : new(x!);
+            int amount = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).Amount;
+            var x = (bl!.Cart.Update(_myCart, id, amount + 1)).Items;
+            Item = x == null ? new() : new(x!);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             int id = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).ProductId;
-            BO.OrderItem orderItem = _myCart.Items!.FirstOrDefault(x => x!.ProductId == id)!;
-            var x = (bl!.Cart.Update(_myCart, orderItem.ProductId, orderItem.Amount - 1)).Items;
-            item = x == null ? new() : new(x!);
+            int amount = ((BO.OrderItem)((System.Windows.FrameworkElement)sender).DataContext).Amount;
+            var x = (bl!.Cart.Update(_myCart, id, amount - 1)).Items;
+            Item = x == null ? new() : new(x!);
         }
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (item == null)
+                if (Item == null)
                     MessageBox.Show("The cart is empty");
                 else
                 {
@@ -82,8 +81,8 @@ namespace PL
                     cart.CustomerName = txtName.Text;
                     cart.CustomerAddress = txtAddress.Text;
                     cart.CustomerEmail = txtEmail.Text;
-                    cart.Items = item == null ? new() : new(item);
-                    cart.TotalPrice = item!.Sum(x => x.TotalPrice);
+                    cart.Items = Item == null ? new() : new(Item);
+                    cart.TotalPrice = Item!.Sum(x => x.TotalPrice);
                     bl!.Cart.MakeAnOrder(cart);
                     MessageBox.Show("הזמנתך התקבלה במערכת. תודה שקנית אצלנו");
                 }
@@ -92,8 +91,6 @@ namespace PL
             {
                 MessageBox.Show(""+ex);
             }
-            //if (txtAddress.Text == "" || txtName.Text == "" || txtEmail.Text == "")
-
         }
     }
 }

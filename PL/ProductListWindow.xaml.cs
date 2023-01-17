@@ -24,22 +24,23 @@ namespace PL
         BlApi.IBl? bl = BlApi.Factory.Get();
 
 
-        public ObservableCollection<BO.ProductForList> prods
+        public ObservableCollection<BO.ProductForList> Prods
         {
-            get { return (ObservableCollection<BO.ProductForList>)GetValue(prodsProperty); }
-            set { SetValue(prodsProperty, value); }
+            get { return (ObservableCollection<BO.ProductForList>)GetValue(ProdsProperty); }
+            set { SetValue(ProdsProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for prods.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty prodsProperty =
-            DependencyProperty.Register("prods", typeof(ObservableCollection<BO.ProductForList>), typeof(Window), new PropertyMetadata(null));
+        public static readonly DependencyProperty ProdsProperty =
+            DependencyProperty.Register("Prods", typeof(ObservableCollection<BO.ProductForList>), typeof(Window), new PropertyMetadata(null));
 
         public ProductListWindow()
         {
             InitializeComponent();
             var help= bl!.Product.GetProducts();
-            prods = help == null ? new() : new(help);
+            Prods = help == null ? new() : new(help);
             CategoriesSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
+            CategoriesSelector.SelectedItem = BO.Categories.Choose_Category;
         }
 
         private void CategoriesSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -49,12 +50,12 @@ namespace PL
             if (category.ToString() == "Choose_Category")
             {
                 var help = bl!.Product.GetProducts();
-                prods = help == null ? new() : new(help);
+                Prods = help == null ? new() : new(help);
             }
             else
             {
                 var help = bl!.Product.GetProductsListByCategory(category);
-                prods = help == null ? new() : new(help);
+                Prods = help == null ? new() : new(help);
             }
         }
 
@@ -62,7 +63,8 @@ namespace PL
         {
             new AddUpdateProduct().ShowDialog();
             var help = bl!.Product.GetProducts();
-            prods = help == null ? new() : new(help);
+            Prods = help == null ? new() : new(help);
+            CategoriesSelector.SelectedItem = BO.Categories.Choose_Category;
         }
 
         private void ProductListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -70,7 +72,8 @@ namespace PL
             int id = ((BO.ProductForList)((ListView)sender).SelectedItem).ID;
             new AddUpdateProduct(id).ShowDialog();
             var help = bl!.Product.GetProducts();
-            prods = help == null ? new() : new(help);
+            Prods = help == null ? new() : new(help);
+            CategoriesSelector.SelectedItem = BO.Categories.Choose_Category;
         }
     }
 }

@@ -23,15 +23,15 @@ namespace PL
         BlApi.IBl? bl = BlApi.Factory.Get();
 
 
-        public BO.ProductItem productItem
+        public BO.ProductItem ProductItem
         {
-            get { return (BO.ProductItem)GetValue(productItemProperty); }
-            set { SetValue(productItemProperty, value); }
+            get { return (BO.ProductItem)GetValue(ProductItemProperty); }
+            set { SetValue(ProductItemProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for productItem.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty productItemProperty =
-            DependencyProperty.Register("productItem", typeof(BO.ProductItem), typeof(Window), new PropertyMetadata(null));
+        public static readonly DependencyProperty ProductItemProperty =
+            DependencyProperty.Register("ProductItem", typeof(BO.ProductItem), typeof(Window), new PropertyMetadata(null));
 
 
 
@@ -39,7 +39,7 @@ namespace PL
         {
             InitializeComponent();
             BO.ProductItem prod = bl.Product.ProductForBuyer(id);
-            productItem= prod;
+            ProductItem= prod;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

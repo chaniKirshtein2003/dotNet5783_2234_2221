@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
-        DataContext="{Binding Path=ords,RelativeSource={RelativeSource self}}"
+        DataContext="{Binding Path=Ords,RelativeSource={RelativeSource self}}"
         mc:Ignorable="d"
         Title="OrderListWindow" Height="450" Width="800">
     <Window.Resources>
@@ -34,9 +34,3 @@ ItemTemplate="{StaticResource MyDataTemplate}"
 HorizontalContentAlignment="Stretch" MouseDoubleClick="OrderListView_MouseDoubleClick"/>
     </StackPanel>
 </Window>
-<!--<Grid>
-        <ListView ItemsSource="{Binding}" x:Name="OrderListView" Grid.Row="1" MouseDoubleClick="OrderListView_MouseDoubleClick">
-        </ListView>
-
-    </Grid>
-</Window>-->

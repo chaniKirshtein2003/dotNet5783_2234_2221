@@ -52,7 +52,7 @@
                 IEnumerable<BO.OrderItem> items = from orderItem in orderItems
                             select new BO.OrderItem
                             {
-                                OrderItemId = orderItem?.OrderId ?? 0,
+                                OrderItemId = orderItem?.OrderItemId ?? 0,
                                 ProductId = orderItem?.ProductId ?? 0,
                                 OrderItemName = idal.Product.Get(orderItem?.ProductId ?? 0).ProductName,
                                 Amount = orderItem?.Amount ?? 0,
@@ -83,7 +83,6 @@
                     idal!.Order.Update(order);
                 }
                 BO.Order newOrder = GetOrderDetails(id);
-                newOrder.Status = BO.OrderStatus.sent;
                 return newOrder;
             }
             catch (DO.NotExistException ex)
@@ -112,7 +111,6 @@
                 idal!.Order.Update(order);
             }
             BO.Order newOrder = GetOrderDetails(id);
-            newOrder.Status = BO.OrderStatus.delivered;
             return newOrder;
         }
         //The purpose of the function is to allow the manager to track the status of the order.

@@ -22,15 +22,15 @@ namespace PL
         BlApi.IBl? bl = BlApi.Factory.Get();
         BO.Order? order;
 
-        public BO.OrderTracking orderTracking
+        public BO.OrderTracking OrderTrack
         {
-            get { return (BO.OrderTracking)GetValue(orderTrackingProperty); }
-            set { SetValue(orderTrackingProperty, value); }
+            get { return (BO.OrderTracking)GetValue(OrderTrackProperty); }
+            set { SetValue(OrderTrackProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for orderTracking.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty orderTrackingProperty =
-            DependencyProperty.Register("orderTracking", typeof(BO.OrderTracking), typeof(Window), new PropertyMetadata(null));
+        public static readonly DependencyProperty OrderTrackProperty =
+            DependencyProperty.Register("OrderTrack", typeof(BO.OrderTracking), typeof(Window), new PropertyMetadata(null));
 
 
         public OrderTracking(int idOrder)
@@ -39,7 +39,7 @@ namespace PL
             try
             {
                 //order = bl.Order.GetOrderDetails(idOrder);
-                orderTracking = bl.Order.OrderTracking(idOrder);
+                OrderTrack = bl.Order.OrderTracking(idOrder);
             }
             catch (Exception)
             {
@@ -50,11 +50,6 @@ namespace PL
         {
             int id = Convert.ToInt32(txtOrderId.Text);
             new UpdateOrder(id, true).ShowDialog();
-        }
-
-        private void txtOrderStatus_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }

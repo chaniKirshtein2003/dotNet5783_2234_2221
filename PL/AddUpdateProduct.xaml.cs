@@ -23,15 +23,15 @@ namespace PL
         BlApi.IBl? bl = BlApi.Factory.Get();
         string state;
 
-        public BO.Product product
+        public BO.Product Product
         {
-            get { return (BO.Product)GetValue(productProperty); }
-            set { SetValue(productProperty, value); }
+            get { return (BO.Product)GetValue(ProductProperty); }
+            set { SetValue(ProductProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for product.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty productProperty =
-            DependencyProperty.Register("product", typeof(BO.Product), typeof(Window), new PropertyMetadata(null));
+        public static readonly DependencyProperty ProductProperty =
+            DependencyProperty.Register("Product", typeof(BO.Product), typeof(Window), new PropertyMetadata(null));
 
 
 
@@ -47,7 +47,7 @@ namespace PL
         {
             InitializeComponent();
             cmbCategory.ItemsSource= Enum.GetValues(typeof(BO.Categories));
-            product = bl!.Product.GetProduct(id);
+            Product = bl!.Product.GetProduct(id);
             state = "update";
         }
         
