@@ -25,7 +25,7 @@ public class DalOrderItem :IOrderItem
     /// </summary>
     /// <param name="idProduct"></param>
     /// <returns>Returns the corresponding object</returns>
-    /// <exception cref="Exception">Returns an error as soon as no suitable orderItem is found</exception>
+    /// <exception cref="NotExistException">Returns an error as soon as no suitable orderItem is found</exception>
     public OrderItem Get(int idOrderItem)
     {
         //look for the orderItem with the same id
@@ -49,7 +49,7 @@ public class DalOrderItem :IOrderItem
     /// A method to delete a orderItem object that receives a orderItem ID number
     /// </summary>
     /// <param name="idProduct"></param>
-    /// <exception cref="Exception">Throws an error as soon as no suitable orderItem is found</exception>
+    /// <exception cref="NotExistException">Throws an error as soon as no suitable orderItem is found</exception>
     public void Delete(int idOrderItem)
     {
         int count = DataSource.orderItemsList.RemoveAll(orItem => orItem?.OrderItemId == idOrderItem);
@@ -62,7 +62,7 @@ public class DalOrderItem :IOrderItem
     ///At the beginning of the update, make sure that the object exists - according to an ID number
     /// </summary>
     /// <param name="orderItem"></param>
-    /// <exception cref="Exception">Returns an error once no matching object is found</exception>
+    /// <exception cref="NotExistException">Returns an error once no matching object is found</exception>
     public void Update(OrderItem orderItem)
     {
         
@@ -72,19 +72,33 @@ public class DalOrderItem :IOrderItem
         DataSource.orderItemsList.Add(orderItem);
     }
 
-    //The function returns an object of orderItem by idProuct and idOrder
+    /// <summary>
+    /// The function returns an object of orderItem by idProuct and idOrder
+    /// </summary>
+    /// <param name="idProduct"></param>
+    /// <param name="idOrder"></param>
+    /// <returns>Return order by id product and id order</returns>
+    /// <exception cref="NotExistException"></exception>
     public OrderItem GetItemById(int idProduct, int idOrder)
     {
         return DataSource.orderItemsList.FirstOrDefault(item => idProduct == item?.ProductId && idOrder == item?.OrderId) ?? throw new NotExistException(idProduct, "OrderItem");
     }
 
-    //The function returns an object of orderItem by a condition
-
+    /// <summary>
+    /// The function returns an object of orderItem by a condition
+    /// </summary>
+    /// <param name="check"></param>
+    /// <returns>Return orderItem by condition</returns>
+    /// <exception cref="NotExistException"></exception>
     public OrderItem? GetByCondition(Func<OrderItem?, bool>? check)
     {
         return DataSource.orderItemsList.FirstOrDefault(x => check!(x)) ?? throw new NotExistException(1, "OrderItem");
     }
-    //The function returns if exists in the list an order items with the  
+    /// <summary>
+    /// The function returns if exists in the list an order items with this id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>Return if there is order item with the id that send or not </returns>
     public bool CheckOrderItem(int id)
     {
         return DataSource.orderItemsList.Any(ordItem => ordItem?.OrderItemId == id);

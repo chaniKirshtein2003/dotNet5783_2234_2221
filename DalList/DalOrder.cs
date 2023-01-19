@@ -18,13 +18,13 @@ public class DalOrder:IOrder
         DataSource.ordersList.Add(order);
         return order.OrderId;
     }
-        /// <summary>
-        /// A request/call method of a single object receives an ID number of the entity and returns the corresponding object
-        /// </summary>
-        /// <param name="idProduct"></param>
-        /// <returns>Returns the corresponding object</returns>
-        /// <exception cref="Exception">Returns an error as soon as no suitable order is found</exception>
-        public Order Get(int idOrder)
+    /// <summary>
+    /// A request/call method of a single object receives an ID number of the entity and returns the corresponding object
+    /// </summary>
+    /// <param name="idProduct"></param>
+    /// <returns>Returns the corresponding object</returns>
+    /// <exception cref="NotExistException">Returns an error as soon as no suitable order is found</exception>
+    public Order Get(int idOrder)
     {
         //look for the orderItem with the same id
         return DataSource.ordersList.FirstOrDefault(ord => ord?.OrderId == idOrder) ?? throw new NotExistException(idOrder, "Order");
@@ -43,12 +43,12 @@ public class DalOrder:IOrder
             return from ord in DataSource.ordersList
                    select ord;
     }
-/// <summary>
-/// A method to delete a order object that receives a order ID number
-/// </summary>
-/// <param name="idProduct"></param>
-/// <exception cref="Exception">Throws an error as soon as no suitable order is found</exception>
-public void Delete(int idOrder)
+    /// <summary>
+    /// A method to delete a order object that receives a order ID number
+    /// </summary>
+    /// <param name="idProduct"></param>
+    /// <exception cref="NotExistException">Throws an error as soon as no suitable order is found</exception>
+    public void Delete(int idOrder)
     {
         int count = DataSource.ordersList.RemoveAll(ord => ord?.OrderId == idOrder);
         if (count == 0)
@@ -60,7 +60,7 @@ public void Delete(int idOrder)
     ///At the beginning of the update, make sure that the object exists - according to an ID number
     /// </summary>
     /// <param name="orderItem"></param>
-    /// <exception cref="Exception">Returns an error once no matching object is found</exception>
+    /// <exception cref="NotExistException">Returns an error once no matching object is found</exception>
     public void Update(Order order)
     {
         int count = DataSource.ordersList.RemoveAll(ord => order.OrderId == ord?.OrderId);
@@ -68,12 +68,21 @@ public void Delete(int idOrder)
             throw new DO.NotExistException(order.OrderId, "Order");
         DataSource.ordersList.Add(order);
     }
+    /// <summary>
+    /// The function returns an object of order by a condition
+    /// </summary>
+    /// <param name="check"></param>
+    /// <returns>Return order by condition</returns>
+    /// <exception cref="NotExistException"></exception>
     public Order? GetByCondition(Func<Order?, bool>? check)
     {
-        //return DataSource.ordersList.FirstOrDefault(x=>check(x))?? throw new NotExistException
         return DataSource.ordersList.FirstOrDefault(x => check!(x)) ?? throw new NotExistException(1, "order");
-
     }
+    /// <summary>
+    /// The function returns if exists in the list an orders with this id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>Return if there is order with the id that send or not </returns>
     public bool CheckOrder(int id)
     {
         return DataSource.ordersList.Any(ord => ord?.OrderId == id);

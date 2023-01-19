@@ -4,7 +4,11 @@
     {
         DalApi.IDal? idal = DalApi.Factory.Get();
 
-        //The purpose of the function is to show the manager all orders.
+        /// <summary>
+        /// The purpose of the function is to show the manager all orders.
+        /// </summary>
+        /// <returns>Return list with all the orders</returns>
+        /// <exception cref="BO.NotExistBlException"></exception>
         public IEnumerable<BO.OrderForList?> GetOrders()
         {
             try
@@ -32,7 +36,13 @@
             }
         }
 
-        //The purpose of the function is to display order details including customer details and details of all its products with product names and prices.
+        /// <summary>
+        /// The purpose of the function is to display order details including customer details and details of all its products with product names and prices.
+        /// </summary>
+        /// <param name="idOrder"></param>
+        /// <returns>Returns a specific order according to the received code.</returns>
+        /// <exception cref="BO.NotValidException"></exception>
+        /// <exception cref="BO.NotExistBlException"></exception>
         public BO.Order GetOrderDetails(int idOrder)
         {
             if (idOrder < 0)
@@ -71,7 +81,12 @@
                 throw new BO.NotExistBlException("not exist", ex);
             }
         }
-        //The purpose of the function is to allow the manager to update that the order has been sent to the customer.
+        /// <summary>
+        /// The purpose of the function is to allow the manager to update that the order has been sent to the customer.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Return the order after update sending</returns>
+        /// <exception cref="BO.NotExistBlException"></exception>
         public BO.Order UpdateSending(int id)
         {
             try
@@ -90,7 +105,13 @@
                 throw new BO.NotExistBlException("not exist", ex);
             }
         }
-        //The purpose of the function is to allow the manager to update that the order has been delivered to the customer.
+        /// <summary>
+        /// The purpose of the function is to allow the manager to update that the order has been delivered to the customer.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Return the order after update the delivery date</returns>
+        /// <exception cref="BO.NotExistBlException"></exception>
+        /// <exception cref="Exception"></exception>
         public BO.Order supplyUpdate(int id)
         {
             DO.Order order;
@@ -113,7 +134,12 @@
             BO.Order newOrder = GetOrderDetails(id);
             return newOrder;
         }
-        //The purpose of the function is to allow the manager to track the status of the order.
+        /// <summary>
+        /// The purpose of the function is to allow the manager to track the status of the order.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Return order tracking</returns>
+        /// <exception cref="BO.NotExistBlException"></exception>
         public BO.OrderTracking OrderTracking(int id)
         {
             try

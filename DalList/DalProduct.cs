@@ -9,7 +9,7 @@ public class DalProduct : IProduct
     /// </summary>
     /// <param name="order">Product to add</param>
     /// <returns>Return the id number of the object that added</returns>
-    /// <exception cref="Exception">Throws an error if there is no room for another product</exception>
+    /// <exception cref="ExistException">Throws an error if there is no room for another product</exception>
     public int Add(DO.Product product)
     {
         if (CheckProduct(product.ProductId))
@@ -23,7 +23,7 @@ public class DalProduct : IProduct
     /// </summary>
     /// <param name="idProduct"></param>
     /// <returns>Returns the corresponding object</returns>
-    /// <exception cref="Exception">Returns an error as soon as no suitable product is found</exception>
+    /// <exception cref="NotExistException">Returns an error as soon as no suitable product is found</exception>
     public DO.Product Get(int idProduct)
     {
         //look for the product with the same id
@@ -45,7 +45,7 @@ public class DalProduct : IProduct
     /// A method to delete a product object that receives a product ID number
     /// </summary>
     /// <param name="idProduct"></param>
-    /// <exception cref="Exception">Throws an error as soon as no suitable product is found</exception>
+    /// <exception cref="NotExistException">Throws an error as soon as no suitable product is found</exception>
     public void Delete(int idProduct)
     {
         int count = DataSource.productsList.RemoveAll(prod => prod?.ProductId == idProduct);
@@ -58,7 +58,7 @@ public class DalProduct : IProduct
     ///At the beginning of the update, make sure that the object exists - according to an ID number
     /// </summary>
     /// <param name="orderItem"></param>
-    /// <exception cref="Exception">Returns an error once no matching object is found</exception>
+    /// <exception cref="NotExistException"> Returns an error once no matching object is found</exception>
     public void Update(DO.Product product)
     {
         int count = DataSource.productsList.RemoveAll(pr => product.ProductId == pr?.ProductId);
@@ -66,12 +66,21 @@ public class DalProduct : IProduct
             throw new DO.NotExistException(product.ProductId, "Product");
         DataSource.productsList.Add(product);
     }
+    /// <summary>
+    /// The function returns an object of product by a condition
+    /// </summary>
+    /// <param name="check"></param>
+    /// <returns>Return product by condition</returns>
+    /// <exception cref="NotExistException"></exception>
     public Product? GetByCondition(Func<Product?, bool>? check)
     {
-        //return DataSource.productsList.FirstOrDefault(x=>check(x))?? throw new NotExistException
         return DataSource.productsList.FirstOrDefault(x => check!(x)) ?? throw new NotExistException(1, "product");
-
     }
+    /// <summary>
+    /// The function returns if exists in the list an products with this id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>Return if there is product with the id that send or not </returns>
     public bool CheckProduct(int id)
     {
         return DataSource.productsList.Any(prod => prod?.ProductId == id);

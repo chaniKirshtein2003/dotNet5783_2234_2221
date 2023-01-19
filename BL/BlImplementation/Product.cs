@@ -7,7 +7,10 @@ namespace BlImplementation
     internal class Product : BlApi.IProduct
     {
         DalApi.IDal? idal = DalApi.Factory.Get();
-        //The purpose of the function is to show the manager a list of products.
+        /// <summary>
+        ///The purpose of the function is to show the manager a list of products.
+        /// </summary>
+        /// <returns>Return list with all the products</returns>
         public IEnumerable<BO.ProductForList> GetProducts()
         {
             IEnumerable<DO.Product?> products = idal!.Product.GetAll();
@@ -21,7 +24,12 @@ namespace BlImplementation
                                   };
             return productsForList;
         }
-        //The purpose of the function is to show the manager by product code the details of that product.
+        /// <summary>
+        ///The purpose of the function is to show the manager by product code the details of that product.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Return product by id</returns>
+        /// <exception cref="BO.NotExistBlException"></exception>
         public BO.Product GetProduct(int id)
         {
             try
@@ -40,6 +48,11 @@ namespace BlImplementation
                 throw new BO.NotExistBlException("product not exist", x);
             }
         }
+        /// <summary>
+        ///The purpose of the function is to show the manager by category the details of that product.
+        /// </summary>
+        /// <param name="_category"></param>
+        /// <returns>Return list of the products with the choose category</returns>
         public IEnumerable<BO.ProductForList> GetProductsListByCategory(BO.Categories _category)
         {
             IEnumerable<DO.Product?> products = idal!.Product.GetAll(x => x?.Category == (DO.Categories)_category);
@@ -53,7 +66,13 @@ namespace BlImplementation
                                   };
             return productsForList;
         }
-        //The purpose of the function is to get the product details from the user and add a new product with the product details.
+        /// <summary>
+        ///The purpose of the function is to get the product details from the user and add a new product with the product details.
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        /// <exception cref="BO.NotValidException"></exception>
+        /// <exception cref="BO.AlreadyExistBlException"></exception>
         public int Add(BO.Product product)
         {
             if (product.ProductId < 0)
@@ -80,7 +99,12 @@ namespace BlImplementation
                 throw new BO.AlreadyExistBlException("exist", x);
             }
         }
-        //The purpose of the function is to delete a product by product code.
+        /// <summary>
+        ///The purpose of the function is to delete a product by product code.
+        /// </summary>
+        /// <param name="idOrder"></param>
+        /// <exception cref="BO.AlreadyExistBlException"></exception>
+        /// <exception cref="BO.NotExistBlException"></exception>
         public void Delete(int idOrder)
         {
             var orderItemList = idal!.OrderItem.GetAll(x => x?.OrderId == idOrder);
@@ -102,7 +126,12 @@ namespace BlImplementation
                 throw new BO.AlreadyExistBlException("the product is exist in orders so it cannot delete");
         }
 
-        //The purpose of the function is to update a product.
+        /// <summary>
+        ///The purpose of the function is to update a product.
+        /// </summary>
+        /// <param name="product"></param>
+        /// <exception cref="BO.NotValidException"></exception>
+        /// <exception cref="BO.NotExistBlException"></exception>
         public void Update(BO.Product product)
         {
             if (product.ProductId < 0)
@@ -129,7 +158,10 @@ namespace BlImplementation
             }
         }
 
-        //The purpose of the function is to show the buyer a list of products.
+        /// <summary>
+        /// The purpose of the function is to show the buyer a list of products.
+        /// </summary>
+        /// <returns>Return catalog of products</returns>
         public IEnumerable<BO.ProductItem> ListProductsToBuy()
         {
             IEnumerable<DO.Product?> products = idal!.Product.GetAll();
@@ -147,7 +179,12 @@ namespace BlImplementation
                               };
             return productList;
         }
-        //The purpose of the function is to present the product details to the buyer according to the product code.
+        /// <summary>
+        /// The purpose of the function is to present the product details to the buyer according to the product code.
+        /// </summary>
+        /// <param name="idProduct"></param>
+        /// <returns>Return product item from the catalog by code product</returns>
+        /// <exception cref="BO.NotExistBlException"></exception>
         public BO.ProductItem ProductForBuyer(int idProduct)
         {
             DO.Product product;
@@ -168,6 +205,11 @@ namespace BlImplementation
                 throw new BO.NotExistBlException("not exist", x);
             }
         }
+        /// <summary>
+        ///The function filters the products in the catalog by category
+        /// </summary>
+        /// <param name="_category"></param>
+        /// <returns>Return all the productItems with the choose category</returns>
         public IEnumerable<BO.ProductItem> GetProductsItemByCategory(BO.Categories _category)
         {
             return ListProductsToBuy().ToList().FindAll(x => x?.Category == _category);
