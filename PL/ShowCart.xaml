@@ -21,11 +21,10 @@
                 <TextBlock Grid.Column="3" Text="{Binding Path=Price}" Margin="10 5 10 5" />
                 <TextBlock Grid.Column="4" Text="{Binding Path=TotalPrice}" Margin="10 5 10 5" />
                 <Button Grid.Column="5" Content="+" Margin="10 5 10 5" Click="Button_Click" Height="20" Width="20"/>
-                <TextBlock Grid.Column="6" Text="{Binding Path=Amount}" Margin="10 5 10 5"/>
+                <!--<TextBlock Grid.Column="6" Text="{Binding Path=Amount}" Margin="10 5 10 5"/>-->
                 <Button Grid.Column="7" Content="-" Margin="10 5 10 5" Click="Button_Click_1" Height="20" Width="20"/>
                 <Button x:Name="btnDelete" Grid.Column="8" Content="מחק" Click="btnDelete_Click" Margin="10 5 10 5" Height="20" Width="35" FontSize="12"/>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />

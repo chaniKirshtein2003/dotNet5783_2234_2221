@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:PL"
         DataContext="{Binding Path=NewOrder,RelativeSource={RelativeSource self}}"
         mc:Ignorable="d"
-        Title="NewOrderWindow" Height="700" Width="800">
+        Title="NewOrderWindow" Height="700" Width="885">
     <Window.Resources>
         <ObjectDataProvider MethodName="GetValues"
                     ObjectType="{x:Type sys:Enum}"
@@ -54,7 +54,7 @@
             <Setter Property="BorderBrush" Value="#FF222631" />
         </Style>
     </Window.Resources>
-    <Grid Margin="0,0,0,0">
+    <Grid Margin="0,0,10,-6">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -62,26 +62,23 @@
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition  Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition  Width="*"/>
-            <ColumnDefinition  Width="*"/>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition  Width="80"/>
+            <ColumnDefinition  Width="47*"/>
+            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition  Width="47*"/>
+            <ColumnDefinition  Width="50*"/>
+            <ColumnDefinition Width="140"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Id Product" Grid.Row="1" Grid.Column="0"/>
-        <Label Content="Product Name" Grid.Row="1" Grid.Column="1"/>
-        <Label Content="Price" Grid.Row="1" Grid.Column="2"/>
-        <Label Content="Category" Grid.Row="1" Grid.Column="3"/>
-        <Label Content="Is In Stock?" Grid.Row="1" Grid.Column="4"/>
-        <Label Content="Amount In Stock" Grid.Row="1" Grid.Column="5"/>
-        
-        <ListBox x:Name="ProductItemsListview" Background="#FFF7E4C6"  Grid.Row="2" Grid.ColumnSpan="10" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyTemplate}" HorizontalContentAlignment="Stretch" MouseDoubleClick="ProductItemsListview_MouseDoubleClick"/>
-        <ComboBox SelectedItem="{x:Static Enum:Categories.Choose_Category}"  ItemsSource="{Binding Source={StaticResource Categories}}" x:Name="cmxFilterCategories"  Grid.Row="0" Grid.ColumnSpan="5" Width="150" SelectionChanged="cmxFilterCategories_SelectionChanged" Margin="90,10,10,45" Height="36" Grid.Column="5" Grid.RowSpan="2"/>
-        <Button x:Name="btnShowCart"  BorderThickness="3 1 1 3" Grid.ColumnSpan="10" Grid.Row="3" Content="View Cart" Width="150" Click="btnShowCart_Click" Margin="5" Height="40"/>
+        <Label Content="Id Product" Grid.Row="1" Grid.Column="0" Margin="0,7,0,8"/>
+        <Label Content="Product Name" Grid.Row="1" Grid.Column="1" Margin="0,7,0,8"/>
+        <Label Content="Price" Grid.Row="1" Grid.Column="2" Margin="0,7,0,8"/>
+        <Label Content="Category" Grid.Row="1" Grid.Column="3" Margin="0,7,0,8"/>
+        <Label Content="Is In Stock?" Grid.Row="1" Grid.Column="4" Margin="0,7,0,8"/>
+        <Label Content="Amount In Cart" Grid.Row="1" Grid.Column="5" Margin="0,7,0,8"/>
+
+        <ListBox x:Name="ProductItemsListview" Background="#FFF7E4C6"  Grid.Row="1" Grid.ColumnSpan="11" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyTemplate}" HorizontalContentAlignment="Stretch" MouseDoubleClick="ProductItemsListview_MouseDoubleClick" Margin="0,45,-10,91" Grid.RowSpan="3"/>
+        <ComboBox SelectedItem="{x:Static Enum:Categories.Choose_Category}"  ItemsSource="{Binding Source={StaticResource Categories}}" x:Name="cmxFilterCategories"  Grid.Row="1" SelectionChanged="cmxFilterCategories_SelectionChanged" Margin="10,7,9,8" Grid.Column="6"/>
+        <Button x:Name="btnShowCart"  BorderThickness="3 1 1 3" Grid.Row="3" Content="View Cart" Click="btnShowCart_Click" Margin="16,26,10,30" Grid.Column="3"/>
     </Grid>
 </Window>
