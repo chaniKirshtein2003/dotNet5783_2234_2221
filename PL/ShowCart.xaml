@@ -15,16 +15,17 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Column="0" Text="{Binding Path=OrderItemId}" Margin="10 5 10 5"/>
-                <TextBlock Grid.Column="1" Text="{Binding Path=OrderItemName}" Margin="10 5 10 5" Width="70"/>
+                <!--<TextBlock Grid.Column="0" Text="{Binding Path=OrderItemId}" Margin="10 5 10 5"/>-->
                 <TextBlock Grid.Column="2" Text="{Binding Path=ProductId}" Margin="10 5 10 5" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=OrderItemName}" Margin="10 5 10 5" Width="70"/>
                 <TextBlock Grid.Column="3" Text="{Binding Path=Price}" Margin="10 5 10 5" />
                 <TextBlock Grid.Column="4" Text="{Binding Path=TotalPrice}" Margin="10 5 10 5" />
-                <Button Grid.Column="5" Content="+" Margin="10 5 10 5" Click="Button_Click" Height="20" Width="20"/>
-                <!--<TextBlock Grid.Column="6" Text="{Binding Path=Amount}" Margin="10 5 10 5"/>-->
-                <Button Grid.Column="7" Content="-" Margin="10 5 10 5" Click="Button_Click_1" Height="20" Width="20"/>
-                <Button x:Name="btnDelete" Grid.Column="8" Content="מחק" Click="btnDelete_Click" Margin="10 5 10 5" Height="20" Width="35" FontSize="12"/>
+                <Button Grid.Column="5" Content="+" Margin="10 5 10 5" Click="Button_Click" Height="20" Width="20" BorderThickness="0.5"/>
+                <TextBlock Grid.Column="6" Text="{Binding Path=Amount}" Margin="10 5 10 5"/>
+                <Button Grid.Column="7" Content="-" Margin="10 5 10 5" Click="Button_Click_1" Height="20" Width="20" BorderThickness="0.5"/>
+                <Button x:Name="btnDelete" Grid.Column="8" Content="מחק" Click="btnDelete_Click" Margin="10 5 10 5" FontSize="13" Height="25" Width="52" BorderThickness="0.5"/>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
@@ -50,6 +51,6 @@ HorizontalContentAlignment="Stretch" />
         <Label x:Name="lblAddress" Content="Address" HorizontalAlignment="Left" Height="28" Margin="5,130,635,0" VerticalAlignment="Top" Width="60"/>
         <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="24" Margin="80,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnOK" IsEnabled="{Binding Count,Converter={StaticResource noProd}}" Content="Complete order" HorizontalAlignment="Left" Height="43" Margin="32,0,0,0" VerticalAlignment="Center" Width="112" Click="btnOK_Click" RenderTransformOrigin="0.259,0.575"/>
-        <Label x:Name="lblEmpty" Visibility="{Binding Count,Converter={StaticResource emptyCart}}" Content="(:סל הקניות שלך ריק" Height="63" Margin="314,112,0,259" Width="466" FontSize="24" HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
+        <Label x:Name="lblEmpty" Visibility="{Binding Count,Converter={StaticResource emptyCart}}" Content="Your shopping cart is empty:)" Height="63" Margin="314,112,0,259" Width="466" FontSize="24" HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
     </Grid>
 </Window>
