@@ -71,21 +71,42 @@ namespace PL
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
+            BO.Cart cart = new BO.Cart();
+            cart.CustomerName = txtName.Text;
+            cart.CustomerAddress = txtAddress.Text;
+            cart.CustomerEmail = txtEmail.Text;
+            cart.Items = Item == null ? new() : new(Item);
+            cart.TotalPrice = Item!.Sum(x => x.TotalPrice);
             try
             {
-                    BO.Cart cart = new BO.Cart();
-                    cart.CustomerName = txtName.Text;
-                    cart.CustomerAddress = txtAddress.Text;
-                    cart.CustomerEmail = txtEmail.Text;
-                    cart.Items = Item == null ? new() : new(Item);
-                    cart.TotalPrice = Item!.Sum(x => x.TotalPrice);
-                    bl!.Cart.MakeAnOrder(cart);
-                    MessageBox.Show("Your order has been accepted; Thank you for shopping with us");
+                bl!.Cart.MakeAnOrder(cart);
             }
             catch (BO.NotValidException ex)
             {
-                MessageBox.Show("" + ex);
+                MessageBox.Show(ex.ToString(),"ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
+            catch (BO.NotExistBlException ex)
+            {
+                MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            catch (BO.NotInStockException ex)
+            {
+                MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //cartItemsLst.Items.Refresh(); //show the updated cart
+            //lblPrice.Content = cart.TotalPrice; //update total price
+            //lblEmpty.Content = "Order successfully placed!";
+            //lblEmpty.Visibility = Visibility.Visible;
+            //btnMakeOrder.IsEnabled = false;
+            //btnMakeOrder.Foreground = Brushes.DimGray;
+        
+
+
+
+        MessageBox.Show("Your order has been accepted; Thank you for shopping with us");
         }
     }
 }
