@@ -240,9 +240,9 @@ namespace BlImplementation
             if (cart.CustomerAddress == "" || cart.CustomerAddress == null)
                 throw new BO.NotValidException("Customer-Address");
             //checking propriety of the customer's email (not empty and contains '@' in the middle)
-            if (!(cart.CustomerEmail == "" || cart.CustomerEmail == null)
-                && cart.CustomerEmail?.IndexOf('@') == -1 || cart.CustomerEmail?.IndexOf('@') == 0
-                || cart.CustomerEmail?.IndexOf('@') == cart.CustomerEmail?.Length)
+            if ((cart.CustomerEmail == "" || cart.CustomerEmail == null)
+                || (cart.CustomerEmail?.IndexOf('@') == -1 || cart.CustomerEmail?.IndexOf('@') == 0
+                || cart.CustomerEmail?.IndexOf('@') == cart.CustomerEmail?.Length-1))
                 throw new BO.NotValidException("Customer-Email");
 
             //for each item, checking if the item exists in the dal list:
