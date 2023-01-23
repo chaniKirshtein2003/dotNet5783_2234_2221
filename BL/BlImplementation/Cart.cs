@@ -178,7 +178,7 @@ namespace BlImplementation
                 var allItems = from item in cart.Items
                                let product = idal!.Product.Get(item.ProductId)
                                let newProd = new DO.Product { ProductId = product.ProductId, ProductName = product.ProductName, Price = product.Price, AmountInStock = product.AmountInStock - item.Amount, Category = product.Category }
-                               let updateAmount = UpdateAmountDal(newProd)
+                            //   let updateAmount = UpdateAmountDal(newProd)
                                select new DO.OrderItem() { Amount = item!.Amount, ProductId = item.ProductId, OrderId = id, PricePerUnit = newProd.Price };
                 allItems.All(x => idal.OrderItem.Add(x) > 0 ? true : false);
             }
