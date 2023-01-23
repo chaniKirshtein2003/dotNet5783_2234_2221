@@ -84,7 +84,7 @@ namespace PL
                     cart.Items = Item == null ? new() : new(Item);
                     cart.TotalPrice = Item!.Sum(x => x.TotalPrice);
                     bl!.Cart.MakeAnOrder(cart);
-                    MessageBox.Show("הזמנתך התקבלה במערכת. תודה שקנית אצלנו");
+                    MessageBox.Show("Your order has been accepted; Thank you for shopping with us");
                 }
             }
             catch (BO.NotValidException ex)
