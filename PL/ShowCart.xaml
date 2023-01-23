@@ -9,6 +9,7 @@
         Title="ShowCart" Height="450" Width="800">
     <Window.Resources>
         <local:NoProducts x:Key="noProd"/>
+        <local:EmptyCart x:Key="emptyCart"/>
         <DataTemplate x:Key="MyDataTemplate" DataType="local:OrderItem">
             <Grid>
                 <Grid.RowDefinitions>
@@ -45,12 +46,11 @@ HorizontalContentAlignment="Stretch" />
         </StackPanel>
         <Label x:Name="lblName"  Content="Full Name" HorizontalAlignment="Left" Height="28" Margin="5,40,0,0" VerticalAlignment="Top" Width="73"/>
         <Label x:Name="lblEmail" Content="Email" HorizontalAlignment="Left" Height="28" Margin="5,85,626,0" VerticalAlignment="Top" Width="53"/>
-        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="25" Margin="80,45,648,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.548,0.777"/>
-        <TextBox x:Name="txtAddress" HorizontalAlignment="Left" Height="25" Margin="80,135,648,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="25" Margin="80,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.548,0.777"/>
+        <TextBox x:Name="txtAddress" HorizontalAlignment="Left" Height="25" Margin="80,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75"/>
         <Label x:Name="lblAddress" Content="Address" HorizontalAlignment="Left" Height="28" Margin="5,130,635,0" VerticalAlignment="Top" Width="60"/>
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="24" Margin="80,90,648,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="24" Margin="80,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnOK" IsEnabled="{Binding Count,Converter={StaticResource noProd}}" Content="Complete order" HorizontalAlignment="Left" Height="43" Margin="32,0,0,0" VerticalAlignment="Center" Width="112" Click="btnOK_Click" RenderTransformOrigin="0.259,0.575"/>
-        <Label x:Name="lblEmpty" Content="סל הקניות שלך ריק" Height="63" Margin="306,325,0,0" Width="466" FontSize="24" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Hidden"/>
+        <Label x:Name="lblEmpty" Visibility="{Binding Count,Converter={StaticResource emptyCart}}" Content="(:סל הקניות שלך ריק" Height="63" Margin="314,112,0,259" Width="466" FontSize="24" HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
     </Grid>
-
 </Window>

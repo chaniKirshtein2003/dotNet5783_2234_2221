@@ -40,11 +40,11 @@ namespace PL
             _myCart = cart;
             var help = _myCart.Items;
             Item = help == null ? new() : new(help!);
-            if (Item == null)
-            {
-                lblEmpty.Visibility = Visibility.Visible;
-                btnOK.Visibility = Visibility.Hidden;
-            }
+            //if (Item == null)
+            //{
+            //    //lblEmpty.Visibility = Visibility.Visible;
+            //    //btnOK.Visibility = Visibility.Hidden;
+            //}
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -73,10 +73,6 @@ namespace PL
         {
             try
             {
-                if (Item == null)
-                    MessageBox.Show("The cart is empty");
-                else
-                {
                     BO.Cart cart = new BO.Cart();
                     cart.CustomerName = txtName.Text;
                     cart.CustomerAddress = txtAddress.Text;
@@ -85,11 +81,10 @@ namespace PL
                     cart.TotalPrice = Item!.Sum(x => x.TotalPrice);
                     bl!.Cart.MakeAnOrder(cart);
                     MessageBox.Show("Your order has been accepted; Thank you for shopping with us");
-                }
             }
             catch (BO.NotValidException ex)
             {
-                MessageBox.Show(""+ex);
+                MessageBox.Show("" + ex);
             }
         }
     }
