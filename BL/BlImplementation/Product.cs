@@ -175,7 +175,7 @@ namespace BlImplementation
                                   Price = product?.Price ?? 0,
                                   Category = (BO.Categories?)product?.Category,
                                   InStock = product?.AmountInStock > 0 ? true : false,
-                                  Amount = product?.AmountInStock ?? 0
+                                  Amount = 0
                               };
             return productList;
         }
@@ -185,17 +185,19 @@ namespace BlImplementation
         /// <param name="idProduct"></param>
         /// <returns>Return product item from the catalog by code product</returns>
         /// <exception cref="BO.NotExistBlException"></exception>
-        public BO.ProductItem ProductForBuyer(int idProduct)
+        public BO.ProductItem ProductForBuyer(int idProduct,BO.Cart cart)
         {
             DO.Product product;
+            int amount;
             try
             {
+                amount = cart.Items?.FirstOrDefault(x => x?.ProductId == idProduct)?.Amount ?? 0;
                 product = idal!.Product.Get(idProduct);
                 BO.ProductItem newProduct = new BO.ProductItem();
                 newProduct.ID = idProduct;
                 newProduct.Name = product.ProductName;
                 newProduct.Price = product.Price;
-                newProduct.Amount = product.AmountInStock;
+                newProduct.Amount = amount;
                 newProduct.Category = (BO.Categories?)product.Category;
                 newProduct.InStock = product.AmountInStock > 0 ? true : false;
                 return newProduct;

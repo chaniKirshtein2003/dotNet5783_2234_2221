@@ -12,16 +12,14 @@
         <!--<Label x:Name="lblPrId" Content="מזהה מוצר" HorizontalAlignment="Left" Margin="570,54,0,0" VerticalAlignment="Top"/>-->
         <Label Content="Price" HorizontalAlignment="Left" Margin="350,133,0,0" VerticalAlignment="Top"/>
         <Label Content="Category" HorizontalAlignment="Left" Margin="350,182,0,0" VerticalAlignment="Top"/>
-        <!--<Label x:Name="lblPrAmount" Content="כמות במלאי" HorizontalAlignment="Left" Margin="565,224,0,0" VerticalAlignment="Top" RenderTransformOrigin="10.729,-2.258"/>-->
         <TextBox Text="{Binding Path=Name}" HorizontalAlignment="Left" Margin="440,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="White"/>
         <!--<TextBox Text="{Binding Path=ID}" x:Name="txtPrId" HorizontalAlignment="Left" Margin="413,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>-->
         <TextBox Text="{Binding Path=Price}" HorizontalAlignment="Left" Margin="440,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <!--<TextBox Text="{Binding Path=Amount}" x:Name="txtPrAmount" HorizontalAlignment="Left" Margin="413,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>-->
         <TextBox Text="{Binding Path=Category}" HorizontalAlignment="Left" Margin="440,187,0,0" VerticalAlignment="Top" Width="120"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="414,365,0,0" VerticalAlignment="Top" Height="32" Width="66" Click="btnCancel_Click"/>
         <Label Content="In Stock" HorizontalAlignment="Left" Margin="350,233,0,0" VerticalAlignment="Top"/>
         <CheckBox IsChecked="{Binding Path=InStock}" IsEnabled="False" HorizontalAlignment="Left" Margin="440,245,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="440,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding Path=Amount}" HorizontalAlignment="Left" Margin="440,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Amount" HorizontalAlignment="Left" Margin="350,288,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.257,1.551"/>
     </Grid>
 </Window>

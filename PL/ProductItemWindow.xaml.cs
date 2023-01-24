@@ -35,11 +35,11 @@ namespace PL
 
 
 
-        public ProductItemWindow(int id)
+        public ProductItemWindow(int id, BO.Cart cart)
         {
             InitializeComponent();
-            BO.ProductItem prod = bl.Product.ProductForBuyer(id);
-            ProductItem= prod;
+            BO.ProductItem prod = bl.Product.ProductForBuyer(id, cart);
+            ProductItem = prod;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

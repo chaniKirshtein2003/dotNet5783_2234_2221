@@ -249,6 +249,15 @@ namespace BlImplementation
             IEnumerable<DO.Product> doProducts;
             try
             {
+                cart.Items!.FindAll(x => idal!.Product.Get(x!.ProductId).AmountInStock - x.Amount > 0 ? true : throw new BO.NotInStockException(x.ProductId, x.OrderItemName!));
+                DO.Order doOrder = new DO.Order() { CustomerAddress = cart.CustomerAddress, CustomerName = cart.CustomerName, CustomerEmail = cart.CustomerEmail, ShipDate = null, DeliveryDate = null, OrderDate = DateTime.Now };
+                int id = idal!.Order.Add(doOrder);
+                var allItems = from item in cart.Items
+                               let product = idal!.Product.Get(item.ProductId)
+                               let newProd = new DO.Product { ProductId = product.ProductId, ProductName = product.ProductName, Price = product.Price, AmountInStock = product.AmountInStock - item.Amount, Category = product.Category }
+                            //   let updateAmount = UpdateAmountDal(newProd)
+                               select new DO.OrderItem() { Amount = item!.Amount, ProductId = item.ProductId, OrderId = id, PricePerUnit = newProd.Price };
+                allItems.All(x => idal.OrderItem.Add(x) > 0 ? true : false);
                 doProducts = from item in cart.Items
                              select idal?.Product.Get(item.ProductId) ?? throw new Exception("");
             }
@@ -301,7 +310,7 @@ namespace BlImplementation
                                     ProductName = item.ProductName ?? "",
                                     Price = item.Price,
                                     Category = item.Category,
-                                    AmountInStock = item.AmountInStock - cart.Items!.First(x => x?.ProductId == item.ProductId).Amount,  //update the amount
+                                    AmountInStock = item.AmountInStock - cart.Items!.First(x => x?.ProductId == item.ProductId)!.Amount,  //update the amount
                                                                                                                                          //PictureName = item.PictureName ?? @"\pics\img.jpg",
                                 };
             //add each updated product to dal:

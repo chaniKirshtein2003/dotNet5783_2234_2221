@@ -10,7 +10,7 @@ namespace BlApi
         public void Delete(int id);
         public void Update(BO.Product product);
         public IEnumerable<BO.ProductItem> ListProductsToBuy();
-        public BO.ProductItem ProductForBuyer(int idProduct);
+        public BO.ProductItem ProductForBuyer(int idProduct, BO.Cart cart);
         public IEnumerable<BO.ProductForList> GetProductsListByCategory(BO.Categories _category);
         public IEnumerable<BO.ProductItem> GetProductsItemByCategory(BO.Categories _category);
     }

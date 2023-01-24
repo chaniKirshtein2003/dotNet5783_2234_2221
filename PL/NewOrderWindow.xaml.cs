@@ -60,11 +60,13 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             int id = ((BO.ProductItem)((System.Windows.FrameworkElement)sender).DataContext).ID;
+            int amount = ((BO.ProductItem)((System.Windows.FrameworkElement)sender).DataContext).Amount;
             if (((BO.ProductItem)((System.Windows.FrameworkElement)sender).DataContext).InStock == false)
                 MessageBox.Show("Out of stock");
             else
             {
                 myCart = bl!.Cart.Add(myCart, id);
+                myCart = bl.Cart.Update(myCart, id, amount);
                 MessageBox.Show("The product has been successfully added!");
             }
         }
@@ -74,7 +76,7 @@ namespace PL
         private void ProductItemsListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             int id = ((BO.ProductItem)((System.Windows.Controls.ListBox)sender).SelectedItem).ID;
-            new ProductItemWindow(id).ShowDialog();
+            new ProductItemWindow(id, myCart).ShowDialog();
         }
     }
 }

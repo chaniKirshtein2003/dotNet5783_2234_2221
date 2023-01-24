@@ -20,7 +20,6 @@ namespace PL
     public partial class OrderTracking : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        BO.Order? order;
 
         public BO.OrderTracking OrderTrack
         {
@@ -38,7 +37,6 @@ namespace PL
             InitializeComponent();
             try
             {
-                //order = bl.Order.GetOrderDetails(idOrder);
                 OrderTrack = bl.Order.OrderTracking(idOrder);
             }
             catch (Exception)

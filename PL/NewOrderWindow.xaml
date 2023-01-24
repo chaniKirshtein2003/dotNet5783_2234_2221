@@ -10,6 +10,7 @@
         mc:Ignorable="d"
         Title="NewOrderWindow" Height="700" Width="885">
     <Window.Resources>
+        <local:NoAdd x:Key="noAdd"/>
         <ObjectDataProvider MethodName="GetValues"
                     ObjectType="{x:Type sys:Enum}"
                     x:Key="Categories">
@@ -35,9 +36,9 @@
                 <TextBlock Grid.Column="1" Text="{Binding Path=Name}" />
                 <TextBlock Grid.Column="2" Text="{Binding Path=Price}" />
                 <TextBlock Grid.Column="3" Text="{Binding Path=Category}" />
-                <CheckBox Grid.Column="4" IsChecked="{Binding Path=InStock}" IsEnabled="False"/>
-                <TextBlock Grid.Column="5" Text="{Binding Path=Amount}" />
-                <Button Grid.Column="6" Content="Add" Click="Button_Click" FontSize="13" Height="25" Width="52" Margin="1"/>
+                <CheckBox Grid.Column="4" IsChecked="{Binding Path=InStock}" IsEnabled="False" Margin="3"/>
+                <TextBox Grid.Column="5" Text="{Binding Path=Amount}" Width="40" Height="25" TextAlignment="Center" Margin="1 1 45 1"/>
+                <Button Grid.Column="6" Content="Add" IsEnabled="{Binding Path=Amount,Converter={StaticResource noAdd}}" Click="Button_Click" FontSize="13" Height="25" Width="52" Margin="1"/>
             </Grid>
         </DataTemplate>
         <Style TargetType="Label">
@@ -67,7 +68,7 @@
             <ColumnDefinition Width="47*"/>
             <ColumnDefinition Width="47*"/>
             <ColumnDefinition  Width="47*"/>
-            <ColumnDefinition  Width="50*"/>
+            <ColumnDefinition  Width="47*"/>
             <ColumnDefinition Width="140"/>
         </Grid.ColumnDefinitions>
         <Label Content="Id Product" Grid.Row="1" Grid.Column="0" Margin="0,7,0,8"/>

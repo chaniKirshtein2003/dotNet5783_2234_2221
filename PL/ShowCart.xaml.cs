@@ -107,6 +107,7 @@ namespace PL
 
 
         MessageBox.Show("Your order has been accepted; Thank you for shopping with us");
+            this.Close();
         }
     }
 }

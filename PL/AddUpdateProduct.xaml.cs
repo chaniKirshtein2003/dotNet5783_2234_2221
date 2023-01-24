@@ -90,7 +90,7 @@ namespace PL
                             throw new Exception("update failed");
                         }
                 }
-                catch (Exception x)
+                catch (Exception)
                 {
                     MessageBox.Show("Missing details");
                 }
