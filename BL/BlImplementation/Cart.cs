@@ -102,133 +102,6 @@ namespace BlImplementation
         /// <exception cref="BO.NotValidException"></exception>
         /// <exception cref="Exception"></exception>
         /// <exception cref="BO.AlreadyExistBlException"></exception>
-        //public void MakeAnOrder(BO.Cart cart)
-        //{
-            //if (cart.CustomerAddress == "" || cart.CustomerName == "" || cart.CustomerEmail == "")
-            //    throw new BO.NotValidException("missing details");
-            //if (cart.Items == null)
-            //    throw new Exception("The cart is empty");
-            ////var updatedCart = cart.Items!.FindAll(item => item?.Amount > 0);
-
-            //foreach (BO.OrderItem? item in cart.Items!)
-            //{
-            //    if (item?.Amount < 0)
-            //        throw new BO.NotValidException("cannot be negative amount");
-            //    DO.Product doProduct = idal!.Product.Get(item?.ProductId ?? 0);
-            //    if (doProduct.AmountInStock - item?.Amount < 0)
-            //        throw new BO.NotValidException("there is not enough products in stock");
-            //}
-            //DO.Order order = new DO.Order()
-            //{
-            //    CustomerAddress = cart.CustomerAddress,
-            //    CustomerName = cart.CustomerName,
-            //    CustomerEmail = cart.CustomerEmail,
-            //    DeliveryDate = null,
-            //    ShipDate = null,
-            //    OrderDate = DateTime.Now
-            //};
-            //int id;
-            //try
-            //{
-            //    id = idal!.Order.Add(order);
-            //    DO.OrderItem orderItem;
-            //    foreach (BO.OrderItem? itemBO in cart.Items)
-            //    {
-            //        try
-            //        {
-            //            DO.Product doProduct = idal.Product.Get(itemBO?.ProductId ?? 0);
-            //            doProduct.AmountInStock -= itemBO?.Amount ?? 0;
-            //            idal.Product.Update(doProduct);
-            //            orderItem = new DO.OrderItem();
-            //            orderItem.OrderId = id;
-            //            orderItem.ProductId = itemBO?.ProductId ?? 0;
-            //            orderItem.PricePerUnit = itemBO?.TotalPrice ?? 0;
-            //            orderItem.Amount = itemBO?.Amount ?? 0;
-            //            idal.OrderItem.Add(orderItem);
-            //        }
-            //        catch (DO.ExistException x)
-            //        {
-            //            throw new BO.AlreadyExistBlException("alerady exist", x);
-            //        }
-            //    }
-            //}
-            //catch (DO.ExistException ex)
-            //{
-            //    throw new BO.AlreadyExistBlException("alerady exist", ex);
-            //}
-
-            //if (boCart.CustomerAdress == "")
-            //    throw new BO.NotEnoughDetailsException("customerAsress");
-            //if (boCart.CustomerEmail == "")
-            //    throw new BO.NotEnoughDetailsException("customerEmail");
-            //if (boCart.CustomerName == "")
-            //    throw new BO.NotEnoughDetailsException("customerName");
-            //if (boCart.Items == null)
-            //    throw new Exception("the cart is empty");
-            //int negativeAmount = boCart.Items!.Count(x => x!.Amount < 0);
-            //if (negativeAmount > 0)
-        //    //    throw new BO.NotValidException("amount");
-
-
-        //    try
-        //    {
-        //        cart.Items!.FindAll(x => idal!.Product.Get(x!.ProductId).AmountInStock - x.Amount > 0 ? true : throw new BO.NotInStockException(x.ProductId, x.OrderItemName!));
-        //        DO.Order doOrder = new DO.Order() { CustomerAddress = cart.CustomerAddress, CustomerName = cart.CustomerName, CustomerEmail = cart.CustomerEmail, ShipDate = null, DeliveryDate = null, OrderDate = DateTime.Now };
-        //        int id = idal!.Order.Add(doOrder);
-        //        var allItems = from item in cart.Items
-        //                       let product = idal!.Product.Get(item.ProductId)
-        //                       let newProd = new DO.Product { ProductId = product.ProductId, ProductName = product.ProductName, Price = product.Price, AmountInStock = product.AmountInStock - item.Amount, Category = product.Category }
-        //                       let updateAmount = UpdateAmountDal(newProd)
-        //                       select new DO.OrderItem() { Amount = item!.Amount, ProductId = item.ProductId, OrderId = id, PricePerUnit = newProd.Price };
-        //        allItems.All(x => idal.OrderItem.Add(x) > 0 ? true : false);
-        //    }
-        //    catch (DO.ExistException ex)
-        //    {
-        //        throw new BO.AlreadyExistBlException("order alredy exist cannot add- ", ex);
-        //    }
-        //    catch (DO.NotExistException ex)
-        //    {
-        //        throw new BO.NotExistBlException("product does not exist-", ex);
-        //    }
-        //}
-
-        //public void OrderConfirmation(BO.Cart boCart)
-        //{
-        //if (boCart.CustomerAdress == "")
-        //    throw new BO.NotEnoughDetailsException("customerAsress");
-        //if (boCart.CustomerEmail == "")
-        //    throw new BO.NotEnoughDetailsException("customerEmail");
-        //if (boCart.CustomerName == "")
-        //    throw new BO.NotEnoughDetailsException("customerName");
-        //if (boCart.Items == null)
-        //    throw new Exception("the cart is empty");
-        //int negativeAmount = boCart.Items!.Count(x => x!.Amount < 0);
-        //if (negativeAmount > 0)
-        //    throw new BO.NotValidException("amount");
-
-
-        //    try
-        //    {
-        //        boCart.Items!.FindAll(x => idal!.Product.Get(x!.ProductId).AmountInStock - x.Amount > 0 ? true : throw new BO.NotInStockException(x.ProductId, x.ProductName!));
-        //        DO.Order doOrder = new DO.Order() { CustomerAddress = boCart.CustomerAddress, CustomerName = boCart.CustomerName, CustomerEmail = boCart.CustomerEmail, ShipDate = null, DeliveryDate = null, OrderDate = DateTime.Now };
-        //        int id = idal!.Order.Add(doOrder);
-        //        var allItems = from item in boCart.Items
-        //                       let product = idal!.Product.Get(item.ProductId)
-        //                       let newProd = new DO.Product { ID = product.ID, Name = product.Name, Price = product.Price, InStock = product.InStock - item.Amount, CategoryP = product.CategoryP }
-        //                       let updateAmount = UpdateAmountDal(newProd)
-        //                       select new DO.OrderItem() { Amount = item!.Amount, ProductId = item.ProductId, OrderId = id, Price = newProd.Price };
-        //        allItems.All(x => idal.OrderItem.Add(x) > 0 ? true : false);
-        //    }
-        //    catch (DO.ExistException ex)
-        //    {
-        //        throw new BO.AlreadyExistBlException("order alredy exist cannot add- ", ex);
-        //    }
-        //    catch (DO.NotExistException ex)
-        //    {
-        //        throw new BO.NotExistBlException("product does not exist-", ex);
-        //    }
-        //}
-        //}
         public void MakeAnOrder(BO.Cart cart)
         {
             if (cart.Items?.Count() == 0)//there aren't items in cart
@@ -325,6 +198,18 @@ namespace BlImplementation
             //after the order was made the cart is empty:
             ((List<BO.OrderItem?>)(cart.Items!)).Clear();
             cart.TotalPrice = 0;
+        }
+        /// <summary>
+        /// The function updates the basket quantity of the product added to the basket.
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="id"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        public BO.Cart UpdateAmount(BO.Cart cart, int id, int amount)
+        {
+            var x = Add(cart, id);
+            return Update(x, id, amount);
         }
     }
 }

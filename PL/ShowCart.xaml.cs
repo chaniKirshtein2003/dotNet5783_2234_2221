@@ -83,7 +83,7 @@ namespace PL
             }
             catch (BO.NotValidException ex)
             {
-                MessageBox.Show(ex.ToString(),"ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             catch (BO.NotExistBlException ex)
@@ -96,17 +96,7 @@ namespace PL
                 MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            //cartItemsLst.Items.Refresh(); //show the updated cart
-            //lblPrice.Content = cart.TotalPrice; //update total price
-            //lblEmpty.Content = "Order successfully placed!";
-            //lblEmpty.Visibility = Visibility.Visible;
-            //btnMakeOrder.IsEnabled = false;
-            //btnMakeOrder.Foreground = Brushes.DimGray;
-        
-
-
-
-        MessageBox.Show("Your order has been accepted; Thank you for shopping with us");
+            MessageBox.Show("Your order has been accepted; Thank you for shopping with us");
             this.Close();
         }
     }

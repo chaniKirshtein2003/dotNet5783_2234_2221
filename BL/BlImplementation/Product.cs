@@ -108,7 +108,7 @@ namespace BlImplementation
         public void Delete(int idOrder)
         {
             var orderItemList = idal!.OrderItem.GetAll(x => x?.OrderId == idOrder);
-            if(orderItemList != null)
+            if (orderItemList != null)
                 throw new BO.AlreadyExistBlException("The product is exist");
             try
             {
@@ -185,7 +185,7 @@ namespace BlImplementation
         /// <param name="idProduct"></param>
         /// <returns>Return product item from the catalog by code product</returns>
         /// <exception cref="BO.NotExistBlException"></exception>
-        public BO.ProductItem ProductForBuyer(int idProduct,BO.Cart cart)
+        public BO.ProductItem ProductForBuyer(int idProduct, BO.Cart cart)
         {
             DO.Product product;
             int amount;
@@ -215,6 +215,32 @@ namespace BlImplementation
         public IEnumerable<BO.ProductItem> GetProductsItemByCategory(BO.Categories _category)
         {
             return ListProductsToBuy().ToList().FindAll(x => x?.Category == _category);
+        }
+        public IEnumerable<BO.ProductForList?> PopularProductItems()
+        {
+            //creat a list of groups of items that appear in order, by ID
+            var popGroup = from item in idal!.OrderItem.GetAll()
+                           group item by ((DO.OrderItem?)(item))?.ProductId into g
+                           select new { id = g.Key, Items = g };
+            //take the 10 that appear in the biggest amount of orders 
+            popGroup = popGroup.OrderByDescending(x => x.Items.Count()).Take(10);
+            //return the 10 popular items:
+            try
+            {
+                return from item in popGroup
+                       let prod = idal.Product.Get(item?.id ?? throw new BO.NotValidException("Prodact ID is null"))
+                       select new BO.ProductForList
+                       {
+                           ID = prod.ProductId,
+                           Name = prod.ProductName,
+                           Price = prod.Price,
+                           Category = (BO.Categories?)prod.Category,
+                       };
+            }
+            catch (BO.NotEnoughDetailsException ex)
+            {
+                throw new BO.AlreadyExistBlException("Product does not exist", ex);
+            }
         }
     }
 }

@@ -73,5 +73,10 @@ namespace PL
             Prods = help == null ? new() : new(help);
             CategoriesSelector.SelectedItem = BO.Categories.Choose_Category;
         }
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var temp = bl!.Product.PopularProductItems();
+            Prods = temp == null ? new() : new(temp!);
+        }
     }
 }

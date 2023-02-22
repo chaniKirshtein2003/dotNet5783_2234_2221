@@ -13,5 +13,6 @@ namespace BlApi
         public BO.ProductItem ProductForBuyer(int idProduct, BO.Cart cart);
         public IEnumerable<BO.ProductForList> GetProductsListByCategory(BO.Categories _category);
         public IEnumerable<BO.ProductItem> GetProductsItemByCategory(BO.Categories _category);
+        public IEnumerable<BO.ProductForList?> PopularProductItems();
     }
 }
