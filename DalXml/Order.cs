@@ -24,22 +24,22 @@ internal class Order : IOrder
     public DO.Order Get(int id)
     {
         List<DO.Order?> listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
-
         return listOrders.FirstOrDefault(ord => ord?.OrderId == id) ??
             throw new DO.NotExistException(id,"order");
     }
     public DO.Order? GetByCondition(Func<DO.Order?, bool>? check)
     {
         List<DO.Order?> listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
-
         return listOrders.Select(ord => ord).FirstOrDefault() ?? throw new DO.NotExistException(0, "order");
     }
     public int Add(DO.Order order)
     {
         order.OrderId = Config.GetNextOrderNumber();
+        Config.SaveNextOrderNumber((order.OrderId)+1);
         List<DO.Order?> listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
-        if (listOrders.FirstOrDefault(ord => ord?.OrderId == order.OrderId) != null)
-            throw new DO.ExistException(order.OrderId,"order");
+        
+        //if (listOrders.FirstOrDefault(ord => ord?.OrderId == order.OrderId) != null)
+        //    throw new DO.ExistException(order.OrderId,"order");
 
         listOrders.Add(order);
 

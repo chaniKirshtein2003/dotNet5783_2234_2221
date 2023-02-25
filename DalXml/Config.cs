@@ -16,7 +16,7 @@ internal class Config
     internal static void SaveNextOrderNumber(int number)
     {
         XElement root = XMLTools.LoadListFromXMLElement(s_config);
-        root.Element("NextOrderNumber")!.SetValue(number.ToString());
+        root.Element("orderNextId")!.SetValue(number.ToString());
         XMLTools.SaveListToXMLElement(root, s_config);
     }
 
@@ -25,10 +25,11 @@ internal class Config
     {
         return (int)XMLTools.LoadListFromXMLElement(s_config).Element("orderItemNextId")!;
     }
+
     internal static void SaveNextOrderItemNumber(int number)
     {
         XElement root = XMLTools.LoadListFromXMLElement(s_config);
-        root.Element("NextOrderItemNumber")!.SetValue(number.ToString());
+        root.Element("orderItemNextId")!.SetValue(number.ToString());
         XMLTools.SaveListToXMLElement(root, s_config);
     }
 }
