@@ -38,7 +38,6 @@ internal class Order : IOrder
     {
         order.OrderId = Config.orderNextId();
         List<DO.Order?> listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
-
         if (listOrders.FirstOrDefault(ord => ord?.OrderId == order.OrderId) != null)
             throw new DO.ExistException(order.OrderId,"order");
 
