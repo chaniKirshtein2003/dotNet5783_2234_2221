@@ -14,7 +14,7 @@ internal class OrderItem : IOrderItem
 
     public int Add(DO.OrderItem orderItem)
     {
-        orderItem.OrderItemId = Config.NextOrderItemNumber();
+        orderItem.OrderItemId = Config.GetNextOrderItemNumber();
         List<DO.OrderItem?> listOrderItems = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItem);
 
         if (listOrderItems.FirstOrDefault(ordItem => ordItem?.OrderItemId == orderItem.OrderItemId) != null)
