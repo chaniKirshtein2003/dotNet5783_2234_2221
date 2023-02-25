@@ -12,7 +12,8 @@ namespace Dal
         static string s_config = "config";
         internal static int orderNextId()
         {
-            return (int)XMLTools.LoadListFromXMLElement(s_config).Element("orderNextId")!;
+            int x= (int)XMLTools.LoadListFromXMLElement(s_config).Element("orderNextId")!;
+            return x;
         }
         internal static void SaveNextOrderNumber(int num)
         {
