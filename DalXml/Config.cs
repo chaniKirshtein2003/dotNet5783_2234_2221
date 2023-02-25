@@ -5,33 +5,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Dal
+namespace Dal;
+internal class Config
 {
-    internal class Config
+    static string s_config = "config";
+    internal static int GetNextOrderNumber()
     {
-        static string s_config = "config";
-        internal static int orderNextId()
-        {
-            int x= (int)XMLTools.LoadListFromXMLElement(s_config).Element("orderNextId")!;
-            return x;
-        }
-        internal static void SaveNextOrderNumber(int num)
-        {
-            XElement root = XMLTools.LoadListFromXMLElement(s_config);
-            root.Element("orderNextId")!.SetValue(num.ToString());
-            XMLTools.SaveListToXMLElement(root, s_config);
-        }
+        return (int)XMLTools.LoadListFromXMLElement(s_config).Element("orderNextId")!;
+    }
+    internal static void SaveNextOrderNumber(int number)
+    {
+        XElement root = XMLTools.LoadListFromXMLElement(s_config);
+        root.Element("NextOrderNumber")!.SetValue(number.ToString());
+        XMLTools.SaveListToXMLElement(root, s_config);
+    }
 
 
-        internal static int NextOrderItemNumber()
-        {
-            return (int)XMLTools.LoadListFromXMLElement(s_config).Element("orderItemNextId")!;
-        }
-        internal static void SaveNextOrderItemNumber(int num)
-        {
-            XElement root = XMLTools.LoadListFromXMLElement(s_config);
-            root.Element("orderItemNextId")!.SetValue(num.ToString());
-            XMLTools.SaveListToXMLElement(root, s_config);
-        }
+    internal static int GetNextOrderItemNumber()
+    {
+        return (int)XMLTools.LoadListFromXMLElement(s_config).Element("orderItemNextId")!;
+    }
+    internal static void SaveNextOrderItemNumber(int number)
+    {
+        XElement root = XMLTools.LoadListFromXMLElement(s_config);
+        root.Element("NextOrderItemNumber")!.SetValue(number.ToString());
+        XMLTools.SaveListToXMLElement(root, s_config);
     }
 }

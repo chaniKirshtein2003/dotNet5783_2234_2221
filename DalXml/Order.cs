@@ -36,7 +36,7 @@ internal class Order : IOrder
     }
     public int Add(DO.Order order)
     {
-        order.OrderId = Config.orderNextId();
+        order.OrderId = Config.GetNextOrderNumber();
         List<DO.Order?> listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
 
         if (listOrders.FirstOrDefault(ord => ord?.OrderId == order.OrderId) != null)
