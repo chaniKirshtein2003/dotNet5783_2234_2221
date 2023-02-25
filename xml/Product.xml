@@ -8,13 +8,6 @@
     <AmountInStock>2</AmountInStock>
   </Product>
   <Product>
-    <ProductId>100018</ProductId>
-    <ProductName>ships beds</ProductName>
-    <Price>600</Price>
-    <AmountInStock>7</AmountInStock>
-    <Category>Judaica</Category>
-  </Product>
-  <Product>
     <ProductId>100021</ProductId>
     <ProductName>Ihgf</ProductName>
     <Price>62</Price>
@@ -22,17 +15,24 @@
     <Category>HomeAccessories</Category>
   </Product>
   <Product>
-    <ProductId>100020</ProductId>
-    <ProductName>hh</ProductName>
-    <Price>20</Price>
-    <AmountInStock>3</AmountInStock>
+    <ProductId>100018</ProductId>
+    <ProductName>ships beds</ProductName>
+    <Price>600</Price>
+    <AmountInStock>6</AmountInStock>
     <Category>Judaica</Category>
   </Product>
   <Product>
     <ProductId>100017</ProductId>
     <ProductName>flowers</ProductName>
     <Price>1000</Price>
-    <AmountInStock>14</AmountInStock>
+    <AmountInStock>1</AmountInStock>
+    <Category>Judaica</Category>
+  </Product>
+  <Product>
+    <ProductId>100020</ProductId>
+    <ProductName>hh</ProductName>
+    <Price>20</Price>
+    <AmountInStock>2</AmountInStock>
     <Category>Judaica</Category>
   </Product>
 </ArrayOfProduct>

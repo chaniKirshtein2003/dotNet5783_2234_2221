@@ -37,10 +37,6 @@ internal class Order : IOrder
         order.OrderId = Config.GetNextOrderNumber();
         Config.SaveNextOrderNumber((order.OrderId)+1);
         List<DO.Order?> listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
-        
-        //if (listOrders.FirstOrDefault(ord => ord?.OrderId == order.OrderId) != null)
-        //    throw new DO.ExistException(order.OrderId,"order");
-
         listOrders.Add(order);
 
         XMLTools.SaveListToXMLSerializer(listOrders, s_orders);

@@ -222,9 +222,9 @@ namespace BlImplementation
             var popGroup = from item in idal!.OrderItem.GetAll()
                            group item by ((DO.OrderItem?)(item))?.ProductId into g
                            select new { id = g.Key, Items = g };
-            //take the 10 that appear in the biggest amount of orders 
-            popGroup = popGroup.OrderByDescending(x => x.Items.Count()).Take(10);
-            //return the 10 popular items:
+            //take the 3 that appear in the biggest amount of orders 
+            popGroup = popGroup.OrderByDescending(x => x.Items.Count()).Take(3);
+            //return the 3 popular items:
             try
             {
                 return from item in popGroup

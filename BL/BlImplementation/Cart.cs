@@ -120,11 +120,12 @@ namespace BlImplementation
 
             //for each item, checking if the item exists in the dal list:
             IEnumerable<DO.Product> doProducts;
+            int id;
             try
             {
                 cart.Items!.FindAll(x => idal!.Product.Get(x!.ProductId).AmountInStock - x.Amount > 0 ? true : throw new BO.NotInStockException(x.ProductId, x.OrderItemName!));
                 DO.Order doOrder = new DO.Order() { CustomerAddress = cart.CustomerAddress, CustomerName = cart.CustomerName, CustomerEmail = cart.CustomerEmail, ShipDate = null, DeliveryDate = null, OrderDate = DateTime.Now };
-                int id = idal!.Order.Add(doOrder);
+                 id = idal!.Order.Add(doOrder);
                 var allItems = from item in cart.Items
                                let product = idal!.Product.Get(item.ProductId)
                                let newProd = new DO.Product { ProductId = product.ProductId, ProductName = product.ProductName, Price = product.Price, AmountInStock = product.AmountInStock - item.Amount, Category = product.Category }
@@ -161,13 +162,12 @@ namespace BlImplementation
                 DeliveryDate = null,
                 ShipDate = null,
             };
-            int orderID = idal!.Order.Add(newOrder);
             //creating a list of DO.orderItems due to cart and orderID:
             var orderItem = from item in cart.Items
                             select new DO.OrderItem
                             {
                                 ProductId = item?.ProductId ?? throw new BO.NotValidException("Product ID"),
-                                OrderId = orderID,
+                                OrderId = id,
                                 PricePerUnit = item?.Price ?? 0,
                                 Amount = item?.Amount ?? 0,
                             };
