@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Product>
+    <ProductId>100017</ProductId>
+    <ProductName>flowers</ProductName>
+    <Category>HomeAccessories</Category>
+    <Price>1000</Price>
+    <AmountInStock>16</AmountInStock>
+  </Product>
+  <Product>
+    <ProductId>100003</ProductId>
+    <ProductName>watches</ProductName>
+    <Category>Judaica</Category>
+    <Price>316</Price>
+    <AmountInStock>2</AmountInStock>
+  </Product>
+  <Product>
+    <ProductId>100020</ProductId>
+    <ProductName>hh</ProductName>
+    <Price>20</Price>
+    <AmountInStock>5</AmountInStock>
+    <Category>HomeAccessories</Category>
+  </Product>
+  <Product>
+    <ProductId>100018</ProductId>
+    <ProductName>ships beds</ProductName>
+    <Price>600</Price>
+    <AmountInStock>7</AmountInStock>
+    <Category>Judaica</Category>
+  </Product>
+  <Product>
+    <ProductId>100021</ProductId>
+    <ProductName>Ihgf</ProductName>
+    <Price>62</Price>
+    <AmountInStock>20</AmountInStock>
+    <Category>HomeAccessories</Category>
+  </Product>
+</ArrayOfProduct>

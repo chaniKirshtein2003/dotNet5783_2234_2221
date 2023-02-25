@@ -40,11 +40,6 @@ namespace PL
             _myCart = cart;
             var help = _myCart.Items;
             Item = help == null ? new() : new(help!);
-            //if (Item == null)
-            //{
-            //    //lblEmpty.Visibility = Visibility.Visible;
-            //    //btnOK.Visibility = Visibility.Hidden;
-            //}
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)

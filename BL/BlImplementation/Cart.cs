@@ -128,7 +128,6 @@ namespace BlImplementation
                 var allItems = from item in cart.Items
                                let product = idal!.Product.Get(item.ProductId)
                                let newProd = new DO.Product { ProductId = product.ProductId, ProductName = product.ProductName, Price = product.Price, AmountInStock = product.AmountInStock - item.Amount, Category = product.Category }
-                            //   let updateAmount = UpdateAmountDal(newProd)
                                select new DO.OrderItem() { Amount = item!.Amount, ProductId = item.ProductId, OrderId = id, PricePerUnit = newProd.Price };
                 allItems.All(x => idal.OrderItem.Add(x) > 0 ? true : false);
                 doProducts = from item in cart.Items
@@ -171,7 +170,6 @@ namespace BlImplementation
                                 OrderId = orderID,
                                 PricePerUnit = item?.Price ?? 0,
                                 Amount = item?.Amount ?? 0,
-                                //PictureName = item?.PictureName ?? @"\pics\img.jpg",
                             };
             //add each item to dal:
             orderItem.Select(x => idal.OrderItem.Add(x)).ToList();  //ToList so the method will be immidiate
