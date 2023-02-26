@@ -16,15 +16,23 @@ internal class Order : IOrder
     {
         List<DO.Order?> listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
 
-        if (filter == null)
-            return listOrders.Select(ord => ord).OrderBy(ord => ord?.OrderId);
+        //if (filter == null)
+        //    return listOrders.Select(ord => ord).OrderBy(ord => ord?.OrderId);
+        //else
+        //    return listOrders.Where(filter).OrderBy(ord => ord?.OrderId);
+
+
+        if (filter != null)
+            return listOrders.FindAll(x => filter(x));
         else
-            return listOrders.Where(filter).OrderBy(ord => ord?.OrderId);
+            return from ord in listOrders
+                   select ord;
     }
     public DO.Order Get(int id)
     {
         List<DO.Order?> listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
-        return listOrders.FirstOrDefault(ord => ord?.OrderId == id) ??
+        return listOrders.FirstOrDefault(ord => 
+        ord?.OrderId == id) ??
             throw new DO.NotExistException(id,"order");
     }
     public DO.Order? GetByCondition(Func<DO.Order?, bool>? check)

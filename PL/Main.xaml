@@ -13,9 +13,10 @@
         <Grid.Background>
             <ImageBrush ImageSource="/שוהם.JPG" Stretch="UniformToFill"/>
         </Grid.Background>
-        <Button x:Name="btnManager" Content="Admin" HorizontalAlignment="Left" Height="56" Margin="88,90,0,0" VerticalAlignment="Top" Click="btnManager_Click" FontSize="18"  />
-        <Button x:Name="btnOrderTracking" Content="Order Tracking" HorizontalAlignment="Left" Margin="88,270,0,0" VerticalAlignment="Top" Click="btnOrderTracking_Click"/>
-        <Button x:Name="btnNewOrder" Content="New Order" HorizontalAlignment="Left" Height="56" Margin="88,180,0,0" VerticalAlignment="Top" Click="btnNewOrder_Click"/>
+        <Button x:Name="btnManager" Content="Admin" HorizontalAlignment="Left" Height="56" Margin="85,75,0,0" VerticalAlignment="Top" Click="btnManager_Click" FontSize="18"  />
+        <Button x:Name="btnOrderTracking" Content="Order Tracking" HorizontalAlignment="Left" Margin="85,255,0,0" VerticalAlignment="Top" Click="btnOrderTracking_Click"/>
+        <Button x:Name="btnNewOrder" Content="New Order" HorizontalAlignment="Left" Height="56" Margin="85,165,0,0" VerticalAlignment="Top" Click="btnNewOrder_Click"/>
+        <Button Content="Simulator" HorizontalAlignment="Left" Margin="85,338,0,0" VerticalAlignment="Top" Click="Button_Click"/>
 
     </Grid>
 </Window>

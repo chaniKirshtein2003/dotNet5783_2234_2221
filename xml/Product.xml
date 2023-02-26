@@ -32,7 +32,7 @@
     <ProductId>100020</ProductId>
     <ProductName>hh</ProductName>
     <Price>20</Price>
-    <AmountInStock>2</AmountInStock>
+    <AmountInStock>1</AmountInStock>
     <Category>Judaica</Category>
   </Product>
 </ArrayOfProduct>

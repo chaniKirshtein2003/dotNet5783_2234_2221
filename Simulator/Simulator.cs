@@ -1,42 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Simulator
+﻿namespace Simulator;
+public static class Simulator
 {
-    public static class Simulator
+    private static event EventHandler<EventStatus>? reportStart;
+    private static event EventHandler<EventStatus>? reportEnd;
+    private static event EventHandler? reportEndSim;
+
+    private static BlApi.IBl bl = BlApi.Factory.Get();
+    volatile private static bool isActive;
+
+    public static void Deactive() => isActive = false;
+
+    public static void Active()
     {
-        private static event EventHandler ReportStart;
-        private static event EventHandler ReportEnd;
-        private static event EventHandler ReportEndSim;
-        volatile static bool flagActive;
-        private static Random rn = new Random();
-        private static BlApi.IBl bl = BlApi.Factory.Get();
-        public static void Deactivate() => flagActive = false;
-        public static void Activate()
+        Random rn = new Random();
+        new Thread(() =>
         {
-            new Thread(() =>
+            isActive = true;
+            while (isActive)
             {
-                flagActive = true;
-                while (flagActive)
+                int? oldId = bl.Order.GetOldestOrder();
+                if (oldId != null)
                 {
-                    int? oldId = bl.Order.GetOldestOrder();
-                    if (oldId != null)
+                    BO.Order boOrder = bl.Order.GetOrderDetails((int)oldId);
+                    int delay = rn.Next(3, 11);
+                    DateTime now = DateTime.Now;
+                    DateTime time = now + new TimeSpan(delay * 1000);
+                    BO.OrderStatus willl = (BO.OrderStatus)(((int)boOrder.Status!) + 1);
+                    EventStatus args = new EventStatus()
                     {
-                        BO.Order order = bl.Order.GetOrderDetails((int)oldId);
-                        int delay = rn.Next(3, 11);
-                        DateTime tm = DateTime.Now + new TimeSpan(delay * 1000);
-                        ReportStart(order, new ReportStartEventArgs(tm, order));
-                        Thread.Sleep(delay * 1000);
-                        bl.Order.UpdateStatus(order.OrderId);
-                        ReportEnd();
-                    }
-                    Thread.Sleep(8000);
+                        OrderId = (int)oldId,
+                        start = now,
+                        finish = time,
+                        now = (BO.OrderStatus)boOrder.Status,
+                        will = willl
+                    };
+                    reportStart?.Invoke(null, args);
+                    Thread.Sleep(delay * 1000);
+                    EventStatus args1 = new EventStatus()
+                    {
+                        OrderId = (int)oldId
+                    };
+                    bl.Order.UpdateStatus((int)oldId);
                 }
-                ReportEndSim();
-            }).Start();
-        }
+                Thread.Sleep(1000);
+            }
+            reportEndSim?.Invoke(null, EventArgs.Empty);
+        }).Start();
     }
+
+    public static void ReportStart(EventHandler<EventStatus> ev) => reportStart += ev;
+
+    public static void DereportStart(EventHandler<EventStatus> ev) => reportStart -= ev;
+
+    public static void ReportEnd(EventHandler<EventStatus> ev) => reportEnd += ev;
+    public static void DereportEnd(EventHandler<EventStatus> ev) => reportEnd -= ev;
+
+    public static void ReportEndSim(EventHandler ev) => reportEndSim += ev;
+    public static void DereportEndSim(EventHandler ev) => reportEndSim -= ev;
+
+}
+
+public class EventStatus : EventArgs
+{
+    public int OrderId { get; set; }
+    public DateTime start { get; set; }
+    public DateTime finish { get; set; }
+    public BO.OrderStatus now { get; set; }
+    public BO.OrderStatus will { get; set; }
 }

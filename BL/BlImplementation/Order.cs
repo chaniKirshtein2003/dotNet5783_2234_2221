@@ -190,7 +190,23 @@ namespace BlImplementation
 
         public int? GetOldestOrder()
         {
-            throw new NotImplementedException();
+            IEnumerable<DO.Order?> doOrders = idal!.Order.GetAll();
+            DateTime? dateTime = DateTime.Now;
+            int? id = null;
+            foreach (var ord in doOrders)
+            {
+                if (ord?.OrderDate != null && ord?.OrderDate < dateTime && ord?.DeliveryDate == null && ord?.ShipDate == null)
+                {
+                    dateTime = ord?.OrderDate;
+                    id = ord?.OrderId;
+                }
+                else if (ord?.DeliveryDate == null && ord?.ShipDate != null && ord?.ShipDate < dateTime)
+                {
+                    dateTime = ord?.ShipDate;
+                    id = ord?.OrderId;
+                }
+            }
+            return id;
         }
     }
 }
