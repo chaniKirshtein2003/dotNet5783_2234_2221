@@ -14,5 +14,7 @@ namespace BlApi
         public BO.Order UpdateSending(int id);
         public BO.Order supplyUpdate(int id);
         public OrderTracking OrderTracking(int id);
+        void UpdateStatus(int orderId);
+        int? GetOldestOrder();
     }
 }

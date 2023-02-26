@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="SimulatorWindow" Height="450" Width="800">
     <Grid>
-        
+        <Button x:Name="btnStop" Content="Stop" HorizontalAlignment="Left" Margin="186,314,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="255,136,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>

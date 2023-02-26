@@ -1,4 +1,6 @@
-﻿namespace BlImplementation
+﻿using DalApi;
+
+namespace BlImplementation
 {
     internal class Order : BlApi.IOrder
     {
@@ -173,6 +175,22 @@
                 throw new BO.NotExistBlException("not exist", x);
             }
 
+        }
+
+        public void UpdateStatus(int orderId)
+        {
+            DO.Order order = idal!.Order.Get(orderId);
+            if (order.ShipDate == null)
+                UpdateSending(orderId);
+            else if (order.DeliveryDate == null)
+                supplyUpdate(orderId);
+            else
+                throw new Exception();
+        }
+
+        public int? GetOldestOrder()
+        {
+            throw new NotImplementedException();
         }
     }
 }
