@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using Simulator;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,31 +33,58 @@ namespace PL
             bw.DoWork += Bw_DoWork;
             bw.RunWorkerCompleted += Bw_RunWorkerCompleted;
             bw.ProgressChanged += Bw_ProgressChanged;
-            lblClock.Content = DateTime.Now.ToString("h:mm:ss");
-
-            //להוסיף 2 דגלים ביטול ועוד משהו!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+            //lblClock.Content = DateTime.Now.ToString("h:mm:ss");
+            bw.WorkerReportsProgress = true;
+            bw.WorkerSupportsCancellation = true;
             bw.RunWorkerAsync();
         }
         private void Bw_ProgressChanged(object? sender, ProgressChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            if((int)e.ProgressPercentage==1)
+            {
+                lblClock.Content = DateTime.Now.ToString();
+                return;
+            }
+            else
+            {
+                txtId.Text = ((EventStatus)e.UserState!).OrderId.ToString();
+                lblClock.Content= ((EventStatus)e.UserState!).start.ToString();
+                lblClock2.Content= ((EventStatus)e.UserState!).finish.ToString();
+                lblClock4.Content = ((EventStatus)e.UserState!).now.ToString();
+                lblClock3.Content= ((EventStatus)e.UserState!).will.ToString();
+            }
         }
 
         private void Bw_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
-            throw new NotImplementedException();
+            MessageBox.Show("hhhh");
         }
 
         private void Bw_DoWork(object? sender, DoWorkEventArgs e)
         {
-            //!!!!!!!!!!!!!!!!!!!!!!
-            while (!cancel)
-            //!!!!!!!!!!!!!!!!!!!!!!
+            Simulator.Simulator.ReportStart(repStart);
+            Simulator.Simulator.ReportEnd(repEnd);
+            Simulator.Simulator.ReportEndSim(repEndSim);
+            Simulator.Simulator.Active();
+            while (!bw.CancellationPending)
             {
                 Thread.Sleep(1000);
                 bw.ReportProgress(1);
             }
+        }
+        private void repStart(object? sender,EventStatus eveS) { bw.ReportProgress(1,eveS); }
+        private void repEnd(object? sender,EventStatus eveS) { bw.ReportProgress(2, eveS); }
+        private void repEndSim(object? sender, EventArgs e)
+        {
+            bw.CancelAsync();
+            Simulator.Simulator.DereportStart(repStart);
+            Simulator.Simulator.DereportEnd(repEnd);
+            Simulator.Simulator.DereportEndSim(repEndSim);
+        }
+
+        private void btnStop_Click(object sender, RoutedEventArgs e)
+        {
+            Simulator.Simulator.Deactive();
         }
     }
 }

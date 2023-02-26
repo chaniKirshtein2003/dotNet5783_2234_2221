@@ -31,5 +31,7 @@ namespace PL
         private void btnManager_Click(object sender, RoutedEventArgs e) => new ManagerDisplay().Show();
        
         private void btnNewOrder_Click(object sender, RoutedEventArgs e) => new NewOrderWindow().Show();
+
+        private void Button_Click(object sender, RoutedEventArgs e) => new SimulatorWindow().Show();
     }
 }
