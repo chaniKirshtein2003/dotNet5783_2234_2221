@@ -187,47 +187,6 @@ namespace BlImplementation
             else
                 throw new Exception();
         }
-
-        //public int? GetOldestOrder()
-        //{
-        //    IEnumerable<DO.Order?> doOrders = idal!.Order.GetAll();
-        //    DateTime? dateTime = DateTime.Now;
-        //    int? id = null;
-        //    foreach (var ord in doOrders)
-        //    {
-        //        if (ord?.OrderDate != null && ord?.OrderDate < dateTime && ord?.DeliveryDate == null && ord?.ShipDate == null)
-        //        {
-        //            dateTime = ord?.OrderDate;
-        //            id = ord?.OrderId;
-        //        }
-        //        else if (ord?.DeliveryDate == null && ord?.ShipDate != null && ord?.ShipDate < dateTime)
-        //        {
-        //            dateTime = ord?.ShipDate;
-        //            id = ord?.OrderId;
-        //        }
-        //    }
-        //    return id;
-        //}
-        //public int? GetOldestOrder()
-        //{
-        //    IEnumerable<DO.Order?> doOrders = idal!.Order.GetAll();
-        //    DateTime? dateTime = DateTime.Now;
-        //    int? id = null;
-        //    foreach (var order in doOrders)
-        //    {
-        //        if (order?.OrderDate != null && order?.OrderDate < dateTime && order?.ShipDate == null && order?.DeliveryDate == null)
-        //        {
-        //            dateTime = order?.OrderDate;
-        //            id = order?.OrderId;
-        //        }
-        //        else if (order?.DeliveryDate == null && order?.ShipDate != null && order?.ShipDate < dateTime)
-        //        {
-        //            dateTime = order?.ShipDate;
-        //            id = order?.OrderId;
-        //        }
-        //    }
-        //    return id;
-        //}
         public int? GetOldestOrder()
         {
             var allOrders = idal!.Order.GetAll(x => x?.DeliveryDate == null);
