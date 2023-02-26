@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Simulator
 {
-    internal static class Simulator
+    public static class Simulator
     {
+
     }
 }
