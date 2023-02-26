@@ -24,7 +24,7 @@ public static class Simulator
                     BO.Order boOrder = bl.Order.GetOrderDetails((int)oldId);
                     int delay = rn.Next(3, 11);
                     DateTime now = DateTime.Now;
-                    DateTime time = now + new TimeSpan(delay * 1000);
+                    DateTime time = now.AddSeconds(delay);
                     BO.OrderStatus willl = (BO.OrderStatus)(((int)boOrder.Status!) + 1);
                     EventStatus args = new EventStatus()
                     {
@@ -32,7 +32,8 @@ public static class Simulator
                         start = now,
                         finish = time,
                         now = (BO.OrderStatus)boOrder.Status,
-                        will = willl
+                        will = willl,
+                        seconds=delay
                     };
                     reportStart?.Invoke(null, args);
                     Thread.Sleep(delay * 1000);
@@ -65,6 +66,8 @@ public class EventStatus : EventArgs
     public int OrderId { get; set; }
     public DateTime start { get; set; }
     public DateTime finish { get; set; }
+    public int seconds { get; set; }
     public BO.OrderStatus now { get; set; }
     public BO.OrderStatus will { get; set; }
+
 }

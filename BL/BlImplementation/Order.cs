@@ -17,19 +17,19 @@ namespace BlImplementation
             {
                 IEnumerable<DO.Order?> orders = idal!.Order.GetAll();
                 IEnumerable<BO.OrderForList?> ordersForList = from order in orders
-                                    let orderItems = idal!.OrderItem.GetAll(orderItem => orderItem?.OrderId == (order?.OrderId ?? 0))
-                                    let totalAmount = orderItems.Sum(x => ((DO.OrderItem)x!).Amount)
-                                    let totalPrice = orderItems.Sum(x => ((DO.OrderItem)x!).Amount * ((DO.OrderItem)x!).PricePerUnit)
-                                    select new BO.OrderForList
-                                    {
-                                        ID = ((DO.Order)order).OrderId,
-                                        CustomerName = ((DO.Order)order).CustomerName,
-                                        TotalPrice = totalPrice,
-                                        AmountOfItems = totalAmount,
-                                        Status = ((DO.Order)order).DeliveryDate != null ?
-                                                 BO.OrderStatus.delivered : ((DO.Order)order).ShipDate != null ?
-                                                 BO.OrderStatus.sent : BO.OrderStatus.approved
-                                    };
+                                                              let orderItems = idal!.OrderItem.GetAll(orderItem => orderItem?.OrderId == (order?.OrderId ?? 0))
+                                                              let totalAmount = orderItems.Sum(x => ((DO.OrderItem)x!).Amount)
+                                                              let totalPrice = orderItems.Sum(x => ((DO.OrderItem)x!).Amount * ((DO.OrderItem)x!).PricePerUnit)
+                                                              select new BO.OrderForList
+                                                              {
+                                                                  ID = ((DO.Order)order).OrderId,
+                                                                  CustomerName = ((DO.Order)order).CustomerName,
+                                                                  TotalPrice = totalPrice,
+                                                                  AmountOfItems = totalAmount,
+                                                                  Status = ((DO.Order)order).DeliveryDate != null ?
+                                                                           BO.OrderStatus.delivered : ((DO.Order)order).ShipDate != null ?
+                                                                           BO.OrderStatus.sent : BO.OrderStatus.approved
+                                                              };
                 return ordersForList;
             }
             catch (DO.NotExistException ex)
@@ -62,15 +62,15 @@ namespace BlImplementation
                 order.DeliveryDate = DOorder.DeliveryDate;
                 IEnumerable<DO.OrderItem?> orderItems = idal!.OrderItem.GetAll(orderItem => orderItem?.OrderId == idOrder);
                 IEnumerable<BO.OrderItem> items = from orderItem in orderItems
-                            select new BO.OrderItem
-                            {
-                                OrderItemId = orderItem?.OrderItemId ?? 0,
-                                ProductId = orderItem?.ProductId ?? 0,
-                                OrderItemName = idal.Product.Get(orderItem?.ProductId ?? 0).ProductName,
-                                Amount = orderItem?.Amount ?? 0,
-                                Price = orderItem?.PricePerUnit ?? 0,
-                                TotalPrice = orderItem?.PricePerUnit * orderItem?.Amount ?? 0
-                            };
+                                                  select new BO.OrderItem
+                                                  {
+                                                      OrderItemId = orderItem?.OrderItemId ?? 0,
+                                                      ProductId = orderItem?.ProductId ?? 0,
+                                                      OrderItemName = idal.Product.Get(orderItem?.ProductId ?? 0).ProductName,
+                                                      Amount = orderItem?.Amount ?? 0,
+                                                      Price = orderItem?.PricePerUnit ?? 0,
+                                                      TotalPrice = orderItem?.PricePerUnit * orderItem?.Amount ?? 0
+                                                  };
                 order.Items = items.ToList()!;
                 order.TotalPrice = items.Sum(x => x.TotalPrice);
                 order.Status = order.DeliveryDate != null ?
@@ -188,25 +188,50 @@ namespace BlImplementation
                 throw new Exception();
         }
 
+        //public int? GetOldestOrder()
+        //{
+        //    IEnumerable<DO.Order?> doOrders = idal!.Order.GetAll();
+        //    DateTime? dateTime = DateTime.Now;
+        //    int? id = null;
+        //    foreach (var ord in doOrders)
+        //    {
+        //        if (ord?.OrderDate != null && ord?.OrderDate < dateTime && ord?.DeliveryDate == null && ord?.ShipDate == null)
+        //        {
+        //            dateTime = ord?.OrderDate;
+        //            id = ord?.OrderId;
+        //        }
+        //        else if (ord?.DeliveryDate == null && ord?.ShipDate != null && ord?.ShipDate < dateTime)
+        //        {
+        //            dateTime = ord?.ShipDate;
+        //            id = ord?.OrderId;
+        //        }
+        //    }
+        //    return id;
+        //}
+        //public int? GetOldestOrder()
+        //{
+        //    IEnumerable<DO.Order?> doOrders = idal!.Order.GetAll();
+        //    DateTime? dateTime = DateTime.Now;
+        //    int? id = null;
+        //    foreach (var order in doOrders)
+        //    {
+        //        if (order?.OrderDate != null && order?.OrderDate < dateTime && order?.ShipDate == null && order?.DeliveryDate == null)
+        //        {
+        //            dateTime = order?.OrderDate;
+        //            id = order?.OrderId;
+        //        }
+        //        else if (order?.DeliveryDate == null && order?.ShipDate != null && order?.ShipDate < dateTime)
+        //        {
+        //            dateTime = order?.ShipDate;
+        //            id = order?.OrderId;
+        //        }
+        //    }
+        //    return id;
+        //}
         public int? GetOldestOrder()
         {
-            IEnumerable<DO.Order?> doOrders = idal!.Order.GetAll();
-            DateTime? dateTime = DateTime.Now;
-            int? id = null;
-            foreach (var ord in doOrders)
-            {
-                if (ord?.OrderDate != null && ord?.OrderDate < dateTime && ord?.DeliveryDate == null && ord?.ShipDate == null)
-                {
-                    dateTime = ord?.OrderDate;
-                    id = ord?.OrderId;
-                }
-                else if (ord?.DeliveryDate == null && ord?.ShipDate != null && ord?.ShipDate < dateTime)
-                {
-                    dateTime = ord?.ShipDate;
-                    id = ord?.OrderId;
-                }
-            }
-            return id;
+            var allOrders = idal!.Order.GetAll(x => x?.DeliveryDate == null);
+            return allOrders.MinBy(x => x?.ShipDate == null ? x?.OrderDate : x?.ShipDate)?.OrderId;
         }
     }
 }

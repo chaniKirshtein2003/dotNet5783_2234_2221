@@ -25,7 +25,6 @@ namespace PL
     public partial class SimulatorWindow : Window
     {
         BackgroundWorker bw;
-        private bool cancel;
         public SimulatorWindow()
         {
             InitializeComponent();
@@ -33,7 +32,6 @@ namespace PL
             bw.DoWork += Bw_DoWork;
             bw.RunWorkerCompleted += Bw_RunWorkerCompleted;
             bw.ProgressChanged += Bw_ProgressChanged;
-            //lblClock.Content = DateTime.Now.ToString("h:mm:ss");
             bw.WorkerReportsProgress = true;
             bw.WorkerSupportsCancellation = true;
             bw.RunWorkerAsync();
@@ -42,22 +40,23 @@ namespace PL
         {
             if((int)e.ProgressPercentage==1)
             {
-                lblClock.Content = DateTime.Now.ToString();
+                lblclock.Content = DateTime.Now.ToString();
                 return;
             }
             else
             {
                 txtId.Text = ((EventStatus)e.UserState!).OrderId.ToString();
-                lblClock.Content= ((EventStatus)e.UserState!).start.ToString();
-                lblClock2.Content= ((EventStatus)e.UserState!).finish.ToString();
-                lblClock4.Content = ((EventStatus)e.UserState!).now.ToString();
-                lblClock3.Content= ((EventStatus)e.UserState!).will.ToString();
+                lblStart.Content= ((EventStatus)e.UserState!).start.ToString();
+                lblfinish.Content= ((EventStatus)e.UserState!).finish.ToString();
+                nowStatus.Content = ((EventStatus)e.UserState!).now.ToString();
+                lblnextstatus.Content= ((EventStatus)e.UserState!).will.ToString();
+                lblSeconds.Content= ((EventStatus)e.UserState!).seconds;
             }
         }
 
         private void Bw_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
-            MessageBox.Show("hhhh");
+            MessageBox.Show("stoped");
         }
 
         private void Bw_DoWork(object? sender, DoWorkEventArgs e)
@@ -72,7 +71,7 @@ namespace PL
                 bw.ReportProgress(1);
             }
         }
-        private void repStart(object? sender,EventStatus eveS) { bw.ReportProgress(1,eveS); }
+        private void repStart(object? sender,EventStatus eveS) { bw.ReportProgress(2,eveS); }
         private void repEnd(object? sender,EventStatus eveS) { bw.ReportProgress(2, eveS); }
         private void repEndSim(object? sender, EventArgs e)
         {
