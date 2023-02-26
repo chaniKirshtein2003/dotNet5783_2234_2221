@@ -8,24 +8,10 @@
     <Category>HomeAccessories</Category>
   </Product>
   <Product>
-    <ProductId>100017</ProductId>
-    <ProductName>flowers</ProductName>
-    <Price>300</Price>
-    <AmountInStock>8</AmountInStock>
-    <Category>Judaica</Category>
-  </Product>
-  <Product>
     <ProductId>100016</ProductId>
     <ProductName>ships beds</ProductName>
     <Price>610</Price>
     <AmountInStock>5</AmountInStock>
-    <Category>Judaica</Category>
-  </Product>
-  <Product>
-    <ProductId>100014</ProductId>
-    <ProductName>Cup on a leg</ProductName>
-    <Price>1000</Price>
-    <AmountInStock>48</AmountInStock>
     <Category>Judaica</Category>
   </Product>
   <Product>
@@ -62,5 +48,26 @@
     <Price>450</Price>
     <AmountInStock>0</AmountInStock>
     <Category>DesignedGifts</Category>
+  </Product>
+  <Product>
+    <ProductId>100017</ProductId>
+    <ProductName>flowers</ProductName>
+    <Price>300</Price>
+    <AmountInStock>8</AmountInStock>
+    <Category>HomeTextiles</Category>
+  </Product>
+  <Product>
+    <ProductId>133333</ProductId>
+    <ProductName>hhh</ProductName>
+    <Price>300</Price>
+    <AmountInStock>20</AmountInStock>
+    <Category>HomeAccessories</Category>
+  </Product>
+  <Product>
+    <ProductId>100014</ProductId>
+    <ProductName>Cup on a leg</ProductName>
+    <Price>1000</Price>
+    <AmountInStock>42</AmountInStock>
+    <Category>Judaica</Category>
   </Product>
 </ArrayOfProduct>

@@ -37,7 +37,6 @@ static class XMLTools
         }
         catch (Exception ex)
         {
-            // DO.XMLFileLoadCreateException(filePath, $"fail to create xml file: {filePath}", ex);
             throw new Exception($"fail to create xml file: {filePath}", ex);
         }
     }
@@ -60,7 +59,6 @@ static class XMLTools
         }
     }
     #endregion
-
     #region SaveLoadWithXMLSerializer
     //static readonly bool s_writing = false;
     public static void SaveListToXMLSerializer<T>(List<T?> list, string entity) where T : struct

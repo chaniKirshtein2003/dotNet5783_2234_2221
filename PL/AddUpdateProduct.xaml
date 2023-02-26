@@ -8,17 +8,21 @@
         mc:Ignorable="d"
         Title="AddUpdateProduct" Height="450" Width="700">
     <Grid>
-        <Label Content="Name" HorizontalAlignment="Left" Margin="305,98,0,0" VerticalAlignment="Top"/>
-        <Label Content="Id Product" HorizontalAlignment="Left" Margin="305,56,0,0" VerticalAlignment="Top"/>
-        <Label Content="Price" HorizontalAlignment="Left" Margin="305,143,0,0" VerticalAlignment="Top"/>
-        <Label Content="Category" HorizontalAlignment="Left" Margin="305,182,0,0" VerticalAlignment="Top"/>
-        <Label Content="Amount In Stock" HorizontalAlignment="Left" Margin="305,226,0,0" VerticalAlignment="Top" RenderTransformOrigin="10.729,-2.258"/>
-        <TextBox x:Name="txtName" Text="{Binding ProductName}" HorizontalAlignment="Left" Margin="445,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="White"/>
-        <TextBox x:Name="txtPrId" Text="{Binding ProductId}" HorizontalAlignment="Left" Margin="445,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtPrPrice"  Text="{Binding Price}" HorizontalAlignment="Left" Margin="445,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtPrAmount" Text="{Binding AmountInStock}" HorizontalAlignment="Left" Margin="445,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ComboBox SelectedItem="{Binding Category}" x:Name="cmbCategory" HorizontalAlignment="Left" Margin="445,186,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Ok" HorizontalAlignment="Left" Margin="307,305,0,0" VerticalAlignment="Top" Height="40" Width="90" Click="btnOK_Click"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="475,305,0,0" VerticalAlignment="Top" Height="40" Width="90" Click="btnCancel_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="305,98,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Content="Id Product" HorizontalAlignment="Left" Margin="305,56,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Content="Price" HorizontalAlignment="Left" Margin="305,143,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Content="Category" HorizontalAlignment="Left" Margin="305,182,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Content="Amount In Stock" HorizontalAlignment="Left" Margin="305,226,0,0" VerticalAlignment="Top" RenderTransformOrigin="10.729,-2.258" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtName" Text="{Binding ProductName}" HorizontalAlignment="Left" Margin="445,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="White" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtPrId" Text="{Binding ProductId}" HorizontalAlignment="Left" Margin="445,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtPrPrice"  Text="{Binding Price}" HorizontalAlignment="Left" Margin="445,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtPrAmount" Text="{Binding AmountInStock}" HorizontalAlignment="Left" Margin="445,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+        <ComboBox SelectedItem="{Binding Category}" x:Name="cmbCategory" HorizontalAlignment="Left" Margin="445,186,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+        <Button Content="Ok" HorizontalAlignment="Left" Margin="307,305,0,0" VerticalAlignment="Top" Height="40" Width="90" Click="btnOK_Click" Grid.ColumnSpan="2"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="475,305,0,0" VerticalAlignment="Top" Height="40" Width="90" Click="btnCancel_Click" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>
