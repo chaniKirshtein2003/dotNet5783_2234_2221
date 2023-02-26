@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="SimulatorWindow" Height="450" Width="800">
+        Title="SimulatorWindow" WindowStyle="None" Height="450" Width="800">
     <Grid>
-        <Button x:Name="btnStop" Content="Stop" HorizontalAlignment="Left" Margin="186,314,0,0" VerticalAlignment="Top" Click="btnStop_Click"/>
-        <Label Name="lblClock" Content="l1" HorizontalAlignment="Left" Margin="30,192,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtId" HorizontalAlignment="Left" Margin="510,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="lblClock2" Content="l2" HorizontalAlignment="Left" Margin="91,199,0,0" VerticalAlignment="Top" Height="30" Width="54"/>
-        <Label x:Name="lblClock3" Content="l3" HorizontalAlignment="Left" Margin="169,210,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblClock4" Content="l4" HorizontalAlignment="Left" Margin="270,214,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnStop" Content="Stop" HorizontalAlignment="Left" Margin="89,278,0,0" VerticalAlignment="Top" Click="btnStop_Click" Height="35" Width="69"/>
+        <Label Name="lblClock" Content="l1" HorizontalAlignment="Left" Margin="102,225,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtId" HorizontalAlignment="Left" Margin="508,352,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblClock2" Content="l2" HorizontalAlignment="Right" Margin="0,170,518,0" VerticalAlignment="Top" Height="30" Width="54"/>
+        <Label x:Name="lblClock3" Content="l3" HorizontalAlignment="Left" Margin="359,167,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.385,-0.769"/>
+        <Label x:Name="lblClock4" Content="l4" HorizontalAlignment="Left" Margin="487,171,0,0" VerticalAlignment="Top" RenderTransformOrigin="5.429,0.295"/>
 
     </Grid>
 </Window>

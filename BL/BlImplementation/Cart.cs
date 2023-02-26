@@ -123,7 +123,7 @@ namespace BlImplementation
             int id;
             try
             {
-                cart.Items!.FindAll(x => idal!.Product.Get(x!.ProductId).AmountInStock - x.Amount > 0 ? true : throw new BO.NotInStockException(x.ProductId, x.OrderItemName!));
+                cart.Items!.FindAll(x => idal!.Product.Get(x!.ProductId).AmountInStock - x.Amount >= 0 ? true : throw new BO.NotInStockException(x.ProductId, x.OrderItemName!));
                 DO.Order doOrder = new DO.Order() { CustomerAddress = cart.CustomerAddress, CustomerName = cart.CustomerName, CustomerEmail = cart.CustomerEmail, ShipDate = null, DeliveryDate = null, OrderDate = DateTime.Now };
                  id = idal!.Order.Add(doOrder);
                 var allItems = from item in cart.Items
@@ -172,7 +172,7 @@ namespace BlImplementation
                                 Amount = item?.Amount ?? 0,
                             };
             //add each item to dal:
-            orderItem.Select(x => idal.OrderItem.Add(x)).ToList();  //ToList so the method will be immidiate
+            //orderItem.Select(x => idal.OrderItem.Add(x)).ToList();  //ToList so the method will be immidiate
                                                                     //creating a list of updated DO.product:
             var updateProduct = from item in doProducts
                                 select new DO.Product

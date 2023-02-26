@@ -29,8 +29,8 @@
         <TextBox Text="{Binding OrderDate}" IsEnabled="False" HorizontalAlignment="Left" Margin="135,277,203,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
         <TextBox Text="{Binding ShipDate}" IsEnabled="False" HorizontalAlignment="Left" Margin="135,317,203,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
         <TextBox Text="{Binding DeliveryDate}" IsEnabled="False" HorizontalAlignment="Left" Margin="135,357,203,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
-        <Button x:Name="btnUpdateDeliveryDate" IsEnabled="{Binding ElementName=txtShipDate,Path=Text,Converter={StaticResource notEmptyTextToEnabledConverter}}" Content="Update" HorizontalAlignment="Left" Margin="299,317,0,0" VerticalAlignment="Top" Height="23" Width="56" Click="btnUpdateDeliveryDate_Click" HorizontalContentAlignment="Center" FontSize="12.5"/>
-        <Button x:Name="btnUpdateOrder" Content=" Update" IsEnabled="{Binding ElementName=txtDeliveryDate,Path=Text,Converter={StaticResource notEmptyTextToEnabledConverter}}" HorizontalAlignment="Left" Margin="299,357,0,0" VerticalAlignment="Top" Height="23" Width="56" Click="btnUpdateOrder_Click" HorizontalContentAlignment="Center" FontSize="12.5"/>
+        <Button x:Name="btnUpdateDeliveryDate" IsEnabled="{Binding ShipDate,Converter={StaticResource notEmptyTextToEnabledConverter}}" Content="Update" HorizontalAlignment="Left" Margin="299,317,0,0" VerticalAlignment="Top" Height="23" Width="56" Click="btnUpdateDeliveryDate_Click" HorizontalContentAlignment="Center" FontSize="12.5"/>
+        <Button x:Name="btnUpdateOrder" Content=" Update" IsEnabled="{Binding DeliveryDate,Converter={StaticResource notEmptyTextToEnabledConverter}}" HorizontalAlignment="Left" Margin="299,357,0,0" VerticalAlignment="Top" Height="23" Width="56" Click="btnUpdateOrder_Click" HorizontalContentAlignment="Center" FontSize="12.5"/>
         <ListView ItemsSource="{Binding Path=Items}" Margin="485,30,89,36">
             <ListView.View>
                 <GridView>

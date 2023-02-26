@@ -12,8 +12,9 @@ namespace PL
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string text=(string)value;
-            return (text == null || text == "") ? true : false;
+            //string text=(string)value;
+            //return (text == null || text == "") ? true : false;
+            return (value == null ) ? true : false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

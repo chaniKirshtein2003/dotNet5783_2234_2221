@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Dal;
 using DalApi;
-using DO;
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 
 internal class Order : IOrder
 {
     const string s_orders = @"Order"; //XML Serializer
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<DO.Order?> GetAll(Func<DO.Order?, bool>? filter = null)
     {
         List<DO.Order?> listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
@@ -28,6 +29,8 @@ internal class Order : IOrder
             return from ord in listOrders
                    select ord;
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public DO.Order Get(int id)
     {
         List<DO.Order?> listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
@@ -35,11 +38,15 @@ internal class Order : IOrder
         ord?.OrderId == id) ??
             throw new DO.NotExistException(id,"order");
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public DO.Order? GetByCondition(Func<DO.Order?, bool>? check)
     {
         List<DO.Order?> listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
         return listOrders.Select(ord => ord).FirstOrDefault() ?? throw new DO.NotExistException(0, "order");
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Add(DO.Order order)
     {
         order.OrderId = Config.GetNextOrderNumber();
@@ -52,6 +59,7 @@ internal class Order : IOrder
         return order.OrderId;
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
         List<DO.Order?> listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
@@ -61,11 +69,16 @@ internal class Order : IOrder
 
         XMLTools.SaveListToXMLSerializer(listOrders, s_orders);
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(DO.Order order)
     {
-        Delete(order.OrderId);
-        Add(order);
+        List<DO.Order?> listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
+        int num= listOrders.RemoveAll(x => x?.OrderId == order.OrderId);
+        if(num==0)
+            throw new DO.NotExistException(order.OrderId,"order");
+        listOrders.Add(order);
+        XMLTools.SaveListToXMLSerializer(listOrders, s_orders);
     }
-
 }
 
