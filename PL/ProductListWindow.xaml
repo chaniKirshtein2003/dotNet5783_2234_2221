@@ -60,7 +60,7 @@
         <Label Content="Price" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="253,5,0,5"/>
         <Label Content="Category" Grid.Row="1" Grid.Column="3" Margin="1,5,27,5"/>
         <ComboBox SelectedItem="{x:Static Enum:Categories.Choose_Category }"  ItemsSource="{Binding Source={StaticResource Categories}}" x:Name="CategoriesSelector"  SelectionChanged="CategoriesSelector_SelectionChanged" Grid.Column="3" Margin="1,4,27,0" Background="#FFF7E4C6"/>
-        <Button Content="The Popular Product" Grid.Column="0" Grid.Row="0" Click="Button_Click_1" Margin="10,4,111,44" Grid.RowSpan="2"/>
+        <Button Content="The Popular Product" Grid.Column="0" Grid.Row="0" Click="Button_Click_1" Margin="19,4,97,37" Grid.RowSpan="2"/>
         <ListView ItemsSource="{Binding}" Background="#FFF7E4C6" Grid.Row="1" Grid.ColumnSpan="4"  x:Name="ProductListview"  ItemTemplate="{StaticResource MyDataTemplate}"
 HorizontalContentAlignment="Stretch"  MouseDoubleClick="ProductListview_MouseDoubleClick" Margin="0,38,0,69" Grid.RowSpan="2"/>
         <Button Content="Add new Product" Grid.Row="2" 

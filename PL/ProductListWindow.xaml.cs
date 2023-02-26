@@ -23,7 +23,6 @@ namespace PL
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
 
-
         public ObservableCollection<BO.ProductForList> Prods
         {
             get { return (ObservableCollection<BO.ProductForList>)GetValue(ProdsProperty); }

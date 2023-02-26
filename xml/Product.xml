@@ -15,13 +15,6 @@
     <Category>Judaica</Category>
   </Product>
   <Product>
-    <ProductId>100013</ProductId>
-    <ProductName>watches</ProductName>
-    <Price>450</Price>
-    <AmountInStock>0</AmountInStock>
-    <Category>DesignedGifts</Category>
-  </Product>
-  <Product>
     <ProductId>100016</ProductId>
     <ProductName>ships beds</ProductName>
     <Price>610</Price>
@@ -62,5 +55,12 @@
     <Price>20</Price>
     <AmountInStock>20</AmountInStock>
     <Category>Chagim</Category>
+  </Product>
+  <Product>
+    <ProductId>100013</ProductId>
+    <ProductName>watches</ProductName>
+    <Price>450</Price>
+    <AmountInStock>0</AmountInStock>
+    <Category>DesignedGifts</Category>
   </Product>
 </ArrayOfProduct>
