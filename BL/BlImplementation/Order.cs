@@ -195,14 +195,14 @@ namespace BlImplementation
             int? id = null;
             foreach (var ord in doOrders)
             {
-                if (ord?.OrderDate != null && ord?.OrderDate < dateTime && ord?.DeliveryDate == null && ord?.ShipDate == null)
+                if (ord?.OrderDate != null && ord?.OrderDate < dateTime && ord?.ShipDate == null && ord?.DeliveryDate == null)
                 {
                     dateTime = ord?.OrderDate;
                     id = ord?.OrderId;
                 }
-                else if (ord?.DeliveryDate == null && ord?.ShipDate != null && ord?.ShipDate < dateTime)
+                else if (ord?.ShipDate == null && ord?.DeliveryDate != null && ord?.DeliveryDate < dateTime)
                 {
-                    dateTime = ord?.ShipDate;
+                    dateTime = ord?.DeliveryDate;
                     id = ord?.OrderId;
                 }
             }

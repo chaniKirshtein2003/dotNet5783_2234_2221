@@ -25,7 +25,6 @@ namespace PL
     public partial class SimulatorWindow : Window
     {
         BackgroundWorker bw;
-        private bool cancel;
         public SimulatorWindow()
         {
             InitializeComponent();
@@ -33,7 +32,6 @@ namespace PL
             bw.DoWork += Bw_DoWork;
             bw.RunWorkerCompleted += Bw_RunWorkerCompleted;
             bw.ProgressChanged += Bw_ProgressChanged;
-            //lblClock.Content = DateTime.Now.ToString("h:mm:ss");
             bw.WorkerReportsProgress = true;
             bw.WorkerSupportsCancellation = true;
             bw.RunWorkerAsync();
@@ -57,7 +55,7 @@ namespace PL
 
         private void Bw_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
-            MessageBox.Show("hhhh");
+            MessageBox.Show("Time Out");
         }
 
         private void Bw_DoWork(object? sender, DoWorkEventArgs e)
